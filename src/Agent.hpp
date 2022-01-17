@@ -1,24 +1,38 @@
+/**
+ * @class class Agent
+ * @brief Classe Agent
+ */
 #ifndef AGENT_HPP
 #define AGENT_HPP
 
-#include "Point.hpp"
+#include <iostream>
+#include "Direction.hpp"
 
 class Agent
 {
 private:
-    Point _position;
+    int _x;
+    int _y;
 
 public:
-    Agent(Point point);
     Agent(int x, int y);
 
-    Point getPosition() const { return _position; }
-    int getX() const { return _position.getX(); }
-    int getY() const { return _position.getY(); }
+    // Getter
+    int getX() const { return _x; }
+    int getY() const { return _y; }
 
-    void setPosition(Point &point) { _position = point; }
-    void setX(int x) { _position.setX(x); }
-    void setY(int y) { _position.setY(y); }
+    // Setter
+    void setX(int x) { _x = x; }
+    void setY(int y) { _y = y; }
+
+    void deplacer(Direction dir);
+
+    void deplacerNordOuest();
+    void deplacerOuest();
+    void deplacerSudOuest();
+    void deplacerSudEst();
+    void deplacerEst();
+    void deplacerNordEst();
 };
 
 #endif
