@@ -1,16 +1,23 @@
 /**
  * @enum Direction
- * @brief Direction de déplacement possible sur depuis une case
- * 
+ * @brief Direction (enum class)
+ * @details
+ * Direction de déplacement possible sur depuis une case
  */
-enum Direction
+
+#ifndef DIRECTION_HPP
+#define DIRECTION_HPP
+
+enum class DIRECTION
 {
-    // Nord,
-    NordOuest,
-    Ouest,
-    SudOuest,
-    // Sud,
-    SudEst,
-    Est,
-    NordEst
+    // Nord, // ↑
+    NORDOUEST, // ↖
+    OUEST, // ←
+    SUDOUEST, // ↙ 
+    // Sud, // ↓
+    SUDEST, // ↘
+    EST, // →
+    NORDEST // ↗
 };
+
+#endif
