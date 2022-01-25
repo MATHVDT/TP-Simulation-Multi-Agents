@@ -1,4 +1,6 @@
 #include "Carte.hpp"
+#include "Agent.hpp"
+#include "Direction.hpp"
 #include <iostream>
 
 using namespace std;
@@ -6,6 +8,7 @@ using namespace std;
 const string RESET = "\033[0m";
 const string RED = "\033[31m";
 const string GREEN = "\033[32m";
+const string BLUE = "\033[34m";
 
 Carte::Carte()
 {
@@ -22,7 +25,7 @@ Carte::Carte()
     }
 }
 
-void Carte::AfficherCarte() const
+void Carte::afficherCarte() const
 {
     int j;
     int i;
@@ -34,7 +37,7 @@ void Carte::AfficherCarte() const
         {
             if (_grilleAgents[i][j] != nullptr)
             {
-                
+                cout << BLUE << "A ";
             }
             else
             {
@@ -47,7 +50,7 @@ void Carte::AfficherCarte() const
                         cout << RED << ". ";
                         break;
                     case 2:
-                        cout << GREEN << ". ";
+                        cout << BLUE << ". ";
                         break;
                     default:
                     cout << RESET << "? ";
@@ -68,7 +71,28 @@ void Carte::setAgent(int i, int j, Agent * agent) {
     _grilleAgents[i][j] = agent;
 }
 
-void Carte::ChangerCase(int i, int j, int val)
-{
+void Carte::changerCase(int i, int j, int val) {
     _grille[i][j] = val;
 }
+
+bool Carte::estVide(int i, int j){
+    return _grilleAgents [i][j] == nullptr;
+}
+
+/*
+void Carte::deplacerAgent(Agent * agent, Direction dir)
+{
+    int j = agent->getX();
+    int i = agent->getY();
+    int decalage = i % 2;
+
+    switch (dir)
+    {
+        case NordEst:
+            setAgent(i + 1, j - 1 + decalage, agent);
+            break;
+        case Ouest:
+            setAgent()
+    }
+}
+*/
