@@ -11,22 +11,22 @@ Agent::Agent(int x, int y) : _x(x), _y(y) {}
 /**
  * @fn void Agent::deplacer(Direction dir)
  * @brief Deplace l'agent suivant une direction.
- * @param Direction dir - *Direction de déplacement*
+ * @param DIRECTION dir - *Direction de déplacement*
  */
-void Agent::deplacer(Direction dir)
+void Agent::deplacer(DIRECTION dir)
 {
     // Ne vérifie pas s'il peut se déplacer
 
     switch (dir)
     {
-    case DIRECTION::NORDEST:
+    case DIRECTION::NORDOUEST:
         deplacerNordOuest();
         break;
     case DIRECTION::OUEST:
         deplacerOuest();
         break;
-    case DIRECTION::NORDOUEST:
-        deplacerNordOuest();
+    case DIRECTION::SUDOUEST:
+        deplacerSudOuest();
         break;
     case DIRECTION::SUDEST:
         deplacerSudEst();
@@ -38,7 +38,7 @@ void Agent::deplacer(Direction dir)
         deplacerNordEst();
         break;
     default:
-        std::cerr << "Direction non reconnue : " << dir;
+        std::cerr << "Direction non reconnue : " << endl;
         break;
     }
 }

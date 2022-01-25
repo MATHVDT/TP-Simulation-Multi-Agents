@@ -8,6 +8,8 @@
 #include <iostream>
 #include "Direction.hpp"
 
+using namespace std;
+
 class Agent
 {
 private:
@@ -25,7 +27,7 @@ public:
     void setX(int x) { _x = x; }
     void setY(int y) { _y = y; }
 
-    void deplacer(Direction dir);
+    void deplacer(DIRECTION dir);
 
     void deplacerNordOuest();
     void deplacerOuest();
