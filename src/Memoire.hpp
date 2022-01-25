@@ -8,13 +8,13 @@
 class Memoire {
 
 private:
-    const int _tailleMemoire = 100;
+    const int _tailleMemoire = 99;
     int _deplacement;
     int _renforcement;
     int _division;
 
 public: 
-   Memoire() {}
+   Memoire() _deplacement(33), _renforcement(33), _division(33){}
 
    // Getter
    int getDeplacement() {return _deplacement;}

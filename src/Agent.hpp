@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Direction.hpp"
+#include "Memoire.hpp"
 
 using namespace std;
 
@@ -15,6 +16,8 @@ class Agent
 private:
     int _x;
     int _y;
+    int _level;
+    Memoire _memoire;
 
 public:
     Agent(int x, int y);
@@ -27,6 +30,7 @@ public:
     void setX(int x) { _x = x; }
     void setY(int y) { _y = y; }
 
+    // Deplacement
     void deplacer(DIRECTION dir);
 
     void deplacerNordOuest();
@@ -35,6 +39,9 @@ public:
     void deplacerSudEst();
     void deplacerEst();
     void deplacerNordEst();
+
+    void communiquer(Agent * copainAdjacent);
+
 };
 
 #endif
