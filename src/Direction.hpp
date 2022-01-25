@@ -3,14 +3,14 @@
  * @brief Direction de déplacement possible sur depuis une case
  * 
  */
-enum Direction
+enum class DIRECTION
 {
     // Nord,
-    NordOuest,
-    Ouest,
-    SudOuest,
+    NORDOUEST,
+    OUEST,
+    SUDOUEST,
     // Sud,
-    SudEst,
-    Est,
-    NordEst
+    SUDEST,
+    EST,
+    NORDEST
 };
