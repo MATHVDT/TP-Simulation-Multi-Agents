@@ -22,6 +22,7 @@ private:
 
 public:
     Memoire();
+    Memoire(float division, float depalcement, float renforcement);
     // Getter
     float getDivision() const { return _division; }
     float getDeplacement() const { return _deplacement; }
@@ -33,6 +34,9 @@ public:
     void setRenforcement(float valeur) { _renforcement = valeur; }
 
     void apprentissage(float influence, const Memoire &memoire);
+
+private:
+    void correctionMemoire();
 };
 
 #endif

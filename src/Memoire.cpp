@@ -17,24 +17,21 @@
 Memoire::Memoire()
     : _division(1. / 3.), _deplacement(1. / 3.), _renforcement(1. / 3.) {}
 
-
-// Memoire::Memoire(float)
+Memoire::Memoire(float division, float depalcement, float renforcement)
+    : _division(division), _deplacement(depalcement), _renforcement(renforcement)
+{
+    this->correctionMemoire();
+}
 
 /**
  * @fn void Memoire::apprentissage(float influence, Memoire &memoire)
  * @brief
  * @param float influence - *Influence de la mémoire passé en paramètre*
  * @param const Memoire &memoire - *Mémoire sur laquelle on apprend*
- * @warning 
- * Les calculs des nouvelles valeurs de mémoire (division/deplacement/renforcement)
- * sont effectués et si delta = |1 - somme| < epsilon,
- *  alors on essaye de corriger en rajoutant uniformement 
- * ce delta au 3 valeurs de mémoire.
- * const float epsilon = 1e-3; 
+ * @warning correctionMemoire est appelée
  */
-void Memoire::apprentissage(float influence,const Memoire &memoire)
+void Memoire::apprentissage(float influence, const Memoire &memoire)
 {
-    const float epsilon = 1e-3;
     float newValeurDivision, newValeurDeplacement, newValeurRenforcement;
 
     // Calcul des nouvelles valeurs
@@ -42,27 +39,62 @@ void Memoire::apprentissage(float influence,const Memoire &memoire)
     newValeurDeplacement = (1 - influence) * this->_deplacement + influence * memoire.getDeplacement();
     newValeurRenforcement = (1 - influence) * this->_renforcement + influence * memoire.getRenforcement();
 
-    float somme = newValeurDivision + newValeurDeplacement + newValeurRenforcement;
+    // Application des nouvelles valeurs
+    this->setDivision(newValeurDivision);
+    this->setDeplacement(newValeurDeplacement);
+    this->setRenforcement(newValeurRenforcement);
 
-    float delta = 1 - somme; // Delta pour Somme =(exact) 1.
+    // Appel de la correction
+    this->correctionMemoire();
+}
+
+/**
+ * @fn void Memoire::correctionMemoire()
+ * @brief Corrige les valeurs de la mémoire pour avoir une somme environ égale à 1.
+ * @details
+ * Les calculs des nouvelles valeurs de mémoire (division/deplacement/renforcement)
+ * sont effectués et si delta = |1 - somme| < epsilon,
+ * alors on essaye de corriger en rajoutant uniformement 
+ * ce delta au 3 valeurs de mémoire.
+ * @warning const float epsilon = 1e-3; 
+ */
+void Memoire::correctionMemoire()
+{
+    const float epsilon = 1e-3;
+
+    // Recuperation des valeurs
+    float valeurDivision = this->getDivision();
+    float valeurDeplacement = this->getDeplacement();
+    float valeurRenforcement = this->getRenforcement();
+
+    // Calcul de la somme des valeurs
+    float somme = valeurDivision + valeurDeplacement + valeurRenforcement;
+
+    // Delta pour Somme =(exact) 1.
+    float delta = 1 - somme;
 
     // Correction s'il y a eu des erreurs sur les arrondis
     if (delta > epsilon)
     { // Manque un petit peu dans chaque valeur
-        newValeurDivision += delta / 3.;
-        newValeurDeplacement += delta / 3.;
-        newValeurRenforcement += delta / 3.;
+        valeurDivision += delta / 3.;
+        valeurDeplacement += delta / 3.;
+        valeurRenforcement += delta / 3.;
         std::cerr << "Correction de +" << delta / 3.;
     }
     else if (delta < -epsilon)
     {
-        newValeurDivision -= delta / 3.;
-        newValeurDeplacement -= delta / 3.;
-        newValeurRenforcement -= delta / 3.;
+        valeurDivision -= delta / 3.;
+        valeurDeplacement -= delta / 3.;
+        valeurRenforcement -= delta / 3.;
         std::cerr << "Correction de -" << delta / 3.;
     }
+    else
+    {
+        return;
+    }
 
-    this->setDivision(newValeurDivision);
-    this->setDeplacement(newValeurDeplacement);
-    this->setRenforcement(newValeurRenforcement);
+    // Application des valeurs corrigées
+    this->setDivision(valeurDivision);
+    this->setDeplacement(valeurDeplacement);
+    this->setRenforcement(valeurRenforcement);
 }
