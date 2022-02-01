@@ -1,0 +1,560 @@
+<!doctype html><html lang="fr">
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preload" href="/font/pc-icons.woff2?t=2f4187228ca956c693a7216e80d6ea51" as="font" type="font/woff2" crossorigin/>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+	<link rel="preconnect" href="https://ajax.googleapis.com" crossorigin/>
+<link rel="stylesheet" href="/style/min/planetcalc_common_4140.css">
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script><script>window.googletag = window.googletag || {cmd: []};googletag.cmd.push(function() {googletag.pubads().disableInitialLoad();var mapping0  = googletag.sizeMapping().addSize([1500,200],  [970,90]).addSize([768,200],  [728,90]).addSize([480,200],  [468,60]).addSize([0,0],  [320,250]).build();googletag.defineSlot('/13440450/v7.fr.B.A.top', [[970,90],[728,90],[468,60],[320,250]], 'div-gpt-ad-1643726445-1').defineSizeMapping(mapping0).addService(googletag.pubads());
+var mapping1  = googletag.sizeMapping().addSize([768,200],  [728,90]).addSize([480,200],  [468,60]).addSize([0,0],  [320,250]).build();googletag.defineSlot('/13440450/v7.fr.B.A.bottom', [[728,90],[468,60],[320,250]], 'div-gpt-ad-1643726445-2').defineSizeMapping(mapping1).addService(googletag.pubads());
+var mapping2  = googletag.sizeMapping().addSize([0,0],  [320,250]).build();googletag.defineSlot('/13440450/v7.fr.B.A.right', [[320,250]], 'div-gpt-ad-1643726445-3').defineSizeMapping(mapping2).addService(googletag.pubads());
+var mapping3  = googletag.sizeMapping().addSize([768,400],  [320,250]).build();googletag.defineSlot('/13440450/v7.fr.B.A.sticker', [[320,250]], 'div-gpt-ad-1643726445-4').defineSizeMapping(mapping3).addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});</script>		
+
+
+<meta name="keywords" content="analyse régressive, approximation, fonction, Math, régression, régression cubique, régression exponentielle, régression linéaire, régression logarithmique, régression puissance, régression quadratique, variable"/><meta name="description" content=" Ce calculateur en ligne utilise plusieurs modèles de régressions simples pour approximer une fonction donnée suivant un ensemble de points."/><meta name="author" content="Timur : membre de planetcalc"/><meta name="generator" content="Planetcalc"/><link rel="canonical" href="https://fr.planetcalc.com/5992/" /><style media="all">
+.social-float {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	width: 350px;
+    	height: 400px;
+    	background: white;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	z-index: 100;
+}
+td.comment_created {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+td.message {
+	padding-top:0 !important;
+}
+
+#main_div { padding:0 }
+.f_ {
+	margin-top:0;
+	line-height: normal;
+}
+
+	#request_status { width:900px; }
+	.modal-body {  max-height: 800px;}
+.sofia {
+	margin:8px auto;
+	text-align:center;
+}
+.right-ads { margin:16px 0; }
+.v5 {
+	background-color:#fafafa;
+}
+.card-authors { padding:0 1.5em 1.5em 1.5em; }
+
+.author-date {
+	padding:16px 0;
+}
+.author-date i {
+	padding-right:8px;
+}
+.author-date a {
+	padding-right:32px;
+}
+#comments {
+	margin-top:32px;
+}
+#comments .t9 {
+	margin-top:0;
+}
+.ads-inline {
+    text-align: center;
+}
+.embed-form {
+	margin-bottom:16px;
+}
+
+div.social a.oc { margin-right:16px }
+div.social { margin: 16px 0; }
+div.social h4 { margin-bottom:0 }
+.share-url-text { margin:16px 0 }
+.share-mode { margin-bottom: 16px; }
+.share-url-text div { width:100% }
+.similar-calc ul {  padding:0; }
+.similar-calc ul li { padding:0 0 16px 16px; display: inline-block; }
+#div-gpt-ad-1643726445-1{min-height:250px}#div-gpt-ad-1643726445-2{min-height:250px}#div-gpt-ad-1643726445-3{min-height:250px}
+@media (min-width:480px){#div-gpt-ad-1643726445-1{min-height:60px}#div-gpt-ad-1643726445-2{min-height:60px}}
+@media (min-width:768px){#div-gpt-ad-1643726445-1{min-height:90px}#div-gpt-ad-1643726445-2{min-height:90px}#div-gpt-ad-1643726445-4{min-height:250px}}
+@media (min-width:1500px){#div-gpt-ad-1643726445-1{min-height:90px}}</style>
+<title>Calculatrice en ligne: Approximation d'une fonction avec une analyse r&eacute;gressive</title>
+</head>
+<body id="ui_viewer" class="y1 viewer">
+<div id="main_menu" class="nc w0 g1" tabindex="-1"><ul class="z0"  role="menu" aria-hidden="true"><li class="a1" role="menuitem" tabindex="0" onclick="document.location.href='/all/';"><span class="y0"><i class="material-icons">&#xe5c3;</i></span><span class="b1">Toutes les calculatrices en ligne</span></li><li class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='/personal/requests/new/';"><span class="y0"><i class="material-icons">&#xe90f;</i></span><span class="b1">Demander une calculatrice</span></li><li class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='/todo/translationtask/?id[]=5992&from=fr';"><span class="y0"><i class="material-icons">&#xe894;</i></span><span class="b1">Traduction</span></li></ul></div><div class="m1 q7 kb"><div class="q1"><div class="r1 s1 mdc-toolbar__section--shrink-to-fit" ><a class="material-icons n1" id="btn_main_menu" href="#">&#xe5d2;</a><a href="/" class="u1 nb" title="Calculatrices en ligne"><h2 class="u1">PLANETCALC <span class="cc kc">Calculatrices en ligne</span></h2></a></div><div class="r1 t1" ><a id="btn_change_language_menu" class="material-icons cc n1" href="#">&#xe894;</a><a class="material-icons n1" href="/search/">&#xe8b6;</a><a href="/personal/" class="cc ob c2 g2" id="planetcalc_login">S'identifier</a></div></div><div style="min-height:0;"><div id="change_language_menu" class="nc w0 g1" tabindex="6"><ul class="z0"  role="menu" aria-hidden="true"><li id="change_language_de" class="a1" role="menuitem" tabindex="0" onclick="document.location.href='https://de.planetcalc.com/5992/?language_select=de';"><span class="y0"><i class="material-icons"> </i></span><span class="b1">Deutsch</span></li><li id="change_language_en" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://planetcalc.com/5992/?language_select=en';"><span class="y0"><i class="material-icons"> </i></span><span class="b1">English</span></li><li id="change_language_es" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://es.planetcalc.com/5992/?language_select=es';"><span class="y0"><i class="material-icons"> </i></span><span class="b1">Español</span></li><li id="change_language_pt" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://pt.planetcalc.com/5992/?language_select=pt';"><span class="y0"><i class="material-icons"> </i></span><span class="b1">Português</span></li><li id="change_language_ru" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://planetcalc.ru/5992/?language_select=ru';"><span class="y0"><i class="material-icons"> </i></span><span class="b1">Русский</span></li><li id="change_language_zh" class="a1" role="menuitem" tabindex="-1" onclick="document.location.href='https://zh.planetcalc.com/5992/?language_select=zh';"><span class="y0"><i class="material-icons"> </i></span><span class="b1">中文</span></li><li id="change_language_fr" class="a1 f1" role="menuitem" tabindex="-1"><span class="y0"><i class="material-icons">&#xe5ca;</i></span><span class="b1">Français</span></li></ul></div></div></div><div id="main_div" class="jb">  
+	<div class="v_"> 
+	<div class="w_"> 
+<div class="main-column x_ g0" id="left-block"><div class="qb"><a class="material-icons" href="/">&#xe88a;</a><i class="material-icons">&#xe5cc;</i><a href="/search/?tag=5022">Las étude</a><i class="material-icons">&#xe5cc;</i><a href="/search/?tag=4578">Math</a></div><header><h1>Approximation d'une fonction avec une analyse régressive</h1><p class="f_">Ce calculateur en ligne utilise plusieurs modèles de régressions simples pour approximer une fonction donnée suivant un ensemble de points.</p><div></div></header><script>
+document.addEventListener("DOMContentLoaded",function() {
+	var f = new FormatterTimeSpan();
+	$('.nav-created').text(function ( i,t ) { return f.Format(t);});
+});
+</script>
+<div class="article"><div class="article_body"><p>Le problème de l'approximation de fonction nous pousse à sélectionner une fonction parmi une classe bien définie qui correspond étroitement (&quot;approximativement&quot;) à la fonction cible.</p>
+<p>Ce calculateur utilise les tableaux de données de fonctions cibles fournies {x, f(x)} pour construire plusieurs modèles de régression, soit régression linéaire, régression quadratique, régression cubique, régression puissance, régression logarithmique, régression hyperbolique, régression exponentielle ab, régression exponentielle. Les résultats peuvent être comparés en utilisant le coefficient de corrélation, le coefficient de détermination, l'erreur relative moyenne (erreur standard de la régression) et visuellement sur le graphique. La théorie et les fonctions sont après le calculateur, comme d'habitude.<br />
+</p>
+<div id="calculator5986"></div><div class="ads-inline"><div id="div-gpt-ad-1643726445-1"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1643726445-1");});</script></div></div><div class="pc-article-part"><div class="u5"><div class="w_ f8"  id="dialogv61a2134c364ff"><div class="x_ j0"><div class="s8 t8"><a class="t_" target="_blank" href="https://fr.planetcalc.com/5986/?license=1"><img src="/img/32x32i.png" alt="PLANETCALC, Approximation d'une fonction avec une analyse régressive" width="32" height="32"></a><h4 class="y9">Approximation d'une fonction avec une analyse régressive</h4></div></div><div class="x_ j0"><div class="j4 m4 g8 "><textarea class="l4"  name="xstring" id="dialogv61a2134c364ff_xstring" rows="5" cols="60">83 71 64 69 69 64 68 59 81 91 57 65 58 62</textarea>
+<div class="c3 k3"><div class="e3"></div><div class="f3"><label class="h3 i3" for="dialogv61a2134c364ff_xstring">Valeurs de X, séparées par des espaces</label></div><div class="g3"></div></div></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_xstring" class="e4 c4"></div></div></div><div class="x_ j0"><div class="j4 m4 g8 "><textarea class="l4"  name="ystring" id="dialogv61a2134c364ff_ystring" rows="5" cols="60">183 168 171 178 176 172 165 158 183 182 163 175 164 175</textarea>
+<div class="c3 k3"><div class="e3"></div><div class="f3"><label class="h3 i3" for="dialogv61a2134c364ff_ystring">Valeurs de Y, séparées par des espaces</label></div><div class="g3"></div></div></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_ystring" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="dolinear" id="dialogv61a2134c364ff_dolinear"/></div></div></div><label for="dialogv61a2134c364ff_dolinear"> Régression linéaire</label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_dolinear" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="doquadratic" id="dialogv61a2134c364ff_doquadratic"/></div></div></div><label for="dialogv61a2134c364ff_doquadratic"> Régression quadratique</label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_doquadratic" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="docubic" id="dialogv61a2134c364ff_docubic"/></div></div></div><label for="dialogv61a2134c364ff_docubic"> Régression cubique</label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_docubic" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="dopower" id="dialogv61a2134c364ff_dopower"/></div></div></div><label for="dialogv61a2134c364ff_dopower"> Régression puissance</label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_dopower" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="doexponential" id="dialogv61a2134c364ff_doexponential"/></div></div></div><label for="dialogv61a2134c364ff_doexponential"> Régression exponentielle ab</label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_doexponential" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="dologarithmic" id="dialogv61a2134c364ff_dologarithmic"/></div></div></div><label for="dialogv61a2134c364ff_dologarithmic"> Régression logarithmique </label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_dologarithmic" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="dohyperbolic" id="dialogv61a2134c364ff_dohyperbolic"/></div></div></div><label for="dialogv61a2134c364ff_dohyperbolic"> Régression hyperbolique</label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_dohyperbolic" class="e4 c4"></div></div></div><div class="x_ a0"><div class="t9"><div class="x6 y6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" checked value="1" name="doeexponential" id="dialogv61a2134c364ff_doeexponential"/></div></div></div><label for="dialogv61a2134c364ff_doeexponential"> Régression exponentielle</label></div><div class="n4"><div id="hlp_dialogv61a2134c364ff_doeexponential" class="e4 c4"></div></div></div><div class="x_ a0"><div class="v8"><label class="l8">Précision de calcul</label><div class="x8" id="ctrl_dialogv61a2134c364ff_precisionmetervalue">Chiffres après la virgule décimale : 4</div><div id="dialogv61a2134c364ff_precisionmeter" aria-controls="ctrl_dialogv61a2134c364ff_precisionmetervalue" class="pc-precision y8 h6 v6" tabindex="0" role="slider" data-step="1" aria-valuetext="Chiffres après la virgule décimale : 4" aria-valuemin="0" aria-valuemax="20" aria-valuenow="4"><div class="k6"><div class="j6"></div></div><div class="q6"><div class="p6"><span class="r6"></span></div><svg class="n6" width="21" height="21"><circle cx="10.5" cy="10.5" r="7.875"></circle></svg><div class="o6"></div></div></div></div></div><div class="x_ j0"><div class="r8"><button type="button" id="dialogv61a2134c364ff_calculate" class="c2 g2 s_ pc-btn-calc"><span id="dialogv61a2134c364ff_button_text">Calculer</span></button></div></div><div class="x_ j0"><div class="e8"><div id="dialogv61a2134c364ff__progress_" role="progressbar" class="c8 m0 t0"><div class="p0"></div><div class="q0"></div><div class="n0 r0"><span class="o0"></span></div><div class="n0 s0"><span class="o0"></span></div></div></div></div><div class="x_ j0"><div></div><div class="n4 x"><div id="hlp_default_dialogv61a2134c364ff" class="e4 c4"></div></div></div><div class="x_ j0"><div class="o8">Régression linéaire</div><div class="pc-output-value" id="dialogv61a2134c364ff_linear">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation linéaire</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_rxy">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Rlinear">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Alinear">&nbsp;</div></div><div class="x_ j0"><div class="o8">Régression quadratique</div><div class="pc-output-value" id="dialogv61a2134c364ff_quadratic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_rquadratic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Rquadratic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Aquadratic">&nbsp;</div></div><div class="x_ j0"><div class="o8">Régression cubique</div><div class="pc-output-value" id="dialogv61a2134c364ff_cubic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_rcubic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Rcubic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Acubic">&nbsp;</div></div><div class="x_ j0"><div class="o8">Régression puissance</div><div class="pc-output-value" id="dialogv61a2134c364ff_power">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_rpower">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Rpower">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Apower">&nbsp;</div></div><div class="x_ j0"><div class="o8">Régression exponentielle ab</div><div class="pc-output-value" id="dialogv61a2134c364ff_exponential">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_rexponential">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Rexponential">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Aexponential">&nbsp;</div></div><div class="x_ j0"><div class="o8">Régression logarithmique</div><div class="pc-output-value" id="dialogv61a2134c364ff_logarithmic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_rlogarithmic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Rlogarithmic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Alogarithmic">&nbsp;</div></div><div class="x_ j0"><div class="o8">Régression hyperbolique</div><div class="pc-output-value" id="dialogv61a2134c364ff_hyperbolic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_rhyperbolic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Rhyperbolic">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Ahyperbolic">&nbsp;</div></div><div class="x_ j0"><div class="o8">Régression exponentielle</div><div class="pc-output-value" id="dialogv61a2134c364ff_eexponential">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de corrélation</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_reexponential">&nbsp;</div></div><div class="x_ a0"><div class="o8">Coefficient de détermination</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Reexponential">&nbsp;</div></div><div class="x_ a0"><div class="o8">Erreur relative moyenne, %</div><div class="pc-output-value p8" id="dialogv61a2134c364ff_Aeexponential">&nbsp;</div></div><div class="x_ j0"><div id="dialogv61a2134c364ff_result_name" class="o8">Résultats</div><div id="dialogv61a2134c364ff_result_big_msg" class="ke"><div class="me"><div class="ne">Le fichier est très volumineux; un ralentissement du navigateur peut se produire pendant le chargement et la création.</div><div class="re" aria-atomic="true"><button class="c2 se" type="button" id="dialogv61a2134c364ff_result_download"><span class="f2 ">Télécharger</span></button>
+<button type="button" class="c2 vb te"><i class="material-icons">&#xe5cd;</i></button></div></div></div><div id="dialogv61a2134c364ff_result_diagram" class="pc-graph"></div><div id="dialogv61a2134c364ff_result" class="pc-output-table"></div></div><div class="x_ j0"><div class="b2"><div class="pc-calc-footer"><div class="ba u8"></div></div></div></div></div><script>function Dialogv61a2134c364ff() {var me = this;me.id = "dialogv61a2134c364ff";me.GetElement = function () { return document.getElementById( me.id ); };me.GetEventHandlerName = function () { return "dialoghandlerv61a2134c364ff"; };this.dialog_controls = [new DialogInput("xstring", this, 0,new ElementAccessorText()),new DialogInput("ystring", this, 0,new ElementAccessorText()),new DialogInput("dolinear", this, 0,new ElementAccessorCheckbox()),new DialogInput("doquadratic", this, 0,new ElementAccessorCheckbox()),new DialogInput("docubic", this, 0,new ElementAccessorCheckbox()),new DialogInput("dopower", this, 0,new ElementAccessorCheckbox()),new DialogInput("doexponential", this, 0,new ElementAccessorCheckbox()),new DialogInput("dologarithmic", this, 0,new ElementAccessorCheckbox()),new DialogInput("dohyperbolic", this, 0,new ElementAccessorCheckbox()),new DialogInput("doeexponential", this, 0,new ElementAccessorCheckbox()),new DialogInput("precisionmeter", this, 0,new ElementAccessorPrecision(4)),new DialogInput("calculate", this, 0,new ElementAccessorOperation()),new DialogInput("_progress_", this, 0,new ElementAccessorDefault()),new DialogInput("", this, 0,new ElementAccessorDefault()),new DialogInput("linear", this, 0,new ElementAccessorDefault()),new DialogInput("rxy", this, 0,new ElementAccessorOutput()),new DialogInput("Rlinear", this, 0,new ElementAccessorOutput()),new DialogInput("Alinear", this, 0,new ElementAccessorOutput()),new DialogInput("quadratic", this, 0,new ElementAccessorDefault()),new DialogInput("rquadratic", this, 0,new ElementAccessorOutput()),new DialogInput("Rquadratic", this, 0,new ElementAccessorOutput()),new DialogInput("Aquadratic", this, 0,new ElementAccessorOutput()),new DialogInput("cubic", this, 0,new ElementAccessorDefault()),new DialogInput("rcubic", this, 0,new ElementAccessorOutput()),new DialogInput("Rcubic", this, 0,new ElementAccessorOutput()),new DialogInput("Acubic", this, 0,new ElementAccessorOutput()),new DialogInput("power", this, 0,new ElementAccessorDefault()),new DialogInput("rpower", this, 0,new ElementAccessorOutput()),new DialogInput("Rpower", this, 0,new ElementAccessorOutput()),new DialogInput("Apower", this, 0,new ElementAccessorOutput()),new DialogInput("exponential", this, 0,new ElementAccessorDefault()),new DialogInput("rexponential", this, 0,new ElementAccessorOutput()),new DialogInput("Rexponential", this, 0,new ElementAccessorOutput()),new DialogInput("Aexponential", this, 0,new ElementAccessorOutput()),new DialogInput("logarithmic", this, 0,new ElementAccessorDefault()),new DialogInput("rlogarithmic", this, 0,new ElementAccessorOutput()),new DialogInput("Rlogarithmic", this, 0,new ElementAccessorOutput()),new DialogInput("Alogarithmic", this, 0,new ElementAccessorOutput()),new DialogInput("hyperbolic", this, 0,new ElementAccessorDefault()),new DialogInput("rhyperbolic", this, 0,new ElementAccessorOutput()),new DialogInput("Rhyperbolic", this, 0,new ElementAccessorOutput()),new DialogInput("Ahyperbolic", this, 0,new ElementAccessorOutput()),new DialogInput("eexponential", this, 0,new ElementAccessorDefault()),new DialogInput("reexponential", this, 0,new ElementAccessorOutput()),new DialogInput("Reexponential", this, 0,new ElementAccessorOutput()),new DialogInput("Aeexponential", this, 0,new ElementAccessorOutput()),new DialogInput("result", this, 0,new ElementAccessorDefault())];me.dialog_controls._all ={};me.dialog_controls.forEach( function( e ) { if (me[e.id]===undefined) me[e.id] = e; me.dialog_controls._all[e.id] = e;} );this.addHandler = function ( handler ) {this.dialog_controls.forEach(function(c) { c.addHandler( handler);});};this.SetValues = function ( values ) {this.dialog_controls.forEach(function(c) {if ( values[c.id]!==undefined ) { c.SetValue( values[c.id] ); }});};this.Clear = function ( ) {this.dialog_controls.forEach(function( c) { c.ResetValue();});};this.SetDefaultValues = function () { this.Clear();};this.GetValues = function () {var ret = {}; this.dialog_controls.forEach(function( c) { ret[c.id] = c.GetValue();});return ret;};this.Validate = function ( ) {for(var i=0;i<me.dialog_controls.length;++i) if (!me.dialog_controls[i].Validate()) return false; return true;};this.layout = function ( ) {me.dialog_controls[10].elementAccessor.layout();}};document.addEventListener("DOMContentLoaded", function(event) {var dlg = new Dialogv61a2134c364ff();
+var hd = new CalculatorHandler(new function () {
+var me = this;
+me.id = 5986;
+me.global = 1;
+var outputs = {};
+me.sinks={change:[],done:[]};
+me.startOnLoad = 1;
+me.infinite = 0;
+var inputs = {};
+var renderers = {};
+var recordsets = {};
+var diagrams = {};
+var handler, dialog, refreshTimer;var outer = this;
+var Planetcalc = new function() { 
+var __glib = self.Planetcalc;var inner = this; var Planetcalc = inner; var cpcData = new CalcProgressData();if ( __glib) { for( var libn in __glib) { inner[libn]=__glib[libn];}}var Calculate1435_cpc = new CalcProgressControl(cpcData);
+var Resources1435messages = {"Error":"Erreur sur la ligne","Zero":"La matrice n'est pas fixée","NonSquare":"La matrice n'est pas carré","Singular":"La matrice est singulière"};inner.Resources1435messages=Resources1435messages;inner.Calculate1435 = function( __inp__ ) {
+
+var Calculate1435_result={};inner.Calc1435(Resources1435messages,__inp__["matrixA"]===undefined?"3 2 -1 4\n2 -1 5 23\n1 7 -1 5":__inp__["matrixA"],{ SetValue: function( v ) { Calculate1435_result["matrixR"]=v; } },Calculate1435_cpc);
+ if ( Calculate1435_cpc.completed() ) { Calculate1435_cpc.context = null; } return Calculate1435_result;};var Calculate5986_cpc = new CalcProgressControl(cpcData);
+var Resources5986errors = {"xempty":"Impossible d'analyser les valeurs de X","yempty":"Impossible d'analyser les valeurs de Y","nomatch":"Les X et Y ne correspondent pas","nohyperzero":"La régression hyperbolique ne peut pas être calculée lorsque X égale à 0"};inner.Resources5986errors=Resources5986errors;inner.Calculate5986 = function( __inp__ ) {
+
+var Calculate5986_result={};
+var result = new Recordset("","__id__");inner.Calc5986(__inp__["xstring"]===undefined?"83 71 64 69 69 64 68 59 81 91 57 65 58 62":__inp__["xstring"],__inp__["ystring"]===undefined?"183 168 171 178 176 172 165 158 183 182 163 175 164 175":__inp__["ystring"],__inp__["dolinear"]===undefined?1:__inp__["dolinear"],Resources5986errors,__inp__["doquadratic"]===undefined?1:__inp__["doquadratic"],__inp__["dopower"]===undefined?1:__inp__["dopower"],__inp__["docubic"]===undefined?1:__inp__["docubic"],__inp__["doexponential"]===undefined?1:__inp__["doexponential"],__inp__["dologarithmic"]===undefined?1:__inp__["dologarithmic"],__inp__["dohyperbolic"]===undefined?1:__inp__["dohyperbolic"],__inp__["doeexponential"]===undefined?1:__inp__["doeexponential"],{ SetValue: function( v ) { Calculate5986_result["linear"]=v; } },{ SetValue: function( v ) { Calculate5986_result["rxy"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Rlinear"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Alinear"]=v; } },{ SetValue: function( v ) { Calculate5986_result["quadratic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["rquadratic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Rquadratic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Aquadratic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["power"]=v; } },{ SetValue: function( v ) { Calculate5986_result["rpower"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Rpower"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Apower"]=v; } },{ SetValue: function( v ) { Calculate5986_result["cubic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["rcubic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Rcubic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Acubic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["exponential"]=v; } },{ SetValue: function( v ) { Calculate5986_result["rexponential"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Rexponential"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Aexponential"]=v; } },{ SetValue: function( v ) { Calculate5986_result["logarithmic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["rlogarithmic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Rlogarithmic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Alogarithmic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["hyperbolic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["rhyperbolic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Rhyperbolic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Ahyperbolic"]=v; } },{ SetValue: function( v ) { Calculate5986_result["eexponential"]=v; } },{ SetValue: function( v ) { Calculate5986_result["reexponential"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Reexponential"]=v; } },{ SetValue: function( v ) { Calculate5986_result["Aeexponential"]=v; } },result,Calculate5986_cpc);
+
+Calculate5986_result["result"] = result.GetRecordArray(); if ( Calculate5986_cpc.completed() ) { Calculate5986_cpc.context = null; } return Calculate5986_result;};inner.main=inner.Calculate5986;inner.progressControl = Calculate5986_cpc; inner.init = function(){inner.progressControl.onDataReady();};};me.adapter = null;function startLoad() {
+me.progressControl.addEventListener("ready",handler.onReady);
+Planetcalc.init(); }
+me.timeout = 1500;
+me.auto = 1;
+me.init = function ( h, dlg ) { var o; handler=h;dialog =dlg;me.progressControl = Planetcalc.progressControl;var n; var fn;n='xstring';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='ystring';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='dolinear';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='doquadratic';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='dopower';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='docubic';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='doexponential';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='dologarithmic';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='dohyperbolic';if ( dlg[n] ) { inputs[n] = dlg[n]; }n='doeexponential';if ( dlg[n] ) { inputs[n] = dlg[n]; }o = dlg.linear;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.rxy;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Rlinear;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Alinear;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );o = dlg.quadratic;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.rquadratic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Rquadratic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Aquadratic;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );o = dlg.power;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.rpower;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Rpower;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Apower;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );o = dlg.cubic;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.rcubic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Rcubic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Acubic;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );o = dlg.exponential;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.rexponential;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Rexponential;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Aexponential;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );o = dlg.logarithmic;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.rlogarithmic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Rlogarithmic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Alogarithmic;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );o = dlg.hyperbolic;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.rhyperbolic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Rhyperbolic;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Ahyperbolic;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );o = dlg.eexponential;outputs[o.id] =o;o.formatter =new FormatterFormula();o = dlg.reexponential;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Reexponential;outputs[o.id] =o;o.formatter =new FormatterNumber( 4,0,0,"R" );o = dlg.Aeexponential;outputs[o.id] =o;o.formatter =new FormatterPersent( 2 );n='result';fn='dialogv61a2134c364ff_result';recordsets[n] = new Recordset("","__id__");renderers[n]= new RecordsetRendererC(fn,10,["export"]);
+ renderers[n].name = "Résultats";renderers[n].AddColumn("i", "i", new RecordFieldFormatter(new FormatterNumber( 0,0,0,"R" )), '', 0,{"interpolate":"cardinal","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("x", "x", new RecordFieldFormatter(new FormatterNumber( 1,0,0,"R" )), '', 1,{"interpolate":"cardinal","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("y", "y", new RecordFieldFormatter(new FormatterNumber( 1,0,0,"R" )), '', 10,{"interpolate":"cardinal","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("ylinear", "Régression linéaire", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("yquadratic", "Régression quadratique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("ycubic", "Régression cubique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("ypower", "Régression puissance", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("yexponential", "Régression exponentielle ab", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("ylogarithmic", "Régression logarithmique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("yhyperbolic", "Régression hyperbolique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+renderers[n].AddColumn("yeexponential", "Régression exponentielle", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n] = new BarDiagram(fn+'_diagram',{"y_axis_type":"default","scale_log_base":10,"scale_power_exponent":2,"aspect_ratio":"4:3","x_axis_position":"bottom","y_axis_position":"left","x_center_zero":0,"y_center_zero":0,"page_size":10,"transpose_table":0,"graphics_scale":"xy"});diagrams[n].Header.AddColumn("x", "x", new RecordFieldFormatter(new FormatterNumber( 1,0,0,"R" )), '', 1,{"interpolate":"cardinal","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("y", "y", new RecordFieldFormatter(new FormatterNumber( 1,0,0,"R" )), '', 10,{"interpolate":"cardinal","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("ylinear", "Régression linéaire", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("yquadratic", "Régression quadratique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("ycubic", "Régression cubique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("ypower", "Régression puissance", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("yexponential", "Régression exponentielle ab", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("ylogarithmic", "Régression logarithmique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("yhyperbolic", "Régression hyperbolique", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+diagrams[n].Header.AddColumn("yeexponential", "Régression exponentielle", new RecordFieldFormatter(new FormatterNumber( 4,0,0,"R" )), '', 2,{"interpolate":"monotone","line_color":"primary","line_markup":0},1);
+startLoad();};
+me.stop = function() {Planetcalc.progressControl.stop();
+};
+me.start = function() {
+	handler.onStart();
+inputValues = {"xstring":inputs.xstring.GetValue(), "ystring":inputs.ystring.GetValue(), "dolinear":new Boolean( inputs.dolinear.GetValue() ).valueOf(), "doquadratic":new Boolean( inputs.doquadratic.GetValue() ).valueOf(), "dopower":new Boolean( inputs.dopower.GetValue() ).valueOf(), "docubic":new Boolean( inputs.docubic.GetValue() ).valueOf(), "doexponential":new Boolean( inputs.doexponential.GetValue() ).valueOf(), "dologarithmic":new Boolean( inputs.dologarithmic.GetValue() ).valueOf(), "dohyperbolic":new Boolean( inputs.dohyperbolic.GetValue() ).valueOf(), "doeexponential":new Boolean( inputs.doeexponential.GetValue() ).valueOf()};	Planetcalc.progressControl.clear();
+		me.result = null;
+		me.refresh();};me.getInputs = function() {
+	return inputs;
+};
+function objectValues( a, o ) {
+	for(var n in o) {
+		a.push( o[n] );
+	}
+}
+me.getOutputs = function() {
+	var ret = [];
+	objectValues( ret, outputs );
+	objectValues( ret, diagrams );
+	objectValues( ret, renderers );
+	return ret;
+};me.refresh = function ( ) {me.doit();};
+me.setResult = function( res, done ) {recordsets.result.Clear();recordsets.result.LoadFromArray( res.result);if (renderers.result) {renderers.result.Render( recordsets.result);} if ( diagrams.result) { diagrams.result.Render(res.result ); }outputs.linear.SetValue(res.linear);outputs.rxy.SetValue(res.rxy);outputs.Rlinear.SetValue(res.Rlinear);outputs.Alinear.SetValue(res.Alinear);outputs.quadratic.SetValue(res.quadratic);outputs.rquadratic.SetValue(res.rquadratic);outputs.Rquadratic.SetValue(res.Rquadratic);outputs.Aquadratic.SetValue(res.Aquadratic);outputs.power.SetValue(res.power);outputs.rpower.SetValue(res.rpower);outputs.Rpower.SetValue(res.Rpower);outputs.Apower.SetValue(res.Apower);outputs.cubic.SetValue(res.cubic);outputs.rcubic.SetValue(res.rcubic);outputs.Rcubic.SetValue(res.Rcubic);outputs.Acubic.SetValue(res.Acubic);outputs.exponential.SetValue(res.exponential);outputs.rexponential.SetValue(res.rexponential);outputs.Rexponential.SetValue(res.Rexponential);outputs.Aexponential.SetValue(res.Aexponential);outputs.logarithmic.SetValue(res.logarithmic);outputs.rlogarithmic.SetValue(res.rlogarithmic);outputs.Rlogarithmic.SetValue(res.Rlogarithmic);outputs.Alogarithmic.SetValue(res.Alogarithmic);outputs.hyperbolic.SetValue(res.hyperbolic);outputs.rhyperbolic.SetValue(res.rhyperbolic);outputs.Rhyperbolic.SetValue(res.Rhyperbolic);outputs.Ahyperbolic.SetValue(res.Ahyperbolic);outputs.eexponential.SetValue(res.eexponential);outputs.reexponential.SetValue(res.reexponential);outputs.Reexponential.SetValue(res.Reexponential);outputs.Aeexponential.SetValue(res.Aeexponential);if (done) { handler.onStop();if ( PCF.requestFormulaUpdate( false ) ) { var mjx = window.MathJax; mjx.Hub.Queue(["Typeset",mjx.Hub]);};}};
+function preprocess( p, cb ) {cb(p,true);}var inputValues = null;me.doit = function ( ) {preprocess(inputValues, function( p, sync, cont ) {if ( cont ) me.progressControl.repeat();try {me.changeDisplayOptions();
+var res = Planetcalc.Calculate5986(p);if ( res ) { if ( me.result ) { for( var n in res ) me.result[n] = res[n]; } else me.result = res; }if ( me.result ) me.setResult( me.result, true );} catch( e ) {
+	handler.onStop(e);
+}});};me.changeDisplayOptions = function () {me.calculateDisplay(new DisplayWrapperInput(inputs.xstring), new DisplayWrapperInput(inputs.ystring), new DisplayWrapperInput(inputs.dolinear), { GetValue:function() { return Planetcalc.Resources5986errors;}}, new DisplayWrapperInput(inputs.doquadratic), new DisplayWrapperInput(inputs.dopower), new DisplayWrapperInput(inputs.docubic), new DisplayWrapperInput(inputs.doexponential), new DisplayWrapperInput(inputs.dologarithmic), new DisplayWrapperInput(inputs.dohyperbolic), new DisplayWrapperInput(inputs.doeexponential), new DisplayWrapper(outputs.linear), new DisplayWrapper(outputs.rxy), new DisplayWrapper(outputs.Rlinear), new DisplayWrapper(outputs.Alinear), new DisplayWrapper(outputs.quadratic), new DisplayWrapper(outputs.rquadratic), new DisplayWrapper(outputs.Rquadratic), new DisplayWrapper(outputs.Aquadratic), new DisplayWrapper(outputs.power), new DisplayWrapper(outputs.rpower), new DisplayWrapper(outputs.Rpower), new DisplayWrapper(outputs.Apower), new DisplayWrapper(outputs.cubic), new DisplayWrapper(outputs.rcubic), new DisplayWrapper(outputs.Rcubic), new DisplayWrapper(outputs.Acubic), new DisplayWrapper(outputs.exponential), new DisplayWrapper(outputs.rexponential), new DisplayWrapper(outputs.Rexponential), new DisplayWrapper(outputs.Aexponential), new DisplayWrapper(outputs.logarithmic), new DisplayWrapper(outputs.rlogarithmic), new DisplayWrapper(outputs.Rlogarithmic), new DisplayWrapper(outputs.Alogarithmic), new DisplayWrapper(outputs.hyperbolic), new DisplayWrapper(outputs.rhyperbolic), new DisplayWrapper(outputs.Rhyperbolic), new DisplayWrapper(outputs.Ahyperbolic), new DisplayWrapper(outputs.eexponential), new DisplayWrapper(outputs.reexponential), new DisplayWrapper(outputs.Reexponential), new DisplayWrapper(outputs.Aeexponential), new DisplayWrapperTable( renderers.result,null,diagrams.result));dialog.layout();
+}
+me.calculateDisplay = function ( xstring, ystring, dolinear, errors, doquadratic, dopower, docubic, doexponential, dologarithmic, dohyperbolic, doeexponential, linear, rxy, Rlinear, Alinear, quadratic, rquadratic, Rquadratic, Aquadratic, power, rpower, Rpower, Apower, cubic, rcubic, Rcubic, Acubic, exponential, rexponential, Rexponential, Aexponential, logarithmic, rlogarithmic, Rlogarithmic, Alogarithmic, hyperbolic, rhyperbolic, Rhyperbolic, Ahyperbolic, eexponential, reexponential, Reexponential, Aeexponential, result )
+ {if ( renderers.result) renderers.result.Header.RestoreColumns();
+if ( diagrams.result) diagrams.result.Header.RestoreColumns();
+linear.Display(dolinear.GetValue());
+rxy.Display(dolinear.GetValue());
+Rlinear.Display(dolinear.GetValue());
+Alinear.Display(dolinear.GetValue());
+result.DisplayColumn("ylinear",dolinear.GetValue());
+result.DisplaySeries("ylinear",dolinear.GetValue());
+quadratic.Display(doquadratic.GetValue());
+rquadratic.Display(doquadratic.GetValue());
+Rquadratic.Display(doquadratic.GetValue());
+Aquadratic.Display(doquadratic.GetValue());
+result.DisplayColumn("yquadratic",doquadratic.GetValue());
+result.DisplaySeries("yquadratic",doquadratic.GetValue());
+cubic.Display(docubic.GetValue());
+rcubic.Display(docubic.GetValue());
+Rcubic.Display(docubic.GetValue());
+Acubic.Display(docubic.GetValue());
+result.DisplayColumn("ycubic",docubic.GetValue());
+result.DisplaySeries("ycubic",docubic.GetValue());
+power.Display(dopower.GetValue());
+rpower.Display(dopower.GetValue());
+Rpower.Display(dopower.GetValue());
+Apower.Display(dopower.GetValue());
+result.DisplayColumn("ypower",dopower.GetValue());
+result.DisplaySeries("ypower",dopower.GetValue());
+exponential.Display(doexponential.GetValue());
+rexponential.Display(doexponential.GetValue());
+Rexponential.Display(doexponential.GetValue());
+Aexponential.Display(doexponential.GetValue());
+result.DisplayColumn("yexponential",doexponential.GetValue());
+result.DisplaySeries("yexponential",doexponential.GetValue());
+logarithmic.Display(dologarithmic.GetValue());
+rlogarithmic.Display(dologarithmic.GetValue());
+Rlogarithmic.Display(dologarithmic.GetValue());
+Alogarithmic.Display(dologarithmic.GetValue());
+result.DisplayColumn("ylogarithmic",dologarithmic.GetValue());
+result.DisplaySeries("ylogarithmic",dologarithmic.GetValue());
+hyperbolic.Display(dohyperbolic.GetValue());
+rhyperbolic.Display(dohyperbolic.GetValue());
+Rhyperbolic.Display(dohyperbolic.GetValue());
+Ahyperbolic.Display(dohyperbolic.GetValue());
+result.DisplayColumn("yhyperbolic",dohyperbolic.GetValue());
+result.DisplaySeries("yhyperbolic",dohyperbolic.GetValue());
+eexponential.Display(doeexponential.GetValue());
+reexponential.Display(doeexponential.GetValue());
+Reexponential.Display(doeexponential.GetValue());
+Aeexponential.Display(doeexponential.GetValue());
+result.DisplayColumn("yeexponential",doeexponential.GetValue());
+result.DisplaySeries("yeexponential",doeexponential.GetValue());
+};
+},{calculate:"Calculer", stop:"Arrêt"});;
+hd.initdialog(dlg);dlg.addHandler(hd);window.dialoghandlerv61a2134c364ff = hd;});</script><div id="user_data_5986"><div class="tc" id="ud_note5986"><button class="c2 pc-btn-link ce"><i class="material-icons">&#xe14d;</i> Lien</button> <button class="c2 pc-btn-new"><i class="material-icons">&#xe161;</i> sauvegarder</button>  <button type="button" class="c2 pc-btn-embed-wol"><i class="material-icons">&#xe87b;</i> Widget</button></div><script>document.addEventListener("DOMContentLoaded", function(event) { window.udh_5986=new PCUserDataHandler( { calcid:5986,id:"user_data_5986"});});</script></div></div></div><div class="ads-inline"><div id="div-gpt-ad-1643726445-2"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1643726445-2");});</script></div></div>
+<p></p>
+<h2>Régression linéaire</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3Dax%2Bb" alt="\widehat{y}=ax+b" class="pc-math" /></p>
+<p>Coefficient a<br />
+<img src="/cgi-bin/mimetex.cgi?a%26amp%3B%3D%5Cfrac%7B%5Csum%20x_i%20%5Csum%20y_i-%20n%5Csum%20x_iy_i%7D%7B%5Cleft%28%5Csum%20x_i%5Cright%29%5E2-n%5Csum%20x_i%5E2%7D" alt="a&amp;=\frac{\sum x_i \sum y_i- n\sum x_iy_i}{\left(\sum x_i\right)^2-n\sum x_i^2}" class="pc-math" /></p>
+<p>Coefficient b<br />
+<img src="/cgi-bin/mimetex.cgi?b%26amp%3B%3D%5Cfrac%7B%5Csum%20x_i%20%5Csum%20x_iy_i-%5Csum%20x_i%5E2%5Csum%20y_i%7D%7B%5Cleft%28%5Csum%20x_i%5Cright%29%5E2-n%5Csum%20x_i%5E2%7D" alt="b&amp;=\frac{\sum x_i \sum x_iy_i-\sum x_i^2\sum y_i}{\left(\sum x_i\right)^2-n\sum x_i^2}" class="pc-math" /></p>
+<p>Coefficient de corrélation linéaire<br />
+<img src="/cgi-bin/mimetex.cgi?r_%7Bxy%7D%26amp%3B%3D%5Cfrac%7Bn%5Csum%20x_iy_i-%5Csum%20x_i%5Csum%20y_i%7D%7B%5Csqrt%7B%5Cleft%28n%5Csum%20x_i%5E2-%5Cleft%28%5Csum%20x_i%5Cright%29%5E2%5Cright%29%5C%21%5C%21%5Cleft%28n%5Csum%20y_i%5E2-%5Cleft%28%5Csum%20y_i%5Cright%29%5E2%20%5Cright%29%7D%7D" alt="r_{xy}&amp;=\frac{n\sum x_iy_i-\sum x_i\sum y_i}{\sqrt{\left(n\sum x_i^2-\left(\sum x_i\right)^2\right)\!\!\left(n\sum y_i^2-\left(\sum y_i\right)^2 \right)}}" class="pc-math" /></p>
+<p>Coefficient de détermination<br />
+<img src="/cgi-bin/mimetex.cgi?R%5E2%3Dr_%7Bxy%7D%5E2" alt="R^2=r_{xy}^2" class="pc-math" /></p>
+<p>Erreur standard de la régression<br />
+<img src="/cgi-bin/mimetex.cgi?%5Coverline%7BA%7D%3D%5Cdfrac%7B1%7D%7Bn%7D%5Csum%5Cleft%7C%5Cdfrac%7By_i-%5Cwidehat%7By%7D_i%7D%7By_i%7D%5Cright%7C%5Ccdot100%5C%25" alt="\overline{A}=\dfrac{1}{n}\sum\left|\dfrac{y_i-\widehat{y}_i}{y_i}\right|\cdot100\%" class="pc-math" /></p>
+<h2>Régression quadratique</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3Dax%5E2%2Bbx%2Bc" alt="\widehat{y}=ax^2+bx+c" class="pc-math" /></p>
+<p>Système d'équations pour déterminer a, b et c<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cbegin%7Bcases%7Da%5Csum%20x_i%5E2%2Bb%5Csum%20x_i%2Bnc%3D%5Csum%20y_i%5C%2C%2C%5C%5C%5B2pt%5D%20a%5Csum%20x_i%5E3%2Bb%5Csum%20x_i%5E2%2Bc%5Csum%20x_i%3D%5Csum%20x_iy_i%5C%2C%2C%5C%5C%5B2pt%5D%20a%5Csum%20x_i%5E4%2Bb%5Csum%20x_i%5E3%2Bc%5Csum%20x_i%5E2%3D%5Csum%20x_i%5E2y_i%5C%2C%3B%5Cend%7Bcases%7D" alt="\begin{cases}a\sum x_i^2+b\sum x_i+nc=\sum y_i\,,\\[2pt] a\sum x_i^3+b\sum x_i^2+c\sum x_i=\sum x_iy_i\,,\\[2pt] a\sum x_i^4+b\sum x_i^3+c\sum x_i^2=\sum x_i^2y_i\,;\end{cases}" class="pc-math" /></p>
+<p>Coefficient de corrélation<br />
+<img src="/cgi-bin/mimetex.cgi?R%3D%20%5Csqrt%7B1-%5Cfrac%7B%5Csum%28y_i-%5Cwidehat%7By%7D_i%29%5E2%7D%7B%5Csum%28y_i-%5Coverline%7By%7D%29%5E2%7D%7D" alt="R= \sqrt{1-\frac{\sum(y_i-\widehat{y}_i)^2}{\sum(y_i-\overline{y})^2}}" class="pc-math" />,<br />
+où<br />
+<img src="/cgi-bin/mimetex.cgi?%5Coverline%7By%7D%3D%20%5Cdfrac%7B1%7D%7Bn%7D%5Csum%20y_i" alt="\overline{y}= \dfrac{1}{n}\sum y_i" class="pc-math" /></p>
+<p>Coefficient de détermination<br />
+<img src="/cgi-bin/mimetex.cgi?R%5E2" alt="R^2" class="pc-math" /></p>
+<p>Erreur standard de la régression<br />
+<img src="/cgi-bin/mimetex.cgi?%5Coverline%7BA%7D%3D%5Cdfrac%7B1%7D%7Bn%7D%5Csum%5Cleft%7C%5Cdfrac%7By_i-%5Cwidehat%7By%7D_i%7D%7By_i%7D%5Cright%7C%5Ccdot100%5C%25" alt="\overline{A}=\dfrac{1}{n}\sum\left|\dfrac{y_i-\widehat{y}_i}{y_i}\right|\cdot100\%" class="pc-math" /></p>
+<h2>Régression cubique</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3Dax%5E3%2Bbx%5E2%2Bcx%2Bd" alt="\widehat{y}=ax^3+bx^2+cx+d" class="pc-math" /></p>
+<p>Système d'équations pour déterminer a, b, c et d<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cbegin%7Bcases%7Da%5Csum%20x_i%5E3%2Bb%5Csum%20x_i%5E2%2Bc%5Csum%20x_i%2Bnd%3D%5Csum%20y_i%5C%2C%2C%5C%5C%5B2pt%5D%20a%5Csum%20x_i%5E4%2Bb%5Csum%20x_i%5E3%2Bc%5Csum%20x_i%5E2%2Bd%5Csum%20x_i%3D%5Csum%20x_iy_i%5C%2C%2C%5C%5C%5B2pt%5D%20a%5Csum%20x_i%5E5%2Bb%5Csum%20x_i%5E4%2Bc%5Csum%20x_i%5E3%2Bd%5Csum%20x_i%5E2%3D%5Csum%20x_i%5E2y_i%5C%2C%2C%5C%5C%5B2pt%5D%20a%5Csum%20x_i%5E6%2Bb%5Csum%20x_i%5E5%2Bc%5Csum%20x_i%5E4%2Bd%5Csum%20x_i%5E3%3D%5Csum%20x_i%5E3y_i%5C%2C%3B%5Cend%7Bcases%7D" alt="\begin{cases}a\sum x_i^3+b\sum x_i^2+c\sum x_i+nd=\sum y_i\,,\\[2pt] a\sum x_i^4+b\sum x_i^3+c\sum x_i^2+d\sum x_i=\sum x_iy_i\,,\\[2pt] a\sum x_i^5+b\sum x_i^4+c\sum x_i^3+d\sum x_i^2=\sum x_i^2y_i\,,\\[2pt] a\sum x_i^6+b\sum x_i^5+c\sum x_i^4+d\sum x_i^3=\sum x_i^3y_i\,;\end{cases}" class="pc-math" /></p>
+<p>Coefficient de corrélation, coefficient de détermination, erreur standard de la régression - formules identiques à celles de la régression quadratique.</p>
+<h2>Régression puissance</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3Da%5Ccdot%20x%5Eb" alt="\widehat{y}=a\cdot x^b" class="pc-math" /></p>
+<p>Coefficient b<br />
+<img src="/cgi-bin/mimetex.cgi?b%3D%5Cdfrac%7Bn%5Csum%28%5Cln%20x_i%5Ccdot%5Cln%20y_i%29-%5Csum%5Cln%20x_i%5Ccdot%5Csum%5Cln%20y_i%20%7D%7Bn%5Csum%5Cln%5E2x_i-%5Cleft%28%5Csum%5Cln%20x_i%5Cright%29%5E2%20%7D" alt="b=\dfrac{n\sum(\ln x_i\cdot\ln y_i)-\sum\ln x_i\cdot\sum\ln y_i }{n\sum\ln^2x_i-\left(\sum\ln x_i\right)^2 }" class="pc-math" /></p>
+<p>Coefficient a<br />
+<img src="/cgi-bin/mimetex.cgi?a%3D%5Cexp%5C%21%5Cleft%28%5Cdfrac%7B1%7D%7Bn%7D%5Csum%5Cln%20y_i-%5Cdfrac%7Bb%7D%7Bn%7D%5Csum%5Cln%20x_i%5Cright%29" alt="a=\exp\!\left(\dfrac{1}{n}\sum\ln y_i-\dfrac{b}{n}\sum\ln x_i\right)" class="pc-math" /></p>
+<p>Coefficient de corrélation, coefficient de détermination, erreur standard de la régression - les mêmes formules que ci-dessus.</p>
+<h2>Régression exponentielle ab</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3Da%5Ccdot%20b%5Ex" alt="\widehat{y}=a\cdot b^x" class="pc-math" /></p>
+<p>Coefficient b<br />
+<img src="/cgi-bin/mimetex.cgi?b%3D%5Cexp%5Cdfrac%7Bn%5Csum%20x_i%5Cln%20y_i-%5Csum%20x_i%5Ccdot%5Csum%5Cln%20y_i%20%7D%7Bn%5Csum%20x_i%5E2-%5Cleft%28%5Csum%20x_i%5Cright%29%5E2%20%7D" alt="b=\exp\dfrac{n\sum x_i\ln y_i-\sum x_i\cdot\sum\ln y_i }{n\sum x_i^2-\left(\sum x_i\right)^2 }" class="pc-math" /></p>
+<p>Coefficient a<br />
+<img src="/cgi-bin/mimetex.cgi?a%3D%5Cexp%5C%21%5Cleft%28%5Cdfrac%7B1%7D%7Bn%7D%5Csum%5Cln%20y_i-%5Cdfrac%7B%5Cln%20b%7D%7Bn%7D%5Csum%20x_i%5Cright%29" alt="a=\exp\!\left(\dfrac{1}{n}\sum\ln y_i-\dfrac{\ln b}{n}\sum x_i\right)" class="pc-math" /></p>
+<p>Coefficient de corrélation, coefficient de détermination, erreur standard de la régression - identiques.</p>
+<h2>Régression hyperbolique</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3Da%20%2B%20%5Cfrac%7Bb%7D%7Bx%7D" alt="\widehat{y}=a + \frac{b}{x}" class="pc-math" /></p>
+<p>Coefficient b<br />
+<img src="/cgi-bin/mimetex.cgi?b%3D%5Cdfrac%7Bn%5Csum%5Cdfrac%7By_i%7D%7Bx_i%7D-%5Csum%5Cdfrac%7B1%7D%7Bx_i%7D%5Csum%20y_i%20%7D%7Bn%5Csum%5Cdfrac%7B1%7D%7Bx_i%5E2%7D-%5Cleft%28%5Csum%5Cdfrac%7B1%7D%7Bx_i%7D%5Cright%29%5E2%20%7D" alt="b=\dfrac{n\sum\dfrac{y_i}{x_i}-\sum\dfrac{1}{x_i}\sum y_i }{n\sum\dfrac{1}{x_i^2}-\left(\sum\dfrac{1}{x_i}\right)^2 }" class="pc-math" /></p>
+<p>Coefficient a<br />
+<img src="/cgi-bin/mimetex.cgi?a%3D%5Cdfrac%7B1%7D%7Bn%7D%5Csum%20y_i-%5Cdfrac%7Bb%7D%7Bn%7D%5Csum%5Cdfrac%7B1%7D%7Bx_i%7D" alt="a=\dfrac{1}{n}\sum y_i-\dfrac{b}{n}\sum\dfrac{1}{x_i}" class="pc-math" /></p>
+<p>Coefficient de corrélation, coefficient de détermination, erreur standard de la régression - identiques à ceux ci-dessus.</p>
+<h2>Régression logarithmique</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3Da%20%2B%20b%5Cln%20x" alt="\widehat{y}=a + b\ln x" class="pc-math" /></p>
+<p>Coefficient b<br />
+<img src="/cgi-bin/mimetex.cgi?b%3D%5Cdfrac%7Bn%5Csum%28y_i%5Cln%20x_i%29-%5Csum%5Cln%20x_i%5Ccdot%20%5Csum%20y_i%20%7D%7Bn%5Csum%5Cln%5E2x_i-%5Cleft%28%5Csum%5Cln%20x_i%5Cright%29%5E2%20%7D" alt="b=\dfrac{n\sum(y_i\ln x_i)-\sum\ln x_i\cdot \sum y_i }{n\sum\ln^2x_i-\left(\sum\ln x_i\right)^2 }" class="pc-math" /></p>
+<p>Coefficient a<br />
+<img src="/cgi-bin/mimetex.cgi?a%3D%5Cdfrac%7B1%7D%7Bn%7D%5Csum%20y_i-%5Cdfrac%7Bb%7D%7Bn%7D%5Csum%5Cln%20x_i" alt="a=\dfrac{1}{n}\sum y_i-\dfrac{b}{n}\sum\ln x_i" class="pc-math" /></p>
+<p>Coefficient de corrélation, coefficient de détermination, erreur standard de la régression - identiques à ceux ci-dessus.</p>
+<h2>Régression exponentielle</h2>
+<p>Equation :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cwidehat%7By%7D%3De%5E%7Ba%2Bbx%7D" alt="\widehat{y}=e^{a+bx}" class="pc-math" /></p>
+<p>Coefficient b<br />
+<img src="/cgi-bin/mimetex.cgi?b%3D%5Cdfrac%7Bn%5Csum%20x_i%5Cln%20y_i-%5Csum%20x_i%5Ccdot%5Csum%5Cln%20y_i%20%7D%7Bn%5Csum%20x_i%5E2-%5Cleft%28%5Csum%20x_i%5Cright%29%5E2%20%7D" alt="b=\dfrac{n\sum x_i\ln y_i-\sum x_i\cdot\sum\ln y_i }{n\sum x_i^2-\left(\sum x_i\right)^2 }" class="pc-math" /></p>
+<p>Coefficient a<br />
+<img src="/cgi-bin/mimetex.cgi?a%3D%5Cdfrac%7B1%7D%7Bn%7D%5Csum%5Cln%20y_i-%5Cdfrac%7Bb%7D%7Bn%7D%5Csum%20x_i" alt="a=\dfrac{1}{n}\sum\ln y_i-\dfrac{b}{n}\sum x_i" class="pc-math" /></p>
+<p>Coefficient de corrélation, coefficient de détermination, erreur standard de la régression - identiques à ceux ci-dessus.</p>
+<h2>Dérivation des formules</h2>
+<p>Commençons par le problème :<br />
+Nous avons une fonction inconnue y=f(x), donné sous la forme d'un tableau de données (par exemples, celles obtenues lors d'expériences).<br />
+Nous avons besoin, de trouver une fonction d'un type connu (linéaire, quadratique, etc.) y=F(x), pour laquelle ces valeurs seront aussi proches que possibles des valeurs du tableau au même point. En pratique, le type de fonction est déterminée en comparant visuellement les points du tableaux aux graphiques des fonctions connues.</p>
+<p>En résultat, nous devrions obtenir une formule y=F(x), nommée formule empirique (équation régressive, approximation de la fonction) qui nous permet de calculer y pour des valeurs de x non présentes de le tableau. Donc la formule empirique &quot;lisse&quot; les valeurs de Y.</p>
+<p>Nous utilisations la <strong>Méthode des moindres carrés</strong> pour obtenir les paramètres de F qui correspondent le mieux. La meilleure correspondance dans la méthode des moindres carrés tends à minimiser la somme des carrés résiduels, un résiduel étant la différence entre la valeur observée et la valeur correspondante fournie par le modèle.</p>
+<p>Ainsi, nous devons trouver une fonction F, de telle sorte que la somme des carrés résiduels S soit minimale<br />
+<img src="/cgi-bin/mimetex.cgi?S%3D%5Csum%5Climits_i%28y_i-F%28x_i%29%29%5E2%5Crightarrow%20min" alt="S=\sum\limits_i(y_i-F(x_i))^2\rightarrow min" class="pc-math" /></p>
+<p>Décrivons la solution pour ce problème en utilisant une régression linéaire F=ax+b par exemple. Nous devons trouver la meilleure correspondance pour les coefficients a et b, puisque S dépend de a et b. Pour trouver le minimum, nous trouveront les points extrêmes où la dérivée partielle est égale à zéro.</p>
+<p>En utilisant la formule de dérivation de fonctions complexes, nous obtiendrons les équations suivantes<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cbegin%7Bcases%7D%20%5Csum%20%5By_i%20-%20F%28x_i%2C%20a%2C%20b%29%5D%5Ccdot%20F%5E%5Cprime_a%28x_i%2C%20a%2C%20b%29%3D0%20%5C%5C%20%5Csum%20%5By_i%20-%20F%28x_i%2C%20a%2C%20b%29%5D%5Ccdot%20F%5E%5Cprime_b%28x_i%2C%20a%2C%20b%29%3D0%20%5Cend%7Bcases%7D" alt="\begin{cases} \sum [y_i - F(x_i, a, b)]\cdot F^\prime_a(x_i, a, b)=0 \\ \sum [y_i - F(x_i, a, b)]\cdot F^\prime_b(x_i, a, b)=0 \end{cases}" class="pc-math" /></p>
+<p>Pour la fonction <img src="/cgi-bin/mimetex.cgi?F%28x%2Ca%2Cb%29%3Dax%2Bb" alt="F(x,a,b)=ax+b" class="pc-math" /> les dérivés partielles sont<br />
+<img src="/cgi-bin/mimetex.cgi?F%5E%5Cprime_a%3Dx" alt="F^\prime_a=x" class="pc-math" />,<br />
+<img src="/cgi-bin/mimetex.cgi?F%5E%5Cprime_b%3D1" alt="F^\prime_b=1" class="pc-math" /></p>
+<p>En étendant les premières formules avec des dérivés partielles, nous obtiendrons les équations suivantes<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cbegin%7Bcases%7D%20%5Csum%20%28y_i%20-%20ax_i-b%29%5Ccdot%20x_i%3D0%20%5C%5C%20%5Csum%20%28y_i%20-%20ax_i-b%29%3D0%20%5Cend%7Bcases%7D" alt="\begin{cases} \sum (y_i - ax_i-b)\cdot x_i=0 \\ \sum (y_i - ax_i-b)=0 \end{cases}" class="pc-math" /></p>
+<p>Après avoir éliminé les parenthèse, nous obtenons alors :<br />
+<img src="/cgi-bin/mimetex.cgi?%5Cbegin%7Bcases%7D%20%5Csum%20y_ix_i%20-%20a%20%5Csum%20x_i%5E2-b%5Csum%20x_i%3D0%20%5C%5C%20%5Csum%20y_i%20-%20a%5Csum%20x_i%20-%20nb%3D0%20%5Cend%7Bcases%7D" alt="\begin{cases} \sum y_ix_i - a \sum x_i^2-b\sum x_i=0 \\ \sum y_i - a\sum x_i - nb=0 \end{cases}" class="pc-math" /></p>
+<p>A partir de ces équations, nous pouvons obtenir les formules pour a et b, qui seront les mêmes formules que celles listées ci-dessus.</p>
+<p>En utilisant la même technique, nous pouvons trouver les formules pour toutes les autres régressions restantes.</p></div></div><div id="copied_msg" class="ke"><div class="me"><div class="ne">URL copiée dans le presse-papiers</div></div></div><div class="social social-share ee"><div class="share-mode"><div class="t9 share-switch"><div class="x6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" id="share_data_md"/></div></div></div> <label for="share_data_md">&nbsp;Partager mon calcul</label></div><div class="share_data_msg z"></div></div><div class="share-buttons"><a class="pc-social-share oc pc" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffr.planetcalc.com%2F5992%2F" rel="noopener nofollow" data-origin="pc"><span class="material-icons">&#xf301;</span></a><a class="pc-social-share oc qc" target="_blank" href="https://twitter.com/intent/tweet?text=Calculatrice%20en%20ligne%3A%20Approximation%20d%27une%20fonction%20avec%20une%20analyse%20r%C3%A9gressive&url=https%3A%2F%2Ffr.planetcalc.com%2F5992%2F" rel="noopener nofollow" data-origin="qc"><span class="material-icons">&#xf303;</span></a><a class="pc-social-share oc r_" href="mailto:?subject=Calculatrice%20en%20ligne%3A%20Approximation%20d%27une%20fonction%20avec%20une%20analyse%20r%C3%A9gressive&body=https%3A%2F%2Ffr.planetcalc.com%2F5992%2F" rel="noopener nofollow" data-origin="r_"><span class="material-icons">&#xe0e1;</span></a></div><div class="share-url-text x"><div class="j4"><input class="l4" type="text" value="" readonly/><div class="_3"></div></div><div class="n4"><div id="share_data_md_hlp" class="e4 c4">Tous ceux qui reçoivent le lien pourront voir ce calcul</div></div><button class="c2 mc" type="button" ><span class="f2 ">Copier</span></button>
+<div style="clear:both"></div></div></div><div class="similar-calc"><h4>Calculatrices similaires</h4><ul><li>&bull; <a href="/8735/" title="Ajustement de courbe à l’aide de méthodes des moindres carrés linéaires sans contrainte et avec contrainte">Ajustement de courbe à l’aide de méthodes des moindres carrés linéaires sans contrainte et avec contrainte</a></li><li>&bull; <a href="/8386/" title="Approximation linéraire">Approximation linéraire</a></li><li>&bull; <a href="/2787/" title="Valeurs d'une fonction à une variable">Valeurs d'une fonction à une variable</a></li><li>&bull; <a href="/620/" title="Calculateur mathématique">Calculateur mathématique</a></li><li>&bull; <a href="/419/" title="Logarithme">Logarithme</a></li><li>&bull; <a href="/search/?section=4578" class="vc">Section Math ( 185 calculatrices )</a></li></ul></div><div class="b"><i class="material-icons">&#xe54e;</i>&nbsp;<a class="vc xb" href="/search/?tag=4849" >analyse régressive</a> <a class="vc xb" href="/search/?tag=4840" >approximation</a> <a class="vc xb" href="/search/?tag=4559" >fonction</a> <a class="vc bc" href="/search/?tag=4578" >Math</a> <a class="vc xb" href="/search/?tag=4841" >régression</a> <a class="vc xb" href="/search/?tag=4845" >régression cubique</a> <a class="vc xb" href="/search/?tag=4844" >régression exponentielle</a> <a class="vc xb" href="/search/?tag=4842" >régression linéaire</a> <a class="vc xb" href="/search/?tag=4847" >régression logarithmique</a> <a class="vc xb" href="/search/?tag=4843" >régression puissance</a> <a class="vc xb" href="/search/?tag=4846" >régression quadratique</a> <a class="vc xb" href="/search/?tag=4839" >variable</a> </div><div class="b2"><span class="u8"><a href="https://fr.planetcalc.com/5992/?license=1" target=_blank><i class="material-icons">&#xf304;</i><i class="material-icons">&#xf305;</i></a></span> PLANETCALC, Approximation d'une fonction avec une analyse régressive<div class="ba u8"></div></div><div class="p9 qb author-date v"><i class="material-icons">&#xe7ff;</i><a href="/5992/?thanks=1">Timur</a><i class="material-icons">&#xe8b5;</i><span class="nav-created">2020-11-03 14:19:34</span></div>		<script>
+		function showAvInitials( i ) {
+			i.style.display="none";
+			var d = i.parentNode;
+			var bg = d.getAttribute("data-bg");
+			d.style.backgroundColor = bg;
+			var e = d.getElementsByClassName("tb");
+			if ( e.length ) {
+				e[0].style.display="inline";
+			}
+		}
+		function CommentAvatarFormatter( formatter ) {
+			var colors = [ "#D32F2F", "#C2185B", "#7B1FA2", "#512DA8", "#303F9F", "#1976D2", "#0288D1", "#0097A7", "#00796B", "#388E3C", "#689F38", "#AFB42B", "#FBC02D", "#FFA000", "#F57C00", "#E64A19", "#5D4037", "#455A64"];
+	this.Format = function ( colname, record ) {
+		var ret = '<div class="' + "sb" + '"';
+			var name = record.nickname;
+			if ( !name ) name = 'Unknown'; else name = name.toString();
+			var hash = 0;
+			for(var i =0 ;i<name.length;++i) {
+				hash+=name.charCodeAt(i);
+			}
+			var color = colors[ hash%colors.length];
+			var namearr = name.split(' ');
+			var abbr ='';
+			for(var i=0;i<namearr.length && i<2 ;++i) {
+				if ( namearr[i].length) {
+					abbr+=namearr[i].substr(0,1);
+				}
+			}
+		if ( record.photo ) {
+			ret+='data-bg="' + color + '"><img src="' + record.photo + '" alt="' + (record.nickname && record.nickname.replace?record.nickname.replace('"',"'"):'') + '" onerror="showAvInitials(this);">';
+		} else {
+			ret+=' style="background-color:' + color + '">';
+		}
+		ret+='<span class="' + "tb" + '"' + (record.photo?' style="display:none;"':'') + '>' + abbr.toUpperCase()  + '</span>';
+		ret+='</div>';
+		return ret;
+	}
+}</script>
+<div id="comments"><div class="w_ f8"  id="dialogv61f9466dd7823"><div class="x_ j0"><div class="s8"><h4 class="y9">commentaires</h4></div></div><div class="x_ _0"><div id="dialogv61f9466dd7823_group_sofia"  class="placeholder"></div></div><div class="x_ g0"><div class="w_ f8"  id="dialogv61f9466dd7823_group_comments"><div class="x_ j0"><div class="j4 m4 g8 "><textarea class="l4"  id="dialogv61f9466dd7823_message" rows="5" cols="80"></textarea>
+<div class="c3"><div class="e3"></div><div class="f3"><label class="h3" for="dialogv61f9466dd7823_message">Votre message</label></div><div class="g3"></div></div></div><div class="n4"><div id="hlp_dialogv61f9466dd7823_message" class="e4 c4"></div></div></div><div class="x_ j0"><div class="t9"><div class="x6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" id="dialogv61f9466dd7823_notify"/></div></div></div><label for="dialogv61f9466dd7823_notify"> Abonnez-vous aux notifications de commentaires</label></div><div class="n4"><div id="hlp_dialogv61f9466dd7823_notify" class="e4 c4"></div></div></div></div></div><div class="x_ j0"><div class="e8"><div id="dialogv61f9466dd7823_progress" role="progressbar" class="c8 m0 t0"><div class="p0"></div><div class="q0"></div><div class="n0 r0"><span class="o0"></span></div><div class="n0 s0"><span class="o0"></span></div></div></div></div><div class="r8 x_ j0"><button class="c2 g2" type="button" id="dialogv61f9466dd7823_send"><span class="f2 ">Envoyer</span></button>
+</div><div class="x_ j0"><div id="dialogv61f9466dd7823_comments"  class="placeholder"></div></div><input type="hidden" value="6403" id="dialogv61f9466dd7823_messagebox"/></div><script>function Dialogv61f9466dd7823() {var me = this;me.id = "dialogv61f9466dd7823";me.GetElement = function () { return document.getElementById( me.id ); };me.GetEventHandlerName = function () { return "dialoghandlerv61f9466dd7823"; };this.dialog_controls = [new DialogInput("group_sofia", this, 0,new ElementAccessorDefault()),new DialogInput("group_comments", this, 0,new ElementAccessorDefault()),new DialogInput("message", this, new ValidatorTextSize( 0,5000 ),new ElementAccessorText()),new DialogInput("notify", this, 0,new ElementAccessorCheckbox()),new DialogInput("messagebox", this, 0,new ElementAccessorHidden()),new DialogInput("progress", this, 0,new ElementAccessorDefault()),new DialogInput("send", this, 0,new ElementAccessorOperation()),new DialogInput("comments", this, 0,new ElementAccessorDefault())];me.dialog_controls._all ={};me.dialog_controls.forEach( function( e ) { if (me[e.id]===undefined) me[e.id] = e; me.dialog_controls._all[e.id] = e;} );this.addHandler = function ( handler ) {this.dialog_controls.forEach(function(c) { c.addHandler( handler);});};this.SetValues = function ( values ) {this.dialog_controls.forEach(function(c) {if ( values[c.id]!==undefined ) { c.SetValue( values[c.id] ); }});};this.Clear = function ( ) {this.dialog_controls.forEach(function( c) { c.ResetValue();});};this.SetDefaultValues = function () { this.Clear();};this.GetValues = function () {var ret = {}; this.dialog_controls.forEach(function( c) { ret[c.id] = c.GetValue();});return ret;};this.Validate = function ( ) {for(var i=0;i<me.dialog_controls.length;++i) if (!me.dialog_controls[i].Validate()) return false; return true;};this.layout = function ( ) {}};document.addEventListener("DOMContentLoaded", function(event) {var dlg = new Dialogv61f9466dd7823();
+var hd = function() {var dialogv61f9466dd7823_comments_init_data="";var dialogv61f9466dd7823_comments=new AjaxSetMessages(dialogv61f9466dd7823_comments_init_data, "/service/comments/", "dialogv61f9466dd7823_comments", "Chargement...");dialogv61f9466dd7823_comments.Renderer.AddColumn("posted","Créé",new RecordFieldFormatter( new FormatterTimeSpan() ));dialogv61f9466dd7823_comments.Renderer.AddColumn("avatar","",new CommentAvatarFormatter());dialogv61f9466dd7823_comments.Renderer.AddColumn("created","",new RecordFieldFormatter( new FormatterPrefix("Inscrit: ", new FormatterDateOnly()) ));dialogv61f9466dd7823_comments.Renderer.AddColumn("posts","",new RecordFieldFormatter( new FormatterPrefix("Postes: ", null) ));dialogv61f9466dd7823_comments.Render();dialogv61f9466dd7823_comments.qc.messagebox=6403;dialogv61f9466dd7823_comments.qc.language="fr";dialogv61f9466dd7823_comments.qc.parent=0; var ch= new CommentFormHandler("https://fr.planetcalc.com/5992/?loginrequirednow=1&language_select=fr",false);ch.setTable(dialogv61f9466dd7823_comments); return ch;}();;
+hd.initdialog(dlg);dlg.addHandler(hd);});</script></div></div><div class="x_ _0"><div id="top-right-card" class="right_fix"></div><div class="cc right-ads"><div id="div-gpt-ad-1643726445-3"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1643726445-3");});</script></div></div><div id="bottom-right-anchor" ></div><div id="bottom-right-card" ><div class="social social-share ce"><h4 class="share-title">Partager <span class="share-subject">la page</span></h4><div class="share-mode"><div class="t9 share-switch"><div class="x6"><div class="z6"></div><div class="b7"><div class="_7"><input class="a7" type="checkbox" id="share_data"/></div></div></div> <label for="share_data">&nbsp;Partager mon calcul</label></div><div class="share_data_msg z"></div></div><div class="share-buttons"><a class="pc-social-share oc pc" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffr.planetcalc.com%2F5992%2F" rel="noopener nofollow" data-origin="pc"><span class="material-icons">&#xf301;</span></a><a class="pc-social-share oc qc" target="_blank" href="https://twitter.com/intent/tweet?text=Calculatrice%20en%20ligne%3A%20Approximation%20d%27une%20fonction%20avec%20une%20analyse%20r%C3%A9gressive&url=https%3A%2F%2Ffr.planetcalc.com%2F5992%2F" rel="noopener nofollow" data-origin="qc"><span class="material-icons">&#xf303;</span></a><a class="pc-social-share oc r_" href="mailto:?subject=Calculatrice%20en%20ligne%3A%20Approximation%20d%27une%20fonction%20avec%20une%20analyse%20r%C3%A9gressive&body=https%3A%2F%2Ffr.planetcalc.com%2F5992%2F" rel="noopener nofollow" data-origin="r_"><span class="material-icons">&#xe0e1;</span></a></div><div class="share-url-text x"><div class="j4"><input class="l4" type="text" value="" readonly/><div class="_3"></div></div><div class="n4"><div id="share_data_hlp" class="e4 c4">Tous ceux qui reçoivent le lien pourront voir ce calcul</div></div><button class="c2 mc" type="button" ><span class="f2 ">Copier</span></button>
+<div style="clear:both"></div></div></div></div><div class="ads-sticker right-ads"><div id="div-gpt-ad-1643726445-4"><script>googletag.cmd.push(function() { googletag.display("div-gpt-ad-1643726445-4");});</script></div></div></div></div></div><script>
+var shiftMax = 0;
+document.addEventListener('DOMContentLoaded', function(){ 
+	shiftMax = $('#left-block').offset().top-$('#bottom-right-anchor').offset().top+$('#left-block').height()-$('#bottom-right-card').height();
+	window.addEventListener('scroll',sticky_update, {passive:true});
+	sticky_update();
+	showStoreRef();
+	
+var sharer = new PSS.Sharer("mon calcul",'La taille des données de calcul est de %1. Pour partager votre calcul, <a class="save_data_link" href="#">sauvegardez les données de calcul</a> sur notre serveur.');});
+
+function sticky_update() {
+	var window_top = $(window).scrollTop();
+	var off = $('#bottom-right-anchor').offset();
+	var shift = window_top+56 - off.top;
+	if (shift>0 && off.left>400 && shiftMax>0) {
+		$('#bottom-right-anchor').height(shift<shiftMax?shift:shiftMax);
+	} else {
+		$('#bottom-right-anchor').height(0);
+	}
+}
+
+function getMobileOperatingSystem() {
+	var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+	if (/android/i.test(userAgent)) {
+		return "Android";
+    }
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return "iOS";
+    }
+    return "unknown";
+}
+function showStoreRef() {
+	if ( $(".wb").length && !$(".wb").is(":visible") ) {
+	switch( getMobileOperatingSystem()) {
+	case 'Android':{
+		$(".pc-storeref-android").removeClass("cc");
+	} break;
+	case 'iOS':{
+		$(".pc-storeref-ios").removeClass("cc");
+	} break;
+	}	
+}
+var savedData = [];function forEachCalc( func ) {
+	if ( window.CurrentPageCalculators ) {
+		for( var i =0;i<window.CurrentPageCalculators.length;++i ) {
+			func( window.CurrentPageCalculators[i] );
+		}
+	}
+}
+
+forEachCalc( function ( calc ) {
+	var sd = savedData[calc.CalculatorID ];
+	if ( sd ) {
+		calc.setProfile(sd,false);
+}});
+
+}
+</script>
+</div><!-- container-->
+	<div class="horizontal_divider"></div>
+	<footer class="t7">
+	<ol >
+		<li><h4>Sur</h4></li>
+		<li><a href="/about/">Le projet</a></li>
+		<li><a class="inline" href="//twitter.com/planetcalc" rel="nofollow" ><i class="material-icons">&#xf303;</i></a>
+				</li>
+	</ol>
+
+	<ol >
+		<li><h4>termes</h4></li>
+		<li><a href="/terms/">Conditions d'utilisation</a></li>  
+		<li><a href="/privacy/">Politique de confidentialité</a></li>
+	</ol>
+	<ol >
+		<li><h4>Calculatrices</h4></li>
+		<li><a href="/all/">Toutes les calculatrices en ligne</a></li>
+	</ol>
+	<ol >
+		<li><h4>Communauté</h4></li>
+		<li><a href="/comments/">Toutes les discussions</a></li>
+		<li><a href="/allrequests/">Toutes les demandes</a></li>
+		<li><a href="/sofia/">Galerie de Sofia</a></li>
+		<li><a href="/dev/">Pour les développeurs</a></li>
+	</ol>
+	<ol >
+		<li><h4>Langues</h4></li>
+<li><a href="#" onclick="document.location.href='https://de.planetcalc.com/5992/?language_select=de'" title="Deutsch">Deutsch</a></li><li><a href="#" onclick="document.location.href='https://planetcalc.com/5992/?language_select=en'" title="English">English</a></li><li><a href="#" onclick="document.location.href='https://es.planetcalc.com/5992/?language_select=es'" title="Español">Español</a></li><li><a href="#" onclick="document.location.href='https://pt.planetcalc.com/5992/?language_select=pt'" title="Português">Português</a></li><li><a href="#" onclick="document.location.href='https://planetcalc.ru/5992/?language_select=ru'" title="Русский">Русский</a></li><li><a href="#" onclick="document.location.href='https://zh.planetcalc.com/5992/?language_select=zh'" title="中文">中文</a></li><li><a href="#" onclick="document.location.href='https://fr.planetcalc.com/5992/?language_select=fr'" title="Français">Français</a></li>	</ol>
+	<ol >
+		<li><h4>Section personnelle</h4></li>
+		<li><a href="/personal/">
+S'identifier</a>
+</li>
+	</ol>
+	<div class="pb">Copyright &copy; PlanetCalc Version:
+	3.0.4141.0	</div>
+</footer>
+
+<style media="all">
+.consent { background-color:white; position: fixed; bottom:0; padding: 16px; z-index:50000;
+width:356px;
+margin:8px;
+background-color:#fefefe;
+}
+@media (min-width: 540px) {
+	.consent {
+	margin:32px;
+	padding:32px;
+	}
+}
+.consent .pc-icon-align { margin:16px 0 }
+.consent button { margin: 16px 8px; min-width:128px; }
+.consent p { text-align:right; }
+.consent .buttons { text-align: center;}
+</style>
+<aside class="consent t5 consent-prev"><h4>Pouvons-nous utiliser vos données pour personnaliser les annonces pour vous ?</h4>Nos partenaires collectent des données et utilisent des cookies pour la personnalisation et la mesure des publicités. <a href="/privacy/">Découvrez comment PLANETCALC et nos partenaires collectent et utilisent vos données.</a>
+<div class="buttons"><button type="button" data-consent="ad_target" class="c2 g2 s_ consent-save">Oui</button>
+<button type="button" class="c2 g2 s_ consent-navigate">non</button></div>
+<div><span class="z">Vous pouvez modifier votre choix à tout moment sur notre page <a href="/privacy/">Politique de confidentialité</a>.</span>
+</div>
+</aside>
+<aside class="consent t5 consent-next" style="display:none"><div class="qb"><a class="consent-navigate"><i class="material-icons">&#xe5cb;</i>Retour</a></div><div>Vous pouvez voir des annonces qui vous concernent moins. Ces annonces utilisent des cookies, mais pas ceux pour la personnalisation. <a href="/privacy/">la façon dont nous utilisons les cookies</a></div>
+<div class="buttons">
+<button type="button" data-consent="ad_base" class="c2 g2 s_ consent-save">OK</button>
+</div>
+</aside>
+<script>if ( PCL===undefined ) {var PCL = {};}
+	PCL.language_id='fr';
+PCL.minutes_ago_one="il y a %1 minute";PCL.minutes_ago_other="il y a %1 minutes";PCL.hours_ago_one="il y a %1 heure";PCL.hours_ago_other="il y a %1 heures";PCL.days_ago_one="il y a %1 jour";PCL.days_ago_other="il y a %1 jours";PCL.months_ago_one="il y a %1 mois";PCL.months_ago_other="il y a %1 mois";PCL.years_ago_one="il y a %1 an";PCL.years_ago_other="il y a %1 ans";PCL.all="tout";PCL.x_of_y="%1 sur %2";PCL.items_per_page="objets par page";PCL.next_page="Page suivante";PCL.prev_page="Page précédente";PCL.err_data_too_long="La taille des données de calcul est de %1. Vos données de calcul sont trop grandes. Nous pouvons nous permettre %2 seulement.";PCL.userdata="Le calcul a été retenu %2 par <a href=\"/personal/authorinfo/?id=%3\" rel=\"nofollow\">%1</a>";	PCL.yes="Oui";PCL.no="non";	PCL.digits_afterdot="Chiffres après la virgule décimale : %1";	PCL.err_must_be_at_least_x_chars_long="Le champ doit contenir au moins %1 caractères.";PCL.err_must_be_less_or_equal_x_chars="Le champ doit contenir moins de %1 caractères.";		PCL.pluralCodes = ['zero','one','two','few','many'];
+	PCL.ordinalIR = function( n ) {
+		var i = n, w=0,f=0,t=0,v=0;
+		if (n==1) return PCL.pluralCodes[1];return "other";	}
+	PCL.cardinalIR = function( n ) {
+		var i = n, w=0,f=0,t=0,v=0;
+		if (i==0 || i==1) return PCL.pluralCodes[1];return "other";	}
+	PCL.getOrdinal = function(n){
+		return PCL['ordinal_' + PCL.ordinalIR( n )];
+	}
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script><script src="/plugins/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=fr"></script><script src="https://d3js.org/d3.v4.min.js"></script><script src="/lib/min/4141/pla_a_4141.js"></script><script>"use strict";self.Planetcalc=new function(){this.Calc5986=function(t,e,r,n,i,a,u,o,c,h,l,s,f,p,g,d,m,x,y,v,w,M,S,V,_,b,N,F,A,q,R,j,C,D,P,B,I,T,z,E,Z,k,G,H,J){var K=[];t.length&&(K=(K=t.split(" ")).map(function(t){return Number(t.replace(",","."))}));var L=(L=e.split(" ")).map(function(t){return Number(t.replace(",","."))});if(0===K.length)for(var O=0;O<L.length;++O)K.push(O);if(0===L.length)throw{source:"ystring",message:n.yempty};if(L.length!=K.length)throw{source:"ystring",message:n.nomatch};var Q=K.some(function(t){return 0===t});if(Q&&h)throw{source:"xstring",message:n.nohyperzero};for(O=K.length-1;0<=O;O--)for(var U,W,X=1;X<=O;X++)K[X-1]>K[X]&&(U=K[X-1],W=L[X-1],K[X-1]=K[X],L[X-1]=L[X],K[X]=U,L[X]=W);K.reduce(function(t,e){return t+e},0),K.length;var Y,$,tt,et=K.reduce(function(t,e){return t+e},0),rt=K.reduce(function(t,e){return t+e*e},0),nt=K.reduce(function(t,e){return t+e*e*e},0),it=K.reduce(function(t,e){return t+Math.pow(e,4)},0),at=K.reduce(function(t,e){return t+Math.pow(e,5)},0),ut=K.reduce(function(t,e){return t+Math.pow(e,6)},0),ot=(L.reduce(function(t,e){return t+e},0),L.length,L.reduce(function(t,e){return t+e},0)),ct=L.reduce(function(t,e){return t+e*e},0),ht=L.reduce(function(t,e,r){return t+e*K[r]},0),lt=L.reduce(function(t,e,r){return t+e*K[r]*K[r]},0),lt=L.reduce(function(t,e,r){return t+e*K[r]*K[r]},0),st=L.reduce(function(t,e,r){return t+e*Math.pow(K[r],3)},0);Q||(Y=K.reduce(function(t,e){return t+1/e},0),$=K.reduce(function(t,e){return t+1/(e*e)},0),tt=L.reduce(function(t,e,r){return t+e/K[r]},0));var ft=K.length,pt=K.reduce(function(t,e){return t+Math.log(e)},0),gt=K.reduce(function(t,e){return t+Math.log(e)*Math.log(e)},0),t=L.reduce(function(t,e){return t+Math.log(e)},0),e=L.reduce(function(t,e,r){return t+Math.log(e)*Math.log(K[r])},0),h=L.reduce(function(t,e,r){return t+Math.log(e)*K[r]},0),n=L.reduce(function(t,e,r){return t+Math.log(K[r])*e},0);function dt(t){return(0<=t?"+":"-")+Math.abs(t).toFixed(mt)}var mt=(mt=PCF.getCalcPrecision())||4,xt=(et*ot-ft*ht)/(et*et-ft*rt),yt=(et*ht-rt*ot)/(et*et-ft*rt);s.SetValue("y="+xt.toFixed(mt)+"x"+dt(yt));var s=this.Calculate1435({matrixA:[[rt,et,ft,ot].join(" "),[nt,rt,et,ht].join(" "),[it,nt,rt,lt].join(" ")].join("\r\n")}),vt=Number(s.matrixR[0][0]),wt=Number(s.matrixR[1][0]),Mt=Number(s.matrixR[2][0]);d.SetValue("y="+vt.toFixed(mt)+"x^2"+dt(wt)+"x"+dt(Mt));var s=this.Calculate1435({matrixA:[[nt,rt,et,ft,ot].join(" "),[it,nt,rt,et,ht].join(" "),[at,it,nt,rt,lt].join(" "),[ut,at,it,nt,st].join(" ")].join("\r\n")}),St=Number(s.matrixR[0][0]),Vt=Number(s.matrixR[1][0]),_t=Number(s.matrixR[2][0]),bt=Number(s.matrixR[3][0]);V.SetValue("y="+St.toFixed(mt)+"x^3"+dt(Vt)+"x^2"+dt(_t)+"x"+dt(bt));var Nt=(ft*e-pt*t)/(ft*gt-pt*pt),Ft=Math.exp((t-Nt*pt)/ft);v.SetValue("y="+Ft.toFixed(mt)+"x^{"+Nt.toFixed(mt)+"}");var At=Math.exp((ft*h-et*t)/(ft*rt-et*et)),qt=Math.exp((t-Math.log(At)*et)/ft);F.SetValue("y="+qt.toFixed(mt)+"\\cdot"+At.toFixed(mt)+"^x");var Rt,jt,Ct=(ft*n-pt*ot)/(ft*gt-pt*pt),Dt=(ot-Ct*pt)/ft;j.SetValue("y="+Dt.toFixed(mt)+dt(Ct)+"\\cdot ln x"),Q||B.SetValue("y="+(jt=(ot-(Rt=(ft*tt-Y*ot)/(ft*$-Y*Y))*Y)/ft).toFixed(mt)+(0<=Rt?"+":"-")+"\\frac{"+Math.abs(Rt).toFixed(mt)+"}{x}");var Pt=(ft*h-et*t)/(ft*rt-et*et),Bt=(t-Pt*et)/ft;E.SetValue("y=e^{"+Bt.toFixed(mt)+dt(Pt)+"x}");var It=[],Tt=[],zt=[],Et=[],Zt=[],kt=[],Gt=[],Ht=[],t=K[0]-.1*(K[K.length-1]-K[0]),E=H.AddNewRecord();E.x=t,E.ylinear=xt*t+yt,E.yquadratic=vt*t*t+wt*t+Mt,E.ypower=Ft*Math.pow(t,Nt),E.ycubic=St*t*t*t+Vt*t*t+_t*t+bt,E.yexponential=qt*Math.pow(At,t),E.ylogarithmic=Dt+Ct*Math.log(t),Q||(E.yhyperbolic=jt+Rt/t),E.yeexponential=Math.exp(Bt+Pt*t);for(O=0;O<K.length;++O){var Jt=H.AddNewRecord();Jt.i=O+1,Jt.x=K[O],Jt.y=L[O],Jt.ylinear=xt*K[O]+yt,It.push(Jt.ylinear),Jt.yquadratic=vt*K[O]*K[O]+wt*K[O]+Mt,Tt.push(Jt.yquadratic),Jt.ypower=Ft*Math.pow(K[O],Nt),zt.push(Jt.ypower),Jt.ycubic=St*K[O]*K[O]*K[O]+Vt*K[O]*K[O]+_t*K[O]+bt,Et.push(Jt.ycubic),Jt.yexponential=qt*Math.pow(At,K[O]),Zt.push(Jt.yexponential),Jt.ylogarithmic=Dt+Ct*Math.log(K[O]),kt.push(Jt.ylogarithmic),Q||(Jt.yhyperbolic=jt+Rt/K[O],Gt.push(Jt.yhyperbolic)),Jt.yeexponential=Math.exp(Bt+Pt*K[O]),Ht.push(Jt.yeexponential)}E=K[K.length-1]+.1*(K[K.length-1]-K[0]),t=H.AddNewRecord();t.x=E,t.ylinear=xt*E+yt,t.yquadratic=vt*E*E+wt*E+Mt,t.ypower=Ft*Math.pow(E,Nt),t.ycubic=St*E*E*E+Vt*E*E+_t*E+bt,t.yexponential=qt*Math.pow(At,E),t.ylogarithmic=Dt+Ct*Math.log(E),Q||(t.yhyperbolic=jt+Rt/E),t.yeexponential=Math.exp(Bt+Pt*E);ot=(ft*ht-et*ot)/Math.sqrt((ft*rt-et*et)*(ft*ct-ot*ot));f.SetValue(ot),p.SetValue(ot*ot);ot=L.reduce(function(t,e,r){return t+Math.abs((e-It[r])/e)},0)/L.length;function Kt(t,n){var i=t.reduce(function(t,e){return t+e},0)/t.length,e=t.reduce(function(t,e,r){return t+Math.pow(e-n[r],2)},0),t=t.reduce(function(t,e,r){return t+Math.pow(e-i,2)},0);return Math.sqrt(1-e/t)}function Lt(t,n){return t.reduce(function(t,e,r){return t+Math.abs((e-n[r])/e)},0)/t.length}g.SetValue(ot);ot=Kt(L,Tt);m.SetValue(ot),x.SetValue(ot*ot),y.SetValue(Lt(L,Tt)),ot=Kt(L,Et),_.SetValue(ot),b.SetValue(ot*ot),N.SetValue(Lt(L,Et)),ot=Kt(L,zt),w.SetValue(ot),M.SetValue(ot*ot),S.SetValue(Lt(L,zt)),ot=Kt(L,Zt),A.SetValue(ot),q.SetValue(ot*ot),R.SetValue(Lt(L,Zt)),ot=Kt(L,kt),C.SetValue(ot),D.SetValue(ot*ot),P.SetValue(Lt(L,kt)),Q||(ot=Kt(L,Gt),I.SetValue(ot),T.SetValue(ot*ot),z.SetValue(Lt(L,Gt))),ot=Kt(L,Ht),Z.SetValue(ot),k.SetValue(ot*ot),G.SetValue(Lt(L,Ht))},this.Calc1435=function(e,r,t,n){t.SetValue([]);var i=new function(){this.c_valid=0,this.c_invalid=-1,this.c_empty=-2,this.error_line=-1,this.rows=-1,this.columns=-1,this.matrix=[],this.parse=function(t){for(var e=t.split(/\r\n|\r|\n/),r=0;r<e.length;++r)if(0!=e[r].length){for(var n=e[r].split(/\s|\t/),i=[],a=0;a<n.length;++a)if(0!=n[a].length){var u=Number(n[a].replace(",","."));if(isNaN(u))throw this.error_line=r+1,this.c_invalid;i.push(u)}if(-1==this.columns)this.columns=i.length;else if(this.columns!=i.length)throw this.error_line=r+1,this.c_invalid;if(0==i.length)throw this.c_empty;this.matrix.push(i)}if(0==this.matrix.length)throw this.c_empty;this.rows=this.matrix.length}};try{i.parse(r)}catch(t){if(t==i.c_empty)throw{source:"matrixA",message:e.Zero};if(t==i.c_invalid)throw{source:"matrixA",message:e.Error+" "+i.error_line};alert(t)}r=new function(){function f(t,e,r){return t[e][r]}function p(t){return t[0].length}function g(t){return t.length}function l(t,e,r){for(var n=[],i=0;i<t.length;++i)if(i!=e){for(var a=t[i],u=[],o=0;o<a.length;++o)o!=r&&u.push(a[o]);n.push(u)}return n}this.c_valid=0,this.c_nonsquare=-1,this.c_singular=-2,this.c_wrongdimensions=-3,this.splitA=function(t){for(var e=[],r=0;r<t.length;++r){for(var n=t[r],i=[],a=0;a<n.length-1;++a)i.push(n[a]);e.push(i)}return e},this.splitB=function(t){for(var e=[],r=0;r<t.length;++r){var n=t[r],i=[];i.push(n[n.length-1]),e.push(i)}return e},this.calcMultiplication=function(t,e){var r=[],n=p(t),i=g(t),a=p(e),u=g(e);if(n!=u)throw this.c_wrongdimensions;for(var o=0;o<i;++o){for(var c=[],h=0;h<a;++h){for(var l=0,s=0;s<u;++s)l+=f(t,o,s)*f(e,s,h);c.push(l)}r.push(c)}return r},this.calcTransponent=function(t){for(var e=[],r=p(t),n=0;n<r;++n){for(var i=[],a=g(t),u=0;u<a;++u)i[i.length]=f(t,u,n);e[e.length]=i}return e},this.calcScalar=function(t,e){for(var r=[],n=p(t),i=0;i<n;++i){for(var a=[],u=g(t),o=0;o<u;++o)a.push(f(t,i,o)*e);r.push(a)}return r},this.calcDeterminant=function(t){if(p(t)!=g(t))throw this.c_nonsquare;if(1==t.length)return f(t,0,0);if(2==t.length)return f(t,0,0)*f(t,1,1)-f(t,0,1)*f(t,1,0);for(var e=0,r=p(t),n=0;n<r;++n)e+=Math.pow(-1,n)*f(t,0,n)*this.calcDeterminant(l(t,0,n));return e},this.calcInverse=function(t){var e=p(t),r=g(t);if(e!=r)throw this.c_nonsquare;var n=this.calcDeterminant(t);if(0==n)throw this.c_singular;for(var i=[],a=0;a<r;++a){for(var u=[],o=0;o<e;++o){var c=this.calcDeterminant(l(t,a,o));c*=Math.pow(-1,a+o),u.push(c)}i.push(u)}var h=this.calcTransponent(i);return this.calcScalar(h,1/n)}};try{var a=r.splitA(i.matrix),u=r.splitB(i.matrix);if(0==r.calcDeterminant(a))throw{source:"matrixA",message:e.Singular};var o=r.calcInverse(a),c=r.calcMultiplication(o,u);t.SetValue(c)}catch(t){if(t==r.c_nonsquare)throw{source:"matrixA",message:e.NonSquare};if(t==r.c_singular)throw{source:"matrixA",message:e.Singular};alert(t)}}};</script><script>
+$(function() {
+var cons = $('.consent');
+cons.find('.consent-save').on("click", function() {
+		cons.hide(500);
+		var cv = $(this).data('consent');	
+		setCookie('pclc_consent',cv,365);
+		if ( googletag ) {
+			googletag.cmd.push(function() {
+				googletag.pubads().setRequestNonPersonalizedAds(cv =="ad_base"?1:0);
+				googletag.pubads().refresh();
+			});
+		}
+		return;
+	}
+);
+var consPrev = $('.consent-prev');
+var consNext = $('.consent-next');
+consPrev.find('.consent-navigate').on("click", function() {
+	swapConsent( consPrev, consNext );
+});
+consNext.find('.consent-navigate').on("click", function() {
+	swapConsent( consNext, consPrev );
+});
+function swapConsent( cHide, cShow ) {
+	cHide.hide(500, function() {
+		cShow.show( 500 );
+	});
+}
+function setCookie(cname, cvalue, exdays) {
+	    var d = new Date();
+	   var consent = ""+ cvalue + ":" + Math.round(d.getTime()/1000);
+	        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	        var expires = "expires="+ d.toUTCString();
+		    document.cookie = cname + "=" + consent + ";" + expires + ";path=/";
+}
+});
+PLANETCALC.init();
+</script>
+</body>
+</html>

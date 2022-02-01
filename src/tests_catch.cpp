@@ -10,7 +10,7 @@
 
 TEST_CASE("Deplacement agent")
 {
-  Agent a{0, 0};
+  Agent a{0, 0, EQUIPE::BLEU};
 
   SECTION("Deplacement Nord Ouest")
   {

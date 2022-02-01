@@ -10,9 +10,10 @@
  * @brief Constructeur de Agent.
  * @param int x - *Position x d'instantiation de l'agent*
  * @param int y - *Position y d'instantiation de l'agent*
+ * @param EQUIPE equipe - *Nom de l'équipe de l'agent*
  */
-Agent::Agent(int x, int y)
-    : _x(x), _y(y), _level(1), _memoire() {}
+Agent::Agent(int x, int y, EQUIPE equipe)
+    : _x(x), _y(y), _level(1), _memoire(), _equipe(equipe) {}
 
 /**
  * @fn void Agent::deplacer(Direction dir)
@@ -97,4 +98,29 @@ void Agent::communiquer(Agent *copainAdjacent)
     {
         cerr << "Je suis triste j'ai pas de copains à proximités" << endl;
     }
+}
+
+/**
+ * @fn void Agent::aquerirMemoire(int levelAgentTransmetteur, Memoire &memoire)
+ * @brief Apprend en fonction du level de l'agent transmetteur de mémoire.
+ * @param int levelAgentTransmetteur - *Level de l'agent qui transmet sa mémoire*
+ * @param Memoire &memoire - *Memoire de l'agent qui transmet sa mémoire*
+ * @details
+ * Apprend de la mémoire d'un autre agent.
+ * L'influence de l'agent transmetteur dépend de sa différence 
+ * de level par rapport à l'agent qui reçoit la mémoire.
+ * 
+ * Le taux d'influence suit une fonction affine : y = a * x + b
+ * Taux d'influence :
+ * Agent transmetteur +9 level / agent receveur => influence = 0.9
+ * Agent transmetteur -9 level / agent receveur => influence 0.1
+ */
+void Agent::aquerirMemoire(int levelAgentTransmetteur, Memoire &memoire)
+{
+    int diffLevel = (levelAgentTransmetteur - this->_level);
+
+    // this->_memoire.
+
+
+
 }

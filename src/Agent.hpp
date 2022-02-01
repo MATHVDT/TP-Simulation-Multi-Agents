@@ -10,6 +10,12 @@
 
 using namespace std;
 
+enum class EQUIPE
+{
+    BLEU,
+    ROUGE
+};
+
 /**
  * @class Agent
  * @brief Classe Agent
@@ -17,13 +23,17 @@ using namespace std;
 class Agent
 {
 private:
+    static const int _levelMax = 10;
+
+private:
     int _x;
     int _y;
     int _level;
     Memoire _memoire;
+    EQUIPE _equipe;
 
 public:
-    Agent(int x, int y);
+    Agent(int x, int y, EQUIPE equipe);
 
     // Getter
     int getX() const { return _x; }
@@ -43,8 +53,8 @@ public:
     void deplacerEst();
     void deplacerNordEst();
 
-    void communiquer(Agent * copainAdjacent);
-
+    void communiquer(Agent *copainAdjacent);
+    void aquerirMemoire(int level, Memoire &memoire);
 };
 
 #endif

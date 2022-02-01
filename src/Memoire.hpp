@@ -13,17 +13,19 @@ class Memoire
 {
 
 private:
-    const int _tailleMemoire = 99;
-    int _deplacement;
-    int _renforcement;
-    int _division;
+    const float _tailleMemoire = 99;
+    float _deplacement;
+    float _renforcement;
+    float _division;
 
 public:
     Memoire();
     // Getter
-    int getDeplacement() { return _deplacement; }
-    int getRenforcement() { return _renforcement; }
-    int getDivision() { return _division; }
+    float getDeplacement() { return _deplacement; }
+    float getRenforcement() { return _renforcement; }
+    float getDivision() { return _division; }
+
+    void apprentissage(float influence, Memoire &memoire);
 };
 
 #endif
