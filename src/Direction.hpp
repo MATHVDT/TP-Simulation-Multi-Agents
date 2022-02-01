@@ -2,7 +2,8 @@
  * @enum Direction
  * @brief Direction (enum class)
  * @details
- * Direction de déplacement possible sur depuis une case
+ * Direction de déplacement possible sur depuis une case : 
+ * NORDOUEST, OUEST, SUDOUEST, SUDEST, EST, NORDEST 
  */
 
 #ifndef DIRECTION_HPP

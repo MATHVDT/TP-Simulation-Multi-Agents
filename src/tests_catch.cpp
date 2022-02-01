@@ -1,8 +1,11 @@
+/**
+ * @file tests_catch.cpp
+ * @brief Fichier contenant les tests unitaires.
+ */
 #include <fstream>
 #include <iostream>
 
 #include "catch.hpp"
-
 #include "Agent.hpp"
 
 

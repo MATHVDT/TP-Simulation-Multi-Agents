@@ -1,12 +1,12 @@
 /**
  * @file Point.hpp
- * @brief Classe Point *inutilisée*
+ * @brief Fichier de la classe Point *inutilisée*.
  */
 #ifndef POINT_HPP
 #define POINT_HPP
 
 /**
- * @class class Point
+ * @class Point
  * @brief Classe représentant des coordonnées 2D.
  */
 class Point

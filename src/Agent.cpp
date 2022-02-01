@@ -1,3 +1,8 @@
+/**
+ * @file Agent.cpp
+ * @brief Fichier de définition des méthodes de la classe Agent.
+ */
+
 #include "Agent.hpp"
 
 /**

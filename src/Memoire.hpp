@@ -1,9 +1,13 @@
+/**
+ * @file Memoire.hpp
+ * @brief Fichier entête de la classe Memoire.
+ */
 #ifndef MEMOIRE_HPP
 #define MEMOIRE_HPP
 
 /**
  * @class Memoire
- * @brief Classe contenant les informations.
+ * @brief Classe contenant la Memoire d'un Agent.
  */
 class Memoire {
 
