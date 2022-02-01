@@ -2,7 +2,6 @@
  * @file Agent.hpp
  * @brief Fichier entête de la classe Agent.
  */
- 
 #ifndef AGENT_HPP
 #define AGENT_HPP
 #include <iostream>

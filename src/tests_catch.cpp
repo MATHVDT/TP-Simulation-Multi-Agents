@@ -8,100 +8,85 @@
 #include "catch.hpp"
 #include "Agent.hpp"
 
-
 TEST_CASE("Deplacement agent")
 {
-  Agent a{4,4};
+  Agent a{0, 0};
 
   SECTION("Deplacement Nord Ouest")
   {
     // Position (0,0)
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
 
     // Deplacement ↖
-    a.deplacer(DIRECTION::NORDOUEST); 
+    a.deplacer(DIRECTION::NORDOUEST);
 
-    REQUIRE( a.getX() == -1 );
-    REQUIRE( a.getY() ==  1 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == -1);
   }
-
 
   SECTION("Deplacement Ouest")
   {
     // Position (0,0)
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
 
     // Deplacement ←
-    a.deplacer(DIRECTION::OUEST); 
+    a.deplacer(DIRECTION::OUEST);
 
-    REQUIRE( a.getX() == -1 );
-    REQUIRE( a.getY() ==  0 );
+    REQUIRE(a.getX() == -1);
+    REQUIRE(a.getY() == 0);
   }
 
   SECTION("Deplacement Sud Ouest")
   {
     // Position (0,0)
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
 
     // Deplacement ↙
-    a.deplacer(DIRECTION::SUDOUEST); 
+    a.deplacer(DIRECTION::SUDOUEST);
 
-    REQUIRE( a.getX() == -1 );
-    REQUIRE( a.getY() == -1 );
+    REQUIRE(a.getX() == -1);
+    REQUIRE(a.getY() == 1);
   }
 
   SECTION("Deplacement Sud Est")
   {
     // Position (0,0)
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
 
     // Deplacement ↘
-    a.deplacer(DIRECTION::SUDEST); 
+    a.deplacer(DIRECTION::SUDEST);
 
-    REQUIRE( a.getX() ==  0 );
-    REQUIRE( a.getY() == -1 );
-  }
-
-    SECTION("Deplacement Est")
-  {
-    // Position (0,0)
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 0 );
-
-    // Deplacement →
-    a.deplacer(DIRECTION::EST); 
-
-  REQUIRE( a.getX() == 1 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 1);
   }
 
   SECTION("Deplacement Est")
   {
     // Position (0,0)
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
 
     // Deplacement →
-    a.deplacer(DIRECTION::EST); 
+    a.deplacer(DIRECTION::EST);
 
-    REQUIRE( a.getX() == 1 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 1);
+    REQUIRE(a.getY() == 0);
   }
 
   SECTION("Deplacement Nord Est")
   {
     // Position (0,0)
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 0 );
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
 
     // Deplacement ↗
-    a.deplacer(DIRECTION::EST); 
+    a.deplacer(DIRECTION::NORDEST);
 
-    REQUIRE( a.getX() == 0 );
-    REQUIRE( a.getY() == 1 );
+    REQUIRE(a.getX() == 1);
+    REQUIRE(a.getY() == -1);
   }
 }

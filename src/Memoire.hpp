@@ -9,7 +9,8 @@
  * @class Memoire
  * @brief Classe contenant la Memoire d'un Agent.
  */
-class Memoire {
+class Memoire
+{
 
 private:
     const int _tailleMemoire = 99;
@@ -17,14 +18,12 @@ private:
     int _renforcement;
     int _division;
 
-public: 
-   Memoire() _deplacement(33), _renforcement(33), _division(33){}
-
-   // Getter
-   int getDeplacement() {return _deplacement;}
-   int getRenforcement() {return _renforcement;}
-   int getDivision() {return _division;}
-
-  
+public:
+    Memoire();
+    // Getter
+    int getDeplacement() { return _deplacement; }
+    int getRenforcement() { return _renforcement; }
+    int getDivision() { return _division; }
+};
 
 #endif

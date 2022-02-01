@@ -11,18 +11,19 @@
  * @param int x - *Position x d'instantiation de l'agent*
  * @param int y - *Position y d'instantiation de l'agent*
  */
-Agent::Agent(int x, int y) : _x(x), _y(y), _level(1), _memoire() {}
+Agent::Agent(int x, int y)
+    : _x(x), _y(y), _level(1), _memoire() {}
 
 /**
  * @fn void Agent::deplacer(Direction dir)
  * @brief Deplace l'agent suivant une direction.
  * @param DIRECTION dir - *Direction de déplacement*
  */
-void Agent::deplacer(DIRECTION dir)
+void Agent::deplacer(DIRECTION direction)
 {
     // Ne vérifie pas s'il peut se déplacer
 
-    switch (dir)
+    switch (direction)
     {
     case DIRECTION::NORDOUEST:
         deplacerNordOuest();
@@ -49,37 +50,36 @@ void Agent::deplacer(DIRECTION dir)
 }
 
 void Agent::deplacerNordOuest()
-{ // <- et ^
+{ // ↖
     _y -= 1;
 }
 
 void Agent::deplacerOuest()
-{ // <-
+{ // ←
     _x -= 1;
 }
 
 void Agent::deplacerSudOuest()
-{
+{ // ↙
+    _x -= 1;
     _y += 1;
 }
 
 void Agent::deplacerSudEst()
-{
-    _x += 1;
+{ // ↘
     _y += 1;
 }
 
 void Agent::deplacerEst()
-{
+{ // →
     _x += 1;
 }
 
 void Agent::deplacerNordEst()
-{
+{ // ↗
     _x += 1;
     _y -= 1;
 }
-
 
 /**
  * @fn void Agent::communiquer(Agent * copainAdjacent)
@@ -87,12 +87,14 @@ void Agent::deplacerNordEst()
  * @param Agent * copainAdjacent - *Agent adjacent de la même équipe* 
  * @warning Il peut ne pas y avoir d'agent adjacent => nullptr.
  */
-void Agent::communiquer(Agent * copainAdjacent)
+void Agent::communiquer(Agent *copainAdjacent)
 {
-    if(copainAdjacent != nullptr)
+    if (copainAdjacent != nullptr)
     {
         //copainAdjacent.aquerirMemoire(level, &memoire)
-    }else{
-        cerr << "Je suis triste j'ai pas de copains à proximités" <<endl;
+    }
+    else
+    {
+        cerr << "Je suis triste j'ai pas de copains à proximités" << endl;
     }
 }
