@@ -7,6 +7,7 @@
 
 #include "catch.hpp"
 #include "Agent.hpp"
+#include "Memoire.hpp"
 
 TEST_CASE("Deplacement agent")
 {
@@ -89,4 +90,13 @@ TEST_CASE("Deplacement agent")
     REQUIRE(a.getX() == 1);
     REQUIRE(a.getY() == -1);
   }
+}
+
+
+TEST_CASE("Apprentissage mémoire")
+{
+  Memoire m1{};
+  Memoire m2{};
+
+
 }

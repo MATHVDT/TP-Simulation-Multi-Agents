@@ -54,7 +54,7 @@ public:
     void deplacerNordEst();
 
     void communiquer(Agent *copainAdjacent);
-    void aquerirMemoire(int level, Memoire &memoire);
+    void aquerirMemoire(int level, const Memoire &memoire);
 };
 
 #endif

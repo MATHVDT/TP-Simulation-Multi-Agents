@@ -104,7 +104,7 @@ void Agent::communiquer(Agent *copainAdjacent)
  * @fn void Agent::aquerirMemoire(int levelAgentTransmetteur, Memoire &memoire)
  * @brief Apprend en fonction du level de l'agent transmetteur de mémoire.
  * @param int levelAgentTransmetteur - *Level de l'agent qui transmet sa mémoire*
- * @param Memoire &memoire - *Memoire de l'agent qui transmet sa mémoire*
+ * @param const Memoire &memoire - *Memoire de l'agent qui transmet sa mémoire*
  * @details
  * Apprend de la mémoire d'un autre agent.
  * L'influence de l'agent transmetteur dépend de sa différence 
@@ -115,12 +115,12 @@ void Agent::communiquer(Agent *copainAdjacent)
  * Agent transmetteur +9 level / agent receveur => influence = 0.9
  * Agent transmetteur -9 level / agent receveur => influence 0.1
  */
-void Agent::aquerirMemoire(int levelAgentTransmetteur, Memoire &memoire)
+void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
 {
+    const float a = (0.9 - 0.4) / 9;
+    const float b = 0.5;
+
     int diffLevel = (levelAgentTransmetteur - this->_level);
-
-    // this->_memoire.
-
-
-
+    float influence = a * (float)diffLevel + b;
+    this->_memoire.apprentissage(influence, memoire);
 }
