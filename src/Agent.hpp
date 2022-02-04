@@ -10,11 +10,7 @@
 
 using namespace std;
 
-enum class EQUIPE
-{
-    BLEU,
-    ROUGE
-};
+enum class EQUIPE;
 
 /**
  * @class Agent
@@ -30,7 +26,6 @@ private:
     int _y;
     int _level;
     Memoire _memoire;
-    EQUIPE _equipe;
 
 public:
     Agent(int x, int y, EQUIPE equipe);
@@ -38,6 +33,7 @@ public:
     // Getter
     int getX() const { return _x; }
     int getY() const { return _y; }
+    Memoire getMemoire() const { return _memoire; }
 
     // Setter
     void setX(int x) { _x = x; }
@@ -53,7 +49,8 @@ public:
     void deplacerEst();
     void deplacerNordEst();
 
-    void communiquer(Agent *copainAdjacent);
+    void partagerMemoireAuVoisinage(Agent *voisinage[6]);
+    void partagerMemoireACopain(Agent *copainAdjacent);
     void aquerirMemoire(int level, const Memoire &memoire);
 };
 

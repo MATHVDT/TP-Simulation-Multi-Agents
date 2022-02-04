@@ -5,29 +5,68 @@
 
 #include "Memoire.hpp"
 
+const float Memoire::_epsilon = 1e-3;
+
 /**
  * @fn Memoire::Memoire()
  * @brief Constructeur de la mémoire.
+ * 
+ * @param EQUIPE equipe - *Equipe de l'agent*
+ * 
  * @details
  * Initialise des les valeurs _division/_deplacement/_renforcement
  * au même valeur.
+ * 
  * @warning Les trois valeurs sont à 1./3., somme de la mémoire environ égale à 1 !
  * @todo Faire des opérateurs pour prendre en compte les aproximations des floats
  */
-Memoire::Memoire()
-    : _division(1. / 3.), _deplacement(1. / 3.), _renforcement(1. / 3.) {}
+Memoire::Memoire(EQUIPE equipe)
+    : _division(1. / 3.),
+      _deplacement(1. / 3.),
+      _renforcement(1. / 3.),
+      _equipe(equipe) {}
 
-Memoire::Memoire(float division, float depalcement, float renforcement)
-    : _division(division), _deplacement(depalcement), _renforcement(renforcement)
+Memoire::Memoire(float division,
+                 float depalcement,
+                 float renforcement, EQUIPE equipe)
+    : _division(division),
+      _deplacement(depalcement),
+      _renforcement(renforcement),
+      _equipe(equipe)
 {
     this->correctionMemoire();
+}
+
+
+/**
+ * @fn float Memoire::getInfluence
+ * @brief Calcul l'influence de l'agent sur celui-ci.
+ * 
+ * @param int differenceLevel - *Différence de level entre les 2sagents*
+ * 
+ * @details
+ * Calcul l'influence de l'agent qui transmet sa mémoire en fonction de la différence de niveau.
+ * 
+ * Le taux d'influence suit une fonction affine : y = a * x + b
+ * Taux d'influence :
+ * Agent transmetteur +9 level / agent receveur => influence = 0.9
+ * Agent transmetteur -9 level / agent receveur => influence 0.1
+ */
+float Memoire::getInfluence(int differenceLevel)
+{
+    const float a = (0.9 - 0.4) / 9;
+    const float b = 0.5;
+    float influence = a * (float)differenceLevel + b;
+    return influence;
 }
 
 /**
  * @fn void Memoire::apprentissage(float influence, Memoire &memoire)
  * @brief
+ * 
  * @param float influence - *Influence de la mémoire passé en paramètre*
  * @param const Memoire &memoire - *Mémoire sur laquelle on apprend*
+ * 
  * @warning correctionMemoire est appelée
  */
 void Memoire::apprentissage(float influence, const Memoire &memoire)
@@ -51,6 +90,7 @@ void Memoire::apprentissage(float influence, const Memoire &memoire)
 /**
  * @fn void Memoire::correctionMemoire()
  * @brief Corrige les valeurs de la mémoire pour avoir une somme environ égale à 1.
+ * 
  * @details
  * Les calculs des nouvelles valeurs de mémoire (division/deplacement/renforcement)
  * sont effectués et si delta = |1 - somme| < epsilon,
@@ -60,8 +100,6 @@ void Memoire::apprentissage(float influence, const Memoire &memoire)
  */
 void Memoire::correctionMemoire()
 {
-    const float epsilon = 1e-3;
-
     // Recuperation des valeurs
     float valeurDivision = this->getDivision();
     float valeurDeplacement = this->getDeplacement();
@@ -74,14 +112,14 @@ void Memoire::correctionMemoire()
     float delta = 1 - somme;
 
     // Correction s'il y a eu des erreurs sur les arrondis
-    if (delta > epsilon)
+    if (delta > Memoire::getEpsilon())
     { // Manque un petit peu dans chaque valeur
         valeurDivision += delta / 3.;
         valeurDeplacement += delta / 3.;
         valeurRenforcement += delta / 3.;
         std::cerr << "Correction de +" << delta / 3.;
     }
-    else if (delta < -epsilon)
+    else if (delta < -Memoire::getEpsilon())
     {
         valeurDivision -= delta / 3.;
         valeurDeplacement -= delta / 3.;

@@ -13,7 +13,7 @@
  * @param EQUIPE equipe - *Nom de l'équipe de l'agent*
  */
 Agent::Agent(int x, int y, EQUIPE equipe)
-    : _x(x), _y(y), _level(1), _memoire(), _equipe(equipe) {}
+    : _x(x), _y(y), _level(1), _memoire(equipe) {}
 
 /**
  * @fn void Agent::deplacer(Direction dir)
@@ -83,16 +83,43 @@ void Agent::deplacerNordEst()
 }
 
 /**
- * @fn void Agent::communiquer(Agent * copainAdjacent)
+ * @fn void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
+ * @brief Partage la mémoire aux copains adjacents.
+ * 
+ * @param Agent * voisinage[6] - *Tableau contenant les agents adjacents*
+ * 
+ * @details
+ * Parcours tous ses voisins et partage sa mémoire avec les agents 
+ * de la même équipe.
+ */
+void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
+{
+    EQUIPE equipeAgent = this->_memoire.getEquipe();
+
+    // Pour chaque cases voisines
+    for (int i = 0; i < 6; ++i)
+    { 
+        if (voisinage[i] != nullptr &&
+            voisinage[i]->_memoire.getEquipe() == equipeAgent)
+        { // Il y a bien un voisin et c'est un copain
+            this->partagerMemoireACopain(voisinage[i]);
+        }
+    }
+}
+
+/**
+ * @fn void Agent::partagerMemoireACopain(Agent * copainAdjacent)
  * @brief Partage sa mémoire à son copain.
- * @param Agent * copainAdjacent - *Agent adjacent de la même équipe* 
+ * 
+ * @param Agent * copainAdjacent - *Agent adjacent de la même équipe*
+ *  
  * @warning Il peut ne pas y avoir d'agent adjacent => nullptr.
  */
-void Agent::communiquer(Agent *copainAdjacent)
+void Agent::partagerMemoireACopain(Agent *copainAdjacent)
 {
     if (copainAdjacent != nullptr)
-    {
-        //copainAdjacent.aquerirMemoire(level, &memoire)
+    { // Transmet mémoire qui est acquise par l'agent adjacent
+        copainAdjacent->aquerirMemoire(this->_level, this->_memoire);
     }
     else
     {
@@ -103,24 +130,20 @@ void Agent::communiquer(Agent *copainAdjacent)
 /**
  * @fn void Agent::aquerirMemoire(int levelAgentTransmetteur, Memoire &memoire)
  * @brief Apprend en fonction du level de l'agent transmetteur de mémoire.
+ * 
  * @param int levelAgentTransmetteur - *Level de l'agent qui transmet sa mémoire*
  * @param const Memoire &memoire - *Memoire de l'agent qui transmet sa mémoire*
- * @details
+ *
+ *  @details
  * Apprend de la mémoire d'un autre agent.
  * L'influence de l'agent transmetteur dépend de sa différence 
  * de level par rapport à l'agent qui reçoit la mémoire.
- * 
- * Le taux d'influence suit une fonction affine : y = a * x + b
- * Taux d'influence :
- * Agent transmetteur +9 level / agent receveur => influence = 0.9
- * Agent transmetteur -9 level / agent receveur => influence 0.1
  */
 void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
 {
-    const float a = (0.9 - 0.4) / 9;
-    const float b = 0.5;
-
     int diffLevel = (levelAgentTransmetteur - this->_level);
-    float influence = a * (float)diffLevel + b;
+
+    float influence = this->_memoire.getInfluence(diffLevel);
+
     this->_memoire.apprentissage(influence, memoire);
 }
