@@ -19,7 +19,7 @@ Carte::Carte()
     {
         for (j = 0; j < TAILLE; j++)
         {
-            _grille[i][j] = 0;
+            _grille[i][j] = EQUIPE::NEUTRE;
             _grilleAgents[i][j] = nullptr;
         }
     }
@@ -41,19 +41,30 @@ void Carte::afficherCarte() const
         {
             if (_grilleAgents[i][j] != nullptr)
             {
-                std::cout << BLUE << "A ";
+                switch (_grilleAgents[i][j]->getMemoire().getEquipe())
+                {
+                    case EQUIPE::ROUGE:
+                        std::cout << RED << "A ";
+                        break;
+                    case EQUIPE::BLEU:
+                        std::cout << BLUE << "A ";
+                        break;
+                    default:
+                    std::cout << GREEN << "E ";
+                        break;
+                }
             }
             else
             {
                 switch (_grille[i][j])
                 {
-                    case 0:
+                    case EQUIPE::NEUTRE:
                         std::cout << RESET << ". ";
                         break;
-                    case 1:
+                    case EQUIPE::ROUGE:
                         std::cout << RED << ". ";
                         break;
-                    case 2:
+                    case EQUIPE::BLEU:
                         std::cout << BLUE << ". ";
                         break;
                     default:
@@ -67,7 +78,7 @@ void Carte::afficherCarte() const
     }
 }
 
-Agent * Carte::getAgent(int i, int j) {
+Agent * Carte::getAgent(int i, int j) const {
     return _grilleAgents[i][j];
 }
 
@@ -75,25 +86,17 @@ void Carte::setAgent(int i, int j, Agent * agent) {
     _grilleAgents[i][j] = agent;
 }
 
-void Carte::changerCase(int i, int j, int val) {
-    _grille[i][j] = val;
+void Carte::changerCase(int i, int j, EQUIPE equipe) {
+    _grille[i][j] = equipe;
 }
 
-bool Carte::estVide(int i, int j){
+bool Carte::estVide(int i, int j) const {
     return _grilleAgents [i][j] == nullptr;
 }
 
-/*
-void Carte::deplacerAgent(Agent * agent, Direction dir)
+void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
 {
-
-    switch (dir)
-    {
-        case NordEst:
-            setAgent(i + 1, j - 1 + decalage, agent);
-            break;
-        case Ouest:
-            setAgent()
-    }
+    setAgent(destination.getX(), destination.getY(), agent);
+    changerCase(destination.getX(), destination.getY(), agent->getMemoire().getEquipe());
+    setAgent(origine.getX(), origine.getY(), nullptr);
 }
-*/

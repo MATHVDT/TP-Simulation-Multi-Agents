@@ -207,18 +207,47 @@ TEST_CASE("Affichage carte")
 {
 	Carte carte{};
 
+	//test de creation de la carte
     carte.afficherCarte();
     cout << "-----" << endl;
-    carte.changerCase(3, 6, 1);
-    carte.changerCase(7, 7, 7);
+
+	//test de coloration des cases
+    carte.changerCase(3, 6, EQUIPE::ROUGE);
+    carte.changerCase(7, 7, EQUIPE::ROUGE);
     for (int i  = 3; i < 7; i++)
     {
         for (int j = 2; j < 5; j++)
         {
-            carte.changerCase(i, j, 2);
+            carte.changerCase(i, j, EQUIPE::BLEU);
         }
     }
-    Agent * agent1 = new Agent(5, 5, EQUIPE::BLEU);
+	carte.afficherCarte();
+	cout << "-----" << endl;
+
+	//test d'ajout et d'affichage d'un agent
+    Agent * agent1 = new Agent(5, 5, EQUIPE::ROUGE);
     carte.setAgent(agent1->getX(), agent1->getY(), agent1);
+	carte.changerCase(agent1->getX(), agent1->getY(), agent1->getMemoire().getEquipe());
     carte.afficherCarte();
+	cout << "-----" << endl;
+
+	//test de deplacement de l'agent
+	Point origine{5,5};
+	Point dest{5,4};
+	carte.deplacerAgent(agent1, origine, dest);
+	origine.setY(4);
+	dest.setY(3);
+	carte.deplacerAgent(agent1, origine, dest);
+	origine.setY(3);
+	dest.setX(6);
+	carte.deplacerAgent(agent1, origine, dest);
+	origine.setX(6);
+	dest.setX(7);
+	carte.deplacerAgent(agent1, origine, dest);
+	origine.setX(7);
+	dest.setX(8);
+	carte.deplacerAgent(agent1, origine, dest);
+	origine.setX(8);
+	carte.afficherCarte();
+	cout << "-----" << endl;
 }
