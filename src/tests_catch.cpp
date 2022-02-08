@@ -8,6 +8,7 @@
 #include "catch.hpp"
 #include "Agent.hpp"
 #include "Memoire.hpp"
+#include "Carte.hpp"
 
 TEST_CASE("Deplacement agent")
 {
@@ -200,4 +201,24 @@ TEST_CASE("Partage de la mémoire à un voisinage")
     REQUIRE((*allie1).getMemoire().getDeplacement() == Approx(0.333).epsilon(eps));
     REQUIRE((*allie1).getMemoire().getRenforcement() == Approx(0.333).epsilon(eps));
   }
+}
+
+TEST_CASE("Affichage carte")
+{
+	Carte carte{};
+
+    carte.afficherCarte();
+    cout << "-----" << endl;
+    carte.changerCase(3, 6, 1);
+    carte.changerCase(7, 7, 7);
+    for (int i  = 3; i < 7; i++)
+    {
+        for (int j = 2; j < 5; j++)
+        {
+            carte.changerCase(i, j, 2);
+        }
+    }
+    Agent * agent1 = new Agent(5, 5, EQUIPE::BLEU);
+    carte.setAgent(agent1->getX(), agent1->getY(), agent1);
+    carte.afficherCarte();
 }

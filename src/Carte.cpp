@@ -32,34 +32,38 @@ void Carte::afficherCarte() const
 
     for (i = 0; i < TAILLE; i++)
     {
-        if (i % 2 == 1) cout << " ";
+        //if (i % 2 == 1) cout << " ";
+        for (j = 0; j < i; j++)
+        {
+            std::cout << " ";
+        }
         for (j = 0; j < TAILLE; j++)
         {
             if (_grilleAgents[i][j] != nullptr)
             {
-                cout << BLUE << "A ";
+                std::cout << BLUE << "A ";
             }
             else
             {
                 switch (_grille[i][j])
                 {
                     case 0:
-                        cout << RESET << ". ";
+                        std::cout << RESET << ". ";
                         break;
                     case 1:
-                        cout << RED << ". ";
+                        std::cout << RED << ". ";
                         break;
                     case 2:
-                        cout << BLUE << ". ";
+                        std::cout << BLUE << ". ";
                         break;
                     default:
-                    cout << RESET << "? ";
+                    std::cout << RESET << "? ";
                         break;
                 }
             }
             
         }
-        cout << endl;
+        std::cout << endl;
     }
 }
 
@@ -82,9 +86,6 @@ bool Carte::estVide(int i, int j){
 /*
 void Carte::deplacerAgent(Agent * agent, Direction dir)
 {
-    int j = agent->getX();
-    int i = agent->getY();
-    int decalage = i % 2;
 
     switch (dir)
     {
