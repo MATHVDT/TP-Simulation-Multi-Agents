@@ -10,6 +10,8 @@
 
 using namespace std;
 
+#include "Point.hpp"
+
 enum class EQUIPE;
 
 /**
@@ -22,22 +24,22 @@ private:
     static const int _levelMax = 10;
 
 private:
-    int _x;
-    int _y;
+    Point _position;
     int _level;
     Memoire _memoire;
 
 public:
     Agent(int x, int y, EQUIPE equipe);
+    Agent(Point position, EQUIPE equipe);
 
     // Getter
-    int getX() const { return _x; }
-    int getY() const { return _y; }
+    int getX() const { return _position.getX(); }
+    int getY() const { return _position.getY(); }
     Memoire getMemoire() const { return _memoire; }
 
     // Setter
-    void setX(int x) { _x = x; }
-    void setY(int y) { _y = y; }
+    void setX(int x) { _position.setX(x); }
+    void setY(int y) { _position.setY(y); }
 
     // Deplacement
     void deplacer(DIRECTION dir);

@@ -13,12 +13,13 @@ enum class DIRECTION
 {
     // Nord, // ↑
     NORDOUEST, // ↖
-    OUEST, // ←
-    SUDOUEST, // ↙ 
+    OUEST,     // ←
+    SUDOUEST,  // ↙
     // Sud, // ↓
-    SUDEST, // ↘
-    EST, // →
-    NORDEST // ↗
+    SUDEST,       // ↘
+    EST,          // →
+    NORDEST,      // ↗
+    NULLDIRECTION // X
 };
 
 #endif

@@ -6,14 +6,22 @@
 #include "Agent.hpp"
 
 /**
- * @fn Agent::Agent(int x, int y)
+ * @fn Agent::Agent(int x, int y, EQUIPE)
  * @brief Constructeur de Agent.
  * @param int x - *Position x d'instantiation de l'agent*
  * @param int y - *Position y d'instantiation de l'agent*
  * @param EQUIPE equipe - *Nom de l'équipe de l'agent*
  */
 Agent::Agent(int x, int y, EQUIPE equipe)
-    : _x(x), _y(y), _level(1), _memoire(equipe) {}
+    : _position(x, y), _level(1), _memoire(equipe) {}
+
+/**
+ * @overload Agent::Agent(Point position, EQUIPE equipe)
+ * @param Point position - *Position d'instanciation de l'agent*
+ * @param EQUIPE equipe - *Nom de l'équipe de l'agent*
+ */
+Agent::Agent(Point position, EQUIPE equipe)
+    : _position(position), _level(1), _memoire(equipe) {}
 
 /**
  * @fn void Agent::deplacer(Direction dir)
@@ -24,32 +32,37 @@ void Agent::deplacer(DIRECTION direction)
 {
     // Ne vérifie pas s'il peut se déplacer
 
-    switch (direction)
-    {
-    case DIRECTION::NORDOUEST:
-        deplacerNordOuest();
-        break;
-    case DIRECTION::OUEST:
-        deplacerOuest();
-        break;
-    case DIRECTION::SUDOUEST:
-        deplacerSudOuest();
-        break;
-    case DIRECTION::SUDEST:
-        deplacerSudEst();
-        break;
-    case DIRECTION::EST:
-        deplacerEst();
-        break;
-    case DIRECTION::NORDEST:
-        deplacerNordEst();
-        break;
-    default:
-        std::cerr << "Direction non reconnue : " << endl;
-        break;
-    }
+    Point pointDir = directionToPoint(direction);
+
+    _position = _position + pointDir;
+
+    // switch (direction)
+    // {
+    // case DIRECTION::NORDOUEST:
+    //     deplacerNordOuest();
+    //     break;
+    // case DIRECTION::OUEST:
+    //     deplacerOuest();
+    //     break;
+    // case DIRECTION::SUDOUEST:
+    //     deplacerSudOuest();
+    //     break;
+    // case DIRECTION::SUDEST:
+    //     deplacerSudEst();
+    //     break;
+    // case DIRECTION::EST:
+    //     deplacerEst();
+    //     break;
+    // case DIRECTION::NORDEST:
+    //     deplacerNordEst();
+    //     break;
+    // default:
+    //     std::cerr << "Direction non reconnue : " << endl;
+    //     break;
+    // }
 }
 
+/*
 void Agent::deplacerNordOuest()
 { // ↖
     _y -= 1;
@@ -81,6 +94,7 @@ void Agent::deplacerNordEst()
     _x += 1;
     _y -= 1;
 }
+*/
 
 /**
  * @fn void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
