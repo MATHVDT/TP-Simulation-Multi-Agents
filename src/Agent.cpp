@@ -98,7 +98,7 @@ void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
 
     // Pour chaque cases voisines
     for (int i = 0; i < 6; ++i)
-    { 
+    {
         if (voisinage[i] != nullptr &&
             voisinage[i]->_memoire.getEquipe() == equipeAgent)
         { // Il y a bien un voisin et c'est un copain
