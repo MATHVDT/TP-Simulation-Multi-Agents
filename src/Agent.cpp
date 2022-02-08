@@ -13,7 +13,8 @@
  * @param EQUIPE equipe - *Nom de l'équipe de l'agent*
  */
 Agent::Agent(int x, int y, EQUIPE equipe)
-    : _position(x, y), _level(1), _memoire(equipe) {}
+    : _position(x, y), _level(1), _memoire(equipe),
+      _action(ACTION::INACTIF) {}
 
 /**
  * @overload Agent::Agent(Point position, EQUIPE equipe)
@@ -21,12 +22,16 @@ Agent::Agent(int x, int y, EQUIPE equipe)
  * @param EQUIPE equipe - *Nom de l'équipe de l'agent*
  */
 Agent::Agent(Point position, EQUIPE equipe)
-    : _position(position), _level(1), _memoire(equipe) {}
+    : _position(position), _level(1), _memoire(equipe),
+      _action(ACTION::INACTIF) {}
 
 /**
  * @fn void Agent::deplacer(Direction dir)
  * @brief Deplace l'agent suivant une direction.
  * @param DIRECTION dir - *Direction de déplacement*
+ * 
+ * @warning Ne vérifie pas s'il sort de la map, 
+ * et s'il y a de la place.
  */
 void Agent::deplacer(DIRECTION direction)
 {
@@ -61,40 +66,6 @@ void Agent::deplacer(DIRECTION direction)
     //     break;
     // }
 }
-
-/*
-void Agent::deplacerNordOuest()
-{ // ↖
-    _y -= 1;
-}
-
-void Agent::deplacerOuest()
-{ // ←
-    _x -= 1;
-}
-
-void Agent::deplacerSudOuest()
-{ // ↙
-    _x -= 1;
-    _y += 1;
-}
-
-void Agent::deplacerSudEst()
-{ // ↘
-    _y += 1;
-}
-
-void Agent::deplacerEst()
-{ // →
-    _x += 1;
-}
-
-void Agent::deplacerNordEst()
-{ // ↗
-    _x += 1;
-    _y -= 1;
-}
-*/
 
 /**
  * @fn void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
@@ -160,4 +131,54 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
     float influence = this->_memoire.getInfluence(diffLevel);
 
     this->_memoire.apprentissage(influence, memoire);
+}
+
+/**
+ * @fn Point Agent::agir(Agent *voisinage[6])
+ * @brief Action de l'agent dans le tour.
+ * 
+ * @param Agent *voisinage[6] - *Voisinage de l'agent*
+ */
+Point Agent::agir(Agent *voisinage[6])
+{
+    // Level general des equipes
+    int levelEnnemis = 0;
+    int levelAmis = this->_level;
+
+    // Nombre de directions potentielles de deplacement
+    int nbDirPossible = 0;
+    bool direction[6];
+
+    // Check le voisinage
+    for (int i = 0; i < 6; ++i)
+    {
+        if (voisinage[i] == nullptr)
+        {
+            direction[i] = true; // Direction de deplacement possible
+            ++nbDirPossible;     // Comptage du nb de dir. possibles
+        }
+        else
+        {                         // Agent à proximité
+            direction[i] = false; // Pas de proba d'aller dans cette dir.
+
+            if (voisinage[i]->getEquipe() != this->getEquipe())
+            { // Ennemi
+                levelEnnemis += voisinage[i]->getLevel();
+                this->_action = ACTION::ESTATTAQUE;
+            }
+            else if (voisinage[i]->getEquipe() == this->getEquipe())
+            { // Ami
+                levelAmis += voisinage[i]->getLevel();
+            }
+        }
+    }
+
+    if (this->_action == ACTION::ESTATTAQUE)
+    {
+        // ATTAQUE En fct des levels
+    }
+    else
+    {
+        // gestion du reste des actions
+    }
 }
