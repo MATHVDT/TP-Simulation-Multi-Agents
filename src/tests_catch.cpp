@@ -245,15 +245,15 @@ TEST_CASE("Affichage carte")
   cout << "-----" << endl;
 
   //test d'affichage du voisinage en terme de couleur de cases
-  EQUIPE voisinage[3][2];
+  EQUIPE voisinage[6];
   carte.casesAdjacentes(agent1, voisinage);
-  REQUIRE(voisinage[0][0] == EQUIPE::NEUTRE);
-  REQUIRE(voisinage[0][1] == EQUIPE::NEUTRE);
-  REQUIRE(voisinage[1][0] == EQUIPE::BLEU);
-  REQUIRE(voisinage[1][1] == EQUIPE::NEUTRE);
-  REQUIRE(voisinage[2][0] == EQUIPE::BLEU);
-  REQUIRE(voisinage[2][1] == EQUIPE::NEUTRE);
-  
+  REQUIRE(voisinage[0] == EQUIPE::NEUTRE);
+  REQUIRE(voisinage[1] == EQUIPE::BLEU);
+  REQUIRE(voisinage[2] == EQUIPE::BLEU);
+  REQUIRE(voisinage[3] == EQUIPE::NEUTRE);
+  REQUIRE(voisinage[4] == EQUIPE::NEUTRE);
+  REQUIRE(voisinage[5] == EQUIPE::NEUTRE);
+
 
 	//test de deplacement unitaire de l'agent
 	Point origine{5,5};

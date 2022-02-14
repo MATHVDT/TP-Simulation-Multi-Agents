@@ -94,22 +94,22 @@ bool Carte::estVide(int i, int j) const {
     return _grilleAgents [i][j] == nullptr;
 }
 
-void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[3][2]) const {
-voisinage[0][0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[0][1] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
-    voisinage[1][0] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
-    voisinage[1][1] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[2][0] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
-    voisinage[2][1] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
+void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
+    voisinage[0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
+    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
+    voisinage[3] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
+    voisinage[4] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
+    voisinage[5] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
 }
 
-void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[3][2]) const {
-    voisinage[0][0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[0][1] = _grilleAgents[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
-    voisinage[1][0] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
-    voisinage[1][1] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[2][0] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
-    voisinage[2][1] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
+void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
+    voisinage[0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
+    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
+    voisinage[3] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
+    voisinage[4] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
+    voisinage[5] = _grilleAgents[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
 }
 
 void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
