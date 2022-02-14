@@ -10,7 +10,8 @@
 enum class EQUIPE
 {
     BLEU,
-    ROUGE
+    ROUGE,
+    NEUTRE
 };
 
 /**

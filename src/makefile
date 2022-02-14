@@ -1,8 +1,8 @@
-#SRC=
+#SRC=main.cpp Carte.cpp
 SRC=$(wildcard *.cpp)  
 EXE=prog
 
-CXXFLAGS+=-Wall -Wextra -MMD -g -O2
+CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto
 LDFLAGS= #-lSDL
 
 OBJ=$(addprefix build/,$(SRC:.cpp=.o))
@@ -17,5 +17,6 @@ build/%.o: %.cpp
 
 clean:
 	rm -rf build core *.gch
+	rm *$(EXE)
 
 -include $(DEP)
