@@ -10,6 +10,19 @@
 #include "Memoire.hpp"
 #include "Carte.hpp"
 
+
+TEST_CASE("Test point")
+{
+  Point p1{4,5};
+  Point p2{1,2};
+
+ Point p3 =  p1 + p2;
+
+  REQUIRE(p3.getX() == 5);
+  REQUIRE(p3.getY() == 7);
+}
+
+
 TEST_CASE("Deplacement agent")
 {
   Agent a{0, 0, EQUIPE::BLEU};

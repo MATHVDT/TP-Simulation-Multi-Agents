@@ -10,7 +10,10 @@
 
 using namespace std;
 
+#include "Point.hpp"
+
 enum class EQUIPE;
+enum class ACTION;
 
 /**
  * @class Agent
@@ -22,36 +25,45 @@ private:
     static const int _levelMax = 10;
 
 private:
-    int _x;
-    int _y;
+    Point _position;
     int _level;
     Memoire _memoire;
+    ACTION _action;
 
 public:
     Agent(int x, int y, EQUIPE equipe);
+    Agent(Point position, EQUIPE equipe);
 
     // Getter
-    int getX() const { return _x; }
-    int getY() const { return _y; }
+    Point getPosition() const { return _position; }
+    int getX() const { return _position.getX(); }
+    int getY() const { return _position.getY(); }
+    int getLevel() const { return _level; }
+    EQUIPE getEquipe() const { return getMemoire().getEquipe(); }
     Memoire getMemoire() const { return _memoire; }
 
     // Setter
-    void setX(int x) { _x = x; }
-    void setY(int y) { _y = y; }
+    void setX(int x) { _position.setX(x); }
+    void setY(int y) { _position.setY(y); }
 
     // Deplacement
     void deplacer(DIRECTION dir);
 
-    void deplacerNordOuest();
-    void deplacerOuest();
-    void deplacerSudOuest();
-    void deplacerSudEst();
-    void deplacerEst();
-    void deplacerNordEst();
-
     void partagerMemoireAuVoisinage(Agent *voisinage[6]);
     void partagerMemoireACopain(Agent *copainAdjacent);
     void aquerirMemoire(int level, const Memoire &memoire);
+
+    Point agir(Agent *voisinage[6]);
+};
+
+enum class ACTION
+{
+    DIVISION,
+    DEPLACEMENT,
+    RENFORCEMENT,
+    ESTATTAQUE,
+    MORT,
+    INACTIF
 };
 
 #endif

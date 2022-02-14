@@ -5,6 +5,8 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
+#include "Direction.hpp"
+
 /**
  * @class Point
  * @brief Classe représentant des coordonnées 2D.
@@ -24,5 +26,14 @@ public:
     void setX(int x) { _x = x; }
     void setY(int y) { _y = y; }
 };
+
+Point operator+(const Point &p1, const Point &p2);
+
+
+Point directionToPoint(DIRECTION direction);
+DIRECTION pointToDirection(Point point);
+
+
+
 
 #endif
