@@ -221,28 +221,39 @@ TEST_CASE("Affichage carte")
 	Carte carte{};
 
 	//test de creation de la carte
-    carte.afficherCarte();
-    cout << "-----" << endl;
+  carte.afficherCarte();
+  cout << "-----" << endl;
 
 	//test de coloration des cases
-    carte.changerCase(3, 6, EQUIPE::ROUGE);
-    carte.changerCase(7, 7, EQUIPE::ROUGE);
-    for (int i  = 3; i < 7; i++)
-    {
-        for (int j = 2; j < 5; j++)
-        {
-            carte.changerCase(i, j, EQUIPE::BLEU);
-        }
-    }
+  carte.changerCase(3, 6, EQUIPE::ROUGE);
+  carte.changerCase(7, 7, EQUIPE::ROUGE);
+  for (int i  = 3; i < 7; i++)
+  {
+      for (int j = 2; j < 5; j++)
+      {
+          carte.changerCase(i, j, EQUIPE::BLEU);
+      }
+  }
 	carte.afficherCarte();
 	cout << "-----" << endl;
 
 	//test d'ajout et d'affichage d'un agent
-    Agent * agent1 = new Agent(5, 5, EQUIPE::ROUGE);
-    carte.setAgent(agent1->getX(), agent1->getY(), agent1);
-	carte.changerCase(agent1->getX(), agent1->getY(), agent1->getMemoire().getEquipe());
-    carte.afficherCarte();
-	cout << "-----" << endl;
+  Agent * agent1 = new Agent(5, 5, EQUIPE::ROUGE);
+  carte.setAgent(agent1->getX(), agent1->getY(), agent1);
+  carte.changerCase(agent1->getX(), agent1->getY(), agent1->getMemoire().getEquipe());
+  carte.afficherCarte();
+  cout << "-----" << endl;
+
+  //test d'affichage du voisinage en terme de couleur de cases
+  EQUIPE voisinage[3][2];
+  carte.casesAdjacentes(agent1, voisinage);
+  REQUIRE(voisinage[0][0] == EQUIPE::NEUTRE);
+  REQUIRE(voisinage[0][1] == EQUIPE::NEUTRE);
+  REQUIRE(voisinage[1][0] == EQUIPE::BLEU);
+  REQUIRE(voisinage[1][1] == EQUIPE::NEUTRE);
+  REQUIRE(voisinage[2][0] == EQUIPE::BLEU);
+  REQUIRE(voisinage[2][1] == EQUIPE::NEUTRE);
+  
 
 	//test de deplacement unitaire de l'agent
 	Point origine{5,5};

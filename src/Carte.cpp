@@ -95,27 +95,21 @@ bool Carte::estVide(int i, int j) const {
 }
 
 void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[3][2]) const {
-    int x, y;
-
-    for (x = 0; x < 2; x++)
-    {
-        for (y = 0; y < 3; y++)
-        {
-            voisinage[y][x] = _grille[y + agent->getY()][x + agent->getX()];
-        }
-    }
+voisinage[0][0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
+    voisinage[0][1] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[1][0] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[1][1] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
+    voisinage[2][0] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
+    voisinage[2][1] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
 }
 
 void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[3][2]) const {
-    int x, y;
-
-    for (x = 0; x < 2; x++)
-    {
-        for (y = 0; y < 3; y++)
-        {
-            voisinage[y][x] = _grilleAgents[y + agent->getY()][x + agent->getX()];
-        }
-    }
+    voisinage[0][0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
+    voisinage[0][1] = _grilleAgents[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[1][0] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[1][1] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
+    voisinage[2][0] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
+    voisinage[2][1] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
 }
 
 void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
