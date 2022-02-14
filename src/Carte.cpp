@@ -23,8 +23,8 @@ Carte::Carte(Agent *agent0Bleu, Agent *agent0Rouge)
             _grilleAgents[i][j] = nullptr;
         }
     }
-    _grilleAgents[agent0Bleu->getX()][agent0Bleu->getY()] = agent0Bleu;
-    _grilleAgents[agent0Rouge->getX()][agent0Rouge->getY()] = agent0Rouge;
+    _grilleAgents[agent0Bleu->getY()][agent0Bleu->getX()] = agent0Bleu;
+    _grilleAgents[agent0Rouge->getY()][agent0Rouge->getX()] = agent0Rouge;
 }
 
 void Carte::afficherCarte() const
@@ -99,18 +99,20 @@ bool Carte::estVide(int i, int j) const
     return _grilleAgents[i][j] == nullptr;
 }
 
-void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
+void Carte::casesAdjacentes(Agent *agent, EQUIPE voisinage[6]) const
+{
     voisinage[0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) % TAILLE];
     voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
     voisinage[3] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
     voisinage[5] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
 }
 
-void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
+void Carte::agentsAdjacents(Agent *agent, Agent *voisinage[6]) const
+{
     voisinage[0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) % TAILLE];
     voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
     voisinage[3] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];

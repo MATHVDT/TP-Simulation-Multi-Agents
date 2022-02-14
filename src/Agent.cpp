@@ -40,31 +40,6 @@ void Agent::deplacer(DIRECTION direction)
     Point pointDir = directionToPoint(direction);
 
     _position = _position + pointDir;
-
-    // switch (direction)
-    // {
-    // case DIRECTION::NORDOUEST:
-    //     deplacerNordOuest();
-    //     break;
-    // case DIRECTION::OUEST:
-    //     deplacerOuest();
-    //     break;
-    // case DIRECTION::SUDOUEST:
-    //     deplacerSudOuest();
-    //     break;
-    // case DIRECTION::SUDEST:
-    //     deplacerSudEst();
-    //     break;
-    // case DIRECTION::EST:
-    //     deplacerEst();
-    //     break;
-    // case DIRECTION::NORDEST:
-    //     deplacerNordEst();
-    //     break;
-    // default:
-    //     std::cerr << "Direction non reconnue : " << endl;
-    //     break;
-    // }
 }
 
 /**
@@ -139,7 +114,7 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
  * 
  * @param Agent *voisinage[6] - *Voisinage de l'agent*
  */
-Point Agent::agir(Agent *voisinage[6])
+Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6])
 {
     // Level general des equipes
     int levelEnnemis = 0;
@@ -149,10 +124,10 @@ Point Agent::agir(Agent *voisinage[6])
     int nbDirPossible = 0;
     bool direction[6];
 
-    // Check le voisinage
+    // Check le voisinageAgentVoisins
     for (int i = 0; i < 6; ++i)
     {
-        if (voisinage[i] == nullptr)
+        if (voisinageAgentVoisins[i] == nullptr) // Pas d'agent sur cette case
         {
             direction[i] = true; // Direction de deplacement possible
             ++nbDirPossible;     // Comptage du nb de dir. possibles
@@ -161,29 +136,73 @@ Point Agent::agir(Agent *voisinage[6])
         {                         // Agent à proximité
             direction[i] = false; // Pas de proba d'aller dans cette dir.
 
-            if (voisinage[i]->getEquipe() != this->getEquipe())
+            if (voisinageAgentVoisins[i]->getEquipe() != this->getEquipe())
             { // Ennemi
-                levelEnnemis += voisinage[i]->getLevel();
+                levelEnnemis += voisinageAgentVoisins[i]->getLevel();
                 this->_action = ACTION::ESTATTAQUE;
             }
-            else if (voisinage[i]->getEquipe() == this->getEquipe())
+            else if (voisinageAgentVoisins[i]->getEquipe() == this->getEquipe())
             { // Ami
-                levelAmis += voisinage[i]->getLevel();
+                levelAmis += voisinageAgentVoisins[i]->getLevel();
             }
         }
     }
 
+    this->_action = ACTION::DEPLACEMENT;
     if (this->_action == ACTION::ESTATTAQUE)
+    // if (this->_action == ACTION::ESTATTAQUE)
     {
         // ATTAQUE En fct des levels
     }
     else
     {
+        cout << "ici" << endl;
         // gestion du reste des actions
+        cout << "Deplacement " << endl;
+        // UNIQUEMENT deplacement
+        DIRECTION directionChoisie = choixDirectionDeplacement(direction);
+        deplacer(directionChoisie);
+
+        // int indiceDirectionVoisinage = directionToInt(directionChoisie);
+        // voisinageAgentVoisins[indiceDirectionVoisinage] = this;
+        // cout << voisinageAgentVoisins[indiceDirectionVoisinage]->getX() << endl;
     }
-    //return point....
+    return Point{0, 0};
 }
 
+/**
+ * @fn Agent::choixDirectionDeplacement
+ * @brief Choisie une direction de déplacement en fonction des possibilités.
+ * 
+ * @param bool directionsPossibles[6]
+ */
+DIRECTION Agent::choixDirectionDeplacement(bool directionsPossibles[6])
+{
+    int i = rand() % 6;
+
+    DIRECTION directionChoisie = DIRECTION::NULLDIRECTION;
+
+    // Tant que l'on a pas choisie une direction
+    while (directionChoisie == DIRECTION::NULLDIRECTION)
+    {
+        // Si la direction est possible
+        if (directionsPossibles[i])
+        {                        // La direction est libre
+            if (rand() % 6 == 0) // 1 chance sur 6
+            {                    // Prendre la direction par rapport au tableau de correspondance
+                directionChoisie = intToDirection(i);
+            }
+        }
+    }
+    return directionChoisie;
+}
+
+/**
+ * @overload Agent::operator=
+ * @brief Surcharge de l'opérateur d'affectation.
+ * 
+ * @return Agent &
+ */
 Agent &Agent::operator=(const Agent &agent)
 {
     if (this == &agent) // Guard self assignment

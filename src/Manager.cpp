@@ -80,10 +80,21 @@ void Manager::actionAgent(Agent *agent)
     EQUIPE voisinageAgentCases[6]; // Récupération de la couleur des cases adjacentes
     _carte.casesAdjacentes(agent, voisinageAgentCases);
 
-    // agent->agir(voisinageAgentVoisins);
 
-    _carte.afficherCarte();
+    agent->agir(voisinageAgentVoisins, voisinageAgentCases);
+
+    // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
+    // Verifier s'il n'a pas fait de petit
+
+    // _carte.correctionPositionAgent(agent)
+
+    // _carte.afficherCarte();
     std::this_thread::sleep_for(2000ms);
+}
+
+void Manager::afficherCarte()
+{
+    _carte.afficherCarte();
 }
 
 /**

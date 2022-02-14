@@ -29,6 +29,7 @@ public:
 
     void tour();
     void actionAgent(Agent *agent);
+    void afficherCarte();
 
 private:
     void melangerOrdreAgent();
