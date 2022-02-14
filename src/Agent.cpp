@@ -181,4 +181,25 @@ Point Agent::agir(Agent *voisinage[6])
     {
         // gestion du reste des actions
     }
+    //return point....
+}
+
+Agent &Agent::operator=(const Agent &agent)
+{
+    if (this == &agent) // Guard self assignment
+        return *this;
+
+    // Copie position
+    this->_position = agent._position;
+
+    // Copie level
+    this->_level = agent._level;
+
+    // Copie memoire
+    this->_memoire = agent._memoire;
+
+    // Copie action en cours
+    this->_action = agent._action;
+
+    return *this;
 }

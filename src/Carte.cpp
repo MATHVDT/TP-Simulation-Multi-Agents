@@ -10,7 +10,7 @@ const string RED = "\033[31m";
 const string GREEN = "\033[32m";
 const string BLUE = "\033[34m";
 
-Carte::Carte()
+Carte::Carte(Agent *agent0Bleu, Agent *agent0Rouge)
 {
     int j;
     int i;
@@ -23,6 +23,8 @@ Carte::Carte()
             _grilleAgents[i][j] = nullptr;
         }
     }
+    _grilleAgents[agent0Bleu->getX()][agent0Bleu->getY()] = agent0Bleu;
+    _grilleAgents[agent0Rouge->getX()][agent0Rouge->getY()] = agent0Rouge;
 }
 
 void Carte::afficherCarte() const
@@ -43,82 +45,88 @@ void Carte::afficherCarte() const
             {
                 switch (_grilleAgents[i][j]->getMemoire().getEquipe())
                 {
-                    case EQUIPE::ROUGE:
-                        std::cout << RED << "A ";
-                        break;
-                    case EQUIPE::BLEU:
-                        std::cout << BLUE << "A ";
-                        break;
-                    default:
+                case EQUIPE::ROUGE:
+                    std::cout << RED << "A ";
+                    break;
+                case EQUIPE::BLEU:
+                    std::cout << BLUE << "A ";
+                    break;
+                default:
                     std::cout << GREEN << "E ";
-                        break;
+                    break;
                 }
             }
             else
             {
                 switch (_grille[i][j])
                 {
-                    case EQUIPE::NEUTRE:
-                        std::cout << RESET << ". ";
-                        break;
-                    case EQUIPE::ROUGE:
-                        std::cout << RED << ". ";
-                        break;
-                    case EQUIPE::BLEU:
-                        std::cout << BLUE << ". ";
-                        break;
-                    default:
+                case EQUIPE::NEUTRE:
+                    std::cout << RESET << ". ";
+                    break;
+                case EQUIPE::ROUGE:
+                    std::cout << RED << ". ";
+                    break;
+                case EQUIPE::BLEU:
+                    std::cout << BLUE << ". ";
+                    break;
+                default:
                     std::cout << RESET << "? ";
-                        break;
+                    break;
                 }
             }
-            
         }
         std::cout << endl;
     }
 }
 
-Agent * Carte::getAgent(int i, int j) const {
+Agent *Carte::getAgent(int i, int j) const
+{
     return _grilleAgents[i][j];
 }
 
-void Carte::setAgent(int i, int j, Agent * agent) {
+void Carte::setAgent(int i, int j, Agent *agent)
+{
     _grilleAgents[i][j] = agent;
 }
 
-void Carte::changerCase(int i, int j, EQUIPE equipe) {
+void Carte::changerCase(int i, int j, EQUIPE equipe)
+{
     _grille[i][j] = equipe;
 }
 
-bool Carte::estVide(int i, int j) const {
-    return _grilleAgents [i][j] == nullptr;
+bool Carte::estVide(int i, int j) const
+{
+    return _grilleAgents[i][j] == nullptr;
 }
 
-void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[3][2]) const {
-voisinage[0][0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
+void Carte::casesAdjacentes(Agent *agent, EQUIPE voisinage[3][2]) const
+{
+    voisinage[0][0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
     voisinage[0][1] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
-    voisinage[1][0] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[1][0] = _grille[agent->getY()][(agent->getX() - 1) % TAILLE];
     voisinage[1][1] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
     voisinage[2][0] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
     voisinage[2][1] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
 }
 
-void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[3][2]) const {
+void Carte::agentsAdjacents(Agent *agent, Agent *voisinage[3][2]) const
+{
     voisinage[0][0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
     voisinage[0][1] = _grilleAgents[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
-    voisinage[1][0] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
+    voisinage[1][0] = _grilleAgents[agent->getY()][(agent->getX() - 1) % TAILLE];
     voisinage[1][1] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
     voisinage[2][0] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
     voisinage[2][1] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
 }
 
-void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
+void Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
 {
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
     changerCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
 }
 
-void Carte::deplacerAgent(Agent * agent, Point Destination) {
+void Carte::deplacerAgent(Agent *agent, Point Destination)
+{
     deplacerAgent(agent, agent->getPosition(), Destination);
 }

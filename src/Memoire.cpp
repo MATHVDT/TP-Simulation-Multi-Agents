@@ -37,7 +37,6 @@ Memoire::Memoire(float division,
     this->correctionMemoire();
 }
 
-
 /**
  * @fn float Memoire::getInfluence
  * @brief Calcul l'influence de l'agent sur celui-ci.
@@ -135,4 +134,21 @@ void Memoire::correctionMemoire()
     this->setDivision(valeurDivision);
     this->setDeplacement(valeurDeplacement);
     this->setRenforcement(valeurRenforcement);
+}
+
+Memoire &Memoire::operator=(const Memoire &memoire)
+{
+    // Guard self assignment
+    if (this == &memoire)
+        return *this;
+
+    // Copie stat
+    this->_division = memoire._division;
+    this->_deplacement = memoire._deplacement;
+    this->_renforcement = memoire._renforcement;
+
+    // Copie couleur Equipe
+    this->_equipe = memoire._equipe;
+
+    return *this;
 }

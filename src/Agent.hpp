@@ -54,6 +54,8 @@ public:
     void aquerirMemoire(int level, const Memoire &memoire);
 
     Point agir(Agent *voisinage[6]);
+
+    Agent &operator=(const Agent & agent);
 };
 
 enum class ACTION

@@ -2,7 +2,11 @@
 #define MANAGER_HPP
 
 #include <vector>
+#include <random>
+#include "Carte.hpp"
 #include "Agent.hpp"
+
+using namespace std;
 
 class Manager
 {
@@ -10,12 +14,23 @@ private:
     vector<Agent> _listAgentBleu;
     vector<Agent> _listAgentRouge;
 
+    Carte _carte;
+
+    vector<int> _ordreInteractionBleu;
+    vector<int> _ordreInteractionRouge;
 
 public:
     Manager(Agent &agent0Bleu, Agent &agent0Rouge);
     ~Manager();
 
+    void tour();
+    void actionAgent(Agent *agent);
 
+private:
+    void melangerOrdreAgent();
 };
+
+
+void fisherYates(vector<Agent> listagent);
 
 #endif
