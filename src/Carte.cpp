@@ -94,9 +94,37 @@ bool Carte::estVide(int i, int j) const {
     return _grilleAgents [i][j] == nullptr;
 }
 
+void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[3][2]) const {
+    int x, y;
+
+    for (x = 0; x < 2; x++)
+    {
+        for (y = 0; y < 3; y++)
+        {
+            voisinage[y][x] = _grille[y + agent->getY()][x + agent->getX()];
+        }
+    }
+}
+
+void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[3][2]) const {
+    int x, y;
+
+    for (x = 0; x < 2; x++)
+    {
+        for (y = 0; y < 3; y++)
+        {
+            voisinage[y][x] = _grilleAgents[y + agent->getY()][x + agent->getX()];
+        }
+    }
+}
+
 void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
 {
-    setAgent(destination.getX(), destination.getY(), agent);
-    changerCase(destination.getX(), destination.getY(), agent->getMemoire().getEquipe());
-    setAgent(origine.getX(), origine.getY(), nullptr);
+    setAgent(origine.getY(), origine.getX(), nullptr);
+    setAgent(destination.getY(), destination.getX(), agent);
+    changerCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+}
+
+void Carte::deplacerAgent(Agent * agent, Point Destination) {
+    deplacerAgent(agent, agent->getPosition(), Destination);
 }

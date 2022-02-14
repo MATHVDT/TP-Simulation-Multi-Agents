@@ -244,23 +244,23 @@ TEST_CASE("Affichage carte")
     carte.afficherCarte();
 	cout << "-----" << endl;
 
-	//test de deplacement de l'agent
+	//test de deplacement unitaire de l'agent
 	Point origine{5,5};
-	Point dest{5,4};
+	Point dest{4,5};
 	carte.deplacerAgent(agent1, origine, dest);
-	origine.setY(4);
-	dest.setY(3);
+	origine.setX(4);
+	dest.setX(3);
 	carte.deplacerAgent(agent1, origine, dest);
-	origine.setY(3);
-	dest.setX(6);
+	origine.setX(3);
+	dest.setY(6);
 	carte.deplacerAgent(agent1, origine, dest);
-	origine.setX(6);
-	dest.setX(7);
+	origine.setY(6);
+	dest.setY(7);
 	carte.deplacerAgent(agent1, origine, dest);
-	origine.setX(7);
-	dest.setX(8);
+	origine.setY(7);
+	dest.setY(8);
 	carte.deplacerAgent(agent1, origine, dest);
-	origine.setX(8);
+	origine.setY(8);
 	carte.afficherCarte();
 	cout << "-----" << endl;
 }
