@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SMA:  Fichier source de src/Agent.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SMA
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.3 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Recherche');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Agent.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_agent_8hpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef AGENT_HPP</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define AGENT_HPP</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_direction_8hpp.html">Direction.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="_memoire_8hpp.html">Memoire.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">using namespace </span>std;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="class_agent.html">   18</a></span><span class="keyword">class </span><a class="code hl_class" href="class_agent.html">Agent</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">int</span> _x;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">int</span> _y;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">int</span> _level;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_class" href="class_memoire.html">Memoire</a> _memoire;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_function" href="class_agent.html#ae6fb39d8334a4dd030dec5b7cf0238b2">Agent</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">// Getter</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_agent.html#af17b586ee841efd8b99b49ba7fef05fb">   30</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_agent.html#af17b586ee841efd8b99b49ba7fef05fb">getX</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _x; }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_agent.html#a455f82cf912b020818aa43b5df413da0">   31</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_agent.html#a455f82cf912b020818aa43b5df413da0">getY</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _y; }</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// Setter</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_agent.html#ab987987c0f05c5e83203ee34f4ddc7bf">   34</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#ab987987c0f05c5e83203ee34f4ddc7bf">setX</a>(<span class="keywordtype">int</span> x) { _x = x; }</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_agent.html#ac16dbaf81672246ae486e12197738542">   35</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#ac16dbaf81672246ae486e12197738542">setY</a>(<span class="keywordtype">int</span> y) { _y = y; }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">// Deplacement</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#abeb2adc8470073ffff97b6016bdd671e">deplacer</a>(<a class="code hl_enumeration" href="_direction_8hpp.html#aa268a41a13430b18e933ed40207178d0">DIRECTION</a> dir);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#aac81a5a803dd419c073c9409a56ae9c0">deplacerNordOuest</a>();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#a2229a25b640ea53994b6a134e1ab0e73">deplacerOuest</a>();</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#afc9452490f1c0e2a4bd2281c1537d2b5">deplacerSudOuest</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#a3d372aba2ae0fa56d9e69bc8fd17698f">deplacerSudEst</a>();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#ae2493c78d1cb692f2021920aa4364fcb">deplacerEst</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#abf32cb632ddcd406fd27205e8b76fbbe">deplacerNordEst</a>();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_agent.html#a68f9add90867653fe3a4ce6ce10f45ca">communiquer</a>(<a class="code hl_class" href="class_agent.html">Agent</a> * copainAdjacent);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>};</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="a_direction_8hpp_html"><div class="ttname"><a href="_direction_8hpp.html">Direction.hpp</a></div></div>
+<div class="ttc" id="a_direction_8hpp_html_aa268a41a13430b18e933ed40207178d0"><div class="ttname"><a href="_direction_8hpp.html#aa268a41a13430b18e933ed40207178d0">DIRECTION</a></div><div class="ttdeci">DIRECTION</div><div class="ttdef"><b>Definition:</b> Direction.hpp:13</div></div>
+<div class="ttc" id="a_memoire_8hpp_html"><div class="ttname"><a href="_memoire_8hpp.html">Memoire.hpp</a></div><div class="ttdoc">Fichier entête de la classe Memoire.</div></div>
+<div class="ttc" id="aclass_agent_html"><div class="ttname"><a href="class_agent.html">Agent</a></div><div class="ttdoc">Classe Agent.</div><div class="ttdef"><b>Definition:</b> Agent.hpp:19</div></div>
+<div class="ttc" id="aclass_agent_html_a2229a25b640ea53994b6a134e1ab0e73"><div class="ttname"><a href="class_agent.html#a2229a25b640ea53994b6a134e1ab0e73">Agent::deplacerOuest</a></div><div class="ttdeci">void deplacerOuest()</div><div class="ttdef"><b>Definition:</b> Agent.cpp:56</div></div>
+<div class="ttc" id="aclass_agent_html_a3d372aba2ae0fa56d9e69bc8fd17698f"><div class="ttname"><a href="class_agent.html#a3d372aba2ae0fa56d9e69bc8fd17698f">Agent::deplacerSudEst</a></div><div class="ttdeci">void deplacerSudEst()</div><div class="ttdef"><b>Definition:</b> Agent.cpp:66</div></div>
+<div class="ttc" id="aclass_agent_html_a455f82cf912b020818aa43b5df413da0"><div class="ttname"><a href="class_agent.html#a455f82cf912b020818aa43b5df413da0">Agent::getY</a></div><div class="ttdeci">int getY() const</div><div class="ttdef"><b>Definition:</b> Agent.hpp:31</div></div>
+<div class="ttc" id="aclass_agent_html_a68f9add90867653fe3a4ce6ce10f45ca"><div class="ttname"><a href="class_agent.html#a68f9add90867653fe3a4ce6ce10f45ca">Agent::communiquer</a></div><div class="ttdeci">void communiquer(Agent *copainAdjacent)</div><div class="ttdoc">Partage sa mémoire à son copain.</div><div class="ttdef"><b>Definition:</b> Agent.cpp:90</div></div>
+<div class="ttc" id="aclass_agent_html_aac81a5a803dd419c073c9409a56ae9c0"><div class="ttname"><a href="class_agent.html#aac81a5a803dd419c073c9409a56ae9c0">Agent::deplacerNordOuest</a></div><div class="ttdeci">void deplacerNordOuest()</div><div class="ttdef"><b>Definition:</b> Agent.cpp:51</div></div>
+<div class="ttc" id="aclass_agent_html_ab987987c0f05c5e83203ee34f4ddc7bf"><div class="ttname"><a href="class_agent.html#ab987987c0f05c5e83203ee34f4ddc7bf">Agent::setX</a></div><div class="ttdeci">void setX(int x)</div><div class="ttdef"><b>Definition:</b> Agent.hpp:34</div></div>
+<div class="ttc" id="aclass_agent_html_abeb2adc8470073ffff97b6016bdd671e"><div class="ttname"><a href="class_agent.html#abeb2adc8470073ffff97b6016bdd671e">Agent::deplacer</a></div><div class="ttdeci">void deplacer(DIRECTION dir)</div><div class="ttdoc">Deplace l'agent suivant une direction.</div><div class="ttdef"><b>Definition:</b> Agent.cpp:21</div></div>
+<div class="ttc" id="aclass_agent_html_abf32cb632ddcd406fd27205e8b76fbbe"><div class="ttname"><a href="class_agent.html#abf32cb632ddcd406fd27205e8b76fbbe">Agent::deplacerNordEst</a></div><div class="ttdeci">void deplacerNordEst()</div><div class="ttdef"><b>Definition:</b> Agent.cpp:77</div></div>
+<div class="ttc" id="aclass_agent_html_ac16dbaf81672246ae486e12197738542"><div class="ttname"><a href="class_agent.html#ac16dbaf81672246ae486e12197738542">Agent::setY</a></div><div class="ttdeci">void setY(int y)</div><div class="ttdef"><b>Definition:</b> Agent.hpp:35</div></div>
+<div class="ttc" id="aclass_agent_html_ae2493c78d1cb692f2021920aa4364fcb"><div class="ttname"><a href="class_agent.html#ae2493c78d1cb692f2021920aa4364fcb">Agent::deplacerEst</a></div><div class="ttdeci">void deplacerEst()</div><div class="ttdef"><b>Definition:</b> Agent.cpp:72</div></div>
+<div class="ttc" id="aclass_agent_html_ae6fb39d8334a4dd030dec5b7cf0238b2"><div class="ttname"><a href="class_agent.html#ae6fb39d8334a4dd030dec5b7cf0238b2">Agent::Agent</a></div><div class="ttdeci">Agent(int x, int y)</div><div class="ttdoc">Constructeur de Agent.</div><div class="ttdef"><b>Definition:</b> Agent.cpp:14</div></div>
+<div class="ttc" id="aclass_agent_html_af17b586ee841efd8b99b49ba7fef05fb"><div class="ttname"><a href="class_agent.html#af17b586ee841efd8b99b49ba7fef05fb">Agent::getX</a></div><div class="ttdeci">int getX() const</div><div class="ttdef"><b>Definition:</b> Agent.hpp:30</div></div>
+<div class="ttc" id="aclass_agent_html_afc9452490f1c0e2a4bd2281c1537d2b5"><div class="ttname"><a href="class_agent.html#afc9452490f1c0e2a4bd2281c1537d2b5">Agent::deplacerSudOuest</a></div><div class="ttdeci">void deplacerSudOuest()</div><div class="ttdef"><b>Definition:</b> Agent.cpp:61</div></div>
+<div class="ttc" id="aclass_memoire_html"><div class="ttname"><a href="class_memoire.html">Memoire</a></div><div class="ttdoc">Classe contenant la Memoire d'un Agent.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>
