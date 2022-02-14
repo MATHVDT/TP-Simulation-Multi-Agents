@@ -11,6 +11,10 @@ Manager::~Manager()
 {
 }
 
+/**
+ * @fn Manager::tour
+ * @brief Fait agir tous les agents dans un ordre aléatoire.
+ */
 void Manager::tour()
 {
     int nbAgentBleu = _listAgentBleu.size();
@@ -22,7 +26,8 @@ void Manager::tour()
 
     // Pour chaque agent
     while (iAgentBleu < nbAgentBleu && iAgentRouge < nbAgentRouge)
-    { // 1 chance sur 2 de choisir un agent d'une équipe
+    {
+        // 1 chance sur 2 de choisir un agent d'une équipe
         if (rand() % 2 == 0)
         { // Récupération d'un agent BLEU dans l'odre aléatoire de l'équipe
             agentCour = &(_listAgentBleu[iAgentBleu]);
@@ -36,6 +41,7 @@ void Manager::tour()
         // Action d'un agent
         actionAgent(agentCour);
     }
+    cout << iAgentBleu << " " << iAgentRouge << endl;
 
     // Si TOUS les agents d'une des deux équipes ont agit
     // Il faut faire agir tous les agents de l'autre équipe qui n'ont pas agit
@@ -52,11 +58,38 @@ void Manager::tour()
     }
 }
 
+/**
+ * @fn void Manager::actionAgent
+ * @brief Fait agir un agent sur la carte.
+ * 
+ * @param Agent *agent - *Agent qui agit*
+ * 
+ * @details
+ * Fait agir un agent sur la carte, en lui fournissant son voisinage.
+ * @todo Tient à jour la carte s'il a bougé ou qu'il s'est divisé.
+ * 
+ */
 void Manager::actionAgent(Agent *agent)
 {
     cout << "Action agent " << (agent->getEquipe() == EQUIPE::BLEU ? "bleu" : "rouge") << endl;
+
+    // Récupération du voisinage
+    Agent *voisinageAgentVoisins[6]; // Récupération des agents adjacents
+    _carte.agentsAdjacents(agent, voisinageAgentVoisins);
+
+    EQUIPE voisinageAgentCases[6]; // Récupération de la couleur des cases adjacentes
+    _carte.casesAdjacentes(agent, voisinageAgentCases);
+
+    // agent->agir(voisinageAgentVoisins);
+
+    _carte.afficherCarte();
+    std::this_thread::sleep_for(2000ms);
 }
 
+/**
+ * @fn Manager::melangerOrdreAgent
+ * @brief Mélange l'ordre des agents de chaque équipe dans leurs vecteurs respectifs.
+ */
 void Manager::melangerOrdreAgent()
 {
     fisherYates(_listAgentBleu);

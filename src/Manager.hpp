@@ -3,6 +3,10 @@
 
 #include <vector>
 #include <random>
+#include <iostream>
+#include <chrono>
+#include <thread>
+
 #include "Carte.hpp"
 #include "Agent.hpp"
 
