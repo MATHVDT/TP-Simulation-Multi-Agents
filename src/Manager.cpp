@@ -22,7 +22,7 @@ void Manager::tour()
 
     int iAgentBleu = 0;
     int iAgentRouge = 0;
-    Agent *agentCour;
+    Agent *agentCour =nullptr;
 
     // Pour chaque agent
     while (iAgentBleu < nbAgentBleu && iAgentRouge < nbAgentRouge)
@@ -86,7 +86,7 @@ void Manager::actionAgent(Agent *agent)
     // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
     // Verifier s'il n'a pas fait de petit
 
-    // _carte.correctionPositionAgent(agent)
+    _carte.correctionPositionAgent(agent);
 
     // _carte.afficherCarte();
     std::this_thread::sleep_for(2000ms);

@@ -24,6 +24,8 @@ public:
     void agentsAdjacents(Agent *agent, Agent *voisinage[6]) const;
     void deplacerAgent(Agent *agent, Point origine, Point Destination);
     void deplacerAgent(Agent *agent, Point Destination);
+
+    void correctionPositionAgent(Agent *agent);
 };
 
 #endif

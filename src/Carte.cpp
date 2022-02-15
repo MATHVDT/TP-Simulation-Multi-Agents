@@ -130,3 +130,15 @@ void Carte::deplacerAgent(Agent *agent, Point Destination)
 {
     deplacerAgent(agent, agent->getPosition(), Destination);
 }
+
+/**
+ * @fn void Carte::correctionPositionAgent 
+ * @brief Corrige la position de l'agent pour qu'il reste dans la Carte.
+ * 
+ * @param Agent *agent - *Agent à qui il faut corriger la position*
+ */
+void Carte::correctionPositionAgent(Agent *agent)
+{
+    agent->setX(agent->getX() % TAILLE);
+    agent->setY(agent->getY() % TAILLE);
+}
