@@ -55,35 +55,36 @@ void Carte::afficherCarte() const
             {
                 switch (_grilleAgents[i][j]->getMemoire().getEquipe())
                 {
-                case EQUIPE::ROUGE:
-                    std::cout << RED << "A ";
-                    break;
-                case EQUIPE::BLEU:
-                    std::cout << BLUE << "A ";
-                    break;
-                default:
+                    case EQUIPE::ROUGE:
+                        std::cout << RED << "A ";
+                        break;
+                    case EQUIPE::BLEU:
+                        std::cout << BLUE << "A ";
+                        break;
+                    default:
                     std::cout << GREEN << "E ";
-                    break;
+                        break;
                 }
             }
             else
             {
                 switch (_grille[i][j])
                 {
-                case EQUIPE::NEUTRE:
-                    std::cout << RESET << ". ";
-                    break;
-                case EQUIPE::ROUGE:
-                    std::cout << RED << ". ";
-                    break;
-                case EQUIPE::BLEU:
-                    std::cout << BLUE << ". ";
-                    break;
-                default:
+                    case EQUIPE::NEUTRE:
+                        std::cout << RESET << ". ";
+                        break;
+                    case EQUIPE::ROUGE:
+                        std::cout << RED << ". ";
+                        break;
+                    case EQUIPE::BLEU:
+                        std::cout << BLUE << ". ";
+                        break;
+                    default:
                     std::cout << RESET << "? ";
-                    break;
+                        break;
                 }
             }
+            
         }
         std::cout << endl;
     }
@@ -98,7 +99,7 @@ bool Carte::estVide(int i, int j) const {
 void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
     //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
     voisinage[0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) % TAILLE];
+    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
     voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
     voisinage[3] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
@@ -110,7 +111,7 @@ void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
 void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
     //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
     voisinage[0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) % TAILLE];
+    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
     voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
     voisinage[3] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
@@ -128,16 +129,4 @@ void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
 //A n'utiliser que si l'attribut position de agent est mis à jour après coup
 void Carte::deplacerAgent(Agent * agent, Point Destination) {
     deplacerAgent(agent, agent->getPosition(), Destination);
-}
-
-/**
- * @fn void Carte::correctionPositionAgent 
- * @brief Corrige la position de l'agent pour qu'il reste dans la Carte.
- * 
- * @param Agent *agent - *Agent à qui il faut corriger la position*
- */
-void Carte::correctionPositionAgent(Agent *agent)
-{
-    agent->setX(agent->getX() % TAILLE);
-    agent->setY(agent->getY() % TAILLE);
 }
