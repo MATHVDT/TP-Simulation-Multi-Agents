@@ -30,7 +30,7 @@
 *.exe
 *.out
 *.app
-**/prog
+*/prog*
 
 # Documentation
 *htlm

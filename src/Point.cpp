@@ -107,3 +107,29 @@ DIRECTION pointToDirection(Point point)
 
     return dir;
 }
+
+const DIRECTION DIRECTION_TAB[] =
+    {
+        DIRECTION::NORDOUEST,
+        DIRECTION::OUEST,
+        DIRECTION::SUDOUEST,
+        DIRECTION::SUDEST,
+        DIRECTION::EST,
+        DIRECTION::NORDEST};
+
+DIRECTION intToDirection(int entier)
+{
+    if (entier < 0 || entier >= 6)
+        throw __EXCEPTIONS;
+    return DIRECTION_TAB[entier];
+}
+
+int directionToInt(DIRECTION direction)
+{
+    int dir = 0;
+    while (dir < 6 && DIRECTION_TAB[dir] != direction)
+    {
+        ++dir;
+    }
+    return (dir == 6 ? -1 : dir);
+}

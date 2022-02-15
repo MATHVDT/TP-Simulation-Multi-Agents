@@ -11,7 +11,7 @@ const int TAILLE = 10;
 class Carte
 {
     EQUIPE _grille[TAILLE][TAILLE];
-    Agent * _grilleAgents[TAILLE][TAILLE];
+    Agent *_grilleAgents[TAILLE][TAILLE];
 
     public:
         Carte();
@@ -27,6 +27,7 @@ class Carte
         void agentsAdjacents(Agent * agent, Agent * voisinage[6]) const;
         void deplacerAgent(Agent * agent, Point origine, Point Destination);
         void deplacerAgent(Agent * agent, Point Destination);
+        void correctionPositionAgent(Agent *agent);
 };
 
 #endif

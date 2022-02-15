@@ -22,4 +22,5 @@ enum class DIRECTION
     NULLDIRECTION // X
 };
 
+extern const DIRECTION DIRECTION_TAB[];
 #endif

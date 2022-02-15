@@ -21,14 +21,13 @@ enum class EQUIPE
 class Memoire
 {
 
-
 private:
     const float _tailleMemoire = 1.;
     float _division;
     float _deplacement;
     float _renforcement;
     EQUIPE _equipe;
-    static const float _epsilon ;
+    static const float _epsilon;
 
 public:
     Memoire(EQUIPE equipe);
@@ -43,7 +42,7 @@ public:
     float getRenforcement() const { return _renforcement; }
     EQUIPE getEquipe() const { return _equipe; }
 
-    static float getEpsilon()  {return _epsilon;}
+    static float getEpsilon() { return _epsilon; }
 
     // Setter
     void setDivision(float valeur) { _division = valeur; }
@@ -51,9 +50,11 @@ public:
     void setRenforcement(float valeur) { _renforcement = valeur; }
     void setEquipe(EQUIPE equipe) { _equipe = equipe; }
 
-
     float getInfluence(int differenceLevel);
     void apprentissage(float influence, const Memoire &memoire);
+
+    // Operator
+    Memoire &operator=(const Memoire &memoire);
 
 private:
     void correctionMemoire();

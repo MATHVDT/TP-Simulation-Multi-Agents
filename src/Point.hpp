@@ -29,11 +29,10 @@ public:
 
 Point operator+(const Point &p1, const Point &p2);
 
-
 Point directionToPoint(DIRECTION direction);
 DIRECTION pointToDirection(Point point);
 
-
-
+DIRECTION intToDirection(int entier);
+int directionToInt(DIRECTION direction);
 
 #endif
