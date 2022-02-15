@@ -98,7 +98,7 @@ void Manager::actionAgent(Agent *agent)
     // Verifier s'il n'a pas fait de petit
 
     _carte.afficherCarte();
-    std::this_thread::sleep_for(500ms);
+    std::this_thread::sleep_for(100ms);
 }
 
 void Manager::afficherCarte()

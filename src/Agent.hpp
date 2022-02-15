@@ -59,7 +59,7 @@ public:
 
 private:
     DIRECTION choixDirectionDeplacement(bool directionsPossibles[6]);
-    ACTION choixAction();
+    ACTION choixAction(int levelEnnemis, int nbDirPossible);
 };
 
 enum class ACTION
@@ -68,6 +68,7 @@ enum class ACTION
     DEPLACEMENT,
     RENFORCEMENT,
     ESTATTAQUE,
+    BLOQUE,
     MORT,
     INACTIF
 };

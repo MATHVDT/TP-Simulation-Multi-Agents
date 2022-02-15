@@ -148,24 +148,41 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
         }
     }
 
-    this->_action = ACTION::DEPLACEMENT;
+    // choix action agent
+    this->_action = choixAction(levelEnnemis, nbDirPossible);
+    // this->_action = ACTION::DEPLACEMENT;
+
     if (this->_action == ACTION::ESTATTAQUE)
-    // if (this->_action == ACTION::ESTATTAQUE)
     {
         // ATTAQUE En fct des levels
     }
     else
     {
-        // choix action agent
 
-        // gestion du reste des actions
-        // UNIQUEMENT deplacement
-        DIRECTION directionChoisie = choixDirectionDeplacement(direction);
-        deplacer(directionChoisie);
+        if (this->_action == ACTION::DIVISION)
+        {
+            //
+        }
+        if (this->_action == ACTION::DEPLACEMENT)
+        {
+            // Choix direction de déplacement
+            DIRECTION directionChoisie = choixDirectionDeplacement(direction);
+            deplacer(directionChoisie); // Déplacement de l'agent
+        }
+        if (this->_action == ACTION::RENFORCEMENT)
+        {
+            // Gagne un niveau
+            ++_level;
+        }
+        if (this->_action == ACTION::BLOQUE)
+        {
+            // A le seum et ne fait rien
+        }
 
-        // int indiceDirectionVoisinage = directionToInt(directionChoisie);
-        // voisinageAgentVoisins[indiceDirectionVoisinage] = this;
-        // cout << voisinageAgentVoisins[indiceDirectionVoisinage]->getX() << endl;
+        if (this->_action == ACTION::INACTIF)
+        {
+            cout << "Bizarre tu aurais due agir !";
+        }
     }
 
     // Je crois que le retour sert a rien
@@ -227,26 +244,42 @@ Agent &Agent::operator=(const Agent &agent)
 
 /**
  * @fn Agent::choixAction()
- * @brief Retourne l'action choisie en fonction de la mémoire.
+ * @brief Retourne l'action choisie en fonction de la mémoire et environnement.
  * 
- * @return ACTION actionChoisie
+ * @param int levelEnnemis - *Somme des levels des ennemis adjacents*
+ * @param int nbDirPossible - *Nb directions libres*
+ * 
+ * @return ACTION actionChoisie (DIVISION, DEPLACEMENT, RENFORCEMENT, BLOQUE)
  */
-ACTION Agent::choixAction()
+ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
 {
-    double choix = rand() / RAND_MAX; // [0-1]
+    double choix = (double)rand() / (double)RAND_MAX; // [0-1]
     ACTION actionChoisie = ACTION::INACTIF;
 
-    if (choix < _memoire.getDivision())
-    { // Division de l'agent
-        actionChoisie = ACTION::DIVISION;
+    if (levelEnnemis > 0) // ie, il ya des ennemis adjacents
+    {
+        actionChoisie = ACTION::ESTATTAQUE;
     }
-    else if (choix < _memoire.getDivision() + _memoire.getDeplacement())
-    { // Deplacement de l'agent
-        actionChoisie = ACTION::DEPLACEMENT;
-    }
-    else // choix restant -> Renforcement
-    {    // Renforcement de l'agent
-        actionChoisie = ACTION::RENFORCEMENT;
+    else // Pas d'ennemis adjacents, Tu peux faire ta popote
+    {
+        if (choix < _memoire.getDivision())
+        {                          // Division de l'agent
+            if (nbDirPossible > 0) // Il y a de la place pour se diviser
+                actionChoisie = ACTION::DIVISION;
+            else // Pas de place pour ce diviser
+                actionChoisie = ACTION::BLOQUE;
+        }
+        else if (choix < _memoire.getDivision() + _memoire.getDeplacement())
+        {                          // Deplacement de l'agent
+            if (nbDirPossible > 0) // Il est possible de se déplacer
+                actionChoisie = ACTION::DEPLACEMENT;
+            else // Il n'est pas possible de s déplacer
+                actionChoisie = ACTION::BLOQUE;
+        }
+        else // choix restant -> Renforcement
+        {    // Renforcement de l'agent
+            actionChoisie = ACTION::RENFORCEMENT;
+        }
     }
 
     return actionChoisie;

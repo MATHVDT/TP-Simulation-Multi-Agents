@@ -19,7 +19,7 @@ int main()
         system("clear");
         manager.tour();
         manager.afficherCarte();
-        std::this_thread::sleep_for(2000ms);
+        std::this_thread::sleep_for(1000ms);
     }
     return 0;
 }
