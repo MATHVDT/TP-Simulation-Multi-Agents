@@ -25,6 +25,18 @@ Carte::Carte()
     }
 }
 
+Agent * Carte::getAgent(int i, int j) const {
+    return _grilleAgents[i][j];
+}
+
+void Carte::setAgent(int i, int j, Agent * agent) {
+    _grilleAgents[i][j] = agent;
+}
+
+void Carte::setCase(int i, int j, EQUIPE equipe) {
+    _grille[i][j] = equipe;
+}
+
 void Carte::afficherCarte() const
 {
     int j;
@@ -78,23 +90,14 @@ void Carte::afficherCarte() const
     }
 }
 
-Agent * Carte::getAgent(int i, int j) const {
-    return _grilleAgents[i][j];
-}
-
-void Carte::setAgent(int i, int j, Agent * agent) {
-    _grilleAgents[i][j] = agent;
-}
-
-void Carte::changerCase(int i, int j, EQUIPE equipe) {
-    _grille[i][j] = equipe;
-}
-
 bool Carte::estVide(int i, int j) const {
     return _grilleAgents [i][j] == nullptr;
 }
 
+//Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
+//Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
+    //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
     voisinage[0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
     voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
     voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
@@ -103,7 +106,10 @@ void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
     voisinage[5] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
 }
 
+//Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
+//Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
+    //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
     voisinage[0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
     voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
     voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
@@ -112,13 +118,15 @@ void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
     voisinage[5] = _grilleAgents[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
 }
 
+//A utiliser avant de mettre à jour
 void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
 {
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
-    changerCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+    setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
 }
 
+//A n'utiliser que si l'attribut position de agent est mis à jour après coup
 void Carte::deplacerAgent(Agent * agent, Point Destination) {
     deplacerAgent(agent, agent->getPosition(), Destination);
 }
