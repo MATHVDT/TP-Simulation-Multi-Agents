@@ -53,7 +53,12 @@ public:
     void partagerMemoireACopain(Agent *copainAdjacent);
     void aquerirMemoire(int level, const Memoire &memoire);
 
-    Point agir(Agent *voisinage[6]);
+    Point agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]);
+
+    Agent &operator=(const Agent &agent);
+
+private:
+    DIRECTION choixDirectionDeplacement(bool directionsPossibles[6]);
 };
 
 enum class ACTION
