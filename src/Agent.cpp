@@ -156,6 +156,8 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
     }
     else
     {
+        // choix action agent
+
         // gestion du reste des actions
         // UNIQUEMENT deplacement
         DIRECTION directionChoisie = choixDirectionDeplacement(direction);
@@ -165,6 +167,8 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
         // voisinageAgentVoisins[indiceDirectionVoisinage] = this;
         // cout << voisinageAgentVoisins[indiceDirectionVoisinage]->getX() << endl;
     }
+
+    // Je crois que le retour sert a rien
     return Point{0, 0};
 }
 
@@ -219,4 +223,31 @@ Agent &Agent::operator=(const Agent &agent)
     this->_action = agent._action;
 
     return *this;
+}
+
+/**
+ * @fn Agent::choixAction()
+ * @brief Retourne l'action choisie en fonction de la mémoire.
+ * 
+ * @return ACTION actionChoisie
+ */
+ACTION Agent::choixAction()
+{
+    double choix = rand() / RAND_MAX; // [0-1]
+    ACTION actionChoisie = ACTION::INACTIF;
+
+    if (choix < _memoire.getDivision())
+    { // Division de l'agent
+        actionChoisie = ACTION::DIVISION;
+    }
+    else if (choix < _memoire.getDivision() + _memoire.getDeplacement())
+    { // Deplacement de l'agent
+        actionChoisie = ACTION::DEPLACEMENT;
+    }
+    else // choix restant -> Renforcement
+    {    // Renforcement de l'agent
+        actionChoisie = ACTION::RENFORCEMENT;
+    }
+
+    return actionChoisie;
 }

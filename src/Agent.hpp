@@ -59,6 +59,7 @@ public:
 
 private:
     DIRECTION choixDirectionDeplacement(bool directionsPossibles[6]);
+    ACTION choixAction();
 };
 
 enum class ACTION
