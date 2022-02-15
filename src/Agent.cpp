@@ -156,9 +156,7 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
     }
     else
     {
-        cout << "ici" << endl;
         // gestion du reste des actions
-        cout << "Deplacement " << endl;
         // UNIQUEMENT deplacement
         DIRECTION directionChoisie = choixDirectionDeplacement(direction);
         deplacer(directionChoisie);

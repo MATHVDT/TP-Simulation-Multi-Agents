@@ -22,7 +22,7 @@ void Manager::tour()
 
     int iAgentBleu = 0;
     int iAgentRouge = 0;
-    Agent *agentCour =nullptr;
+    Agent *agentCour = nullptr;
 
     // Pour chaque agent
     while (iAgentBleu < nbAgentBleu && iAgentRouge < nbAgentRouge)
@@ -80,16 +80,26 @@ void Manager::actionAgent(Agent *agent)
     EQUIPE voisinageAgentCases[6]; // Récupération de la couleur des cases adjacentes
     _carte.casesAdjacentes(agent, voisinageAgentCases);
 
+    // Récupère la position de l'agent avant son possible déplacement
+    Point pointDepartAgent = agent->getPosition();
 
+    // Action de l'agent
     agent->agir(voisinageAgentVoisins, voisinageAgentCases);
 
-    // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
-    // Verifier s'il n'a pas fait de petit
+    // Nouvelle posistion de l'agent
+    Point pointDestinationAgent = agent->getPosition();
 
+    // Correction de la position de l'agent dans la carte (bord de la map)
     _carte.correctionPositionAgent(agent);
 
-    // _carte.afficherCarte();
-    std::this_thread::sleep_for(2000ms);
+    // Mise à des grille de la carte
+    _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
+
+        // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
+        // Verifier s'il n'a pas fait de petit
+
+        _carte.afficherCarte();
+        std::this_thread::sleep_for(500ms);
 }
 
 void Manager::afficherCarte()

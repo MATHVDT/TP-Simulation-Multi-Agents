@@ -126,6 +126,7 @@ void Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
     changerCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
 }
 
+// Pas sur que ca serve ...
 void Carte::deplacerAgent(Agent *agent, Point Destination)
 {
     deplacerAgent(agent, agent->getPosition(), Destination);
