@@ -121,32 +121,11 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
     int levelAmis = this->_level;
 
     // Nombre de directions potentielles de deplacement
-    int nbDirPossible = 0;
+    // et info sur le voisinage (level Amis/Ennemis, directonPossible)
     bool direction[6];
-
-    // Check le voisinageAgentVoisins
-    for (int i = 0; i < 6; ++i)
-    {
-        if (voisinageAgentVoisins[i] == nullptr) // Pas d'agent sur cette case
-        {
-            direction[i] = true; // Direction de deplacement possible
-            ++nbDirPossible;     // Comptage du nb de dir. possibles
-        }
-        else
-        {                         // Agent à proximité
-            direction[i] = false; // Pas de proba d'aller dans cette dir.
-
-            if (voisinageAgentVoisins[i]->getEquipe() != this->getEquipe())
-            { // Ennemi
-                levelEnnemis += voisinageAgentVoisins[i]->getLevel();
-                this->_action = ACTION::ESTATTAQUE;
-            }
-            else if (voisinageAgentVoisins[i]->getEquipe() == this->getEquipe())
-            { // Ami
-                levelAmis += voisinageAgentVoisins[i]->getLevel();
-            }
-        }
-    }
+    int nbDirPossible = examenVoisinage(voisinageAgentVoisins,
+                                        levelEnnemis, levelAmis,
+                                        direction);
 
     // choix action agent
     this->_action = choixAction(levelEnnemis, nbDirPossible);
@@ -249,6 +228,10 @@ Agent &Agent::operator=(const Agent &agent)
  * @param int levelEnnemis - *Somme des levels des ennemis adjacents*
  * @param int nbDirPossible - *Nb directions libres*
  * 
+ * @warning 
+ * S'il n'a aucune directions libres alors la *DIVISION* et le
+ * *DEPLACEMENT* sont *BLOQUE*. 
+ * 
  * @return ACTION actionChoisie (DIVISION, DEPLACEMENT, RENFORCEMENT, BLOQUE)
  */
 ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
@@ -283,4 +266,45 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
     }
 
     return actionChoisie;
+}
+
+/**
+ * @fn Agent::examenVoisinage
+ * @brief Analyse le voisinage.
+ * 
+ * @param  Agent *voisinageAgentVoisins[6]
+ * @param int & levelEnnemis
+ * @param int & levelAmis
+ * @param bool * direction[6]
+ */
+int Agent::examenVoisinage(Agent *voisinageAgentVoisins[6],
+                           int &levelEnnemis, int &levelAmis,
+                           bool direction[6])
+{
+    int nbDirPossible = 0;
+    // Check le voisinageAgentVoisins
+    for (int i = 0; i < 6; ++i)
+    {
+        if (voisinageAgentVoisins[i] == nullptr) // Pas d'agent sur cette case
+        {
+            direction[i] = true; // Direction de deplacement possible
+            ++nbDirPossible;     // Comptage du nb de dir. possibles
+        }
+        else
+        {                         // Agent à proximité
+            direction[i] = false; // Pas de proba d'aller dans cette dir.
+
+            if (voisinageAgentVoisins[i]->getEquipe() != this->getEquipe())
+            { // Ennemi
+                levelEnnemis += voisinageAgentVoisins[i]->getLevel();
+                this->_action = ACTION::ESTATTAQUE;
+            }
+            else if (voisinageAgentVoisins[i]->getEquipe() == this->getEquipe())
+            { // Ami
+                levelAmis += voisinageAgentVoisins[i]->getLevel();
+            }
+        }
+    }
+
+    return nbDirPossible;
 }

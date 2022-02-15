@@ -53,7 +53,12 @@ public:
     void partagerMemoireACopain(Agent *copainAdjacent);
     void aquerirMemoire(int level, const Memoire &memoire);
 
-    Point agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]);
+    Point agir(Agent *voisinageAgentVoisins[6],
+               EQUIPE voisinageAgentCases[6]);
+
+    int examenVoisinage(Agent *voisinageAgentVoisins[6],
+                        int &levelEnnemis, int &levelAmis,
+                        bool direction[6]);
 
     Agent &operator=(const Agent &agent);
 
