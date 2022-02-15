@@ -41,7 +41,6 @@ void Manager::tour()
         // Action d'un agent
         actionAgent(agentCour);
     }
-    cout << iAgentBleu << " " << iAgentRouge << endl;
 
     // Si TOUS les agents d'une des deux équipes ont agit
     // Il faut faire agir tous les agents de l'autre équipe qui n'ont pas agit
@@ -71,7 +70,7 @@ void Manager::tour()
  */
 void Manager::actionAgent(Agent *agent)
 {
-    cout << "Action agent " << (agent->getEquipe() == EQUIPE::BLEU ? "bleu" : "rouge") << endl;
+    // cout << "Action agent " << (agent->getEquipe() == EQUIPE::BLEU ? "bleu" : "rouge") << endl;
 
     // Récupération du voisinage
     Agent *voisinageAgentVoisins[6]; // Récupération des agents adjacents
@@ -95,11 +94,11 @@ void Manager::actionAgent(Agent *agent)
     // Mise à des grille de la carte
     _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
 
-        // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
-        // Verifier s'il n'a pas fait de petit
+    // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
+    // Verifier s'il n'a pas fait de petit
 
-        _carte.afficherCarte();
-        std::this_thread::sleep_for(500ms);
+    _carte.afficherCarte();
+    std::this_thread::sleep_for(500ms);
 }
 
 void Manager::afficherCarte()
