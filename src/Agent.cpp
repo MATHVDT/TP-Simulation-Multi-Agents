@@ -275,7 +275,7 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
  * @param  Agent *voisinageAgentVoisins[6]
  * @param int & levelEnnemis
  * @param int & levelAmis
- * @param bool * direction[6]
+ * @param bool direction[6]
  */
 int Agent::examenVoisinage(Agent *voisinageAgentVoisins[6],
                            int &levelEnnemis, int &levelAmis,
@@ -295,12 +295,12 @@ int Agent::examenVoisinage(Agent *voisinageAgentVoisins[6],
             direction[i] = false; // Pas de proba d'aller dans cette dir.
 
             if (voisinageAgentVoisins[i]->getEquipe() != this->getEquipe())
-            { // Ennemi
+            { // Ennemi : récupération de son level
                 levelEnnemis += voisinageAgentVoisins[i]->getLevel();
                 this->_action = ACTION::ESTATTAQUE;
             }
             else if (voisinageAgentVoisins[i]->getEquipe() == this->getEquipe())
-            { // Ami
+            { // Ami : récupération de son level
                 levelAmis += voisinageAgentVoisins[i]->getLevel();
             }
         }

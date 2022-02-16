@@ -14,12 +14,12 @@ int main()
     Manager manager{agent0Bleu, agent0Rouge};
 
     manager.afficherCarte();
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 50; ++i)
     {
         system("clear");
         manager.tour();
         manager.afficherCarte();
-        std::this_thread::sleep_for(1000ms);
+        std::this_thread::sleep_for(500ms);
     }
     return 0;
 }
