@@ -17,50 +17,43 @@ Manager::~Manager()
  */
 void Manager::tour()
 {
-    int nbAgentBleu = _listAgentBleu.size();
-    int nbAgentRouge = _listAgentRouge.size();
+  
     // Indice de parcours des vecteurs des agents
     int iAgentBleu = 0;
     int iAgentRouge = 0;
-    // Quelle équipe est choisie
-    bool agentBleuChoisi = false;
-    // bool agentRougeChoisi = false;
 
     Agent *agentCour = nullptr;
-    bool agentVivant = true;
 
     // Pour chaque agent
-    while (iAgentBleu < _listAgentBleu.size() && iAgentRouge < _listAgentRouge.size())
+    while (iAgentBleu < (int)_listAgentBleu.size() &&
+           iAgentRouge < (int)_listAgentRouge.size())
     {
         // 1 chance sur 2 de choisir un agent d'une équipe
         if (rand() % 2 == 0)
         { // Récupération d'un agent BLEU dans l'odre aléatoire de l'équipe
             agentCour = &(_listAgentBleu[iAgentBleu]);
-            agentBleuChoisi = true;
         }
         else
         { // Récupération d'un agent ROUGE dans l'odre aléatoire de l'équipe
             agentCour = &(_listAgentRouge[iAgentRouge]);
-            agentBleuChoisi = false;
-            // agentRougeChoisi=true;
         }
         // Action d'un agent
         actionAgent(agentCour);
 
         updateListAgent(agentCour, iAgentBleu, iAgentRouge);
-
-        }
+    }
 
     // Si TOUS les agents d'une des deux équipes ont agit
     // Il faut faire agir tous les agents de l'autre équipe qui n'ont pas agit
 
+    // ATTENTION REMPLACER PAR DES WHILE !!! ..................................................................................
     // Pour les agents Bleu qui n'ont pas encore agit
-    for (int i = iAgentBleu; i < _listAgentBleu.size(); ++i)
+    for (int i = iAgentBleu; i < (int)_listAgentBleu.size(); ++i)
     {
         actionAgent(&_listAgentBleu[iAgentBleu]);
     }
     // Pour les agents Rouge qui n'ont pas encore agit
-    for (int i = iAgentRouge; i < _listAgentRouge.size(); ++i)
+    for (int i = iAgentRouge; i < (int)_listAgentRouge.size(); ++i)
     {
         actionAgent(&_listAgentRouge[iAgentRouge]);
     }
@@ -160,7 +153,7 @@ void Manager::updateListAgent(Agent *agentCour,
     {
         // Suppression de l'agent dans la carte
         // ...
-        // _carte.suppressionAgent(agentCour);
+        _carte.suppressionAgent(agentCour);
 
         // suppression dans les vecteur
         if (agentBleuChoisi)
@@ -169,9 +162,9 @@ void Manager::updateListAgent(Agent *agentCour,
             _listAgentRouge.erase(_listAgentRouge.begin() + iAgentRouge);
 
         // delete agentCour ???
-        delete agentCour;
+        // delete agentCour;
     }
-    else // Agent pas mort : Trop fort ce gars en faite !!! 
+    else // Agent pas mort : Trop fort ce gars en faite !!!
     {
         // Incrémentation des indices de parcours
         agentBleuChoisi ? ++iAgentBleu : ++iAgentRouge;

@@ -324,7 +324,7 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
     int deltaLevel = levelAmis - levelEnnemis;
     ACTION issue;
 
-    if (deltaLevel < 0) // Ennemis plus fort
+    if (deltaLevel <= 0) // Ennemis plus fort
     {                   // Agent meurt
         issue = ACTION::MORT;
     }
@@ -332,6 +332,7 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
     {    // Agent survit
         issue = ACTION::SURVIVANT;
     }
+   
 
     return issue; // Retourne l'issue de l'attaque
 }
