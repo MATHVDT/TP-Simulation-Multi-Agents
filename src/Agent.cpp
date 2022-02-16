@@ -134,13 +134,13 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
     if (this->_action == ACTION::ESTATTAQUE)
     {
         // ATTAQUE En fct des levels
+        this->_action = issueAttaque(levelEnnemis, levelAmis);
     }
     else
     {
 
         if (this->_action == ACTION::DIVISION)
         {
-            //
         }
         if (this->_action == ACTION::DEPLACEMENT)
         {
@@ -232,7 +232,7 @@ Agent &Agent::operator=(const Agent &agent)
  * S'il n'a aucune directions libres alors la *DIVISION* et le
  * *DEPLACEMENT* sont *BLOQUE*. 
  * 
- * @return ACTION actionChoisie (DIVISION, DEPLACEMENT, RENFORCEMENT, BLOQUE)
+ * @return ACTION actionChoisie (ESTATTAQUE, DIVISION, DEPLACEMENT, RENFORCEMENT, BLOQUE)
  */
 ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
 {
@@ -307,4 +307,31 @@ int Agent::examenVoisinage(Agent *voisinageAgentVoisins[6],
     }
 
     return nbDirPossible;
+}
+
+/**
+ * @fn ACTION Agent::issueAttaque
+ * @brief Donne l'état de l'agent après l'attaque.
+ * 
+ * @param int levelEnnemis -*Somme des levels des ennemis*
+ * @param int levelAmis - *Somme des levels des amis + de l'agent*
+ * 
+ * @return ACTION *(MORT, SURVIVANT)*
+ */
+ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
+{
+    // Calcul des forces relatives
+    int deltaLevel = levelAmis - levelEnnemis;
+    ACTION issue;
+
+    if (deltaLevel < 0) // Ennemis plus fort
+    {                   // Agent meurt
+        issue = ACTION::MORT;
+    }
+    else // Le pouvoir de l'amitié : Agent + copains plus fort
+    {    // Agent survit
+        issue = ACTION::SURVIVANT;
+    }
+
+    return issue; // Retourne l'issue de l'attaque
 }

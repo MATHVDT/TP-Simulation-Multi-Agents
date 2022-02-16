@@ -63,6 +63,7 @@ public:
     Agent &operator=(const Agent &agent);
 
 private:
+    ACTION issueAttaque(int levelEnnemis, int levelAmis);
     DIRECTION choixDirectionDeplacement(bool directionsPossibles[6]);
     ACTION choixAction(int levelEnnemis, int nbDirPossible);
 };
@@ -73,8 +74,9 @@ enum class ACTION
     DEPLACEMENT,
     RENFORCEMENT,
     ESTATTAQUE,
-    BLOQUE,
+    SURVIVANT,
     MORT,
+    BLOQUE,
     INACTIF
 };
 
