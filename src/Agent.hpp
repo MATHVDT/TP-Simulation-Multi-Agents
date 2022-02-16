@@ -42,6 +42,7 @@ public:
     ACTION getAction() const { return _action; }
     EQUIPE getEquipe() const { return getMemoire().getEquipe(); }
     Memoire getMemoire() const { return _memoire; }
+    EQUIPE getTraceMort() const { return _memoire.getTraceMort(); }
 
     // Setter
     void setX(int x) { _position.setX(x); }

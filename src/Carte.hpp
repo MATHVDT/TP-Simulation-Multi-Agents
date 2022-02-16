@@ -25,6 +25,8 @@ public:
     void deplacerAgent(Agent *agent, Point origine, Point Destination);
     void deplacerAgent(Agent *agent, Point Destination);
 
+    void suppressionAgent(Agent *agentCour);
+
     void correctionPositionAgent(Agent *agent);
 };
 

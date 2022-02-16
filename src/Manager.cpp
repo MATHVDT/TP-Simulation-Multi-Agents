@@ -169,8 +169,9 @@ void Manager::updateListAgent(Agent *agentCour,
             _listAgentRouge.erase(_listAgentRouge.begin() + iAgentRouge);
 
         // delete agentCour ???
+        delete agentCour;
     }
-    else // Agent pas mort
+    else // Agent pas mort : Trop fort ce gars en faite !!! 
     {
         // Incrémentation des indices de parcours
         agentBleuChoisi ? ++iAgentBleu : ++iAgentRouge;

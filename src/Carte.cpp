@@ -143,3 +143,17 @@ void Carte::correctionPositionAgent(Agent *agent)
     agent->setX(agent->getX() % TAILLE);
     agent->setY(agent->getY() % TAILLE);
 }
+
+// SUpprime l'agent dans la carte => met le pointeur à nullptr
+void Carte::suppressionAgent(Agent *agentCour)
+{
+    // Récupère la position de l'agent dans la carte
+    int x = agentCour->getX();
+    int y = agentCour->getY();
+
+    // Récupère la trace quel'agent laisse quand il meurt
+    EQUIPE traceAgentMort = agentCour->getTraceMort();
+
+    _grille[y][x] = traceAgentMort;
+    _grilleAgents[y][x] = nullptr;
+}

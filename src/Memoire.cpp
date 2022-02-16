@@ -24,7 +24,8 @@ Memoire::Memoire(EQUIPE equipe)
     : _division(1. / 3.),
       _deplacement(1. / 3.),
       _renforcement(1. / 3.),
-      _equipe(equipe) {}
+      _equipe(equipe),
+      _traceMort(EQUIPE::NEUTRE) {}
 
 Memoire::Memoire(float division,
                  float depalcement,
@@ -32,7 +33,8 @@ Memoire::Memoire(float division,
     : _division(division),
       _deplacement(depalcement),
       _renforcement(renforcement),
-      _equipe(equipe)
+      _equipe(equipe),
+      _traceMort(EQUIPE::NEUTRE)
 {
     this->correctionMemoire();
 }

@@ -27,6 +27,7 @@ private:
     float _deplacement;
     float _renforcement;
     EQUIPE _equipe;
+    EQUIPE _traceMort; // Couleur de la case quand l'agent meurt
     static const float _epsilon;
 
 public:
@@ -41,6 +42,7 @@ public:
     float getDeplacement() const { return _deplacement; }
     float getRenforcement() const { return _renforcement; }
     EQUIPE getEquipe() const { return _equipe; }
+    EQUIPE getTraceMort() const { return _traceMort; }
 
     static float getEpsilon() { return _epsilon; }
 
