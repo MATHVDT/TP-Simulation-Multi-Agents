@@ -19,7 +19,11 @@ int main()
         system("clear");
         manager.tour();
         manager.afficherCarte();
-        std::this_thread::sleep_for(500ms);
+        std::this_thread::sleep_for(20ms);
     }
+
+    // cout << false * true << endl;
+    // cout << !false * true << endl;
+    // cout << !false * true << endl;
     return 0;
 }

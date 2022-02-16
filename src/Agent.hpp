@@ -39,6 +39,7 @@ public:
     int getX() const { return _position.getX(); }
     int getY() const { return _position.getY(); }
     int getLevel() const { return _level; }
+    ACTION getAction() const { return _action; }
     EQUIPE getEquipe() const { return getMemoire().getEquipe(); }
     Memoire getMemoire() const { return _memoire; }
 
@@ -76,6 +77,7 @@ enum class ACTION
     ESTATTAQUE,
     SURVIVANT,
     MORT,
+    NAISSANCEDIVISION,
     BLOQUE,
     INACTIF
 };

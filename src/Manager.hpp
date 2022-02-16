@@ -30,11 +30,12 @@ public:
     void tour();
     void actionAgent(Agent *agent);
     void afficherCarte();
+    void updateListAgent(Agent *agentCour,
+                         int &iAgentBleu, int &iAgentRouge);
 
 private:
     void melangerOrdreAgent();
 };
-
 
 void fisherYates(vector<Agent> listagent);
 
