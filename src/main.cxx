@@ -18,10 +18,12 @@ int main()
     {
         system("clear");
         manager.tour();
-        manager.afficherCarte();
+        // manager.afficherCarte();
         std::this_thread::sleep_for(100ms);
     }
     manager.afficherCarte();
+
+
 
     return 0;
 }
