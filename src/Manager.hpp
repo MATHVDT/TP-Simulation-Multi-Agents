@@ -7,6 +7,8 @@
 #include <chrono>
 #include <thread>
 
+#include <SFML/Graphics.hpp>
+
 #include "Carte.hpp"
 #include "Agent.hpp"
 
@@ -28,7 +30,9 @@ public:
     ~Manager();
 
     void afficherCarte();
-    void afficherSfml();
+    void afficherSfml(sf::RenderWindow &window,
+                      const int largeurWindow,
+                      const int hauteurWindow) const;
 
     void tour();
     void actionAgent(Agent *agent);

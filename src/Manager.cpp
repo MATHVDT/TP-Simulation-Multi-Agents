@@ -171,7 +171,11 @@ void Manager::updateListAgent(Agent *agentCour,
     }
 }
 
-void Manager::afficherSfml()
+void Manager::afficherSfml(sf::RenderWindow &window,
+                           const int largeurWindow,
+                           const int hauteurWindow) const
 {
-    _carte.afficherCarteSfml();
+    _carte.afficherCarteSfml(window,
+                             largeurWindow,
+                             hauteurWindow);
 }

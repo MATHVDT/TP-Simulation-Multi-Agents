@@ -160,7 +160,89 @@ void Carte::suppressionAgent(Agent *agentCour)
 
 // ----------------- //
 
-void Carte::afficherCarteSfml() const
+void Carte::afficherCarteSfml(
+    sf::RenderWindow &window,
+    const int largeurWindow,
+    const int hauteurWindow) const
 {
-    
+    int j;
+    int i;
+
+    int minTailleWindow = min(hauteurWindow, largeurWindow);
+    // int minTailleWindow = largeurWindow;
+    float rayon = (float)minTailleWindow / (2.f + 1.5 * (float)TAILLE);
+    rayon = 0.9 * rayon;
+    // Case
+    sf::CircleShape caseHexa{rayon, 6};
+    caseHexa.setFillColor(sf::Color::White);
+
+    // Agent
+    sf::CircleShape agent{rayon / 2.f};
+    agent.setOutlineThickness(3.f);
+    agent.setOutlineColor(sf::Color::White);
+
+    // Position
+    sf::Vector2f positionCaseHexa{0.f, 0.f};
+    sf::Vector2f offSetPositionAgent{18.f, 18.f};
+
+    float decalageX, decalageY;
+
+    for (i = 0; i < TAILLE; i++)
+    {
+
+        decalageX = (float)i * 0.95 * rayon;
+        decalageY = (float)i * 1.6 * rayon;
+        positionCaseHexa.y = decalageY;
+
+        for (j = 0; j < TAILLE; j++)
+        {
+            if (_grilleAgents[i][j] != nullptr)
+            {
+                agent.setOutlineColor(sf::Color::Black);
+                switch (_grilleAgents[i][j]->getMemoire().getEquipe())
+                {
+                case EQUIPE::ROUGE:
+                    agent.setFillColor(sf::Color(178, 34, 34));
+                    break;
+                case EQUIPE::BLEU:
+                    agent.setFillColor(sf::Color::Blue);
+                    break;
+                default:
+                    agent.setFillColor(sf::Color::Black);
+                    break;
+                }
+            }
+            else
+            {
+                agent.setOutlineColor(sf::Color::Transparent);
+                agent.setFillColor(sf::Color::Transparent);
+            }
+            switch (_grille[i][j])
+            {
+            case EQUIPE::NEUTRE:
+                caseHexa.setFillColor(sf::Color::White);
+                break;
+            case EQUIPE::ROUGE:
+                caseHexa.setFillColor(sf::Color(255, 99, 71));
+                break;
+            case EQUIPE::BLEU:
+                caseHexa.setFillColor(sf::Color(30, 144, 255));
+                break;
+            default:
+                // std::cout << RESET << "? ";
+                break;
+            }
+
+            // Set de la position X
+            positionCaseHexa.x = decalageX + (float)j * 1.85 * rayon;
+
+            // Set position de la case et de l'agent
+            caseHexa.setPosition(positionCaseHexa);
+            agent.setPosition(positionCaseHexa + offSetPositionAgent);
+
+            // Dessin
+            window.draw(caseHexa);
+            window.draw(agent);
+        }
+    }
 }

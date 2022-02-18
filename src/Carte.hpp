@@ -1,6 +1,8 @@
 #ifndef CARTE_HPP
 #define CARTE_HPP
 
+#include <SFML/Graphics.hpp>
+
 #include "Agent.hpp"
 #include "Direction.hpp"
 #include "Point.hpp"
@@ -17,7 +19,9 @@ public:
     Carte(Agent *agent0Bleu, Agent *agent0Rouge);
 
     void afficherCarte() const;
-    void afficherCarteSfml () const;
+    void afficherCarteSfml(sf::RenderWindow &window,
+                           const int largeurWindow,
+                           const int hauteurWindow) const;
 
     void changerCase(int i, int j, EQUIPE equipe);
     Agent *getAgent(int i, int j) const;
