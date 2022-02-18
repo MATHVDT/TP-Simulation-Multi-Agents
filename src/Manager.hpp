@@ -27,9 +27,11 @@ public:
     Manager(Agent &agent0Bleu, Agent &agent0Rouge);
     ~Manager();
 
+    void afficherCarte();
+    void afficherSfml();
+
     void tour();
     void actionAgent(Agent *agent);
-    void afficherCarte();
     void updateListAgent(Agent *agentCour,
                          int &iAgentBleu, int &iAgentRouge);
 

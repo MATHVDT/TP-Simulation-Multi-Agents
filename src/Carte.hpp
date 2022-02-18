@@ -15,7 +15,10 @@ class Carte
 
 public:
     Carte(Agent *agent0Bleu, Agent *agent0Rouge);
+
     void afficherCarte() const;
+    void afficherCarteSfml () const;
+
     void changerCase(int i, int j, EQUIPE equipe);
     Agent *getAgent(int i, int j) const;
     void setAgent(int i, int j, Agent *agent);

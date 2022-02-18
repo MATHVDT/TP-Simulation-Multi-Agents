@@ -157,3 +157,10 @@ void Carte::suppressionAgent(Agent *agentCour)
     _grille[y][x] = traceAgentMort;
     _grilleAgents[y][x] = nullptr;
 }
+
+// ----------------- //
+
+void Carte::afficherCarteSfml() const
+{
+    
+}

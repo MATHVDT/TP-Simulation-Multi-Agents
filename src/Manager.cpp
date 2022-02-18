@@ -17,7 +17,7 @@ Manager::~Manager()
  */
 void Manager::tour()
 {
-  
+
     // Indice de parcours des vecteurs des agents
     int iAgentBleu = 0;
     int iAgentRouge = 0;
@@ -169,4 +169,9 @@ void Manager::updateListAgent(Agent *agentCour,
         // Incrémentation des indices de parcours
         agentBleuChoisi ? ++iAgentBleu : ++iAgentRouge;
     }
+}
+
+void Manager::afficherSfml()
+{
+    _carte.afficherCarteSfml();
 }
