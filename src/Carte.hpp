@@ -14,17 +14,20 @@ class Carte
     Agent *_grilleAgents[TAILLE][TAILLE];
 
 public:
-    Carte(Agent *agent0Bleu, Agent *agent0Rouge);
-    void afficherCarte() const;
-    void changerCase(int i, int j, EQUIPE equipe);
+    Carte();
+    // Getters et setters
+    void setCase(int i, int j, EQUIPE equipe);
     Agent *getAgent(int i, int j) const;
     void setAgent(int i, int j, Agent *agent);
+
+    // Méthodes sur la manipulation des données
+    void afficherCarte() const;
     bool estVide(int i, int j) const;
     void casesAdjacentes(Agent *agent, EQUIPE voisinage[6]) const;
     void agentsAdjacents(Agent *agent, Agent *voisinage[6]) const;
     void deplacerAgent(Agent *agent, Point origine, Point Destination);
     void deplacerAgent(Agent *agent, Point Destination);
-
+    
     void suppressionAgent(Agent *agentCour);
 
     void correctionPositionAgent(Agent *agent);

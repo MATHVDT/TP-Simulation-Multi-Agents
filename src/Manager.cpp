@@ -1,10 +1,16 @@
 #include "Manager.hpp"
 
-Manager::Manager(Agent &agent0Bleu, Agent &agent0Rouge)
-    : _listAgentBleu{agent0Bleu}, _listAgentRouge{agent0Rouge},
-      _carte{&agent0Bleu, &agent0Rouge},
-      _ordreInteractionBleu{0}, _ordreInteractionRouge{0}
+Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
+    : _listAgentBleu{agent0Bleu},
+      _listAgentRouge{agent0Rouge},
+      _carte{}
 {
+    _carte.setAgent(agent0Bleu->getX(),
+                    agent0Bleu->getY(),
+                    agent0Bleu);
+    _carte.setAgent(agent0Rouge->getX(),
+                    agent0Rouge->getY(),
+                    agent0Rouge);
 }
 
 Manager::~Manager()
@@ -31,11 +37,11 @@ void Manager::tour()
         // 1 chance sur 2 de choisir un agent d'une équipe
         if (rand() % 2 == 0)
         { // Récupération d'un agent BLEU dans l'odre aléatoire de l'équipe
-            agentCour = &(_listAgentBleu[iAgentBleu]);
+            agentCour = _listAgentBleu[iAgentBleu];
         }
         else
         { // Récupération d'un agent ROUGE dans l'odre aléatoire de l'équipe
-            agentCour = &(_listAgentRouge[iAgentRouge]);
+            agentCour = _listAgentRouge[iAgentRouge];
         }
         // Action d'un agent
         actionAgent(agentCour);
@@ -49,13 +55,13 @@ void Manager::tour()
     // Pour les agents Bleu qui n'ont pas encore agit
     while (iAgentBleu < (int)_listAgentBleu.size())
     {
-        actionAgent(&_listAgentBleu[iAgentBleu]);
+        actionAgent(_listAgentBleu[iAgentBleu]);
         ++iAgentBleu;
     }
     // Pour les agents Rouge qui n'ont pas encore agit
     while (iAgentRouge < (int)_listAgentRouge.size())
     {
-        actionAgent(&_listAgentRouge[iAgentRouge]);
+        actionAgent(_listAgentRouge[iAgentRouge]);
         ++iAgentRouge;
     }
 }
@@ -74,22 +80,26 @@ void Manager::tour()
  */
 void Manager::actionAgent(Agent *agent)
 {
-    // cout << "Action agent " << (agent->getEquipe() == EQUIPE::BLEU ? "bleu" : "rouge") << endl;
     // Par défaut on ne retire pas d'agent => agent reste en vie
     bool agentVivant = true;
+    // Agent cloné s'il y a division
+    Agent *agentClone = nullptr;
+
+    // Création voisinage
+    Agent *voisinageAgentVoisins[6];
+    EQUIPE voisinageAgentCases[6];
 
     // Récupération du voisinage
-    Agent *voisinageAgentVoisins[6]; // Récupération des agents adjacents
     _carte.agentsAdjacents(agent, voisinageAgentVoisins);
-
-    EQUIPE voisinageAgentCases[6]; // Récupération de la couleur des cases adjacentes
     _carte.casesAdjacentes(agent, voisinageAgentCases);
 
     // Récupère la position de l'agent avant son possible déplacement
     Point pointDepartAgent = agent->getPosition();
 
-    // Action de l'agent
-    agent->agir(voisinageAgentVoisins, voisinageAgentCases);
+    // Action de l'agent et récupe du clone (en cas de division)
+    agentClone = agent->agir(voisinageAgentVoisins, voisinageAgentCases);
+
+    // Récupération de l'état de l'agent
     agentVivant = !(agent->getAction() == ACTION::MORT);
 
     // Agent toujours en vie, on le tient à jour dans la carte
@@ -103,6 +113,9 @@ void Manager::actionAgent(Agent *agent)
 
         // Mise à des grille de la carte
         _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
+    }
+    else // Agent mort
+    {
     }
 
     // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
@@ -127,7 +140,7 @@ void Manager::melangerOrdreAgent()
     fisherYates(_listAgentRouge);
 }
 
-void fisherYates(vector<Agent> listAgent)
+void fisherYates(vector<Agent *> listAgent)
 {
     int n = listAgent.size();
     int i;
@@ -147,6 +160,7 @@ void Manager::updateListAgent(Agent *agentCour,
 {
     // Récupération de l'état de mort de l'agent ou pas
     bool agentMort = agentCour->getAction() == ACTION::MORT;
+
     // Récupération de son équipe
     bool agentBleuChoisi = agentCour->getEquipe() == EQUIPE::BLEU;
 
@@ -163,7 +177,7 @@ void Manager::updateListAgent(Agent *agentCour,
             _listAgentRouge.erase(_listAgentRouge.begin() + iAgentRouge);
 
         // delete agentCour ???
-        // delete agentCour;
+        delete agentCour;
     }
     else // Agent pas mort : Trop fort ce gars en faite !!!
     {

@@ -15,16 +15,14 @@ using namespace std;
 class Manager
 {
 private:
-    vector<Agent> _listAgentBleu;
-    vector<Agent> _listAgentRouge;
+    vector<Agent*> _listAgentBleu;
+    vector<Agent*> _listAgentRouge;
 
     Carte _carte;
 
-    vector<int> _ordreInteractionBleu;
-    vector<int> _ordreInteractionRouge;
 
 public:
-    Manager(Agent &agent0Bleu, Agent &agent0Rouge);
+    Manager(Agent *agent0Bleu, Agent *agent0Rouge);
     ~Manager();
 
     void tour();
@@ -37,6 +35,6 @@ private:
     void melangerOrdreAgent();
 };
 
-void fisherYates(vector<Agent> listagent);
+void fisherYates(vector<Agent*> listagent);
 
 #endif

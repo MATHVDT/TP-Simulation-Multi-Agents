@@ -8,8 +8,8 @@ using namespace std;
 int main()
 {
 
-    Agent agent0Bleu{2, 2, EQUIPE::BLEU};
-    Agent agent0Rouge{4, 4, EQUIPE::ROUGE};
+    Agent *agent0Bleu = new Agent{2, 2, EQUIPE::BLEU};
+    Agent *agent0Rouge = new Agent{4, 4, EQUIPE::ROUGE};
 
     Manager manager{agent0Bleu, agent0Rouge};
 
