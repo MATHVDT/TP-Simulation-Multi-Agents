@@ -17,7 +17,7 @@ Manager::~Manager()
  */
 void Manager::tour()
 {
-  
+
     // Indice de parcours des vecteurs des agents
     int iAgentBleu = 0;
     int iAgentRouge = 0;
@@ -46,29 +46,30 @@ void Manager::tour()
     // Si TOUS les agents d'une des deux équipes ont agit
     // Il faut faire agir tous les agents de l'autre équipe qui n'ont pas agit
 
-    // ATTENTION REMPLACER PAR DES WHILE !!! ..................................................................................
     // Pour les agents Bleu qui n'ont pas encore agit
-    for (int i = iAgentBleu; i < (int)_listAgentBleu.size(); ++i)
+    while (iAgentBleu < (int)_listAgentBleu.size())
     {
         actionAgent(&_listAgentBleu[iAgentBleu]);
+        ++iAgentBleu;
     }
     // Pour les agents Rouge qui n'ont pas encore agit
-    for (int i = iAgentRouge; i < (int)_listAgentRouge.size(); ++i)
+    while (iAgentRouge < (int)_listAgentRouge.size())
     {
         actionAgent(&_listAgentRouge[iAgentRouge]);
+        ++iAgentRouge;
     }
 }
 
 /**
  * @fn void Manager::actionAgent
  * @brief Fait agir un agent sur la carte.
- * 
+ *
  * @param Agent *agent - *Agent qui agit*
- * 
+ *
  * @details
  * Fait agir un agent sur la carte, en lui fournissant son voisinage.
  * @todo Tient à jour la carte s'il a bougé ou qu'il s'est divisé.
- * 
+ *
 //  * @return bool *Agent vivant*
  */
 void Manager::actionAgent(Agent *agent)

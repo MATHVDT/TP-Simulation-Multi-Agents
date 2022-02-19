@@ -9,7 +9,8 @@ EXETEST=test
 
 DOSSIER=build
 
-CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto
+WARNING+=-Wall -Wextra
+CXXFLAGS+= -MMD -g -O2 -fdiagnostics-color=auto
 LDFLAGS= #-lSDL
 
 TMP = $(SRC:.cpp=.o)
