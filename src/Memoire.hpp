@@ -63,6 +63,6 @@ private:
     void correctionMemoire();
 };
 
-bool operator==(const Memoire &m1, const memoire &m2);
+bool operator==(const Memoire &m1, const Memoire &m2);
 
 #endif
