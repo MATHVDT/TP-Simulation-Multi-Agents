@@ -35,6 +35,23 @@ void Carte::setAgent(int i, int j, Agent *agent)
     _grilleAgents[i][j] = agent;
 }
 
+/**
+ * @fn Carte::setAgent(Agent *agent)
+ * @brief Ajoute un agent dans la carte.
+ * 
+ * @warning La position de l'agent est corrigée
+ * si l'agent est en dehors de la carte.
+ * 
+ * @param Agent *agent 
+ */
+void Carte::setAgent(Agent *agent)
+{
+    correctionPositionAgent(agent);
+    int i = agent->getX();
+    int j = agent->getY();
+    _grilleAgents[i][j] = agent;
+}
+
 void Carte::setCase(int i, int j, EQUIPE equipe)
 {
     _grille[i][j] = equipe;

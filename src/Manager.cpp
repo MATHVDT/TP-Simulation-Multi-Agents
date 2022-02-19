@@ -125,7 +125,9 @@ void Manager::actionAgent(Agent *agent)
         if (agentClone != nullptr)
         {
             // Action de l'agent qui sera une DEPLACEMENT
-            // agentClone->agir(voisinageAgentVoisins, voisinageAgentCases);
+            agentClone->agir(voisinageAgentVoisins, voisinageAgentCases);
+            // Placement dans la carte
+            _carte.setAgent(agentClone);
         }
     }
     else // Agent mort

@@ -19,6 +19,7 @@ public:
     void setCase(int i, int j, EQUIPE equipe);
     Agent *getAgent(int i, int j) const;
     void setAgent(int i, int j, Agent *agent);
+    void setAgent(Agent *agent);
 
     // Méthodes sur la manipulation des données
     void afficherCarte() const;
@@ -27,7 +28,7 @@ public:
     void agentsAdjacents(Agent *agent, Agent *voisinage[6]) const;
     void deplacerAgent(Agent *agent, Point origine, Point Destination);
     void deplacerAgent(Agent *agent, Point Destination);
-    
+
     void suppressionAgent(Agent *agentCour);
 
     void correctionPositionAgent(Agent *agent);
