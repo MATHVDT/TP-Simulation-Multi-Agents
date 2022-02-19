@@ -224,10 +224,13 @@ Agent &Agent::operator=(const Agent &agent)
  * @param int levelEnnemis - *Somme des levels des ennemis adjacents*
  * @param int nbDirPossible - *Nb directions libres*
  *
- * @warning
- * S'il n'a aucune directions libres alors la *DIVISION* et le
- * *DEPLACEMENT* sont *BLOQUE*.
- * Si l'agent vient d'apparaitre, *ie _action = NAISSANCEDIVISION*
+ * @details
+ * S'il n'a aucune directions libres alors la *DIVISION*
+ * et le *DEPLACEMENT* sont *BLOQUE*.
+ * La *DIVISION* est aussi *BLOQUE* quand le level
+ * n'est pas strictemennt supérieur à 1.
+ * Si l'agent vient d'apparaitre,
+ * *ie _action = NAISSANCEDIVISION*
  * alors il n'agit pas ce tour là.
  *
  * @return ACTION actionChoisie (ESTATTAQUE, DIVISION, DEPLACEMENT, RENFORCEMENT, BLOQUE, INACTIF)
@@ -251,8 +254,8 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
         else
         { // Agent ne vient pas d'apparaitre à ce tour
             if (choix < _memoire.getDivision())
-            {                          // Division de l'agent
-                if (nbDirPossible > 0) // Il y a de la place pour se diviser
+            {                                              // Division de l'agent
+                if (nbDirPossible > 0 && this->_level > 1) // Il y a de la place pour se diviser et un niveau assez élevé
                     actionChoisie = ACTION::DIVISION;
                 else // Pas de place pour ce diviser
                     actionChoisie = ACTION::BLOQUE;
@@ -342,25 +345,23 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
     return issue; // Retourne l'issue de l'attaque
 }
 
-
 /**
  * @fn Agent *Agent::divisionAgent()
  * @brief Divise un agent en en créant un nouveau.
- * 
+ *
  * @details
  * Réduit le niveau de l'agent qui se divise par deux,
- * et crée une copie de cette agent pour former le 
- * nouvel agent. 
+ * et crée une copie de cette agent pour former le
+ * nouvel agent.
  * Le nouvel agent à la même position, même mémoire,
- * même level que l'agent parent. 
- * 
+ * même level que l'agent parent.
+ *
  * @return Agent* agentClone - *Agent cloné*
  */
 Agent *Agent::divisionAgent()
 {
     // Perte de la moitié des lvl de l'agent qui se divise
     this->_level /= 2;
-cout << _level<<endl;
     // Création de l'agent issue de la division
     Agent *agentClone = new Agent{*this};
 

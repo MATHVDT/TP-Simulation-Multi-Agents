@@ -48,6 +48,7 @@ public:
     // Setter
     void setX(int x) { _position.setX(x); }
     void setY(int y) { _position.setY(y); }
+    void gagneLevel(int nbLevel = 1) { _level += nbLevel; }
 
     void partagerMemoireAuVoisinage(Agent *voisinage[6]);
     void partagerMemoireACopain(Agent *copainAdjacent);

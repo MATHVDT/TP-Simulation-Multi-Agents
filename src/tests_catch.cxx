@@ -218,8 +218,10 @@ TEST_CASE("Division agent")
   // Création d'un agent
   const Point positionAgent{4, 4};
   EQUIPE equipeAgent = EQUIPE::BLEU;
+  int levelAgent = 3;
 
   Agent agent{positionAgent, equipeAgent};
+  agent.gagneLevel(levelAgent - 1);
 
   // Memoire de test
   Memoire memoire{equipeAgent};
@@ -227,7 +229,7 @@ TEST_CASE("Division agent")
   // Test agent bien crée
   REQUIRE(agent.getPosition() == positionAgent);
   REQUIRE(agent.getEquipe() == equipeAgent);
-  REQUIRE(agent.getLevel() == 1);
+  REQUIRE(agent.getLevel() == levelAgent);
 
   // Vérification état de la mémoire
   REQUIRE(agent.getMemoire() == memoire);
@@ -237,12 +239,13 @@ TEST_CASE("Division agent")
   // Vérification du clone
   REQUIRE(memoire == agentClone->getMemoire());
   REQUIRE(agent.getLevel() == agentClone->getLevel());
+
   REQUIRE(agent.getPosition() == agent.getPosition());
 
   // Vérification de l'agent qui se divise
   REQUIRE(agent.getPosition() == positionAgent);
   REQUIRE(agent.getEquipe() == equipeAgent);
-  REQUIRE(agent.getLevel() == (agent.getLevel() / 2));
+  REQUIRE(agent.getLevel() == levelAgent / 2);
 }
 
 // TEST_CASE("Affichage carte")
