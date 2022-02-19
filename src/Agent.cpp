@@ -151,8 +151,9 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
         {
             if (this->_action == ACTION::DIVISION)
             {
-
                 agentClone = this->divisionAgent();
+                if (agentClone == nullptr)
+                    cerr << "pb pas de clone" << endl;
             }
             if (this->_action == ACTION::DEPLACEMENT)
             {
@@ -296,19 +297,19 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
     switch (actionChoisie)
     {
     case ACTION::DIVISION:
-        cout << "ACTION::DIVISION" << endl;
+        cerr << "ACTION::DIVISION" << endl;
         break;
     case ACTION::DEPLACEMENT:
-        cout << "ACTION::DEPLACEMENT" << endl;
+        cerr << "ACTION::DEPLACEMENT" << endl;
         break;
     case ACTION::RENFORCEMENT:
-        cout << "ACTION::RENFORCEMENT" << endl;
+        cerr << "ACTION::RENFORCEMENT" << endl;
         break;
     case ACTION::BLOQUE:
-        cout << "ACTION::BLOQUE" << endl;
+        cerr << "ACTION::BLOQUE" << endl;
         break;
     case ACTION::INACTIF:
-        cout << "ACTION::INACTIF" << endl;
+        cerr << "ACTION::INACTIF" << endl;
         break;
     default:
         break;

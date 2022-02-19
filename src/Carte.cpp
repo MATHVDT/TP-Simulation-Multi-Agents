@@ -105,7 +105,9 @@ void Carte::afficherCarte() const
                     std::cout << BLUE << ". ";
                     break;
                 default:
+                    // std::cout << RESET << "?(" << i << "," << j << ")";
                     std::cout << RESET << "? ";
+
                     break;
                 }
             }
@@ -159,6 +161,7 @@ void Carte::agentsAdjacents(Agent *agent, Agent *voisinage[6]) const
 // A utiliser avant de mettre à jour
 void Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
 {
+    correctionPositionAgent(agent);
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
     setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());

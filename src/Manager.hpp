@@ -15,17 +15,13 @@ using namespace std;
 class Manager
 {
 private:
-    vector<Agent*> _listAgentBleu;
-    vector<Agent*> _listAgentRouge;
+    vector<Agent *> _listAgents;
 
     Carte _carte;
+    unsigned int _nbAgents;
 
-    int _nbAgentBleu;
-    int _nbAgentRouge;
-
-    int _nbAgentBleuClone;
-    int _nbAgentRougeClone;
-
+    // int _nbAgentBleu;
+    // int _nbAgentRouge;
 
 
 public:
@@ -36,12 +32,12 @@ public:
     void actionAgent(Agent *agent);
     void afficherCarte();
     void updateListAgent(Agent *agentCour,
-                         int &iAgentBleu, int &iAgentRouge);
+                         unsigned int &iAgent);
 
 private:
     void melangerOrdreAgent();
 };
 
-void fisherYates(vector<Agent*> listagent);
+void fisherYates(vector<Agent *> listagent);
 
 #endif

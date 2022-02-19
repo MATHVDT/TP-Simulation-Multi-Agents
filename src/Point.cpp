@@ -1,6 +1,6 @@
 #include "Point.hpp"
 
-extern Point ORIGINE{0, 0};
+Point ORIGINE{0, 0};
 
 /**
  * @fn Point::Point()
