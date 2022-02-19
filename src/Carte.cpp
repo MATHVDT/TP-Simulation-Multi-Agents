@@ -38,23 +38,23 @@ void Carte::setAgent(int i, int j, Agent *agent)
 /**
  * @fn Carte::setAgent(Agent *agent)
  * @brief Ajoute un agent dans la carte.
- * 
+ *
  * @warning La position de l'agent est corrigée
  * si l'agent est en dehors de la carte.
- * 
- * @param Agent *agent 
+ *
+ * @param Agent *agent
  */
 void Carte::setAgent(Agent *agent)
 {
     correctionPositionAgent(agent);
-    int i = agent->getX();
-    int j = agent->getY();
+    int x = agent->getX();
+    int y = agent->getY();
 
     // Vérification de la disponibilité de la case
-    if( _grilleAgents[i][j])
-    throw Carte::ExceptionCaseDejaOccupe();
+    if (_grilleAgents[y][x])
+        throw Carte::ExceptionCaseDejaOccupe();
 
-    _grilleAgents[i][j] = agent;
+    _grilleAgents[y][x] = agent;
 }
 
 void Carte::setCase(int i, int j, EQUIPE equipe)
@@ -128,26 +128,32 @@ bool Carte::estVide(int i, int j) const
 // Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::casesAdjacentes(Agent *agent, EQUIPE voisinage[6]) const
 {
+    agent->setX((agent->getX() + TAILLE) % TAILLE);
+    agent->setY((agent->getY() + TAILLE) % TAILLE);
+
     // Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
-    voisinage[0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) % TAILLE];
-    voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
-    voisinage[3] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
-    voisinage[4] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[5] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[0] = _grille[((agent->getY() - 1) + TAILLE) % TAILLE][agent->getX()];
+    voisinage[1] = _grille[agent->getY()][((agent->getX() - 1) + TAILLE) % TAILLE];
+    voisinage[2] = _grille[((agent->getY() + 1) + TAILLE) % TAILLE][((agent->getX() - 1) + TAILLE) % TAILLE];
+    voisinage[3] = _grille[((agent->getY() + 1) + TAILLE) % TAILLE][agent->getX()];
+    voisinage[4] = _grille[agent->getY()][((agent->getX() + 1) + TAILLE) % TAILLE];
+    voisinage[5] = _grille[((agent->getY() - 1) + TAILLE) % TAILLE][((agent->getX() + 1) + TAILLE) % TAILLE];
 }
 
 // Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
 // Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::agentsAdjacents(Agent *agent, Agent *voisinage[6]) const
 {
+    agent->setX((agent->getX() + TAILLE) % TAILLE);
+    agent->setY((agent->getY() + TAILLE) % TAILLE);
+
     // Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
-    voisinage[0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) % TAILLE];
-    voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
-    voisinage[3] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
-    voisinage[4] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[5] = _grilleAgents[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[0] = _grilleAgents[((agent->getY() - 1) + TAILLE) % TAILLE][agent->getX()];
+    voisinage[1] = _grilleAgents[agent->getY()][((agent->getX() - 1) + TAILLE) % TAILLE];
+    voisinage[2] = _grilleAgents[((agent->getY() + 1) + TAILLE) % TAILLE][((agent->getX() - 1) + TAILLE) % TAILLE];
+    voisinage[3] = _grilleAgents[((agent->getY() + 1) + TAILLE) % TAILLE][agent->getX()];
+    voisinage[4] = _grilleAgents[agent->getY()][((agent->getX() + 1) + TAILLE) % TAILLE];
+    voisinage[5] = _grilleAgents[((agent->getY() - 1) + TAILLE) % TAILLE][((agent->getX() + 1) + TAILLE) % TAILLE];
 }
 
 // A utiliser avant de mettre à jour
@@ -172,20 +178,21 @@ void Carte::deplacerAgent(Agent *agent, Point Destination)
  */
 void Carte::correctionPositionAgent(Agent *agent)
 {
-    agent->setX(agent->getX() % TAILLE);
-    agent->setY(agent->getY() % TAILLE);
+    agent->setX((agent->getX() + TAILLE) % TAILLE);
+    agent->setY((agent->getY() + TAILLE) % TAILLE);
 }
 
 // SUpprime l'agent dans la carte => met le pointeur à nullptr
 void Carte::suppressionAgent(Agent *agentCour)
 {
+    correctionPositionAgent(agentCour);
     // Récupère la position de l'agent dans la carte
     int x = agentCour->getX();
     int y = agentCour->getY();
 
     // Récupère la trace quel'agent laisse quand il meurt
-    EQUIPE traceAgentMort = agentCour->getTraceMort();
+    // EQUIPE traceAgentMort = agentCour->getTraceMort();
 
-    _grille[y][x] = traceAgentMort;
+    // _grille[y][x] = traceAgentMort;
     _grilleAgents[y][x] = nullptr;
 }

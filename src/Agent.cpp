@@ -42,6 +42,12 @@ void Agent::deplacer(DIRECTION direction)
     _position = _position + pointDir;
 }
 
+Agent::~Agent()
+{
+    _position.~Point();
+    _memoire.~Memoire();
+}
+
 /**
  * @fn void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
  * @brief Partage la mémoire aux copains adjacents.
@@ -130,21 +136,6 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
                                         levelEnnemis, levelAmis,
                                         direction);
 
-    // Agent vient d'être cloné
-    if (this->_action == ACTION::NAISSANCEDIVISION)
-    {
-        // Problème ie qu'un agent c'est divisé sans qu'il y ait de place
-        if (nbDirPossible == 0)
-            throw Agent::ExceptionAucuneDirectionsLibres();
-
-        // Dash du clone sur une case libre
-        deplacementApresNaissance(direction);
-        // Le clone n'agira pas au prochain tour
-        this->_action == ACTION::INACTIF;
-        // Retourne aucun clone
-        return agentClone;
-    }
-
     // Choix action agent
     this->_action = choixAction(levelEnnemis, nbDirPossible);
 
@@ -152,6 +143,7 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
     { // Si l'agent est actif
         if (this->_action == ACTION::ESTATTAQUE)
         {
+
             // ATTAQUE En fct de l'environnement (levels...)
             this->_action = issueAttaque(levelEnnemis, levelAmis);
         }
@@ -159,12 +151,17 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
         {
             if (this->_action == ACTION::DIVISION)
             {
+
                 agentClone = this->divisionAgent();
             }
             if (this->_action == ACTION::DEPLACEMENT)
             {
+                if (nbDirPossible == 0)
+                    throw Agent::ExceptionAucuneDirectionsLibres();
+
                 // Choix direction de déplacement
                 DIRECTION directionChoisie = choixDirectionDeplacement(direction);
+
                 // Déplacement de l'agent
                 deplacer(directionChoisie);
             }
@@ -206,6 +203,9 @@ DIRECTION Agent::choixDirectionDeplacement(bool directionsPossibles[6])
                 directionChoisie = intToDirection(i);
             }
         }
+        // on a pas choisie cette direction
+        // On relance une direction
+        i = rand() % 6;
     }
     return directionChoisie;
 }
@@ -265,10 +265,10 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
     }
     else
     { // Pas d'ennemis adjacents, Tu peux faire ta popote
-        // Normalement ne devrait pas être utile A MODIFIER 
+        // Normalement ne devrait pas être utile A MODIFIER
         if (this->_action == ACTION::NAISSANCEDIVISION)
         { // Agent vient d'apparaitre => pas d'action
-            actionChoisie = ACTION::INACTIF;
+            actionChoisie = ACTION::DEPLACEMENT;
         }
         else
         { // Agent ne vient pas d'apparaitre à ce tour
@@ -293,6 +293,26 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
         }
     }
 
+    switch (actionChoisie)
+    {
+    case ACTION::DIVISION:
+        cout << "ACTION::DIVISION" << endl;
+        break;
+    case ACTION::DEPLACEMENT:
+        cout << "ACTION::DEPLACEMENT" << endl;
+        break;
+    case ACTION::RENFORCEMENT:
+        cout << "ACTION::RENFORCEMENT" << endl;
+        break;
+    case ACTION::BLOQUE:
+        cout << "ACTION::BLOQUE" << endl;
+        break;
+    case ACTION::INACTIF:
+        cout << "ACTION::INACTIF" << endl;
+        break;
+    default:
+        break;
+    }
     return actionChoisie;
 }
 
@@ -392,9 +412,9 @@ Agent *Agent::divisionAgent()
 
 /**
  * @fn Agent::deplacementApresNaissance(bool direction[6])
- * @brief Déplace un agent après sa naissance. 
- * 
- * @param bool direction[6] 
+ * @brief Déplace un agent après sa naissance.
+ *
+ * @param bool direction[6]
  */
 void Agent::deplacementApresNaissance(bool direction[6])
 {

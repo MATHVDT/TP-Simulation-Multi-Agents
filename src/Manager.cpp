@@ -13,6 +13,13 @@ Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
     _carte.setAgent(agent0Rouge->getX(),
                     agent0Rouge->getY(),
                     agent0Rouge);
+
+    _carte.setCase(agent0Bleu->getX(),
+                   agent0Bleu->getY(),
+                   agent0Bleu->getEquipe());
+    _carte.setCase(agent0Rouge->getX(),
+                   agent0Rouge->getY(),
+                   agent0Rouge->getEquipe());
 }
 
 Manager::~Manager()
@@ -25,6 +32,7 @@ Manager::~Manager()
  */
 void Manager::tour()
 {
+    std::cerr << "Debut tour" << endl;
     _nbAgentBleu = (int)_listAgentBleu.size();
     _nbAgentRouge = (int)_listAgentRouge.size();
 
@@ -38,6 +46,7 @@ void Manager::tour()
     while (iAgentBleu < _nbAgentBleu &&
            iAgentRouge < _nbAgentRouge)
     {
+
         // 1 chance sur 2 de choisir un agent d'une équipe
         if (rand() % 2 == 0)
         { // Récupération d'un agent BLEU dans l'odre aléatoire de l'équipe
@@ -60,14 +69,20 @@ void Manager::tour()
     // Pour les agents Bleu qui n'ont pas encore agit
     while (iAgentBleu < _nbAgentBleu)
     {
-        actionAgent(_listAgentBleu[iAgentBleu]);
-        ++iAgentBleu;
+        agentCour = _listAgentBleu[iAgentBleu];
+        actionAgent(agentCour);
+
+        // Enlever l'agent de la liste s'il est mort
+        updateListAgent(agentCour, iAgentBleu, iAgentRouge);
     }
     // Pour les agents Rouge qui n'ont pas encore agit
     while (iAgentRouge < _nbAgentRouge)
     {
-        actionAgent(_listAgentRouge[iAgentRouge]);
-        ++iAgentRouge;
+        agentCour = _listAgentRouge[iAgentRouge];
+        actionAgent(agentCour);
+
+        // Enlever l'agent de la liste s'il est mort
+        updateListAgent(agentCour, iAgentBleu, iAgentRouge);
     }
 }
 
@@ -126,8 +141,23 @@ void Manager::actionAgent(Agent *agent)
         {
             // Action de l'agent qui sera une DEPLACEMENT
             agentClone->agir(voisinageAgentVoisins, voisinageAgentCases);
+
+            // Ajout de l'agent cloné dans les listes
+            if (agentClone->getEquipe() == EQUIPE::BLEU)
+                _listAgentBleu.push_back(agentClone);
+            else if(agentClone->getEquipe() == EQUIPE::ROUGE)
+                _listAgentRouge.push_back(agentClone);
+
+            _carte.correctionPositionAgent(agentClone);
+
             // Placement dans la carte
-            _carte.setAgent(agentClone);
+            _carte.setAgent(agentClone->getX(),
+                            agentClone->getY(),
+                            agentClone);
+
+            _carte.setCase(agentClone->getX(),
+                           agentClone->getY(),
+                           agentClone->getEquipe());
         }
     }
     else // Agent mort
@@ -177,23 +207,34 @@ void Manager::updateListAgent(Agent *agentCour,
     bool agentMort = agentCour->getAction() == ACTION::MORT;
 
     // Récupération de son équipe
-    bool agentBleuChoisi = agentCour->getEquipe() == EQUIPE::BLEU;
+    bool agentBleuChoisi = (agentCour->getEquipe() == EQUIPE::BLEU);
 
     if (agentMort) // Agent mort
     {
+        std::cerr << "Suppression agent mort" << endl;
         // Suppression de l'agent dans la carte
         // ...
         _carte.suppressionAgent(agentCour);
 
+        // std::cerr << "arpès suppression carte et " << _carte.getAgent(agentCour->getY(), agentCour->getX())->getLevel() << endl;
+
+        std::cerr << "lvl agent cour : " << agentCour->getLevel() << endl;
+
         // suppression dans les vecteur
         if (agentBleuChoisi)
         {
-            _listAgentBleu.erase(_listAgentBleu.begin() + iAgentBleu);
-            --_nbAgentBleu;
+            std::vector<Agent *>::iterator it = _listAgentBleu.begin() + iAgentBleu+1;
+
+            _listAgentBleu.erase(it);
+            std::cerr << "arpès suppression dans vecteur" << endl;
+            // --_nbAgentBleu;
         }
         else
         {
-            _listAgentRouge.erase(_listAgentRouge.begin() + iAgentRouge);
+            std::vector<Agent *>::iterator it = _listAgentRouge.begin() + iAgentRouge +1;
+            _listAgentRouge.erase(it);
+            
+            std::cerr << "arpès suppression dans vecteur" << endl;
             --_nbAgentRouge;
         }
 
@@ -204,5 +245,9 @@ void Manager::updateListAgent(Agent *agentCour,
     {
         // Incrémentation des indices de parcours
         agentBleuChoisi ? ++iAgentBleu : ++iAgentRouge;
+        // if (agentCour->getEquipe() == EQUIPE::BLEU)
+        //     ++iAgentBleu;
+        // else
+        //     ++iAgentRouge;
     }
 }

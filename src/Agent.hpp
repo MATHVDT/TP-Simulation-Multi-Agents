@@ -37,6 +37,7 @@ public:
     Agent(int x, int y, EQUIPE equipe);
     Agent(Point position, EQUIPE equipe);
     Agent(const Agent &agent) = default;
+    ~Agent();
 
     // Getter
     Point getPosition() const { return _position; }
