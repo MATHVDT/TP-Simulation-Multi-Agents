@@ -214,9 +214,12 @@ void Carte::afficherCarteSfml(
             }
             else
             {
+                // Transparence de l'agent car il n'y a personne
                 agent.setOutlineColor(sf::Color::Transparent);
                 agent.setFillColor(sf::Color::Transparent);
             }
+
+            
             switch (_grille[i][j])
             {
             case EQUIPE::NEUTRE:
