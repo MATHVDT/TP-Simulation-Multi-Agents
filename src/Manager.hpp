@@ -17,16 +17,17 @@ using namespace std;
 class Manager
 {
 private:
-    vector<Agent> _listAgentBleu;
-    vector<Agent> _listAgentRouge;
+    vector<Agent *> _listAgents;
 
     Carte _carte;
+    unsigned int _nbAgents;
 
-    vector<int> _ordreInteractionBleu;
-    vector<int> _ordreInteractionRouge;
+    // int _nbAgentBleu;
+    // int _nbAgentRouge;
+
 
 public:
-    Manager(Agent &agent0Bleu, Agent &agent0Rouge);
+    Manager(Agent *agent0Bleu, Agent *agent0Rouge);
     ~Manager();
 
     void afficherCarte();
@@ -34,15 +35,15 @@ public:
                       const int largeurWindow,
                       const int hauteurWindow) const;
 
-    void tour();
+    void tour(sf::RenderWindow& window );
     void actionAgent(Agent *agent);
     void updateListAgent(Agent *agentCour,
-                         int &iAgentBleu, int &iAgentRouge);
+                         unsigned int &iAgent);
 
 private:
     void melangerOrdreAgent();
 };
 
-void fisherYates(vector<Agent> listagent);
+void fisherYates(vector<Agent *> listagent);
 
 #endif

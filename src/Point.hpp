@@ -18,7 +18,10 @@ private:
     int _y;
 
 public:
+    Point();
     Point(int x, int y);
+    Point(const Point &point) = default;
+    ~Point() = default;
 
     int getX() const { return _x; }
     int getY() const { return _y; }
@@ -27,7 +30,10 @@ public:
     void setY(int y) { _y = y; }
 };
 
+extern Point ORIGINE;
+
 Point operator+(const Point &p1, const Point &p2);
+bool operator==(const Point &p1, const Point &p2);
 
 Point directionToPoint(DIRECTION direction);
 DIRECTION pointToDirection(Point point);

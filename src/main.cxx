@@ -14,21 +14,21 @@ int main()
     sf::RenderWindow window(sf::VideoMode(largeurWindow, hauteurWindow), "SFML works!");
     sf::Event event;
 
-    Agent agent0Bleu{2, 2, EQUIPE::BLEU};
-    Agent agent0Rouge{4, 4, EQUIPE::ROUGE};
+    Agent* agent0Bleu = new Agent{2, 2, EQUIPE::BLEU};
+    Agent *agent0Rouge = new Agent{4, 4, EQUIPE::ROUGE};
     Manager manager{agent0Bleu, agent0Rouge};
 
     for (int i = 0; i < 50; ++i)
     {
         // system("clear");
-        manager.tour();
+        manager.tour(window);
 
         window.clear(sf::Color::Black);
         // manager.afficherCarte();
         manager.afficherSfml(window, largeurWindow, hauteurWindow);
 
         window.display();
-        std::this_thread::sleep_for(50ms);
+        std::this_thread::sleep_for(100ms);
     }
     // manager.afficherCarte();
 

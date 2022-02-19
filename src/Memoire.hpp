@@ -36,7 +36,8 @@ public:
             float depalcement,
             float renforcement,
             EQUIPE equipe);
-
+    Memoire(const Memoire &memoire) = default;
+    ~Memoire() = default;
     // Getter
     float getDivision() const { return _division; }
     float getDeplacement() const { return _deplacement; }
@@ -61,5 +62,8 @@ public:
 private:
     void correctionMemoire();
 };
+
+bool operator==(const Memoire &m1, const Memoire &m2);
+bool operator!=(const Memoire &m1, const Memoire &m2);
 
 #endif

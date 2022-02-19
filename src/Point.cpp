@@ -1,7 +1,15 @@
 #include "Point.hpp"
 
+Point ORIGINE{0, 0};
+
 /**
- * @fn Point::Point(int x, int y)
+ * @fn Point::Point()
+ * @brief Constructeur par défaut => Point origine.
+ */
+Point::Point() : Point{ORIGINE} {}
+
+/**
+ * @overload Point::Point(int x, int y)
  * @param int x - *Coordonnée x du point*
  * @param int y - *Coordonnée y du point*
  */
@@ -10,12 +18,26 @@ Point::Point(int x, int y) : _x(x), _y(y) {}
 /**
  * @fn Point operator+(const Point &p1, const Point &p2)
  * @brief Surcharge operateur + pour deux points.
+ *
+ * @return Point - *Nouveau correspondant à la somme*
  */
 Point operator+(const Point &p1, const Point &p2)
 {
     Point res{p1.getX() + p2.getX(),
               p1.getY() + p2.getY()};
     return res;
+}
+
+/**
+ * @fn Point operator==(const Point &p1, const Point &p2)
+ * @brief Surcharge operateur == pour deux points.
+ *
+ * @return bool - *Resultat de l'égalité des 2 points*
+ */
+bool operator==(const Point &p1, const Point &p2)
+{
+    return (p1.getX() == p2.getX() &&
+    p1.getY() == p2.getY());
 }
 
 /**

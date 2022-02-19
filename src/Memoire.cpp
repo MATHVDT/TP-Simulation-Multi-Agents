@@ -5,18 +5,18 @@
 
 #include "Memoire.hpp"
 
-const float Memoire::_epsilon = 1e-3;
+const float Memoire::_epsilon = 1e-5;
 
 /**
  * @fn Memoire::Memoire()
  * @brief Constructeur de la mémoire.
- * 
+ *
  * @param EQUIPE equipe - *Equipe de l'agent*
- * 
+ *
  * @details
  * Initialise des les valeurs _division/_deplacement/_renforcement
  * au même valeur.
- * 
+ *
  * @warning Les trois valeurs sont à 1./3., somme de la mémoire environ égale à 1 !
  * @todo Faire des opérateurs pour prendre en compte les aproximations des floats
  */
@@ -42,12 +42,12 @@ Memoire::Memoire(float division,
 /**
  * @fn float Memoire::getInfluence
  * @brief Calcul l'influence de l'agent sur celui-ci.
- * 
+ *
  * @param int differenceLevel - *Différence de level entre les 2sagents*
- * 
+ *
  * @details
  * Calcul l'influence de l'agent qui transmet sa mémoire en fonction de la différence de niveau.
- * 
+ *
  * Le taux d'influence suit une fonction affine : y = a * x + b
  * Taux d'influence :
  * Agent transmetteur +9 level / agent receveur => influence = 0.9
@@ -64,10 +64,10 @@ float Memoire::getInfluence(int differenceLevel)
 /**
  * @fn void Memoire::apprentissage(float influence, Memoire &memoire)
  * @brief
- * 
+ *
  * @param float influence - *Influence de la mémoire passé en paramètre*
  * @param const Memoire &memoire - *Mémoire sur laquelle on apprend*
- * 
+ *
  * @warning correctionMemoire est appelée
  */
 void Memoire::apprentissage(float influence, const Memoire &memoire)
@@ -91,13 +91,13 @@ void Memoire::apprentissage(float influence, const Memoire &memoire)
 /**
  * @fn void Memoire::correctionMemoire()
  * @brief Corrige les valeurs de la mémoire pour avoir une somme environ égale à 1.
- * 
+ *
  * @details
  * Les calculs des nouvelles valeurs de mémoire (division/deplacement/renforcement)
  * sont effectués et si delta = |1 - somme| < epsilon,
- * alors on essaye de corriger en rajoutant uniformement 
+ * alors on essaye de corriger en rajoutant uniformement
  * ce delta au 3 valeurs de mémoire.
- * @warning const float epsilon = 1e-3; 
+ * @warning const float epsilon = 1e-3;
  */
 void Memoire::correctionMemoire()
 {
@@ -153,4 +153,38 @@ Memoire &Memoire::operator=(const Memoire &memoire)
     this->_equipe = memoire._equipe;
 
     return *this;
+}
+
+/**
+ * @fn operator==(const Memoire &m1, const Memoire &m2)
+ * @brief Surcharge de l'opérateur == pour la class Mémoire
+ *
+ * @param const Memoire &m1
+ * @param const Memoire &m2
+ * @return true
+ * @return bool - *Résultat de l'égalité*
+ */
+bool operator==(const Memoire &m1, const Memoire &m2)
+{
+    return (
+        (std::abs(m1.getDivision() - m2.getDivision()) < Memoire::getEpsilon()) &&
+        (std::abs(m1.getDeplacement() - m2.getDeplacement()) < Memoire::getEpsilon()) &&
+        (std::abs(m1.getRenforcement() - m2.getRenforcement()) < Memoire::getEpsilon()) &&
+
+        (m1.getEquipe() == m2.getEquipe()) &&
+        (m1.getTraceMort() == m2.getTraceMort()));
+}
+
+/**
+ * @fn operator!=(const Memoire &m1, const Memoire &m2)
+ * @brief Surcharge de l'opérateur != pour la class Mémoire
+ *
+ * @param const Memoire &m1
+ * @param const Memoire &m2
+ * @return true
+ * @return bool - *Résultat de l'inégalité*
+ */
+bool operator!=(const Memoire &m1, const Memoire &m2)
+{
+    return !(m1 == m2);
 }

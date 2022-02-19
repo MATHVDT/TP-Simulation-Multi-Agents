@@ -38,7 +38,6 @@ all: $(OBJ)
 
 test : $(OBJTEST)
 	$(CXX) -o $(EXETEST) $^ $(LDFLAGS)
-	./$(EXETEST)
 
 $(DOSSIER)/%.o: %.cpp
 	@mkdir -p $(DOSSIER)
