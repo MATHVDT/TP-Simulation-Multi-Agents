@@ -170,5 +170,5 @@ bool operator==(const Memoire &m1, const Memoire &m2)
             m1.getDeplacement() == m2.getDeplacement() &&
             m1.getRenforcement() == m2.getRenforcement() &&
             m1.getEquipe() == m1.getEquipe() &&
-            m1.getTraceMort() == m2.getTraceMort() &&);
+            m1.getTraceMort() == m2.getTraceMort());
 }
