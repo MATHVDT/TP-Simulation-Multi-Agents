@@ -360,7 +360,7 @@ Agent *Agent::divisionAgent()
 {
     // Perte de la moitié des lvl de l'agent qui se divise
     this->_level /= 2;
-
+cout << _level<<endl;
     // Création de l'agent issue de la division
     Agent *agentClone = new Agent{*this};
 
