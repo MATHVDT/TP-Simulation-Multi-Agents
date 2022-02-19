@@ -342,6 +342,27 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
     return issue; // Retourne l'issue de l'attaque
 }
 
+
+/**
+ * @fn Agent *Agent::divisionAgent()
+ * @brief Divise un agent en en créant un nouveau.
+ * 
+ * @details
+ * Réduit le niveau de l'agent qui se divise par deux,
+ * et crée une copie de cette agent pour former le 
+ * nouvel agent. 
+ * 
+ * @return Agent* agentClone - *Agent cloné*
+ */
 Agent *Agent::divisionAgent()
 {
+    // Perte de la moitié des lvl de l'agent qui se divise
+    this->_level /= 2;
+
+    // Création de l'agent issue de la division
+    Agent *agentClone = new Agent{*this};
+    // Set état de naissance pour le nouvel agent
+    agentClone->_action = ACTION::NAISSANCEDIVISION;
+
+    return agentClone;
 }
