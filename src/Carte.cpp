@@ -49,6 +49,11 @@ void Carte::setAgent(Agent *agent)
     correctionPositionAgent(agent);
     int i = agent->getX();
     int j = agent->getY();
+
+    // Vérification de la disponibilité de la case
+    if( _grilleAgents[i][j])
+    throw Carte::ExceptionCaseDejaOccupe();
+
     _grilleAgents[i][j] = agent;
 }
 

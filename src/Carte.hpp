@@ -1,6 +1,8 @@
 #ifndef CARTE_HPP
 #define CARTE_HPP
 
+#include <exception>
+
 #include "Agent.hpp"
 #include "Direction.hpp"
 #include "Point.hpp"
@@ -32,6 +34,11 @@ public:
     void suppressionAgent(Agent *agentCour);
 
     void correctionPositionAgent(Agent *agent);
+
+public:
+    class ExceptionCaseDejaOccupe : public exception
+    {
+    };
 };
 
 #endif
