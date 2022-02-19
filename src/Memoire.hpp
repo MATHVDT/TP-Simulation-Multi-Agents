@@ -64,5 +64,6 @@ private:
 };
 
 bool operator==(const Memoire &m1, const Memoire &m2);
+bool operator!=(const Memoire &m1, const Memoire &m2);
 
 #endif

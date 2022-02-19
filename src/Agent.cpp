@@ -351,6 +351,8 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
  * Réduit le niveau de l'agent qui se divise par deux,
  * et crée une copie de cette agent pour former le 
  * nouvel agent. 
+ * Le nouvel agent à la même position, même mémoire,
+ * même level que l'agent parent. 
  * 
  * @return Agent* agentClone - *Agent cloné*
  */
@@ -361,6 +363,7 @@ Agent *Agent::divisionAgent()
 
     // Création de l'agent issue de la division
     Agent *agentClone = new Agent{*this};
+
     // Set état de naissance pour le nouvel agent
     agentClone->_action = ACTION::NAISSANCEDIVISION;
 

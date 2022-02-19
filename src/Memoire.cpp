@@ -5,7 +5,7 @@
 
 #include "Memoire.hpp"
 
-const float Memoire::_epsilon = 1e-3;
+const float Memoire::_epsilon = 1e-5;
 
 /**
  * @fn Memoire::Memoire()
@@ -166,9 +166,25 @@ Memoire &Memoire::operator=(const Memoire &memoire)
  */
 bool operator==(const Memoire &m1, const Memoire &m2)
 {
-    return (m1.getDivision() == m2.getDivision() &&
-            m1.getDeplacement() == m2.getDeplacement() &&
-            m1.getRenforcement() == m2.getRenforcement() &&
-            m1.getEquipe() == m1.getEquipe() &&
-            m1.getTraceMort() == m2.getTraceMort());
+    return (
+        (std::abs(m1.getDivision() - m2.getDivision()) < Memoire::getEpsilon()) &&
+        (std::abs(m1.getDeplacement() - m2.getDeplacement()) < Memoire::getEpsilon()) &&
+        (std::abs(m1.getRenforcement() - m2.getRenforcement()) < Memoire::getEpsilon()) &&
+
+        (m1.getEquipe() == m2.getEquipe()) &&
+        (m1.getTraceMort() == m2.getTraceMort()));
+}
+
+/**
+ * @fn operator!=(const Memoire &m1, const Memoire &m2)
+ * @brief Surcharge de l'opérateur != pour la class Mémoire
+ *
+ * @param const Memoire &m1
+ * @param const Memoire &m2
+ * @return true
+ * @return bool - *Résultat de l'inégalité*
+ */
+bool operator!=(const Memoire &m1, const Memoire &m2)
+{
+    return !(m1 == m2);
 }

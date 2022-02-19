@@ -33,7 +33,7 @@ private:
 public:
     Agent(int x, int y, EQUIPE equipe);
     Agent(Point position, EQUIPE equipe);
-    Agent(const Agent& agent) = default;
+    Agent(const Agent &agent) = default;
 
     // Getter
     Point getPosition() const { return _position; }
@@ -62,16 +62,13 @@ public:
 
     Agent &operator=(const Agent &agent);
 
-    // Déplacement
-    void deplacer(DIRECTION dir);
-
-private:
     ACTION choixAction(int levelEnnemis, int nbDirPossible);
 
     // Division
-    Agent * divisionAgent();
+    Agent *divisionAgent();
 
     // Déplacement
+    void deplacer(DIRECTION dir);
     DIRECTION choixDirectionDeplacement(bool directionsPossibles[6]);
 
     // Combat

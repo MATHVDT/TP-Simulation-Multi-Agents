@@ -104,76 +104,77 @@ TEST_CASE("Deplacement agent")
   }
 }
 
+TEST_CASE("Operateur == et != mémoire")
+{
+
+  float eps = Memoire::getEpsilon();
+
+  Memoire m1{EQUIPE::BLEU};
+
+  // Vérification état de la mémoire
+  REQUIRE(m1.getDivision() == Approx(1. / 3.).epsilon(eps));
+  REQUIRE(m1.getDeplacement() == Approx(1. / 3.).epsilon(eps));
+  REQUIRE(m1.getRenforcement() == Approx(1. / 3.).epsilon(eps));
+
+  // Test égalité vraie
+  REQUIRE(m1 == Memoire{EQUIPE::BLEU});
+
+  // Test égalité fausse
+  REQUIRE_FALSE(m1 == Memoire{EQUIPE::ROUGE});
+  REQUIRE_FALSE(m1 == (Memoire{0.2, 0.2, 0.6, EQUIPE::BLEU}));
+
+  // Test inégalité vraie
+  REQUIRE(m1 != Memoire{EQUIPE::ROUGE});
+  REQUIRE(m1 != (Memoire{0.2, 0.2, 0.6, EQUIPE::BLEU}));
+
+  // Test inégalié fausse
+  REQUIRE_FALSE(m1 != Memoire{EQUIPE::BLEU});
+}
+
 TEST_CASE("Apprentissage mémoire")
 {
   float eps = Memoire::getEpsilon();
 
-  Memoire m1{EQUIPE::BLEU};
-  Memoire m2{0.2, 0.2, 0.6, EQUIPE::BLEU};
+  EQUIPE equipeMemoire = EQUIPE::BLEU;
+
+  Memoire m1{equipeMemoire};
+  Memoire m2{0.2, 0.2, 0.6, equipeMemoire};
+
+  // Vérification état de la mémoire
+  REQUIRE(m1 == (Memoire{1. / 3., 1. / 3., 1. / 3., equipeMemoire}));
+
+  REQUIRE(m2 == (Memoire{0.2, 0.2, 0.6, equipeMemoire}));
 
   SECTION("Influence de 0.5")
   {
-    // Vérification état de la mémoire
-    REQUIRE(m1.getDivision() == Approx(1. / 3.).epsilon(eps));
-    REQUIRE(m1.getDeplacement() == Approx(1. / 3.).epsilon(eps));
-    REQUIRE(m1.getRenforcement() == Approx(1. / 3.).epsilon(eps));
-
-    REQUIRE(m2.getDivision() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getDeplacement() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getRenforcement() == Approx(0.6).epsilon(eps));
 
     // m1 apprend de m2 avec une influence de 0.5
     m1.apprentissage(0.5, m2);
 
     // Vérification de l'apprentissage
-    REQUIRE(m1.getDivision() == Approx(0.267).epsilon(eps));
-    REQUIRE(m1.getDeplacement() == Approx(0.267).epsilon(eps));
-    REQUIRE(m1.getRenforcement() == Approx(0.467).epsilon(eps));
+    REQUIRE(m1 == (Memoire{0.266667, 0.266667, 0.466667, equipeMemoire}));
 
     // Vérifiaction que la mémoire de m2 n'a pas été altéré
-    REQUIRE(m2.getDivision() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getDeplacement() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getRenforcement() == Approx(0.6).epsilon(eps));
+    REQUIRE(m2 == (Memoire{0.2, 0.2, 0.6, equipeMemoire}));
   }
 
   SECTION("Influence de 1") // Pas possible d'avoir une influence >= 1
   {
-    // Vérification état de la mémoire
-    REQUIRE(m1.getDivision() == Approx(1. / 3.).epsilon(eps));
-    REQUIRE(m1.getDeplacement() == Approx(1. / 3.).epsilon(eps));
-    REQUIRE(m1.getRenforcement() == Approx(1. / 3.).epsilon(eps));
-
-    REQUIRE(m2.getDivision() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getDeplacement() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getRenforcement() == Approx(0.6).epsilon(eps));
-
     // m1 apprend de m2 avec une influence de 1
     m1.apprentissage(1, m2);
 
     // Vérification de l'apprentissage
-    REQUIRE(m1.getDivision() == Approx(0.200).epsilon(eps));
-    REQUIRE(m1.getDeplacement() == Approx(0.200).epsilon(eps));
-    REQUIRE(m1.getRenforcement() == Approx(0.600).epsilon(eps));
+    REQUIRE(m1 == (Memoire{0.2, 0.2, 0.6, equipeMemoire}));
   }
 
   SECTION("Influence de 0") // Pas possible d'avoir une influence <= 0
   {
     // Vérification état de la mémoire
-    REQUIRE(m1.getDivision() == Approx(1. / 3.).epsilon(eps));
-    REQUIRE(m1.getDeplacement() == Approx(1. / 3.).epsilon(eps));
-    REQUIRE(m1.getRenforcement() == Approx(1. / 3.).epsilon(eps));
-
-    REQUIRE(m2.getDivision() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getDeplacement() == Approx(0.2).epsilon(eps));
-    REQUIRE(m2.getRenforcement() == Approx(0.6).epsilon(eps));
-
     // m1 apprend de m2 avec une influence de 0
     m1.apprentissage(0, m2);
 
     // Vérification de l'apprentissage
-    REQUIRE(m1.getDivision() == Approx(0.3333).epsilon(eps));
-    REQUIRE(m1.getDeplacement() == Approx(0.333).epsilon(eps));
-    REQUIRE(m1.getRenforcement() == Approx(0.333).epsilon(eps));
+    REQUIRE(m1 == (Memoire{1. / 3., 1. / 3., 1. / 3., equipeMemoire}));
   }
 }
 
@@ -208,31 +209,40 @@ TEST_CASE("Partage de la mémoire à un voisinage")
     agentCentral.partagerMemoireAuVoisinage(voisinage);
 
     // Vérification de l'apprentissage -> Même niveau donc change pas
-    REQUIRE((*allie1).getMemoire().getDivision() == Approx(0.3333).epsilon(eps));
-    REQUIRE((*allie1).getMemoire().getDeplacement() == Approx(0.333).epsilon(eps));
-    REQUIRE((*allie1).getMemoire().getRenforcement() == Approx(0.333).epsilon(eps));
+    REQUIRE((*allie1).getMemoire() == (Memoire{1. / 3., 1. / 3., 1. / 3., allies}));
   }
 }
 
 TEST_CASE("Division agent")
 {
-  float eps = Memoire::getEpsilon();
-
   // Création d'un agent
   const Point positionAgent{4, 4};
   EQUIPE equipeAgent = EQUIPE::BLEU;
 
   Agent agent{positionAgent, equipeAgent};
 
+  // Memoire de test
+  Memoire memoire{equipeAgent};
+
   // Test agent bien crée
   REQUIRE(agent.getPosition() == positionAgent);
   REQUIRE(agent.getEquipe() == equipeAgent);
+  REQUIRE(agent.getLevel() == 1);
 
   // Vérification état de la mémoire
-  REQUIRE(agent.getMemoire().getDivision() == Approx(1. / 3.).epsilon(eps));
-  REQUIRE(agent.getMemoire().getDeplacement() == Approx(1. / 3.).epsilon(eps));
-  REQUIRE(agent.getMemoire().getRenforcement() == Approx(1. / 3.).epsilon(eps));
+  REQUIRE(agent.getMemoire() == memoire);
 
+  Agent *agentClone = agent.divisionAgent();
+
+  // Vérification du clone
+  REQUIRE(memoire == agentClone->getMemoire());
+  REQUIRE(agent.getLevel() == agentClone->getLevel());
+  REQUIRE(agent.getPosition() == agent.getPosition());
+
+  // Vérification de l'agent qui se divise
+  REQUIRE(agent.getPosition() == positionAgent);
+  REQUIRE(agent.getEquipe() == equipeAgent);
+  REQUIRE(agent.getLevel() == (agent.getLevel() / 2));
 }
 
 // TEST_CASE("Affichage carte")
