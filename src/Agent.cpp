@@ -130,6 +130,21 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
                                         levelEnnemis, levelAmis,
                                         direction);
 
+    // Agent vient d'être cloné
+    if (this->_action == ACTION::NAISSANCEDIVISION)
+    {
+        // Problème ie qu'un agent c'est divisé sans qu'il y ait de place
+        if (nbDirPossible == 0)
+            throw Agent::ExceptionAucuneDirectionsLibres();
+
+        // Dash du clone sur une case libre
+        deplacementApresNaissance(direction);
+        // Le clone n'agira pas au prochain tour
+        this->_action == ACTION::INACTIF;
+        // Retourne aucun clone
+        return agentClone;
+    }
+
     // Choix action agent
     this->_action = choixAction(levelEnnemis, nbDirPossible);
 
@@ -250,7 +265,7 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
     }
     else
     { // Pas d'ennemis adjacents, Tu peux faire ta popote
-
+        // Normalement ne devrait pas être utile A MODIFIER 
         if (this->_action == ACTION::NAISSANCEDIVISION)
         { // Agent vient d'apparaitre => pas d'action
             actionChoisie = ACTION::INACTIF;
@@ -373,4 +388,18 @@ Agent *Agent::divisionAgent()
     agentClone->_action = ACTION::NAISSANCEDIVISION;
 
     return agentClone;
+}
+
+/**
+ * @fn Agent::deplacementApresNaissance(bool direction[6])
+ * @brief Déplace un agent après sa naissance. 
+ * 
+ * @param bool direction[6] 
+ */
+void Agent::deplacementApresNaissance(bool direction[6])
+{
+    // Choix direction de déplacement
+    DIRECTION directionChoisie = choixDirectionDeplacement(direction);
+    // Déplacement de l'agent
+    deplacer(directionChoisie);
 }

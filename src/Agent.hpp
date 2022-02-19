@@ -4,7 +4,10 @@
  */
 #ifndef AGENT_HPP
 #define AGENT_HPP
+
 #include <iostream>
+#include <exception>
+
 #include "Direction.hpp"
 #include "Memoire.hpp"
 
@@ -48,7 +51,6 @@ public:
     // Setter
     void setX(int x) { _position.setX(x); }
     void setY(int y) { _position.setY(y); }
-    void gagneLevel(int nbLevel = 1) { _level += nbLevel; }
 
     void partagerMemoireAuVoisinage(Agent *voisinage[6]);
     void partagerMemoireACopain(Agent *copainAdjacent);
@@ -67,6 +69,7 @@ public:
 
     // Division
     Agent *divisionAgent();
+    void deplacementApresNaissance(bool direction[6]);
 
     // Déplacement
     void deplacer(DIRECTION dir);
@@ -77,6 +80,13 @@ public:
 
     // Renforcement
     // Pour l'instant juste incrementation level...
+    void gagneLevel(int nbLevel = 1) { _level += nbLevel; }
+
+    // Classe Exception
+public:
+    class ExceptionAucuneDirectionsLibres : public exception
+    {
+    };
 };
 
 enum class ACTION

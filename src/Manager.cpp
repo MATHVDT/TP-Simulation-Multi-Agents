@@ -3,7 +3,9 @@
 Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
     : _listAgentBleu{agent0Bleu},
       _listAgentRouge{agent0Rouge},
-      _carte{}
+      _carte{},
+      nbAgentBleu(1), nbAgentRouge(1),
+      nbAgentBleuClone(0), nbAgentRougeClone(0)
 {
     _carte.setAgent(agent0Bleu->getX(),
                     agent0Bleu->getY(),
@@ -23,7 +25,6 @@ Manager::~Manager()
  */
 void Manager::tour()
 {
-
     // Indice de parcours des vecteurs des agents
     int iAgentBleu = 0;
     int iAgentRouge = 0;
@@ -46,6 +47,7 @@ void Manager::tour()
         // Action d'un agent
         actionAgent(agentCour);
 
+        // Enlever l'agent de la liste s'il est mort
         updateListAgent(agentCour, iAgentBleu, iAgentRouge);
     }
 
@@ -101,9 +103,10 @@ void Manager::actionAgent(Agent *agent)
 
     // Récupération de l'état de l'agent
     agentVivant = !(agent->getAction() == ACTION::MORT);
+    ACTION agentAction = agent->getAction();
 
     // Agent toujours en vie, on le tient à jour dans la carte
-    if (agentVivant)
+    if (agentAction == ACTION::DEPLACEMENT)
     {
         // Nouvelle posistion de l'agent
         Point pointDestinationAgent = agent->getPosition();
@@ -114,15 +117,22 @@ void Manager::actionAgent(Agent *agent)
         // Mise à des grille de la carte
         _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
     }
+    else if (agentAction == ACTION::DIVISION)
+    {
+        if (agentClone != nullptr)
+        {
+            // Action de l'agent qui sera une DEPLACEMENT
+            // agentClone->agir(voisinageAgentVoisins, voisinageAgentCases);
+        }
+    }
     else // Agent mort
     {
+        // Rien c'est pas ici que l'on gére ça,
+        // Car il faut changer les indices dans
+        // les vecteurs et le retirer de la carte
     }
 
-    // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
-    // Verifier s'il n'a pas fait de petit
-
-    // _carte.afficherCarte();
-    // std::this_thread::sleep_for(50ms);
+    // std::this_thread::sleep_for(10ms);
 }
 
 void Manager::afficherCarte()
