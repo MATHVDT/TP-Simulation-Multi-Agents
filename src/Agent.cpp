@@ -29,8 +29,8 @@ Agent::Agent(Point position, EQUIPE equipe)
  * @fn void Agent::deplacer(Direction dir)
  * @brief Deplace l'agent suivant une direction.
  * @param DIRECTION dir - *Direction de déplacement*
- * 
- * @warning Ne vérifie pas s'il sort de la map, 
+ *
+ * @warning Ne vérifie pas s'il sort de la map,
  * et s'il y a de la place.
  */
 void Agent::deplacer(DIRECTION direction)
@@ -45,11 +45,11 @@ void Agent::deplacer(DIRECTION direction)
 /**
  * @fn void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
  * @brief Partage la mémoire aux copains adjacents.
- * 
+ *
  * @param Agent * voisinage[6] - *Tableau contenant les agents adjacents*
- * 
+ *
  * @details
- * Parcours tous ses voisins et partage sa mémoire avec les agents 
+ * Parcours tous ses voisins et partage sa mémoire avec les agents
  * de la même équipe.
  */
 void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
@@ -70,9 +70,9 @@ void Agent::partagerMemoireAuVoisinage(Agent *voisinage[6])
 /**
  * @fn void Agent::partagerMemoireACopain(Agent * copainAdjacent)
  * @brief Partage sa mémoire à son copain.
- * 
+ *
  * @param Agent * copainAdjacent - *Agent adjacent de la même équipe*
- *  
+ *
  * @warning Il peut ne pas y avoir d'agent adjacent => nullptr.
  */
 void Agent::partagerMemoireACopain(Agent *copainAdjacent)
@@ -90,13 +90,13 @@ void Agent::partagerMemoireACopain(Agent *copainAdjacent)
 /**
  * @fn void Agent::aquerirMemoire(int levelAgentTransmetteur, Memoire &memoire)
  * @brief Apprend en fonction du level de l'agent transmetteur de mémoire.
- * 
+ *
  * @param int levelAgentTransmetteur - *Level de l'agent qui transmet sa mémoire*
  * @param const Memoire &memoire - *Memoire de l'agent qui transmet sa mémoire*
  *
  *  @details
  * Apprend de la mémoire d'un autre agent.
- * L'influence de l'agent transmetteur dépend de sa différence 
+ * L'influence de l'agent transmetteur dépend de sa différence
  * de level par rapport à l'agent qui reçoit la mémoire.
  */
 void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
@@ -111,7 +111,7 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
 /**
  * @fn Point Agent::agir(Agent *voisinage[6])
  * @brief Action de l'agent dans le tour.
- * 
+ *
  * @param Agent *voisinage[6] - *Voisinage de l'agent*
  */
 Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6])
@@ -129,7 +129,6 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
 
     // choix action agent
     this->_action = choixAction(levelEnnemis, nbDirPossible);
-    // this->_action = ACTION::DEPLACEMENT;
 
     if (this->_action == ACTION::ESTATTAQUE)
     {
@@ -171,7 +170,7 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
 /**
  * @fn Agent::choixDirectionDeplacement
  * @brief Choisie une direction de déplacement en fonction des possibilités.
- * 
+ *
  * @param bool directionsPossibles[6]
  */
 DIRECTION Agent::choixDirectionDeplacement(bool directionsPossibles[6])
@@ -198,7 +197,7 @@ DIRECTION Agent::choixDirectionDeplacement(bool directionsPossibles[6])
 /**
  * @overload Agent::operator=
  * @brief Surcharge de l'opérateur d'affectation.
- * 
+ *
  * @return Agent &
  */
 Agent &Agent::operator=(const Agent &agent)
@@ -224,15 +223,17 @@ Agent &Agent::operator=(const Agent &agent)
 /**
  * @fn Agent::choixAction()
  * @brief Retourne l'action choisie en fonction de la mémoire et environnement.
- * 
+ *
  * @param int levelEnnemis - *Somme des levels des ennemis adjacents*
  * @param int nbDirPossible - *Nb directions libres*
- * 
- * @warning 
+ *
+ * @warning
  * S'il n'a aucune directions libres alors la *DIVISION* et le
- * *DEPLACEMENT* sont *BLOQUE*. 
- * 
- * @return ACTION actionChoisie (ESTATTAQUE, DIVISION, DEPLACEMENT, RENFORCEMENT, BLOQUE)
+ * *DEPLACEMENT* sont *BLOQUE*.
+ * Si l'agent vient d'apparaitre, *ie _action = NAISSANCEDIVISION*
+ * alors il n'agit pas ce tour là.
+ *
+ * @return ACTION actionChoisie (ESTATTAQUE, DIVISION, DEPLACEMENT, RENFORCEMENT, BLOQUE, INACTIF)
  */
 ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
 {
@@ -243,25 +244,33 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
     {
         actionChoisie = ACTION::ESTATTAQUE;
     }
-    else // Pas d'ennemis adjacents, Tu peux faire ta popote
-    {
-        if (choix < _memoire.getDivision())
-        {                          // Division de l'agent
-            if (nbDirPossible > 0) // Il y a de la place pour se diviser
-                actionChoisie = ACTION::DIVISION;
-            else // Pas de place pour ce diviser
-                actionChoisie = ACTION::BLOQUE;
+    else
+    { // Pas d'ennemis adjacents, Tu peux faire ta popote
+
+        if (this->_action != ACTION::NAISSANCEDIVISION)
+        { // Agent vient d'apparaitre => pas d'action
+            actionChoisie = ACTION::INACTIF;
         }
-        else if (choix < _memoire.getDivision() + _memoire.getDeplacement())
-        {                          // Deplacement de l'agent
-            if (nbDirPossible > 0) // Il est possible de se déplacer
-                actionChoisie = ACTION::DEPLACEMENT;
-            else // Il n'est pas possible de s déplacer
-                actionChoisie = ACTION::BLOQUE;
-        }
-        else // choix restant -> Renforcement
-        {    // Renforcement de l'agent
-            actionChoisie = ACTION::RENFORCEMENT;
+        else
+        { // Agent ne vient pas d'apparaitre à ce tour
+            if (choix < _memoire.getDivision())
+            {                          // Division de l'agent
+                if (nbDirPossible > 0) // Il y a de la place pour se diviser
+                    actionChoisie = ACTION::DIVISION;
+                else // Pas de place pour ce diviser
+                    actionChoisie = ACTION::BLOQUE;
+            }
+            else if (choix < _memoire.getDivision() + _memoire.getDeplacement())
+            {                          // Deplacement de l'agent
+                if (nbDirPossible > 0) // Il est possible de se déplacer
+                    actionChoisie = ACTION::DEPLACEMENT;
+                else // Il n'est pas possible de s déplacer
+                    actionChoisie = ACTION::BLOQUE;
+            }
+            else // choix restant -> Renforcement
+            {    // Renforcement de l'agent
+                actionChoisie = ACTION::RENFORCEMENT;
+            }
         }
     }
 
@@ -271,7 +280,7 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
 /**
  * @fn Agent::examenVoisinage
  * @brief Analyse le voisinage.
- * 
+ *
  * @param  Agent *voisinageAgentVoisins[6]
  * @param int & levelEnnemis
  * @param int & levelAmis
@@ -312,10 +321,10 @@ int Agent::examenVoisinage(Agent *voisinageAgentVoisins[6],
 /**
  * @fn ACTION Agent::issueAttaque
  * @brief Donne l'état de l'agent après l'attaque.
- * 
+ *
  * @param int levelEnnemis -*Somme des levels des ennemis*
  * @param int levelAmis - *Somme des levels des amis + de l'agent*
- * 
+ *
  * @return ACTION *(MORT, SURVIVANT)*
  */
 ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
@@ -325,14 +334,13 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
     ACTION issue;
 
     if (deltaLevel <= 0) // Ennemis plus fort
-    {                   // Agent meurt
+    {                    // Agent meurt
         issue = ACTION::MORT;
     }
     else // Le pouvoir de l'amitié : Agent + copains plus fort
     {    // Agent survit
         issue = ACTION::SURVIVANT;
     }
-   
 
     return issue; // Retourne l'issue de l'attaque
 }
