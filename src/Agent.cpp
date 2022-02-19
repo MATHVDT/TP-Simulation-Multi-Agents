@@ -25,18 +25,6 @@ Agent::Agent(Point position, EQUIPE equipe)
     : _position(position), _level(1), _memoire(equipe),
       _action(ACTION::INACTIF) {}
 
-
-// /**
-//  * @overload Agent::Agent(const Agent &agent)
-//  * @brief Constructeur par copie.
-//  * 
-//  * @param const Agent& agent
-//  */
-// Agent::Agent(const Agent &agent)
-// {
-    
-// }
-
 /**
  * @fn void Agent::deplacer(Direction dir)
  * @brief Deplace l'agent suivant une direction.
@@ -256,7 +244,7 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
     else
     { // Pas d'ennemis adjacents, Tu peux faire ta popote
 
-        if (this->_action != ACTION::NAISSANCEDIVISION)
+        if (this->_action == ACTION::NAISSANCEDIVISION)
         { // Agent vient d'apparaitre => pas d'action
             actionChoisie = ACTION::INACTIF;
         }
