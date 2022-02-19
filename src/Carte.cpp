@@ -39,14 +39,12 @@ void Carte::setAgent(int i, int j, Agent *agent)
  * @fn Carte::setAgent(Agent *agent)
  * @brief Ajoute un agent dans la carte.
  *
- * @warning La position de l'agent est corrigée
- * si l'agent est en dehors de la carte.
+ * @warning La position de l'agent est supposée correcte
  *
  * @param Agent *agent
  */
 void Carte::setAgent(Agent *agent)
 {
-    correctionPositionAgent(agent);
     int x = agent->getX();
     int y = agent->getY();
 

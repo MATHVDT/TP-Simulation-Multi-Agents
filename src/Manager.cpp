@@ -9,18 +9,18 @@ Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
     _listAgents.push_back(agent0Rouge);
     _nbAgents += 2;
 
-    _carte.setAgent(agent0Bleu->getX(),
-                    agent0Bleu->getY(),
+    _carte.setAgent(agent0Bleu->getY(),
+                    agent0Bleu->getX(),
                     agent0Bleu);
-    _carte.setAgent(agent0Rouge->getX(),
-                    agent0Rouge->getY(),
+    _carte.setAgent(agent0Rouge->getY(),
+                    agent0Rouge->getX(),
                     agent0Rouge);
 
-    _carte.setCase(agent0Bleu->getX(),
-                   agent0Bleu->getY(),
+    _carte.setCase(agent0Bleu->getY(),
+                   agent0Bleu->getX(),
                    agent0Bleu->getEquipe());
-    _carte.setCase(agent0Rouge->getX(),
-                   agent0Rouge->getY(),
+    _carte.setCase(agent0Rouge->getY(),
+                   agent0Rouge->getX(),
                    agent0Rouge->getEquipe());
 }
 
@@ -57,6 +57,9 @@ void Manager::tour()
 
         // Enlever l'agent de la liste s'il est mort
         updateListAgent(agentCour, iAgent);
+
+        //         _carte.afficherCarte();
+        // std::this_thread::sleep_for(50ms);
     }
 }
 
@@ -74,8 +77,7 @@ void Manager::tour()
  */
 void Manager::actionAgent(Agent *agent)
 {
-    // Par défaut on ne retire pas d'agent => agent reste en vie
-    bool agentVivant = true;
+
     // Agent cloné s'il y a division
     Agent *agentClone = nullptr;
 
@@ -96,17 +98,15 @@ void Manager::actionAgent(Agent *agent)
     }
     catch (const std::exception &e)
     {
-        std::cerr << e.what() << "\n\n\n\n\n";
+        std::cerr << e.what() << "\n\n";
     }
 
-    // Récupération de l'état de l'agent
-    agentVivant = !(agent->getAction() == ACTION::MORT);
+    // Récupération de l'action de l'agent
     ACTION agentAction = agent->getAction();
 
     // Agent toujours en vie, on le tient à jour dans la carte
     if (agentAction == ACTION::DEPLACEMENT)
     {
-
         // Correction de la position de l'agent dans la carte (bord de la map)
         _carte.correctionPositionAgent(agent);
 
@@ -129,13 +129,17 @@ void Manager::actionAgent(Agent *agent)
             _listAgents.push_back(agentClone);
 
             // Placement dans la carte
-            _carte.setAgent(agentClone->getX(),
-                            agentClone->getY(),
+            _carte.setAgent(agentClone->getY(),
+                            agentClone->getX(),
                             agentClone);
 
-            _carte.setCase(agentClone->getX(),
-                           agentClone->getY(),
+            _carte.setCase(agentClone->getY(),
+                           agentClone->getX(),
                            agentClone->getEquipe());
+        }
+        else
+        {
+            cerr << "DIVISION sans crée d'agent !!!" << endl;
         }
     }
     else // Agent mort
@@ -144,9 +148,6 @@ void Manager::actionAgent(Agent *agent)
         // Car il faut changer les indices dans
         // les vecteurs et le retirer de la carte
     }
-
-    _carte.afficherCarte();
-    std::this_thread::sleep_for(100ms);
 }
 
 void Manager::afficherCarte()
