@@ -116,6 +116,9 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
  */
 Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6])
 {
+    // Agent à renvoyer, s'il y a une division
+    Agent *agentClone = nullptr;
+
     // Level general des equipes
     int levelEnnemis = 0;
     int levelAmis = this->_level;
@@ -133,26 +136,27 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
     if (this->_action != ACTION::INACTIF)
     { // Si l'agent est actif
         if (this->_action == ACTION::ESTATTAQUE)
-        { // Attaque sur l'agent
+        {
             // ATTAQUE En fct de l'environnement (levels...)
             this->_action = issueAttaque(levelEnnemis, levelAmis);
         }
-        else
+        else // Agent pas attaqué
         {
-
             if (this->_action == ACTION::DIVISION)
             {
+                agentClone = this->divisionAgent();
             }
             if (this->_action == ACTION::DEPLACEMENT)
             {
                 // Choix direction de déplacement
                 DIRECTION directionChoisie = choixDirectionDeplacement(direction);
-                deplacer(directionChoisie); // Déplacement de l'agent
+                // Déplacement de l'agent
+                deplacer(directionChoisie);
             }
             if (this->_action == ACTION::RENFORCEMENT)
             {
                 // Gagne un niveau
-                ++_level;
+                this->gagneLevel();
             }
             if (this->_action == ACTION::BLOQUE)
             {
@@ -161,7 +165,7 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
         }
 
     } // Je crois que le retour sert a rien
-    return new Agent{*this};
+    return agentClone;
 }
 
 /**
