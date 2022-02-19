@@ -33,6 +33,7 @@ public:
 extern Point ORIGINE;
 
 Point operator+(const Point &p1, const Point &p2);
+bool operator==(const Point &p1, const Point &p2);
 
 Point directionToPoint(DIRECTION direction);
 DIRECTION pointToDirection(Point point);

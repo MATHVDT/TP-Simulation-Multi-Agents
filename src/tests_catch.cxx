@@ -10,18 +10,16 @@
 #include "Memoire.hpp"
 #include "Carte.hpp"
 
-
 TEST_CASE("Test point")
 {
-  Point p1{4,5};
-  Point p2{1,2};
+  Point p1{4, 5};
+  Point p2{1, 2};
 
- Point p3 =  p1 + p2;
+  Point p3 = p1 + p2;
 
   REQUIRE(p3.getX() == 5);
   REQUIRE(p3.getY() == 7);
 }
-
 
 TEST_CASE("Deplacement agent")
 {
@@ -216,6 +214,27 @@ TEST_CASE("Partage de la mémoire à un voisinage")
   }
 }
 
+TEST_CASE("Division agent")
+{
+  float eps = Memoire::getEpsilon();
+
+  // Création d'un agent
+  const Point positionAgent{4, 4};
+  EQUIPE equipeAgent = EQUIPE::BLEU;
+
+  Agent agent{positionAgent, equipeAgent};
+
+  // Test agent bien crée
+  REQUIRE(agent.getPosition() == positionAgent);
+  REQUIRE(agent.getEquipe() == equipeAgent);
+
+  // Vérification état de la mémoire
+  REQUIRE(agent.getMemoire().getDivision() == Approx(1. / 3.).epsilon(eps));
+  REQUIRE(agent.getMemoire().getDeplacement() == Approx(1. / 3.).epsilon(eps));
+  REQUIRE(agent.getMemoire().getRenforcement() == Approx(1. / 3.).epsilon(eps));
+
+}
+
 // TEST_CASE("Affichage carte")
 // {
 // 	Carte carte{};
@@ -253,7 +272,6 @@ TEST_CASE("Partage de la mémoire à un voisinage")
 //   REQUIRE(voisinage[3] == EQUIPE::NEUTRE);
 //   REQUIRE(voisinage[4] == EQUIPE::NEUTRE);
 //   REQUIRE(voisinage[5] == EQUIPE::NEUTRE);
-
 
 // 	//test de deplacement unitaire de l'agent
 // 	Point origine{5,5};
