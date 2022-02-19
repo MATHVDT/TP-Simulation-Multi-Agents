@@ -4,8 +4,8 @@ Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
     : _listAgentBleu{agent0Bleu},
       _listAgentRouge{agent0Rouge},
       _carte{},
-      nbAgentBleu(1), nbAgentRouge(1),
-      nbAgentBleuClone(0), nbAgentRougeClone(0)
+      _nbAgentBleu(1), _nbAgentRouge(1),
+      _nbAgentBleuClone(0), _nbAgentRougeClone(0)
 {
     _carte.setAgent(agent0Bleu->getX(),
                     agent0Bleu->getY(),
@@ -25,6 +25,9 @@ Manager::~Manager()
  */
 void Manager::tour()
 {
+    _nbAgentBleu = (int)_listAgentBleu.size();
+    _nbAgentRouge = (int)_listAgentRouge.size();
+
     // Indice de parcours des vecteurs des agents
     int iAgentBleu = 0;
     int iAgentRouge = 0;
@@ -32,8 +35,8 @@ void Manager::tour()
     Agent *agentCour = nullptr;
 
     // Pour chaque agent
-    while (iAgentBleu < (int)_listAgentBleu.size() &&
-           iAgentRouge < (int)_listAgentRouge.size())
+    while (iAgentBleu < _nbAgentBleu &&
+           iAgentRouge < _nbAgentRouge)
     {
         // 1 chance sur 2 de choisir un agent d'une équipe
         if (rand() % 2 == 0)
@@ -55,13 +58,13 @@ void Manager::tour()
     // Il faut faire agir tous les agents de l'autre équipe qui n'ont pas agit
 
     // Pour les agents Bleu qui n'ont pas encore agit
-    while (iAgentBleu < (int)_listAgentBleu.size())
+    while (iAgentBleu < _nbAgentBleu)
     {
         actionAgent(_listAgentBleu[iAgentBleu]);
         ++iAgentBleu;
     }
     // Pour les agents Rouge qui n'ont pas encore agit
-    while (iAgentRouge < (int)_listAgentRouge.size())
+    while (iAgentRouge < _nbAgentRouge)
     {
         actionAgent(_listAgentRouge[iAgentRouge]);
         ++iAgentRouge;
@@ -182,9 +185,15 @@ void Manager::updateListAgent(Agent *agentCour,
 
         // suppression dans les vecteur
         if (agentBleuChoisi)
+        {
             _listAgentBleu.erase(_listAgentBleu.begin() + iAgentBleu);
+            --_nbAgentBleu;
+        }
         else
+        {
             _listAgentRouge.erase(_listAgentRouge.begin() + iAgentRouge);
+            --_nbAgentRouge;
+        }
 
         // delete agentCour ???
         delete agentCour;

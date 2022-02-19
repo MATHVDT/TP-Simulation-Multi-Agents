@@ -18,13 +18,14 @@ private:
     vector<Agent*> _listAgentBleu;
     vector<Agent*> _listAgentRouge;
 
-    int nbAgentBleu;
-    int nbAgentRouge;
-
-    int nbAgentBleuClone;
-    int nbAgentRougeClone;
-
     Carte _carte;
+
+    int _nbAgentBleu;
+    int _nbAgentRouge;
+
+    int _nbAgentBleuClone;
+    int _nbAgentRougeClone;
+
 
 
 public:
