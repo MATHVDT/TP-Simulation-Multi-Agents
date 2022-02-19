@@ -36,6 +36,7 @@ public:
             float depalcement,
             float renforcement,
             EQUIPE equipe);
+    Memoire(const Memoire &memoire) = default;
 
     // Getter
     float getDivision() const { return _division; }

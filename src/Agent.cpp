@@ -25,6 +25,18 @@ Agent::Agent(Point position, EQUIPE equipe)
     : _position(position), _level(1), _memoire(equipe),
       _action(ACTION::INACTIF) {}
 
+
+// /**
+//  * @overload Agent::Agent(const Agent &agent)
+//  * @brief Constructeur par copie.
+//  * 
+//  * @param const Agent& agent
+//  */
+// Agent::Agent(const Agent &agent)
+// {
+    
+// }
+
 /**
  * @fn void Agent::deplacer(Direction dir)
  * @brief Deplace l'agent suivant une direction.
@@ -114,7 +126,7 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
  *
  * @param Agent *voisinage[6] - *Voisinage de l'agent*
  */
-Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6])
+Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6])
 {
     // Level general des equipes
     int levelEnnemis = 0;
@@ -127,44 +139,41 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
                                         levelEnnemis, levelAmis,
                                         direction);
 
-    // choix action agent
+    // Choix action agent
     this->_action = choixAction(levelEnnemis, nbDirPossible);
 
-    if (this->_action == ACTION::ESTATTAQUE)
-    {
-        // ATTAQUE En fct des levels
-        this->_action = issueAttaque(levelEnnemis, levelAmis);
-    }
-    else
-    {
+    if (this->_action != ACTION::INACTIF)
+    { // Si l'agent est actif
+        if (this->_action == ACTION::ESTATTAQUE)
+        { // Attaque sur l'agent
+            // ATTAQUE En fct de l'environnement (levels...)
+            this->_action = issueAttaque(levelEnnemis, levelAmis);
+        }
+        else
+        {
 
-        if (this->_action == ACTION::DIVISION)
-        {
-        }
-        if (this->_action == ACTION::DEPLACEMENT)
-        {
-            // Choix direction de déplacement
-            DIRECTION directionChoisie = choixDirectionDeplacement(direction);
-            deplacer(directionChoisie); // Déplacement de l'agent
-        }
-        if (this->_action == ACTION::RENFORCEMENT)
-        {
-            // Gagne un niveau
-            ++_level;
-        }
-        if (this->_action == ACTION::BLOQUE)
-        {
-            // A le seum et ne fait rien
+            if (this->_action == ACTION::DIVISION)
+            {
+            }
+            if (this->_action == ACTION::DEPLACEMENT)
+            {
+                // Choix direction de déplacement
+                DIRECTION directionChoisie = choixDirectionDeplacement(direction);
+                deplacer(directionChoisie); // Déplacement de l'agent
+            }
+            if (this->_action == ACTION::RENFORCEMENT)
+            {
+                // Gagne un niveau
+                ++_level;
+            }
+            if (this->_action == ACTION::BLOQUE)
+            {
+                // A le seum et ne fait rien
+            }
         }
 
-        if (this->_action == ACTION::INACTIF)
-        {
-            cout << "Bizarre tu aurais due agir !";
-        }
-    }
-
-    // Je crois que le retour sert a rien
-    return Point{0, 0};
+    } // Je crois que le retour sert a rien
+    return new Agent{*this};
 }
 
 /**
@@ -343,4 +352,8 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
     }
 
     return issue; // Retourne l'issue de l'attaque
+}
+
+Agent *Agent::divisionAgent()
+{
 }

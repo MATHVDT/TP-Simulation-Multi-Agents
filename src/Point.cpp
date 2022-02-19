@@ -1,7 +1,15 @@
 #include "Point.hpp"
 
+extern Point ORIGINE{0, 0};
+
 /**
- * @fn Point::Point(int x, int y)
+ * @fn Point::Point()
+ * @brief Constructeur par défaut => Point origine.
+ */
+Point::Point() : Point{ORIGINE} {}
+
+/**
+ * @overload Point::Point(int x, int y)
  * @param int x - *Coordonnée x du point*
  * @param int y - *Coordonnée y du point*
  */
