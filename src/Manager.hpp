@@ -14,26 +14,31 @@ using namespace std;
 
 class Manager
 {
-    private:
-        vector<Agent> _listAgentBleu;
-        vector<Agent> _listAgentRouge;
+private:
+    vector<Agent *> _listAgents;
 
-        Carte _carte;
+    Carte _carte;
+    unsigned int _nbAgents;
 
-    public:
-        Manager();
-        ~Manager();
+    // int _nbAgentBleu;
+    // int _nbAgentRouge;
 
-        void managerInit(Agent *agent0bleu, Agent*agent0rouge);
-        void tour();
-        void actionAgent(Agent *agent);
-        void afficherCarte();
 
-    private:
-        void melangerOrdreAgent();
+public:
+    Manager(Agent *agent0Bleu, Agent *agent0Rouge);
+    ~Manager();
+
+    void managerInit(Agent *agent0bleu, Agent*agent0rouge);
+    void tour();
+    void actionAgent(Agent *agent);
+    void afficherCarte();
+    void updateListAgent(Agent *agentCour,
+                         unsigned int &iAgent);
+
+private:
+    void melangerOrdreAgent();
 };
 
-
-void fisherYates(vector<Agent> listagent);
+void fisherYates(vector<Agent *> listagent);
 
 #endif

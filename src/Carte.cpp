@@ -25,15 +25,46 @@ Carte::Carte()
     }
 }
 
-Agent * Carte::getAgent(int i, int j) const {
+Agent *Carte::getAgent(int i, int j) const
+{
     return _grilleAgents[i][j];
 }
 
-void Carte::setAgent(int i, int j, Agent * agent) {
+/**
+ * @fn Carte::setAgent(int i, int j, Agent *agent)
+ * @brief Ajoute un agent dans la carte.
+ *
+ * @warning La position de l'agent est supposée correcte
+ *
+ * @param Agent *agent
+ */
+void Carte::setAgent(int i, int j, Agent *agent)
+{
+    // Vérification de la disponibilité de la case
+    if (_grilleAgents[y][x])
+        throw Carte::ExceptionCaseDejaOccupe();
+    else
     _grilleAgents[i][j] = agent;
 }
 
-void Carte::setCase(int i, int j, EQUIPE equipe) {
+/**
+ * @fn Carte::setAgent(Agent *agent)
+ * @brief Ajoute un agent a la bonne position dans la carte.
+ *
+ * @warning La position de l'agent est supposée correcte
+ *
+ * @param Agent *agent
+ */
+void Carte::setAgent(Agent *agent)
+{
+    int x = agent->getX();
+    int y = agent->getY();
+
+    setAgent(y, x, agent);
+}
+
+void Carte::setCase(int i, int j, EQUIPE equipe)
+{
     _grille[i][j] = equipe;
 }
 
@@ -79,7 +110,9 @@ void Carte::afficherCarte() const
                     std::cout << BLUE << ". ";
                     break;
                 default:
+                    // std::cout << RESET << "?(" << i << "," << j << ")";
                     std::cout << RESET << "? ";
+
                     break;
                 }
             }
@@ -119,19 +152,41 @@ void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
 //A utiliser avant de mettre à jour
 void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
 {
+    correctionPositionAgent(agent);
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
     setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
 }
 
-//A n'utiliser que si l'attribut position de agent est mis à jour après coup
-void Carte::deplacerAgent(Agent * agent, Point Destination) {
+// A n'utiliser que si l'attribut position de agent est mis à jour après coup
+void Carte::deplacerAgent(Agent *agent, Point Destination)
+{
     deplacerAgent(agent, agent->getPosition(), Destination);
 }
 
 /**
- * @fn void Carte::correctionPositionAgent 
+ * @fn void Carte::correctionPositionAgent
  * @brief Corrige la position de l'agent pour qu'il reste dans la Carte.
- * 
+ *
  * @param Agent *agent - *Agent à qui il faut corriger la position*
  */
+void Carte::correctionPositionAgent(Agent *agent)
+{
+    agent->setX((agent->getX() + TAILLE) % TAILLE);
+    agent->setY((agent->getY() + TAILLE) % TAILLE);
+}
+
+// SUpprime l'agent dans la carte => met le pointeur à nullptr
+void Carte::suppressionAgent(Agent *agentCour)
+{
+    correctionPositionAgent(agentCour);
+    // Récupère la position de l'agent dans la carte
+    int x = agentCour->getX();
+    int y = agentCour->getY();
+
+    // Récupère la trace quel'agent laisse quand il meurt
+    EQUIPE traceAgentMort = agentCour->getEquipe();
+
+    _grille[y][x] = traceAgentMort;
+    _grilleAgents[y][x] = nullptr;
+}
