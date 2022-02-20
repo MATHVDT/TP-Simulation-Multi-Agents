@@ -14,25 +14,23 @@ using namespace std;
 
 class Manager
 {
-private:
-    vector<Agent> _listAgentBleu;
-    vector<Agent> _listAgentRouge;
+    private:
+        vector<Agent> _listAgentBleu;
+        vector<Agent> _listAgentRouge;
 
-    Carte _carte;
+        Carte _carte;
 
-    vector<int> _ordreInteractionBleu;
-    vector<int> _ordreInteractionRouge;
+    public:
+        Manager();
+        ~Manager();
 
-public:
-    Manager(Agent &agent0Bleu, Agent &agent0Rouge);
-    ~Manager();
+        void managerInit(Agent *agent0bleu, Agent*agent0rouge);
+        void tour();
+        void actionAgent(Agent *agent);
+        void afficherCarte();
 
-    void tour();
-    void actionAgent(Agent *agent);
-    void afficherCarte();
-
-private:
-    void melangerOrdreAgent();
+    private:
+        void melangerOrdreAgent();
 };
 
 

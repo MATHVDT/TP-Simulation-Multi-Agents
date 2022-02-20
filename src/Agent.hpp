@@ -52,6 +52,7 @@ public:
     void partagerMemoireAuVoisinage(Agent *voisinage[6]);
     void partagerMemoireACopain(Agent *copainAdjacent);
     void aquerirMemoire(int level, const Memoire &memoire);
+    void correctionPositionAgent();
 
     Point agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]);
 

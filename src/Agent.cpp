@@ -4,6 +4,7 @@
  */
 
 #include "Agent.hpp"
+#include "Carte.hpp"
 
 /**
  * @fn Agent::Agent(int x, int y, EQUIPE)
@@ -108,6 +109,13 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
     this->_memoire.apprentissage(influence, memoire);
 }
 
+
+void Agent::correctionPositionAgent()
+{
+    setX((getX() + TAILLE) % TAILLE);
+    setY((getY() + TAILLE) % TAILLE);
+}
+
 /**
  * @fn Point Agent::agir(Agent *voisinage[6])
  * @brief Action de l'agent dans le tour.
@@ -165,6 +173,7 @@ Point Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6]
         // voisinageAgentVoisins[indiceDirectionVoisinage] = this;
         // cout << voisinageAgentVoisins[indiceDirectionVoisinage]->getX() << endl;
     }
+
     return Point{0, 0};
 }
 

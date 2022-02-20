@@ -1,14 +1,23 @@
 #include "Manager.hpp"
 
-Manager::Manager(Agent &agent0Bleu, Agent &agent0Rouge)
-    : _listAgentBleu{agent0Bleu}, _listAgentRouge{agent0Rouge},
-      _carte{&agent0Bleu, &agent0Rouge},
-      _ordreInteractionBleu{0}, _ordreInteractionRouge{0}
+Manager::Manager()
+    : _listAgentBleu{}, _listAgentRouge{},
+      _carte{}
 {
 }
 
 Manager::~Manager()
 {
+}
+
+void Manager::managerInit(Agent *agent0bleu, Agent*agent0rouge) {
+    _listAgentBleu.push_back(*agent0bleu);
+    _carte.setAgent(agent0bleu->getY(), agent0bleu->getX(), agent0bleu);
+    _carte.setCase(agent0bleu->getY(), agent0bleu->getX(), agent0bleu->getEquipe());
+
+    _listAgentRouge.push_back(*agent0rouge);
+    _carte.setAgent(agent0rouge->getY(), agent0rouge->getX(), agent0rouge);
+    _carte.setCase(agent0rouge->getY(), agent0rouge->getX(), agent0rouge->getEquipe());
 }
 
 /**
@@ -72,6 +81,7 @@ void Manager::actionAgent(Agent *agent)
 {
     // cout << "Action agent " << (agent->getEquipe() == EQUIPE::BLEU ? "bleu" : "rouge") << endl;
 
+    
     // Récupération du voisinage
     Agent *voisinageAgentVoisins[6]; // Récupération des agents adjacents
     _carte.agentsAdjacents(agent, voisinageAgentVoisins);
@@ -85,19 +95,18 @@ void Manager::actionAgent(Agent *agent)
     // Action de l'agent
     agent->agir(voisinageAgentVoisins, voisinageAgentCases);
 
+    // Correction de la position de l'agent dans la carte (bord de la map)
+    agent->correctionPositionAgent();
+
     // Nouvelle posistion de l'agent
     Point pointDestinationAgent = agent->getPosition();
 
-    // Correction de la position de l'agent dans la carte (bord de la map)
-    _carte.correctionPositionAgent(agent);
-
-    // Mise à des grille de la carte
+    // Mise à jour des grille de la carte
     _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
 
     // Verifier si l'agent a bouge ?? et mettre a nullptr sa pos. -> grille
     // Verifier s'il n'a pas fait de petit
 
-    _carte.afficherCarte();
     std::this_thread::sleep_for(500ms);
 }
 
