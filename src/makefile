@@ -1,22 +1,48 @@
 #SRC=main.cpp Carte.cpp
-SRC=$(wildcard *.cpp)  
-EXE=prog
+SRCBASE=$(wildcard *.cpp)  
 
-CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto
+SRC= $(SRCBASE) main.cxx
+SRCTEST = $(SRCBASE) main_test_agent_memoire.cxx tests_catch.cxx
+
+EXE=prog
+EXETEST=test
+
+DOSSIER=build
+
+WARNING+=-Wall -Wextra
+CXXFLAGS+= -MMD -g -O2 -fdiagnostics-color=auto
 LDFLAGS= #-lSDL
 
-OBJ=$(addprefix build/,$(SRC:.cpp=.o))
-DEP=$(addprefix build/,$(SRC:.cpp=.d))
+TMP = $(SRC:.cpp=.o)
+TMP2 = $(TMP:.cxx=.o) 
+
+OBJ=$(addprefix $(DOSSIER)/, $(TMP2) ) 
+DEP=$(addprefix $(DOSSIER)/, $(TMP2:.o=.d))
+
+TMP3 = $(SRCTEST:.cpp=.o)
+TMP4 = $(TMP3:.cxx=.o)
+
+OBJTEST=$(addprefix build/,$(TMP4:.cpp=.o))
+DEPTEST=$(addprefix build/,$(TMP4:.o=.d))
+
 
 all: $(OBJ)
-	$(CXX) -o $(EXE) $^ $(LDFLAGS)
+	$(CXX) -o $(EXE) $^ $(LDFLAGS) 
 
-build/%.o: %.cpp
-	@mkdir -p build
+test : $(OBJTEST)
+	$(CXX) -o $(EXETEST) $^ $(LDFLAGS)
+
+$(DOSSIER)/%.o: %.cpp
+	@mkdir -p $(DOSSIER)
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(DOSSIER)/%.o: %.cxx
+	@mkdir -p $(DOSSIER)
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
 	rm -rf build core *.gch
 	rm */$(EXE)
 
--include $(DEP)
+-include $(DEPCXX)
+-include $(DEPCPP)

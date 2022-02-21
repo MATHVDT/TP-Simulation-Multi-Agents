@@ -27,6 +27,7 @@ private:
     float _deplacement;
     float _renforcement;
     EQUIPE _equipe;
+    EQUIPE _traceMort; // Couleur de la case quand l'agent meurt
     static const float _epsilon;
 
 public:
@@ -35,12 +36,14 @@ public:
             float depalcement,
             float renforcement,
             EQUIPE equipe);
-
+    Memoire(const Memoire &memoire) = default;
+    ~Memoire() = default;
     // Getter
     float getDivision() const { return _division; }
     float getDeplacement() const { return _deplacement; }
     float getRenforcement() const { return _renforcement; }
     EQUIPE getEquipe() const { return _equipe; }
+    EQUIPE getTraceMort() const { return _traceMort; }
 
     static float getEpsilon() { return _epsilon; }
 
@@ -59,5 +62,8 @@ public:
 private:
     void correctionMemoire();
 };
+
+bool operator==(const Memoire &m1, const Memoire &m2);
+bool operator!=(const Memoire &m1, const Memoire &m2);
 
 #endif
