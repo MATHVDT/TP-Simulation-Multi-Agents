@@ -18,6 +18,7 @@
         "tuple": "cpp",
         "new": "cpp",
         "ranges": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "deque": "cpp"
     }
 }
