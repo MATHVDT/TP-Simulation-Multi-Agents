@@ -33,8 +33,6 @@ public:
 
     void suppressionAgent(Agent *agentCour);
 
-    void correctionPositionAgent(Agent *agent);
-
 public:
     class ExceptionCaseDejaOccupe : public exception
     {

@@ -41,9 +41,6 @@ Agent *Carte::getAgent(int i, int j) const
 void Carte::setAgent(int i, int j, Agent *agent)
 {
     // Vérification de la disponibilité de la case
-    if (_grilleAgents[y][x])
-        throw Carte::ExceptionCaseDejaOccupe();
-    else
     _grilleAgents[i][j] = agent;
 }
 
@@ -60,7 +57,10 @@ void Carte::setAgent(Agent *agent)
     int x = agent->getX();
     int y = agent->getY();
 
-    setAgent(y, x, agent);
+    if (_grilleAgents[y][x])
+        throw Carte::ExceptionCaseDejaOccupe();
+    else
+        setAgent(y, x, agent);
 }
 
 void Carte::setCase(int i, int j, EQUIPE equipe)
@@ -149,10 +149,9 @@ void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
     voisinage[5] = _grilleAgents[(agent->getY() - 1 + TAILLE) % TAILLE][(agent->getX() + 1) % TAILLE];
 }
 
-//A utiliser avant de mettre à jour
+//A utiliser avant de mettre à jour, la position de l'agent doit être valide
 void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
 {
-    correctionPositionAgent(agent);
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
     setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
@@ -164,22 +163,12 @@ void Carte::deplacerAgent(Agent *agent, Point Destination)
     deplacerAgent(agent, agent->getPosition(), Destination);
 }
 
-/**
- * @fn void Carte::correctionPositionAgent
- * @brief Corrige la position de l'agent pour qu'il reste dans la Carte.
- *
- * @param Agent *agent - *Agent à qui il faut corriger la position*
- */
-void Carte::correctionPositionAgent(Agent *agent)
-{
-    agent->setX((agent->getX() + TAILLE) % TAILLE);
-    agent->setY((agent->getY() + TAILLE) % TAILLE);
-}
+
 
 // SUpprime l'agent dans la carte => met le pointeur à nullptr
 void Carte::suppressionAgent(Agent *agentCour)
 {
-    correctionPositionAgent(agentCour);
+    agentCour->correctionPositionAgent();
     // Récupère la position de l'agent dans la carte
     int x = agentCour->getX();
     int y = agentCour->getY();

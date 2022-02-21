@@ -1,30 +1,14 @@
 #include "Manager.hpp"
+#include "exception"
 
 Manager::Manager()
-    : _listAgentBleu{}, _listAgentRouge{},
-      _carte{}
+    : _listAgents{}, _carte{}, _nbAgents(0)
+{}
+
 Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
-    : _listAgents{},
-      _carte{},
-      _nbAgents(0)
+    : Manager()
 {
-    _listAgents.push_back(agent0Bleu);
-    _listAgents.push_back(agent0Rouge);
-    _nbAgents += 2;
-
-    _carte.setAgent(agent0Bleu->getY(),
-                    agent0Bleu->getX(),
-                    agent0Bleu);
-    _carte.setAgent(agent0Rouge->getY(),
-                    agent0Rouge->getX(),
-                    agent0Rouge);
-
-    _carte.setCase(agent0Bleu->getY(),
-                   agent0Bleu->getX(),
-                   agent0Bleu->getEquipe());
-    _carte.setCase(agent0Rouge->getY(),
-                   agent0Rouge->getX(),
-                   agent0Rouge->getEquipe());
+    managerInit(agent0Bleu, agent0Rouge);
 }
 
 Manager::~Manager()
@@ -32,13 +16,22 @@ Manager::~Manager()
 }
 
 void Manager::managerInit(Agent *agent0bleu, Agent*agent0rouge) {
-    _listAgentBleu.push_back(*agent0bleu);
-    _carte.setAgent(agent0bleu->getY(), agent0bleu->getX(), agent0bleu);
-    _carte.setCase(agent0bleu->getY(), agent0bleu->getX(), agent0bleu->getEquipe());
+    if (_nbAgents == 0)
+    {
+        _listAgents.push_back(agent0bleu);
+        _carte.setAgent(agent0bleu->getY(), agent0bleu->getX(), agent0bleu);
+        _carte.setCase(agent0bleu->getY(), agent0bleu->getX(), agent0bleu->getEquipe());
 
-    _listAgentRouge.push_back(*agent0rouge);
-    _carte.setAgent(agent0rouge->getY(), agent0rouge->getX(), agent0rouge);
-    _carte.setCase(agent0rouge->getY(), agent0rouge->getX(), agent0rouge->getEquipe());
+        _listAgents.push_back(agent0rouge);
+        _carte.setAgent(agent0rouge->getY(), agent0rouge->getX(), agent0rouge);
+        _carte.setCase(agent0rouge->getY(), agent0rouge->getX(), agent0rouge->getEquipe());
+
+        _nbAgents += 2;
+    }
+    else
+    {
+        throw bad_alloc();
+    }
 }
 
 /**
@@ -63,7 +56,7 @@ void Manager::tour()
     while (iAgent < _nbAgents)
     {
 
-        agentCour = _listAgents.at(iAgent);
+        agentCour = _listAgents[iAgent];
 
         // Action d'un agent
         actionAgent(agentCour);
@@ -122,12 +115,12 @@ void Manager::actionAgent(Agent *agent)
     if (agentAction == ACTION::DEPLACEMENT)
     {
         // Correction de la position de l'agent dans la carte (bord de la map)
-        _carte.correctionPositionAgent(agent);
+        agent->correctionPositionAgent();
 
         // Nouvelle posistion de l'agent
         Point pointDestinationAgent = agent->getPosition();
 
-        // Mise à des grille de la carte
+        // Mise à jour des grille de la carte
         _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
     }
     else if (agentAction == ACTION::DIVISION)
@@ -137,7 +130,7 @@ void Manager::actionAgent(Agent *agent)
             // Action de l'agent qui sera une DEPLACEMENT
             agentClone->agir(voisinageAgentVoisins, voisinageAgentCases);
 
-            _carte.correctionPositionAgent(agentClone);
+           agentClone->correctionPositionAgent();
 
             // Ajout de l'agent cloné dans les listes
             _listAgents.push_back(agentClone);
@@ -219,7 +212,7 @@ void Manager::updateListAgent(Agent *agentCour,
         std::cerr << "arpès suppression dans vecteur" << endl;
 
         // delete agentCour ???
-        delete agentCour;
+        agentCour->~Agent();
     }
     else // Agent pas mort : Trop fort ce gars en faite !!!
     {

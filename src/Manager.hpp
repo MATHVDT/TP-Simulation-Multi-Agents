@@ -25,6 +25,7 @@ private:
 
 
 public:
+    Manager();
     Manager(Agent *agent0Bleu, Agent *agent0Rouge);
     ~Manager();
 
