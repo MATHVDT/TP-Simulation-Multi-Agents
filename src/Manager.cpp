@@ -56,7 +56,7 @@ void Manager::tour()
     while (iAgent < _nbAgents)
     {
 
-        agentCour = _listAgents[iAgent];
+        agentCour = _listAgents.at(iAgent);
 
         // Action d'un agent
         actionAgent(agentCour);
@@ -212,7 +212,7 @@ void Manager::updateListAgent(Agent *agentCour,
         std::cerr << "arpès suppression dans vecteur" << endl;
 
         // delete agentCour ???
-        agentCour->~Agent();
+        delete agentCour;
     }
     else // Agent pas mort : Trop fort ce gars en faite !!!
     {

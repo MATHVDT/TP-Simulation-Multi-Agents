@@ -42,7 +42,7 @@ $(DOSSIER)/%.o: %.cxx
 
 clean:
 	rm -rf build core *.gch
-	rm */$(EXE)
+	rm $(EXE)
 
 -include $(DEPCXX)
 -include $(DEPCPP)
