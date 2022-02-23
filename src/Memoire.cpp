@@ -222,17 +222,17 @@ void Memoire::augmenterDeplacement()
  * @brief Diminue la valeur de deplacement
  *
  * @details
- * Divise par deux la valeur de déplacement de la
- * mémoire et augmente équitablement les valeurs de
- * division et renforcement. *(Somme doit faire 1)*
+ * Divise par deux la valeur de déplacement de
+ * la mémoire et augmente la valeur de
+ * division. *(Somme doit faire 1)*
  */
 void Memoire::diminuerDeplacement()
 {
     float valReduc = _deplacement / 2;
 
     _deplacement -= valReduc;
-    _division += valReduc / 2;
-    _renforcement += valReduc / 2;
+    _division += valReduc ;
+    // _renforcement += valReduc / 2;
 }
 /**
  * @fn void Memoire::diminuerDivision()

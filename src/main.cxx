@@ -18,13 +18,13 @@ int main()
     {
 
         manager.afficherCarte();
-        for (int i = 0; i < 50; ++i)
+        for (int i = 0; i < 1000; ++i)
         {
             system("clear");
             cerr << "tour " << i << endl;
             manager.tour();
-            manager.afficherCarte();
-            std::this_thread::sleep_for(150ms);
+            // manager.afficherCarte();
+            // std::this_thread::sleep_for(50ms);
         }
     }
     catch (const std::exception &e)
@@ -32,7 +32,7 @@ int main()
         std::cerr << e.what() << '\n';
     }
 
-    // manager.afficherCarte();
+    manager.afficherCarte();
 
     return 0;
 }
