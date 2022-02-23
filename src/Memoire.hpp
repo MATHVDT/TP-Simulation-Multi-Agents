@@ -53,13 +53,19 @@ public:
     void setRenforcement(float valeur) { _renforcement = valeur; }
     void setEquipe(EQUIPE equipe) { _equipe = equipe; }
 
+    void augmenterDeplacement();
+    void diminuerDeplacement();
+    void diminuerDivision();
+    void augmenterRenforcement(
+        const int ratioLevel);
+    void diminuerRenforcement();
+
     float getInfluence(int differenceLevel);
     void apprentissage(float influence, const Memoire &memoire);
 
     // Operator
     Memoire &operator=(const Memoire &memoire);
 
-private:
     void correctionMemoire();
 };
 

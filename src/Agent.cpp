@@ -294,26 +294,26 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
         }
     }
 
-    switch (actionChoisie)
-    {
-    case ACTION::DIVISION:
-        cerr << "ACTION::DIVISION" << endl;
-        break;
-    case ACTION::DEPLACEMENT:
-        cerr << "ACTION::DEPLACEMENT" << endl;
-        break;
-    case ACTION::RENFORCEMENT:
-        cerr << "ACTION::RENFORCEMENT" << endl;
-        break;
-    case ACTION::BLOQUE:
-        cerr << "ACTION::BLOQUE" << endl;
-        break;
-    case ACTION::INACTIF:
-        cerr << "ACTION::INACTIF" << endl;
-        break;
-    default:
-        break;
-    }
+    // switch (actionChoisie)
+    // {
+    // case ACTION::DIVISION:
+    //     cerr << "ACTION::DIVISION" << endl;
+    //     break;
+    // case ACTION::DEPLACEMENT:
+    //     cerr << "ACTION::DEPLACEMENT" << endl;
+    //     break;
+    // case ACTION::RENFORCEMENT:
+    //     cerr << "ACTION::RENFORCEMENT" << endl;
+    //     break;
+    // case ACTION::BLOQUE:
+    //     cerr << "ACTION::BLOQUE" << endl;
+    //     break;
+    // case ACTION::INACTIF:
+    //     cerr << "ACTION::INACTIF" << endl;
+    //     break;
+    // default:
+    //     break;
+    // }
     return actionChoisie;
 }
 
@@ -423,4 +423,22 @@ void Agent::deplacementApresNaissance(bool direction[6])
     DIRECTION directionChoisie = choixDirectionDeplacement(direction);
     // Déplacement de l'agent
     deplacer(directionChoisie);
+}
+
+void Agent::consequenceAction(const bool caseCapture)
+{
+    if (caseCapture)
+    {
+        _memoire.augmenterDeplacement();
+    }
+    else
+    {
+        if (_action == ACTION::DIVISION)
+            _memoire.diminuerDivision();
+        if (_action == ACTION::SURVIVANT)
+            _memoire.augmenterRenforcement(_level / _levelMax);
+        if (_level == _levelMax)
+            _memoire.diminuerRenforcement();
+    }
+    _memoire.correctionMemoire();
 }
