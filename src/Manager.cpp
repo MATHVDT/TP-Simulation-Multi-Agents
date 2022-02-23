@@ -16,12 +16,12 @@ Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
                     agent0Rouge->getX(),
                     agent0Rouge);
 
-    _carte.setCase(agent0Bleu->getY(),
-                   agent0Bleu->getX(),
-                   agent0Bleu->getEquipe());
-    _carte.setCase(agent0Rouge->getY(),
-                   agent0Rouge->getX(),
-                   agent0Rouge->getEquipe());
+    // _carte.setCase(agent0Bleu->getY(),
+    //                agent0Bleu->getX(),
+    //                agent0Bleu->getEquipe());
+    // _carte.setCase(agent0Rouge->getY(),
+    //                agent0Rouge->getX(),
+    //                agent0Rouge->getEquipe());
 }
 
 Manager::~Manager()
@@ -126,7 +126,10 @@ void Manager::actionAgent(Agent *agent)
         Point pointDestinationAgent = agent->getPosition();
 
         // Mise à des grille de la carte
-        _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
+        bool caseCapture; // Case change de couleur
+        caseCapture = _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
+
+        agent->consequenceAction(caseCapture);
     }
     else if (agentAction == ACTION::DIVISION)
     {
@@ -153,12 +156,6 @@ void Manager::actionAgent(Agent *agent)
         {
             cerr << "DIVISION sans crée d'agent !!!" << endl;
         }
-    }
-    else // Agent mort
-    {
-        // Rien c'est pas ici que l'on gére ça,
-        // Car il faut changer les indices dans
-        // les vecteurs et le retirer de la carte
     }
 }
 

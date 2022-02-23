@@ -55,9 +55,13 @@ void Carte::setAgent(Agent *agent)
     _grilleAgents[y][x] = agent;
 }
 
-void Carte::setCase(int i, int j, EQUIPE equipe)
+// Renvoie true si la couleur de la case à changée
+bool Carte::setCase(int i, int j, EQUIPE equipe)
 {
+    bool res = false;
+    res = _grille[i][j] == equipe;
     _grille[i][j] = equipe;
+    return res;
 }
 
 void Carte::afficherCarte() const
@@ -114,11 +118,6 @@ void Carte::afficherCarte() const
     }
 }
 
-// void Carte::changerCase(int i, int j, EQUIPE equipe)
-// {
-//     _grille[i][j] = equipe;
-// }
-
 bool Carte::estVide(int i, int j) const
 {
     return _grilleAgents[i][j] == nullptr;
@@ -157,12 +156,16 @@ void Carte::agentsAdjacents(Agent *agent, Agent *voisinage[6]) const
 }
 
 // A utiliser avant de mettre à jour
-void Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
+// renvoie true si la case à changée de couleur
+bool Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
 {
+    bool res;
     correctionPositionAgent(agent);
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
-    setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+    res = setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+
+    return res;
 }
 
 // A n'utiliser que si l'attribut position de agent est mis à jour après coup

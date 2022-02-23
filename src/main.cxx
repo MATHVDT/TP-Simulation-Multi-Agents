@@ -9,9 +9,9 @@ int main()
 {
 
     Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
-    Agent *agent0Rouge = new Agent{4,4, EQUIPE::ROUGE};
+    Agent *agent0Rouge = new Agent{40, 4, EQUIPE::ROUGE};
 
-    agent0Rouge->gagneLevel(5);
+    agent0Rouge->gagneLevel(1);
 
     Manager manager{agent0Bleu, agent0Rouge};
     try
