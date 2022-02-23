@@ -21,9 +21,9 @@ const float Memoire::_epsilon = 1e-5;
  * @todo Faire des opérateurs pour prendre en compte les aproximations des floats
  */
 Memoire::Memoire(EQUIPE equipe)
-    : _division(1. / 3.),
-      _deplacement(1. / 3.),
-      _renforcement(1. / 3.),
+    : _division(1. / 10.),
+      _deplacement(8. / 10.),
+      _renforcement(1. / 10.),
       _equipe(equipe),
       _traceMort(EQUIPE::NEUTRE) {}
 

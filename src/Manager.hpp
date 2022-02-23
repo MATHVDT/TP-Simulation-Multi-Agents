@@ -30,6 +30,7 @@ public:
 
     void tour();
     void actionAgent(Agent *agent);
+    void communicationAgent(Agent *agent);
     void afficherCarte();
     void updateListAgent(Agent *agentCour,
                          unsigned int &iAgent);

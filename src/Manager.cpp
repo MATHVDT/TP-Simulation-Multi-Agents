@@ -46,7 +46,7 @@ void Manager::tour()
 
     Agent *agentCour = nullptr;
 
-    // Pour chaque agent
+    // ACTION de chaque agennt
     while (iAgent < _nbAgents)
     {
 
@@ -61,6 +61,18 @@ void Manager::tour()
         //         _carte.afficherCarte();
         // std::this_thread::sleep_for(50ms);
     }
+
+    iAgent = 0;
+    // COMMUNICATION de chaque agennt
+    while (iAgent < _nbAgents)
+    {
+
+        agentCour = _listAgents.at(iAgent);
+
+        // Action d'un agent
+        communicationAgent(agentCour);
+        ++iAgent; // Agent suivant
+    }
 }
 
 /**
@@ -73,7 +85,7 @@ void Manager::tour()
  * Fait agir un agent sur la carte, en lui fournissant son voisinage.
  * @todo Tient à jour la carte s'il a bougé ou qu'il s'est divisé.
  *
-//  * @return bool *Agent vivant*
+ * @return bool *Agent vivant*
  */
 void Manager::actionAgent(Agent *agent)
 {
@@ -211,5 +223,24 @@ void Manager::updateListAgent(Agent *agentCour,
     {
         // Incrémentation des indices de parcours
         ++iAgent;
+    }
+}
+
+void Manager::communicationAgent(Agent *agent)
+{
+    // Création voisinage
+    Agent *voisinageAgentVoisins[6];
+
+    // Récupération du voisinage
+    _carte.agentsAdjacents(agent, voisinageAgentVoisins);
+
+    try
+    {
+        // Communication de l'agent avec son environnement
+        agent->partagerMemoireAuVoisinage(voisinageAgentVoisins);
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Communication pas effectuée : " << e.what() << "\n\n";
     }
 }
