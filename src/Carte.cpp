@@ -40,7 +40,6 @@ Agent *Carte::getAgent(int i, int j) const
  */
 void Carte::setAgent(int i, int j, Agent *agent)
 {
-    // Vérification de la disponibilité de la case
     _grilleAgents[i][j] = agent;
 }
 
@@ -110,7 +109,6 @@ void Carte::afficherCarte() const
                     std::cout << BLUE << ". ";
                     break;
                 default:
-                    // std::cout << RESET << "?(" << i << "," << j << ")";
                     std::cout << RESET << "? ";
 
                     break;
@@ -129,24 +127,24 @@ bool Carte::estVide(int i, int j) const {
 //Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
     //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
-    voisinage[0] = _grille[(agent->getY() - 1 + TAILLE) % TAILLE][agent->getX()];
-    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1 + TAILLE) % TAILLE];
-    voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1 + TAILLE) % TAILLE];
+    voisinage[0] = _grille[negMod(agent->getY() - 1, TAILLE)][agent->getX()];
+    voisinage[1] = _grille[agent->getY()][negMod(agent->getX() - 1, TAILLE)];
+    voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][negMod(agent->getX() - 1, TAILLE)];
     voisinage[3] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[5] = _grille[(agent->getY() - 1 + TAILLE) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[5] = _grille[negMod(agent->getY() - 1, TAILLE)][(agent->getX() + 1) % TAILLE];
 }
 
 //Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
 //Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
     //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
-    voisinage[0] = _grilleAgents[(agent->getY() - 1 + TAILLE) % TAILLE][agent->getX()];
-    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) % TAILLE];
-    voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1 + TAILLE) % TAILLE];
+    voisinage[0] = _grilleAgents[negMod(agent->getY() - 1, TAILLE)][agent->getX()];
+    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1 + TAILLE) % TAILLE];
+    voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][negMod(agent->getX() - 1, TAILLE)];
     voisinage[3] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[5] = _grilleAgents[(agent->getY() - 1 + TAILLE) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[5] = _grilleAgents[negMod(agent->getY() - 1, TAILLE)][(agent->getX() + 1) % TAILLE];
 }
 
 //A utiliser avant de mettre à jour, la position de l'agent doit être valide
@@ -178,4 +176,8 @@ void Carte::suppressionAgent(Agent *agentCour)
 
     _grille[y][x] = traceAgentMort;
     _grilleAgents[y][x] = nullptr;
+}
+
+int negMod(int n, int mod) {
+    return ((n % mod) + mod) % mod;
 }

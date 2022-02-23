@@ -39,4 +39,6 @@ public:
     };
 };
 
+int negMod(int n, int mod);
+
 #endif
