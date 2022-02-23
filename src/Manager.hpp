@@ -23,14 +23,16 @@ private:
     // int _nbAgentBleu;
     // int _nbAgentRouge;
 
-
 public:
     Manager(Agent *agent0Bleu, Agent *agent0Rouge);
     ~Manager();
 
     void tour();
     void actionAgent(Agent *agent);
+
     void afficherCarte();
+    void afficherCarteCarre();
+
     void updateListAgent(Agent *agentCour,
                          unsigned int &iAgent);
 

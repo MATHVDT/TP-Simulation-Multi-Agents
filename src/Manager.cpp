@@ -58,7 +58,7 @@ void Manager::tour()
         // Enlever l'agent de la liste s'il est mort
         updateListAgent(agentCour, iAgent);
 
-        //         _carte.afficherCarte();
+        // afficherCarte();
         // std::this_thread::sleep_for(50ms);
     }
 }
@@ -153,6 +153,11 @@ void Manager::actionAgent(Agent *agent)
 void Manager::afficherCarte()
 {
     _carte.afficherCarte();
+}
+
+void Manager::afficherCarteCarre()
+{
+    _carte.afficherCarteCarre();
 }
 
 /**

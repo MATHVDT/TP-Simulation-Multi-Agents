@@ -114,6 +114,62 @@ void Carte::afficherCarte() const
     }
 }
 
+void Carte::afficherCarteCarre() const
+{
+    int j;
+    int i;
+    int decalage;
+    int xOk;
+
+    for (i = 0; i < TAILLE; i++)
+    {
+        if (i % 2 == 0)
+            cout << " ";
+
+        for (j = 0; j < TAILLE; j++)
+        {
+            decalage = (i + 1) / 2;
+            xOk = (TAILLE + j - decalage) % TAILLE;
+            if (_grilleAgents[i][xOk] != nullptr)
+            {
+                switch (_grilleAgents[i][xOk]->getMemoire().getEquipe())
+                {
+                case EQUIPE::ROUGE:
+                    std::cout << RED << "A ";
+                    break;
+                case EQUIPE::BLEU:
+                    std::cout << BLUE << "A ";
+                    break;
+                default:
+                    std::cout << GREEN << "E ";
+                    break;
+                }
+            }
+            else
+            {
+                switch (_grille[i][xOk])
+                {
+                case EQUIPE::NEUTRE:
+                    std::cout << RESET << ". ";
+                    break;
+                case EQUIPE::ROUGE:
+                    std::cout << RED << ". ";
+                    break;
+                case EQUIPE::BLEU:
+                    std::cout << BLUE << ". ";
+                    break;
+                default:
+                    // std::cout << RESET << "?(" << i << "," << j << ")";
+                    std::cout << RESET << "? ";
+
+                    break;
+                }
+            }
+        }
+        std::cout << endl;
+    }
+}
+
 // void Carte::changerCase(int i, int j, EQUIPE equipe)
 // {
 //     _grille[i][j] = equipe;
