@@ -161,7 +161,7 @@ void Manager::actionAgent(Agent *agent)
 
 void Manager::afficherCarte()
 {
-    _carte.afficherCarte();
+    _carte.afficherCarteBis();
 }
 
 /**

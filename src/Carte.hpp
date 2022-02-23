@@ -25,6 +25,7 @@ public:
 
     // Méthodes sur la manipulation des données
     void afficherCarte() const;
+    void afficherCarteBis() const;
     bool estVide(int i, int j) const;
     void casesAdjacentes(Agent *agent, EQUIPE voisinage[6]) const;
     void agentsAdjacents(Agent *agent, Agent *voisinage[6]) const;

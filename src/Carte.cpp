@@ -10,6 +10,22 @@ const string RED = "\033[31m";
 const string GREEN = "\033[32m";
 const string BLUE = "\033[34m";
 
+enum class COULEUR : int
+{
+    RESET = 0,
+    RED = 31,
+    GREEN = 32,
+    BLUE = 34,
+    BACKGROUND_BRIGHT_BLEU = 104,
+    BACKGROUND_BRIGHT_RED = 101,
+    BACKGROUND_RESET = 0
+};
+
+const string BACKGROUND_BRIGHT_BLEU = "\033[104m";
+const string BACKGROUND_BRIGHT_RED = "\033[101m";
+const string BACKGROUND_WHITE = "\033[107m";
+const string BACKGROUND_BLACK = "\033[40m";
+
 Carte::Carte()
 {
     int j;
@@ -115,6 +131,61 @@ void Carte::afficherCarte() const
             }
         }
         std::cout << endl;
+    }
+}
+
+void Carte::afficherCarteBis() const
+{
+    int j;
+    int i;
+    string background;
+
+    for (i = 0; i < TAILLE; i++)
+    {
+        for (j = 0; j < i; j++)
+        {
+            cout << BACKGROUND_BLACK << " ";
+        }
+        for (j = 0; j < TAILLE; j++)
+        {
+            switch (_grille[i][j])
+            {
+            case EQUIPE::NEUTRE:
+                background = BACKGROUND_WHITE;
+                break;
+            case EQUIPE::ROUGE:
+                background = BACKGROUND_BRIGHT_RED;
+                break;
+            case EQUIPE::BLEU:
+                background = BACKGROUND_BRIGHT_BLEU;
+                break;
+            default:
+                background = BACKGROUND_BLACK;
+                break;
+            }
+            if (_grilleAgents[i][j] != nullptr)
+            {
+                switch (_grilleAgents[i][j]->getMemoire().getEquipe())
+                {
+                case EQUIPE::ROUGE:
+                    cout << background << RED << "O ";
+                    break;
+                case EQUIPE::BLEU:
+                    cout << background << BLUE << "X ";
+                    break;
+                default:
+                    cout << background << RESET << "E ";
+                    break;
+                }
+            }
+            else
+            {
+                cout << background << "  ";
+            }
+            cout << RESET;
+            // cout << " ";
+        }
+        cout << endl;
     }
 }
 
