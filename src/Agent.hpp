@@ -25,7 +25,7 @@ enum class ACTION;
 class Agent
 {
 private:
-    static const int _levelMax = 10;
+    static const int _levelMax = 5;
 
 private:
     Point _position;

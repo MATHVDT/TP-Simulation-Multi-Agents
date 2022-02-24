@@ -7,11 +7,18 @@ using namespace std;
 
 int main()
 {
-cout << "\033[100m";
-    Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
-    Agent *agent0Rouge = new Agent{40, 4, EQUIPE::ROUGE};
 
-    agent0Rouge->gagneLevel(1);
+
+    Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
+    Agent *agent0Rouge = new Agent{1, 4, EQUIPE::ROUGE};
+
+    agent0Bleu->setX(rand() % TAILLE);
+    agent0Bleu->setY(rand() % TAILLE);
+    agent0Rouge->setX(rand() % TAILLE);
+    agent0Rouge->setY(rand() % TAILLE);
+
+    // agent0Rouge->gagneLevel(1);
+    // agent0Bleu->gagneLevel();
 
     Manager manager{agent0Bleu, agent0Rouge};
     try
@@ -33,15 +40,6 @@ cout << "\033[100m";
     }
 
     manager.afficherCarte();
-
-    // const string BACKGROUND_BRIGHT_BLEU = "\033[104m";
-    // const string GREEN = "\033[32m";
-
-    // string b = BACKGROUND_BRIGHT_BLEU;
-    // string bb = "\033[103m";
-
-    // cout << b << GREEN << "hello" << endl;
-    // cout << bb << GREEN << "hello" << endl;
 
     return 0;
 }

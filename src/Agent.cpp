@@ -427,9 +427,12 @@ void Agent::deplacementApresNaissance(bool direction[6])
 
 void Agent::consequenceAction(const bool caseCapture)
 {
-    if (caseCapture)
+    if (_action == ACTION::DEPLACEMENT)
     {
-        _memoire.augmenterDeplacement();
+        if (caseCapture)
+            _memoire.augmenterDeplacement();
+        else
+            _memoire.diminuerDeplacement();
     }
     else
     {
