@@ -9,6 +9,7 @@
 
 #include "Carte.hpp"
 #include "Agent.hpp"
+#include "Generateur.hpp"
 
 using namespace std;
 

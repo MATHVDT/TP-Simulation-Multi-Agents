@@ -2,14 +2,14 @@
 #include <vector>
 
 #include "Manager.hpp"
+#include "Generateur.hpp"
 
 using namespace std;
 
 int main()
 {
 
-    // Agent *agent0Bleu = new Agent{0, 2, EQUIPE::BLEU};
-    // Agent *agent0Rouge = new Agent{4, 3, EQUIPE::ROUGE};
+    Generateur::initGen();
 
     Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
     Agent *agent0Rouge = new Agent{1, 4, EQUIPE::ROUGE};
