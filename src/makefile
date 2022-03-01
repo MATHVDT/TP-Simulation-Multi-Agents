@@ -9,7 +9,8 @@ EXETEST=test
 
 DOSSIER=build
 
-CXXFLAGS+=-Wall -Wextra -MMD -g -O2 -fdiagnostics-color=auto
+WARNING+=-Wall -Wextra
+CXXFLAGS+= -MMD -g -O2 -fdiagnostics-color=auto
 LDFLAGS= #-lSDL
 
 TMP = $(SRC:.cpp=.o)
@@ -30,7 +31,6 @@ all: $(OBJ)
 
 test : $(OBJTEST)
 	$(CXX) -o $(EXETEST) $^ $(LDFLAGS)
-	./$(EXETEST)
 
 $(DOSSIER)/%.o: %.cpp
 	@mkdir -p $(DOSSIER)

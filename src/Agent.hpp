@@ -4,7 +4,10 @@
  */
 #ifndef AGENT_HPP
 #define AGENT_HPP
+
 #include <iostream>
+#include <exception>
+
 #include "Direction.hpp"
 #include "Memoire.hpp"
 
@@ -33,6 +36,8 @@ private:
 public:
     Agent(int x, int y, EQUIPE equipe);
     Agent(Point position, EQUIPE equipe);
+    Agent(const Agent &agent) = default;
+    ~Agent();
 
     // Getter
     Point getPosition() const { return _position; }
@@ -48,15 +53,12 @@ public:
     void setX(int x) { _position.setX(x); }
     void setY(int y) { _position.setY(y); }
 
-    // Deplacement
-    void deplacer(DIRECTION dir);
-
     void partagerMemoireAuVoisinage(Agent *voisinage[6]);
     void partagerMemoireACopain(Agent *copainAdjacent);
     void aquerirMemoire(int level, const Memoire &memoire);
 
-    Point agir(Agent *voisinageAgentVoisins[6],
-               EQUIPE voisinageAgentCases[6]);
+    Agent *agir(Agent *voisinageAgentVoisins[6],
+                EQUIPE voisinageAgentCases[6]);
 
     int examenVoisinage(Agent *voisinageAgentVoisins[6],
                         int &levelEnnemis, int &levelAmis,
@@ -64,10 +66,28 @@ public:
 
     Agent &operator=(const Agent &agent);
 
-private:
-    ACTION issueAttaque(int levelEnnemis, int levelAmis);
-    DIRECTION choixDirectionDeplacement(bool directionsPossibles[6]);
     ACTION choixAction(int levelEnnemis, int nbDirPossible);
+
+    // Division
+    Agent *divisionAgent();
+    void deplacementApresNaissance(bool direction[6]);
+
+    // Déplacement
+    void deplacer(DIRECTION dir);
+    DIRECTION choixDirectionDeplacement(bool directionsPossibles[6]);
+
+    // Combat
+    ACTION issueAttaque(int levelEnnemis, int levelAmis);
+
+    // Renforcement
+    // Pour l'instant juste incrementation level...
+    void gagneLevel(int nbLevel = 1) { _level += nbLevel; }
+
+    // Classe Exception
+public:
+    class ExceptionAucuneDirectionsLibres : public exception
+    {
+    };
 };
 
 enum class ACTION
