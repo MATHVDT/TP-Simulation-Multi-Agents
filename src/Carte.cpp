@@ -10,6 +10,22 @@ const string RED = "\033[31m";
 const string GREEN = "\033[32m";
 const string BLUE = "\033[34m";
 
+enum class COULEUR : int
+{
+    RESET = 0,
+    RED = 31,
+    GREEN = 32,
+    BLUE = 34,
+    BACKGROUND_BRIGHT_BLEU = 104,
+    BACKGROUND_BRIGHT_RED = 101,
+    BACKGROUND_RESET = 0
+};
+
+const string BACKGROUND_BRIGHT_BLEU = "\033[104m";
+const string BACKGROUND_BRIGHT_RED = "\033[101m";
+const string BACKGROUND_WHITE = "\033[107m";
+const string BACKGROUND_BLACK = "\033[40m";
+
 Carte::Carte()
 {
     int j;
@@ -55,9 +71,13 @@ void Carte::setAgent(Agent *agent)
     _grilleAgents[y][x] = agent;
 }
 
-void Carte::setCase(int i, int j, EQUIPE equipe)
+// Renvoie true si la couleur de la case à changée
+bool Carte::setCase(int i, int j, EQUIPE equipe)
 {
+    bool res = false;
+    res = _grille[i][j] == equipe;
     _grille[i][j] = equipe;
+    return res;
 }
 
 void Carte::afficherCarte() const
@@ -142,38 +162,85 @@ void Carte::afficherCarteCarre() const
                     break;
                 default:
                     std::cout << GREEN << "E ";
+
+                    switch (_grille[i][xOk])
+                    {
+                    case EQUIPE::NEUTRE:
+                        std::cout << RESET << ". ";
+                        break;
+                    case EQUIPE::ROUGE:
+                        std::cout << RED << ". ";
+                        break;
+                    case EQUIPE::BLEU:
+                        std::cout << BLUE << ". ";
+                        break;
+                    default:
+                        // std::cout << RESET << "?(" << i << "," << j << ")";
+                        std::cout << RESET << "? ";
+
+                        break;
+                    }
+                }
+            }
+            std::cout << endl;
+        }
+    }
+}
+
+void Carte::afficherCarteBis() const
+{
+    int j;
+    int i;
+    string background;
+
+    for (i = 0; i < TAILLE; i++)
+    {
+        for (j = 0; j < i; j++)
+        {
+            cout << BACKGROUND_BLACK << " ";
+        }
+        for (j = 0; j < TAILLE; j++)
+        {
+            switch (_grille[i][j])
+            {
+            case EQUIPE::NEUTRE:
+                background = BACKGROUND_WHITE;
+                break;
+            case EQUIPE::ROUGE:
+                background = BACKGROUND_BRIGHT_RED;
+                break;
+            case EQUIPE::BLEU:
+                background = BACKGROUND_BRIGHT_BLEU;
+                break;
+            default:
+                background = BACKGROUND_BLACK;
+                break;
+            }
+            if (_grilleAgents[i][j] != nullptr)
+            {
+                switch (_grilleAgents[i][j]->getMemoire().getEquipe())
+                {
+                case EQUIPE::ROUGE:
+                    cout << background << RED << "O ";
+                    break;
+                case EQUIPE::BLEU:
+                    cout << background << BLUE << "X ";
+                    break;
+                default:
+                    cout << background << RESET << "E ";
                     break;
                 }
             }
             else
             {
-                switch (_grille[i][xOk])
-                {
-                case EQUIPE::NEUTRE:
-                    std::cout << RESET << ". ";
-                    break;
-                case EQUIPE::ROUGE:
-                    std::cout << RED << ". ";
-                    break;
-                case EQUIPE::BLEU:
-                    std::cout << BLUE << ". ";
-                    break;
-                default:
-                    // std::cout << RESET << "?(" << i << "," << j << ")";
-                    std::cout << RESET << "? ";
-
-                    break;
-                }
+                cout << background << "  ";
             }
+            cout << RESET;
+            // cout << " ";
         }
-        std::cout << endl;
+        cout << endl;
     }
 }
-
-// void Carte::changerCase(int i, int j, EQUIPE equipe)
-// {
-//     _grille[i][j] = equipe;
-// }
 
 bool Carte::estVide(int i, int j) const
 {
@@ -213,12 +280,16 @@ void Carte::agentsAdjacents(Agent *agent, Agent *voisinage[6]) const
 }
 
 // A utiliser avant de mettre à jour
-void Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
+// renvoie true si la case à changée de couleur
+bool Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
 {
+    bool res;
     correctionPositionAgent(agent);
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
-    setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+    res = setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+
+    return res;
 }
 
 // A n'utiliser que si l'attribut position de agent est mis à jour après coup

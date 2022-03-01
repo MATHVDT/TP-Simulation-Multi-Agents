@@ -8,7 +8,7 @@
 const float Memoire::_epsilon = 1e-5;
 
 /**
- * @fn Memoire::Memoire()
+ * @fn Memoire::Memoire
  * @brief Constructeur de la mémoire.
  *
  * @param EQUIPE equipe - *Equipe de l'agent*
@@ -27,6 +27,15 @@ Memoire::Memoire(EQUIPE equipe)
       _equipe(equipe),
       _traceMort(EQUIPE::NEUTRE) {}
 
+/**
+ * @overload Memoire::Memoire
+ * @brief Construct a new Memoire:: Memoire object
+ *
+ * @param division
+ * @param depalcement
+ * @param renforcement
+ * @param equipe
+ */
 Memoire::Memoire(float division,
                  float depalcement,
                  float renforcement, EQUIPE equipe)
@@ -97,7 +106,7 @@ void Memoire::apprentissage(float influence, const Memoire &memoire)
  * sont effectués et si delta = |1 - somme| < epsilon,
  * alors on essaye de corriger en rajoutant uniformement
  * ce delta au 3 valeurs de mémoire.
- * @warning const float epsilon = 1e-3;
+ * @warning const float epsilon = 1e-5;
  */
 void Memoire::correctionMemoire()
 {
@@ -187,4 +196,93 @@ bool operator==(const Memoire &m1, const Memoire &m2)
 bool operator!=(const Memoire &m1, const Memoire &m2)
 {
     return !(m1 == m2);
+}
+
+/**
+ * @fn void Memoire::augmenterDeplacement()
+ * @brief Augmente la valeur de déplacement.
+ *
+ * @details
+ * Augmente la valeur de déplacement et réduit
+ * les valeurs de renforcement et de division
+ * par deux. *(Somme doit faire 1)*
+ */
+void Memoire::augmenterDeplacement()
+{
+    float valReducRenfo = _renforcement / 2;
+    float valReducDiv = _division / 2;
+
+    _deplacement += valReducRenfo + valReducDiv;
+    _renforcement -= valReducRenfo;
+    _division -= valReducDiv;
+}
+
+/**
+ * @fn void Memoire::diminuerDeplacement()
+ * @brief Diminue la valeur de deplacement
+ *
+ * @details
+ * Divise par deux la valeur de déplacement de
+ * la mémoire et augmente la valeur de
+ * division. *(Somme doit faire 1)*
+ */
+void Memoire::diminuerDeplacement()
+{
+    float valReduc = _deplacement / 2;
+
+    _deplacement -= valReduc;
+    _division += valReduc ;
+    // _renforcement += valReduc / 2;
+}
+/**
+ * @fn void Memoire::diminuerDivision()
+ * @brief Diminue la valeur de division.
+ *
+ * @details
+ * Divise par deux la valeur de division
+ * et augemente la valeur de renforcement.
+ * *(Somme doit faire 1)*
+ */
+void Memoire::diminuerDivision()
+{
+    float valReduc = _renforcement / 2;
+
+    _division -= valReduc;
+    _renforcement += valReduc;
+}
+/**
+ * @fn void Memoire::augmenterRenforcement()
+ * @brief Augmente le renforcement en fonction du level.
+ *
+ * @param const int ratioLevel - *Level Actuel/Level Max*
+ *
+ * @details
+ * Augmente la valeur du renforcement suivant le
+ * niveau actuel et et le niveau max. Reduit la valeur
+ * de division. *(Somme doit faire 1)*
+ * *[renfo = renfo + (1 - renfo) *( 1 * ratio)]*
+ */
+void Memoire::augmenterRenforcement(const int ratioLevel)
+{
+    float valAdd = (1 - _renforcement) * (1 - ratioLevel);
+
+    _renforcement += valAdd;
+    _division -= valAdd;
+}
+
+/**
+ * @fn void Memoire::diminuerRenforcement()
+ * @brief Diminue la valeur de renforcement.
+ *
+ * @details
+ * Divise par deux la valeur de renforcement
+ * et augmente la valeur de division.
+ * *(Somme doit faire 1)*
+ */
+void Memoire::diminuerRenforcement()
+{
+    float valReduc = _renforcement / 2;
+
+    _renforcement -= valReduc;
+    _division += valReduc;
 }

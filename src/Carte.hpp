@@ -8,7 +8,7 @@
 #include "Point.hpp"
 #include "Memoire.hpp"
 
-const int TAILLE = 10;
+const int TAILLE = 100;
 
 class Carte
 {
@@ -18,7 +18,7 @@ class Carte
 public:
     Carte();
     // Getters et setters
-    void setCase(int i, int j, EQUIPE equipe);
+    bool setCase(int i, int j, EQUIPE equipe);
     Agent *getAgent(int i, int j) const;
     void setAgent(int i, int j, Agent *agent);
     void setAgent(Agent *agent);
@@ -27,10 +27,11 @@ public:
     void afficherCarte() const;
     void afficherCarteCarre() const;
     
+    void afficherCarteBis() const;
     bool estVide(int i, int j) const;
     void casesAdjacentes(Agent *agent, EQUIPE voisinage[6]) const;
     void agentsAdjacents(Agent *agent, Agent *voisinage[6]) const;
-    void deplacerAgent(Agent *agent, Point origine, Point Destination);
+    bool deplacerAgent(Agent *agent, Point origine, Point Destination);
     void deplacerAgent(Agent *agent, Point Destination);
 
     void suppressionAgent(Agent *agentCour);
