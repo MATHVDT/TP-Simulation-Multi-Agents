@@ -34,9 +34,9 @@ Manager::~Manager()
  */
 void Manager::tour()
 {
-    std::cerr << "Debut tour ";
     _nbAgents = (unsigned int)_listAgents.size();
-    cerr << "avec nb agents : " << _nbAgents << endl;
+    // std::cerr << "Debut tour ";
+    // cerr << "avec nb agents : " << _nbAgents << endl;
 
     if ((int)_listAgents.size() < 0)
         cerr << "\n\n heho !!!!! \n\n";
@@ -45,6 +45,9 @@ void Manager::tour()
     unsigned int iAgent = 0;
 
     Agent *agentCour = nullptr;
+
+    // Melanger ordre de passage des agents
+    this->melangerOrdreAgent();
 
     // ACTION de chaque agennt
     while (iAgent < _nbAgents)
