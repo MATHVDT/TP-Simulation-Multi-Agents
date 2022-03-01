@@ -39,7 +39,7 @@ void Manager::tour()
     // cerr << "avec nb agents : " << _nbAgents << endl;
 
     if ((int)_listAgents.size() < 0)
-        cerr << "\n\n heho !!!!! \n\n";
+        cerr << "\n\n heho plus d'agent !!!!! \n\n";
 
     // Indice de parcours des vecteurs des agents
     unsigned int iAgent = 0;
@@ -178,8 +178,7 @@ void Manager::afficherCarteCarre()
  */
 void Manager::melangerOrdreAgent()
 {
-    // fisherYates(_listAgentBleu);
-    // fisherYates(_listAgentRouge);
+    fisherYates(_listAgents);
 }
 
 void fisherYates(vector<Agent *> listAgent)
@@ -187,11 +186,15 @@ void fisherYates(vector<Agent *> listAgent)
     int n = listAgent.size();
     int i;
     int j;
+    Agent* agentTmp = nullptr;
 
-    for (i = n; i > 1; i--)
+    for (i = n-1; i > 0; i--)
     {
         j = rand() % i + 1;
 
+        // agentTmp = listAgent[i];
+        // listAgent[i] = listAgent[j];
+        // listAgent[j] = agentTmp;
         swap(listAgent[i], listAgent[j]);
     }
 }
