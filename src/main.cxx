@@ -6,9 +6,11 @@
 
 using namespace std;
 
+MtRng32 randMT;
+
 int main()
 {
-
+    randMT.init((unsigned int)48);
     Generateur::initGen();
 
     Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
