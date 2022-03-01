@@ -31,7 +31,7 @@ public:
     void managerInit(Agent *agent0bleu, Agent*agent0rouge);
     void tour();
     void actionAgent(Agent *agent);
-
+    void communicationAgent(Agent *agent);
     void afficherCarte();
     void afficherCarteCarre();
 

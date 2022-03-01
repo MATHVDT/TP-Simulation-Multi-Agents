@@ -40,9 +40,9 @@ void Manager::managerInit(Agent *agent0bleu, Agent*agent0rouge) {
  */
 void Manager::tour()
 {
-    std::cerr << "Debut tour ";
     _nbAgents = (unsigned int)_listAgents.size();
-    cerr << "avec nb agents : " << _nbAgents << endl;
+    // std::cerr << "Debut tour ";
+    // cerr << "avec nb agents : " << _nbAgents << endl;
 
     if ((int)_listAgents.size() < 0)
         cerr << "\n\n heho !!!!! \n\n";
@@ -52,7 +52,10 @@ void Manager::tour()
 
     Agent *agentCour = nullptr;
 
-    // Pour chaque agent
+    // Melanger ordre de passage des agents
+    this->melangerOrdreAgent();
+
+    // ACTION de chaque agennt
     while (iAgent < _nbAgents)
     {
 
@@ -67,6 +70,18 @@ void Manager::tour()
         // afficherCarte();
         // std::this_thread::sleep_for(50ms);
     }
+
+    iAgent = 0;
+    // COMMUNICATION de chaque agennt
+    while (iAgent < _nbAgents)
+    {
+
+        agentCour = _listAgents.at(iAgent);
+
+        // Action d'un agent
+        communicationAgent(agentCour);
+        ++iAgent; // Agent suivant
+    }
 }
 
 /**
@@ -79,7 +94,7 @@ void Manager::tour()
  * Fait agir un agent sur la carte, en lui fournissant son voisinage.
  * @todo Tient à jour la carte s'il a bougé ou qu'il s'est divisé.
  *
-//  * @return bool *Agent vivant*
+ * @return bool *Agent vivant*
  */
 void Manager::actionAgent(Agent *agent)
 {
@@ -120,8 +135,11 @@ void Manager::actionAgent(Agent *agent)
         // Nouvelle posistion de l'agent
         Point pointDestinationAgent = agent->getPosition();
 
-        // Mise à jour des grille de la carte
-        _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
+        // Mise à des grille de la carte
+        bool caseCapture; // Case change de couleur
+        caseCapture = _carte.deplacerAgent(agent, pointDepartAgent, pointDestinationAgent);
+
+        agent->consequenceAction(caseCapture);
     }
     else if (agentAction == ACTION::DIVISION)
     {
@@ -149,22 +167,11 @@ void Manager::actionAgent(Agent *agent)
             cerr << "DIVISION sans crée d'agent !!!" << endl;
         }
     }
-    else // Agent mort
-    {
-        // Rien c'est pas ici que l'on gére ça,
-        // Car il faut changer les indices dans
-        // les vecteurs et le retirer de la carte
-    }
 }
 
 void Manager::afficherCarte()
 {
-    _carte.afficherCarte();
-}
-
-void Manager::afficherCarteCarre()
-{
-    _carte.afficherCarteCarre();
+    _carte.afficherCarteBis();
 }
 
 /**
@@ -223,5 +230,24 @@ void Manager::updateListAgent(Agent *agentCour,
     {
         // Incrémentation des indices de parcours
         ++iAgent;
+    }
+}
+
+void Manager::communicationAgent(Agent *agent)
+{
+    // Création voisinage
+    Agent *voisinageAgentVoisins[6];
+
+    // Récupération du voisinage
+    _carte.agentsAdjacents(agent, voisinageAgentVoisins);
+
+    try
+    {
+        // Communication de l'agent avec son environnement
+        agent->partagerMemoireAuVoisinage(voisinageAgentVoisins);
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Communication pas effectuée : " << e.what() << "\n\n";
     }
 }

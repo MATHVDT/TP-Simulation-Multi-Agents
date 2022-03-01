@@ -10,6 +10,22 @@ const string RED = "\033[31m";
 const string GREEN = "\033[32m";
 const string BLUE = "\033[34m";
 
+enum class COULEUR : int
+{
+    RESET = 0,
+    RED = 31,
+    GREEN = 32,
+    BLUE = 34,
+    BACKGROUND_BRIGHT_BLEU = 104,
+    BACKGROUND_BRIGHT_RED = 101,
+    BACKGROUND_RESET = 0
+};
+
+const string BACKGROUND_BRIGHT_BLEU = "\033[104m";
+const string BACKGROUND_BRIGHT_RED = "\033[101m";
+const string BACKGROUND_WHITE = "\033[107m";
+const string BACKGROUND_BLACK = "\033[40m";
+
 Carte::Carte()
 {
     int j;
@@ -34,7 +50,7 @@ Agent *Carte::getAgent(int i, int j) const
  * @fn Carte::setAgent(int i, int j, Agent *agent)
  * @brief Ajoute un agent dans la carte.
  *
- * @warning La position de l'agent est supposée correcte
+ * @warning La position donnée en paramètre est supposée correcte
  *
  * @param Agent *agent
  */
@@ -62,9 +78,13 @@ void Carte::setAgent(Agent *agent)
         setAgent(y, x, agent);
 }
 
-void Carte::setCase(int i, int j, EQUIPE equipe)
+// Renvoie true si la couleur de la case à changée
+bool Carte::setCase(int i, int j, EQUIPE equipe)
 {
+    bool res = false;
+    res = _grille[i][j] == equipe;
     _grille[i][j] = equipe;
+    return res;
 }
 
 void Carte::afficherCarte() const
@@ -114,7 +134,7 @@ void Carte::afficherCarte() const
                 }
             }
         }
-        std::cout << endl;
+        cout << endl;
     }
 }
 
@@ -146,18 +166,22 @@ void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
     voisinage[5] = _grilleAgents[negMod(agent->getY() - 1, TAILLE)][(agent->getX() + 1) % TAILLE];
 }
 
-//A utiliser avant de mettre à jour, la position de l'agent doit être valide
-void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
+// Fonctionne avant et apres la MAJ de la position de l'agent
+// renvoie true si la case à changée de couleur
+bool Carte::deplacerAgent(Agent *agent, Point origine, Point destination)
 {
+    bool res;
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
-    setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+    res = setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
+
+    return res;
 }
 
 // A n'utiliser que si l'attribut position de agent est mis à jour après coup
-void Carte::deplacerAgent(Agent *agent, Point Destination)
+bool Carte::deplacerAgent(Agent *agent, Point Destination)
 {
-    deplacerAgent(agent, agent->getPosition(), Destination);
+    return deplacerAgent(agent, agent->getPosition(), Destination);
 }
 
 

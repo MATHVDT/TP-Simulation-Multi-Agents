@@ -25,7 +25,7 @@ enum class ACTION;
 class Agent
 {
 private:
-    static const int _levelMax = 10;
+    static const int _levelMax = 5;
 
 private:
     Point _position;
@@ -53,11 +53,6 @@ public:
     void setX(int x) { _position.setX(x); }
     void setY(int y) { _position.setY(y); }
 
-    void partagerMemoireAuVoisinage(Agent *voisinage[6]);
-    void partagerMemoireACopain(Agent *copainAdjacent);
-    void aquerirMemoire(int level, const Memoire &memoire);
-    void correctionPositionAgent();
-
     Agent *agir(Agent *voisinageAgentVoisins[6],
                 EQUIPE voisinageAgentCases[6]);
 
@@ -68,6 +63,7 @@ public:
     Agent &operator=(const Agent &agent);
 
     ACTION choixAction(int levelEnnemis, int nbDirPossible);
+    void correctionPositionAgent();
 
     // Division
     Agent *divisionAgent();
@@ -81,8 +77,14 @@ public:
     ACTION issueAttaque(int levelEnnemis, int levelAmis);
 
     // Renforcement
-    // Pour l'instant juste incrementation level...
-    void gagneLevel(int nbLevel = 1) { _level += nbLevel; }
+    void gagneLevel(int nbLevel = 1) { _level += (_level + nbLevel <= _levelMax ? nbLevel : 0); }
+
+    // Modification mémoire
+    void consequenceAction(const bool caseCapture);
+    // Partage de la mémoire
+    void partagerMemoireAuVoisinage(Agent *voisinage[6]);
+    void partagerMemoireACopain(Agent *copainAdjacent);
+    void aquerirMemoire(int level, const Memoire &memoire);
 
     // Classe Exception
 public:
