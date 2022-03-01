@@ -24,9 +24,11 @@ private:
     // int _nbAgentRouge;
 
 public:
+    Manager();
     Manager(Agent *agent0Bleu, Agent *agent0Rouge);
     ~Manager();
 
+    void managerInit(Agent *agent0bleu, Agent*agent0rouge);
     void tour();
     void actionAgent(Agent *agent);
 

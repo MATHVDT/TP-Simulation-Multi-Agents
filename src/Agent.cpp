@@ -4,6 +4,7 @@
  */
 
 #include "Agent.hpp"
+#include "Carte.hpp"
 
 /**
  * @fn Agent::Agent(int x, int y, EQUIPE)
@@ -112,6 +113,16 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
     float influence = this->_memoire.getInfluence(diffLevel);
 
     this->_memoire.apprentissage(influence, memoire);
+}
+
+/**
+ * @fn void Agent::correctionPositionAgent
+ * @brief Corrige la position de l'agent pour qu'il reste dans la Carte.
+ */
+void Agent::correctionPositionAgent()
+{
+    setX((getX() + TAILLE) % TAILLE);
+    setY((getY() + TAILLE) % TAILLE);
 }
 
 /**

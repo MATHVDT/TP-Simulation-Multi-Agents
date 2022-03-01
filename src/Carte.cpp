@@ -30,6 +30,14 @@ Agent *Carte::getAgent(int i, int j) const
     return _grilleAgents[i][j];
 }
 
+/**
+ * @fn Carte::setAgent(int i, int j, Agent *agent)
+ * @brief Ajoute un agent dans la carte.
+ *
+ * @warning La position de l'agent est supposée correcte
+ *
+ * @param Agent *agent
+ */
 void Carte::setAgent(int i, int j, Agent *agent)
 {
     _grilleAgents[i][j] = agent;
@@ -37,7 +45,7 @@ void Carte::setAgent(int i, int j, Agent *agent)
 
 /**
  * @fn Carte::setAgent(Agent *agent)
- * @brief Ajoute un agent dans la carte.
+ * @brief Ajoute un agent a la bonne position dans la carte.
  *
  * @warning La position de l'agent est supposée correcte
  *
@@ -48,11 +56,10 @@ void Carte::setAgent(Agent *agent)
     int x = agent->getX();
     int y = agent->getY();
 
-    // Vérification de la disponibilité de la case
     if (_grilleAgents[y][x])
         throw Carte::ExceptionCaseDejaOccupe();
-
-    _grilleAgents[y][x] = agent;
+    else
+        setAgent(y, x, agent);
 }
 
 void Carte::setCase(int i, int j, EQUIPE equipe)
@@ -67,7 +74,6 @@ void Carte::afficherCarte() const
 
     for (i = 0; i < TAILLE; i++)
     {
-        // if (i % 2 == 1) cout << " ";
         for (j = 0; j < i; j++)
         {
             std::cout << " ";
@@ -78,15 +84,15 @@ void Carte::afficherCarte() const
             {
                 switch (_grilleAgents[i][j]->getMemoire().getEquipe())
                 {
-                    case EQUIPE::ROUGE:
-                        std::cout << RED << "A ";
-                        break;
-                    case EQUIPE::BLEU:
-                        std::cout << BLUE << "A ";
-                        break;
-                    default:
+                case EQUIPE::ROUGE:
+                    std::cout << RED << "A ";
+                    break;
+                case EQUIPE::BLEU:
+                    std::cout << BLUE << "A ";
+                    break;
+                default:
                     std::cout << GREEN << "E ";
-                        break;
+                    break;
                 }
             }
             else
@@ -107,7 +113,6 @@ void Carte::afficherCarte() const
                         break;
                 }
             }
-            
         }
         std::cout << endl;
     }
@@ -121,30 +126,29 @@ bool Carte::estVide(int i, int j) const {
 //Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
     //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
-    voisinage[0] = _grille[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grille[agent->getY()][(agent->getX() - 1) %TAILLE];
-    voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
+    voisinage[0] = _grille[negMod(agent->getY() - 1, TAILLE)][agent->getX()];
+    voisinage[1] = _grille[agent->getY()][negMod(agent->getX() - 1, TAILLE)];
+    voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][negMod(agent->getX() - 1, TAILLE)];
     voisinage[3] = _grille[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grille[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[5] = _grille[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[5] = _grille[negMod(agent->getY() - 1, TAILLE)][(agent->getX() + 1) % TAILLE];
 }
 
 //Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
 //Il représente les 6 points voisins de l'agent passé en entrée.
 void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
     //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
-    voisinage[0] = _grilleAgents[(agent->getY() - 1) % TAILLE][agent->getX()];
-    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1) %TAILLE];
-    voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][(agent->getX() - 1) % TAILLE];
+    voisinage[0] = _grilleAgents[negMod(agent->getY() - 1, TAILLE)][agent->getX()];
+    voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1 + TAILLE) % TAILLE];
+    voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][negMod(agent->getX() - 1, TAILLE)];
     voisinage[3] = _grilleAgents[(agent->getY() + 1) % TAILLE][agent->getX()];
     voisinage[4] = _grilleAgents[agent->getY()][(agent->getX() + 1) % TAILLE];
-    voisinage[5] = _grilleAgents[(agent->getY() - 1) % TAILLE][(agent->getX() + 1) % TAILLE];
+    voisinage[5] = _grilleAgents[negMod(agent->getY() - 1, TAILLE)][(agent->getX() + 1) % TAILLE];
 }
 
-//A utiliser avant de mettre à jour
+//A utiliser avant de mettre à jour, la position de l'agent doit être valide
 void Carte::deplacerAgent(Agent * agent, Point origine, Point destination)
 {
-    correctionPositionAgent(agent);
     setAgent(origine.getY(), origine.getX(), nullptr);
     setAgent(destination.getY(), destination.getX(), agent);
     setCase(destination.getY(), destination.getX(), agent->getMemoire().getEquipe());
@@ -156,29 +160,23 @@ void Carte::deplacerAgent(Agent *agent, Point Destination)
     deplacerAgent(agent, agent->getPosition(), Destination);
 }
 
-/**
- * @fn void Carte::correctionPositionAgent
- * @brief Corrige la position de l'agent pour qu'il reste dans la Carte.
- *
- * @param Agent *agent - *Agent à qui il faut corriger la position*
- */
-void Carte::correctionPositionAgent(Agent *agent)
-{
-    agent->setX((agent->getX() + TAILLE) % TAILLE);
-    agent->setY((agent->getY() + TAILLE) % TAILLE);
-}
+
 
 // SUpprime l'agent dans la carte => met le pointeur à nullptr
 void Carte::suppressionAgent(Agent *agentCour)
 {
-    correctionPositionAgent(agentCour);
+    agentCour->correctionPositionAgent();
     // Récupère la position de l'agent dans la carte
     int x = agentCour->getX();
     int y = agentCour->getY();
 
     // Récupère la trace quel'agent laisse quand il meurt
-    // EQUIPE traceAgentMort = agentCour->getTraceMort();
+    EQUIPE traceAgentMort = agentCour->getEquipe();
 
-    // _grille[y][x] = traceAgentMort;
+    _grille[y][x] = traceAgentMort;
     _grilleAgents[y][x] = nullptr;
+}
+
+int negMod(int n, int mod) {
+    return ((n % mod) + mod) % mod;
 }

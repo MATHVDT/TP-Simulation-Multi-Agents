@@ -19,7 +19,7 @@ public:
     Carte();
     // Getters et setters
     void setCase(int i, int j, EQUIPE equipe);
-    Agent *getAgent(int i, int j) const;
+    Agent* getAgent(int i, int j) const;
     void setAgent(int i, int j, Agent *agent);
     void setAgent(Agent *agent);
 
@@ -34,12 +34,12 @@ public:
 
     void suppressionAgent(Agent *agentCour);
 
-    void correctionPositionAgent(Agent *agent);
-
 public:
     class ExceptionCaseDejaOccupe : public exception
     {
     };
 };
+
+int negMod(int n, int mod);
 
 #endif
