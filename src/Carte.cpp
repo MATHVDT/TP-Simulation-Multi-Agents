@@ -138,6 +138,61 @@ void Carte::afficherCarte() const
     }
 }
 
+void Carte::afficherCarteBis() const
+{
+    int j;
+    int i;
+    string background;
+
+    for (i = 0; i < TAILLE; i++)
+    {
+        for (j = 0; j < i; j++)
+        {
+            cout << BACKGROUND_BLACK << " ";
+        }
+        for (j = 0; j < TAILLE; j++)
+        {
+            switch (_grille[i][j])
+            {
+            case EQUIPE::NEUTRE:
+                background = BACKGROUND_WHITE;
+                break;
+            case EQUIPE::ROUGE:
+                background = BACKGROUND_BRIGHT_RED;
+                break;
+            case EQUIPE::BLEU:
+                background = BACKGROUND_BRIGHT_BLEU;
+                break;
+            default:
+                background = BACKGROUND_BLACK;
+                break;
+            }
+            if (_grilleAgents[i][j] != nullptr)
+            {
+                switch (_grilleAgents[i][j]->getMemoire().getEquipe())
+                {
+                case EQUIPE::ROUGE:
+                    cout << background << RED << "O ";
+                    break;
+                case EQUIPE::BLEU:
+                    cout << background << BLUE << "X ";
+                    break;
+                default:
+                    cout << background << RESET << "E ";
+                    break;
+                }
+            }
+            else
+            {
+                cout << background << "  ";
+            }
+            cout << RESET;
+            // cout << " ";
+        }
+        cout << endl;
+    }
+}
+
 bool Carte::estVide(int i, int j) const {
     return _grilleAgents [i][j] == nullptr;
 }
