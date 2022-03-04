@@ -189,24 +189,24 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
  */
 DIRECTION Agent::choixDirectionDeplacement(bool directionsPossibles[6])
 {
-    int i = rand() % 6;
+    int i;
 
     DIRECTION directionChoisie = DIRECTION::NULLDIRECTION;
 
     // Tant que l'on a pas choisie une direction
     while (directionChoisie == DIRECTION::NULLDIRECTION)
     {
+        i = dice_6() - 1; // nb entre [|0;5|]
         // Si la direction est possible
         if (directionsPossibles[i])
-        {                        // La direction est libre
-            if (rand() % 6 == 0) // 1 chance sur 6
-            {                    // Prendre la direction par rapport au tableau de correspondance
+        {                          // La direction est libre
+            if (dice_6() - 1 == 0) // 1 chance sur 6
+            {                      // Prendre la direction par rapport au tableau de correspondance
                 directionChoisie = intToDirection(i);
             }
         }
         // on a pas choisie cette direction
         // On relance une direction
-        i = rand() % 6;
     }
     return directionChoisie;
 }
@@ -257,7 +257,7 @@ Agent &Agent::operator=(const Agent &agent)
  */
 ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
 {
-    double choix = (double)rand() / (double)RAND_MAX; // [0-1]
+    double choix = genrand_real2(); // [0-1]
     ACTION actionChoisie = ACTION::INACTIF;
 
     if (levelEnnemis > 0) // ie, il ya des ennemis adjacents

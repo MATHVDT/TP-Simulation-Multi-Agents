@@ -1,17 +1,18 @@
 #include <iostream>
 #include <vector>
 
+#include "mt.hpp"
 #include "Manager.hpp"
-#include "Generateur.hpp"
 
 using namespace std;
 
-MtRng32 randMT;
 
-int main()
+
+int main(int, char *)
 {
-    randMT.init((unsigned int)48);
-    Generateur::initGen();
+    
+    initMT();
+
 
     Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
     Agent *agent0Rouge = new Agent{1, 4, EQUIPE::ROUGE};
@@ -22,17 +23,16 @@ int main()
     agent0Rouge->setY(rand() % TAILLE);
 
     // agent0Rouge->gagneLevel(1);
-    // agent0Bleu->gagneLevel();
+    agent0Bleu->gagneLevel();
 
     Manager manager{agent0Bleu, agent0Rouge};
 
-    manager.afficherCarte();
-    std::this_thread::sleep_for(2000ms);
+    // manager.afficherCarte();
+    // std::this_thread::sleep_for(2000ms);
 
     try
     {
 
-        manager.afficherCarte();
         for (int i = 0; i < 10000; ++i)
         {
             cerr << "tour " << i << endl;
@@ -47,7 +47,7 @@ int main()
         std::cerr << e.what() << '\n';
     }
 
-    manager.afficherCarte();
+    // manager.afficherCarte();
 
     return 0;
 }
