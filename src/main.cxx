@@ -38,7 +38,7 @@ int main(int, char *)
             cerr << "tour " << i << endl;
             manager.tour();
             manager.afficherCarte();
-            std::this_thread::sleep_for(1000ms);
+            std::this_thread::sleep_for(50ms);
             system("clear");
         }
     }
