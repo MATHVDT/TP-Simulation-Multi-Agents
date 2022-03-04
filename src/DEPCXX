@@ -1,5 +1,0 @@
-main.o: main.cxx Manager.hpp Carte.hpp Agent.hpp Direction.hpp \
- Memoire.hpp Point.hpp
-main_test_agent_memoire.o: main_test_agent_memoire.cxx catch.hpp
-tests_catch.o: tests_catch.cxx catch.hpp Agent.hpp Direction.hpp \
- Memoire.hpp Point.hpp Carte.hpp

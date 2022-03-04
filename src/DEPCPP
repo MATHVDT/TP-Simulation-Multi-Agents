@@ -1,7 +1,0 @@
-Agent.o: Agent.cpp Agent.hpp Direction.hpp Memoire.hpp Point.hpp
-Carte.o: Carte.cpp Carte.hpp Agent.hpp Direction.hpp Memoire.hpp \
- Point.hpp
-Manager.o: Manager.cpp Manager.hpp Carte.hpp Agent.hpp Direction.hpp \
- Memoire.hpp Point.hpp
-Memoire.o: Memoire.cpp Memoire.hpp
-Point.o: Point.cpp Point.hpp Direction.hpp

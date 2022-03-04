@@ -188,15 +188,12 @@ void fisherYates(vector<Agent *> listAgent)
     int n = listAgent.size();
     int i;
     int j;
-    Agent* agentTmp = nullptr;
 
-    for (i = n-1; i > 0; i--)
+    for (i = n - 1; i > 0; i--)
     {
-        j = rand() % i + 1;
+        // j = rand() % i + 1;
+        j = ((dice_n(n) - 1) % i) + 1;
 
-        // agentTmp = listAgent[i];
-        // listAgent[i] = listAgent[j];
-        // listAgent[j] = agentTmp;
         swap(listAgent[i], listAgent[j]);
     }
 }
