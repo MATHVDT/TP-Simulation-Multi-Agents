@@ -46,6 +46,8 @@ public:
     void updateListAgent(Agent *agentCour,
                          unsigned int &iAgent);
 
+    Carte &getCarte() { return _carte; }
+
 private:
     void melangerOrdreAgent();
 };

@@ -13,19 +13,19 @@ const int TAILLE = 100;
 class Carte
 {
     EQUIPE _grille[TAILLE][TAILLE];
-    Agent * _grilleAgents[TAILLE][TAILLE];
+    Agent *_grilleAgents[TAILLE][TAILLE];
 
 public:
     Carte();
     // Getters et setters
     bool setCase(int i, int j, EQUIPE equipe);
-    Agent* getAgent(int i, int j) const;
+    Agent *getAgent(int i, int j) const;
     void setAgent(int i, int j, Agent *agent);
     void setAgent(Agent *agent);
 
     // Méthodes sur la manipulation des données
     void afficherCarte() const;
-    
+
     void afficherCarteBis() const;
     bool estVide(int i, int j) const;
     void casesAdjacentes(Agent *agent, EQUIPE voisinage[6]) const;
@@ -34,6 +34,9 @@ public:
     bool deplacerAgent(Agent *agent, Point Destination);
 
     void suppressionAgent(Agent *agentCour);
+
+    void compterStatCases(int &nbCasesBleu,
+                          int &nbCasesRouge);
 
 public:
     class ExceptionCaseDejaOccupe : public exception

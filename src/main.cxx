@@ -17,12 +17,17 @@ int main(int, char *)
 
     try
     {
-        manager->simulationAnimee(1000, 40ms);
+        manager->simulationAnimee(10, 40ms);
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
+    int a, b;
+    manager->afficherCarte();
+    manager->getCarte().compterStatCases(a, b);
+    cout << "cases bleu : " << a << endl;
+    cout << "cases rouge : " << b << endl;
 
     delete manager;
 

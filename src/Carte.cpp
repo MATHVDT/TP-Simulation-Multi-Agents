@@ -119,18 +119,18 @@ void Carte::afficherCarte() const
             {
                 switch (_grille[i][j])
                 {
-                    case EQUIPE::NEUTRE:
-                        std::cout << RESET << ". ";
-                        break;
-                    case EQUIPE::ROUGE:
-                        std::cout << RED << ". ";
-                        break;
-                    case EQUIPE::BLEU:
-                        std::cout << BLUE << ". ";
-                        break;
-                    default:
+                case EQUIPE::NEUTRE:
+                    std::cout << RESET << ". ";
+                    break;
+                case EQUIPE::ROUGE:
+                    std::cout << RED << ". ";
+                    break;
+                case EQUIPE::BLEU:
+                    std::cout << BLUE << ". ";
+                    break;
+                default:
                     std::cout << RESET << "? ";
-                        break;
+                    break;
                 }
             }
         }
@@ -193,14 +193,16 @@ void Carte::afficherCarteBis() const
     }
 }
 
-bool Carte::estVide(int i, int j) const {
-    return _grilleAgents [i][j] == nullptr;
+bool Carte::estVide(int i, int j) const
+{
+    return _grilleAgents[i][j] == nullptr;
 }
 
-//Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
-//Il représente les 6 points voisins de l'agent passé en entrée.
-void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
-    //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
+// Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
+// Il représente les 6 points voisins de l'agent passé en entrée.
+void Carte::casesAdjacentes(Agent *agent, EQUIPE voisinage[6]) const
+{
+    // Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
     voisinage[0] = _grille[negMod(agent->getY() - 1, TAILLE)][agent->getX()];
     voisinage[1] = _grille[agent->getY()][negMod(agent->getX() - 1, TAILLE)];
     voisinage[2] = _grille[(agent->getY() + 1) % TAILLE][negMod(agent->getX() - 1, TAILLE)];
@@ -209,10 +211,11 @@ void Carte::casesAdjacentes(Agent * agent, EQUIPE voisinage[6]) const {
     voisinage[5] = _grille[negMod(agent->getY() - 1, TAILLE)][(agent->getX() + 1) % TAILLE];
 }
 
-//Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
-//Il représente les 6 points voisins de l'agent passé en entrée.
-void Carte::agentsAdjacents(Agent * agent, Agent * voisinage[6]) const {
-    //Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
+// Le résultat de casesAdjacentes est stocké dans un tableau 1D de taille 6 passé en entrée.
+// Il représente les 6 points voisins de l'agent passé en entrée.
+void Carte::agentsAdjacents(Agent *agent, Agent *voisinage[6]) const
+{
+    // Parcours des cases voisines depuis la direction Nord-Ouest en sens trigonométrique
     voisinage[0] = _grilleAgents[negMod(agent->getY() - 1, TAILLE)][agent->getX()];
     voisinage[1] = _grilleAgents[agent->getY()][(agent->getX() - 1 + TAILLE) % TAILLE];
     voisinage[2] = _grilleAgents[(agent->getY() + 1) % TAILLE][negMod(agent->getX() - 1, TAILLE)];
@@ -239,8 +242,6 @@ bool Carte::deplacerAgent(Agent *agent, Point Destination)
     return deplacerAgent(agent, agent->getPosition(), Destination);
 }
 
-
-
 // SUpprime l'agent dans la carte => met le pointeur à nullptr
 void Carte::suppressionAgent(Agent *agentCour)
 {
@@ -256,6 +257,28 @@ void Carte::suppressionAgent(Agent *agentCour)
     _grilleAgents[y][x] = nullptr;
 }
 
-int negMod(int n, int mod) {
+int negMod(int n, int mod)
+{
     return ((n % mod) + mod) % mod;
+}
+
+/**
+ * @brief Compte le nombre de cases capturées de chaque équipe.
+ *
+ * @param int & nbCasesBleu
+ * @param int & nbCasesRouge
+ */
+void Carte::compterStatCases(int &nbCasesBleu,
+                             int &nbCasesRouge)
+{
+    nbCasesBleu = 0;
+    nbCasesRouge = 0;
+    for (int i = 0; i < TAILLE; i++)
+    {
+        for (int j = 0; j < TAILLE; j++)
+        {
+            nbCasesBleu += (_grille[i][j] == EQUIPE::BLEU);
+            nbCasesRouge += (_grille[i][j] == EQUIPE::ROUGE);
+        }
+    }
 }
