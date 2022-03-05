@@ -10,13 +10,21 @@ Manager::Manager()
 
 Manager::~Manager()
 {
+    deleteAgents();
+    _singleton = nullptr;
+}
+
+/**
+ * @brief Supprime les agents de la liste (libère la mémoire).
+ */
+void Manager::deleteAgents()
+{
     // Suppression des agents dans le tableau
     for (auto a : _listAgents)
     {
         delete a;
     }
     _listAgents.clear();
-    _singleton = nullptr;
 }
 
 /**
@@ -32,25 +40,46 @@ Manager *Manager::getInstance()
     return _singleton;
 }
 
-void Manager::managerInit(Agent *agent0bleu, Agent *agent0rouge)
+/**
+ * @brief Initialise deux agents avec des positions aléatoire (et la carte)=>pas encore fait.
+ * 
+ */
+void Manager::managerInit()
 {
+    int xBleu = dice_n(TAILLE) - 1;
+    int yBleu = dice_n(TAILLE) - 1;
+    int xRouge = dice_n(TAILLE) - 1;
+    int yRouge = dice_n(TAILLE) - 1;
+    // Pour ne pas mettre les agents sur la même case
+    while (xRouge == xBleu)
+    {
+        xRouge = dice_n(TAILLE) - 1;
+    }
+
+    Agent *agent0Bleu = new Agent{xBleu,
+                                  yBleu,
+                                  EQUIPE::BLEU};
+    Agent *agent0Rouge = new Agent{xRouge,
+                                   yRouge,
+                                   EQUIPE::ROUGE};
+
     if (_nbAgents == 0)
     {
-        _listAgents.push_back(agent0bleu);
-        _carte.setAgent(agent0bleu->getY(),
-                        agent0bleu->getX(),
-                        agent0bleu);
-        _carte.setCase(agent0bleu->getY(),
-                       agent0bleu->getX(),
-                       agent0bleu->getEquipe());
+        _listAgents.push_back(agent0Bleu);
+        _carte.setAgent(agent0Bleu->getY(),
+                        agent0Bleu->getX(),
+                        agent0Bleu);
+        _carte.setCase(agent0Bleu->getY(),
+                       agent0Bleu->getX(),
+                       agent0Bleu->getEquipe());
 
-        _listAgents.push_back(agent0rouge);
-        _carte.setAgent(agent0rouge->getY(),
-                        agent0rouge->getX(),
-                        agent0rouge);
-        _carte.setCase(agent0rouge->getY(),
-                       agent0rouge->getX(),
-                       agent0rouge->getEquipe());
+        _listAgents.push_back(agent0Rouge);
+        _carte.setAgent(agent0Rouge->getY(),
+                        agent0Rouge->getX(),
+                        agent0Rouge);
+        _carte.setCase(agent0Rouge->getY(),
+                       agent0Rouge->getX(),
+                       agent0Rouge->getEquipe());
 
         _nbAgents += 2;
     }
@@ -61,8 +90,8 @@ void Manager::managerInit(Agent *agent0bleu, Agent *agent0rouge)
 }
 /**
  * @brief Effecture une simulation.
- * 
- * @param int nbTour - *Nombre de tours de simulation* 
+ *
+ * @param int nbTour - *Nombre de tours de simulation*
  */
 void Manager::simulation(int nbTour)
 {
@@ -74,9 +103,9 @@ void Manager::simulation(int nbTour)
 }
 /**
  * @brief Effecture une simulation avec l'animation dans la console.
- * 
- * @param int nbTour - *Nombre de tours de simulation* 
- * @param std::chrono::milliseconds frameTpsMs 
+ *
+ * @param int nbTour - *Nombre de tours de simulation*
+ * @param std::chrono::milliseconds frameTpsMs
  */
 void Manager::simulationAnimee(int nbTour,
                                std::chrono::milliseconds frameTpsMs)
@@ -149,7 +178,6 @@ void Manager::tour()
  *
  * @details
  * Fait agir un agent sur la carte, en lui fournissant son voisinage.
- * @todo Tient à jour la carte s'il a bougé ou qu'il s'est divisé.
  *
  * @return bool *Agent vivant*
  */
@@ -267,7 +295,6 @@ void Manager::updateListAgent(Agent *agentCour,
         // Suppression de l'agent dans la carte
         // ...
         _carte.suppressionAgent(agentCour);
-
 
         std::vector<Agent *>::iterator it = _listAgents.begin() + iAgent;
 

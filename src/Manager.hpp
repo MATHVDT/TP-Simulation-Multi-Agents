@@ -25,14 +25,14 @@ private:
 
 private:
     Manager();
+    void deleteAgents();
 
 public:
     ~Manager();
 
     static Manager *getInstance();
 
-    void managerInit(Agent *agent0bleu,
-                     Agent *agent0rouge);
+    void managerInit();
 
     void simulation(int nbTour);
     void simulationAnimee(int nbTour,

@@ -305,26 +305,6 @@ ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
         }
     }
 
-    // switch (actionChoisie)
-    // {
-    // case ACTION::DIVISION:
-    //     cerr << "ACTION::DIVISION" << endl;
-    //     break;
-    // case ACTION::DEPLACEMENT:
-    //     cerr << "ACTION::DEPLACEMENT" << endl;
-    //     break;
-    // case ACTION::RENFORCEMENT:
-    //     cerr << "ACTION::RENFORCEMENT" << endl;
-    //     break;
-    // case ACTION::BLOQUE:
-    //     cerr << "ACTION::BLOQUE" << endl;
-    //     break;
-    // case ACTION::INACTIF:
-    //     cerr << "ACTION::INACTIF" << endl;
-    //     break;
-    // default:
-    //     break;
-    // }
     return actionChoisie;
 }
 
@@ -383,9 +363,10 @@ ACTION Agent::issueAttaque(int levelEnnemis, int levelAmis)
     // Calcul des forces relatives
     int deltaLevel = levelAmis - levelEnnemis;
     ACTION issue;
+    deltaLevel += genrand_int31() % 2;
 
-    if (deltaLevel <= 0) // Ennemis plus fort
-    {                    // Agent meurt
+    if (deltaLevel < 0) // Ennemis plus fort
+    {                   // Agent meurt
         issue = ACTION::MORT;
     }
     else // Le pouvoir de l'amitié : Agent + copains plus fort
