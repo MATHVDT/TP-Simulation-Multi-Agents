@@ -3,28 +3,38 @@
 
 Manager::Manager()
     : _listAgents{}, _carte{}, _nbAgents(0)
-{}
-
-Manager::Manager(Agent *agent0Bleu, Agent *agent0Rouge)
-    : Manager()
 {
-    managerInit(agent0Bleu, agent0Rouge);
 }
 
 Manager::~Manager()
 {
+    // Suppression des agents dans le tableau
+    for (auto a : _listAgents)
+    {
+        delete a;
+    }
+    _listAgents.clear();
 }
 
-void Manager::managerInit(Agent *agent0bleu, Agent*agent0rouge) {
+void Manager::managerInit(Agent *agent0bleu, Agent *agent0rouge)
+{
     if (_nbAgents == 0)
     {
         _listAgents.push_back(agent0bleu);
-        _carte.setAgent(agent0bleu->getY(), agent0bleu->getX(), agent0bleu);
-        _carte.setCase(agent0bleu->getY(), agent0bleu->getX(), agent0bleu->getEquipe());
+        _carte.setAgent(agent0bleu->getY(),
+                        agent0bleu->getX(),
+                        agent0bleu);
+        _carte.setCase(agent0bleu->getY(),
+                       agent0bleu->getX(),
+                       agent0bleu->getEquipe());
 
         _listAgents.push_back(agent0rouge);
-        _carte.setAgent(agent0rouge->getY(), agent0rouge->getX(), agent0rouge);
-        _carte.setCase(agent0rouge->getY(), agent0rouge->getX(), agent0rouge->getEquipe());
+        _carte.setAgent(agent0rouge->getY(),
+                        agent0rouge->getX(),
+                        agent0rouge);
+        _carte.setCase(agent0rouge->getY(),
+                       agent0rouge->getX(),
+                       agent0rouge->getEquipe());
 
         _nbAgents += 2;
     }
@@ -106,7 +116,6 @@ void Manager::actionAgent(Agent *agent)
     Agent *voisinageAgentVoisins[6];
     EQUIPE voisinageAgentCases[6];
 
-    
     // Récupération du voisinage
     _carte.agentsAdjacents(agent, voisinageAgentVoisins);
     _carte.casesAdjacentes(agent, voisinageAgentCases);
@@ -148,7 +157,7 @@ void Manager::actionAgent(Agent *agent)
             // Action de l'agent qui sera une DEPLACEMENT
             agentClone->agir(voisinageAgentVoisins, voisinageAgentCases);
 
-           agentClone->correctionPositionAgent();
+            agentClone->correctionPositionAgent();
 
             // Ajout de l'agent cloné dans les listes
             _listAgents.push_back(agentClone);

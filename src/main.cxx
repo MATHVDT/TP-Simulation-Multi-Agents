@@ -27,6 +27,8 @@ int main(int, char *)
 
     Manager manager{agent0Bleu, agent0Rouge};
 
+    manager.managerInit(agent0Bleu, agent0Rouge);
+
     // manager.afficherCarte();
     // std::this_thread::sleep_for(2000ms);
 
