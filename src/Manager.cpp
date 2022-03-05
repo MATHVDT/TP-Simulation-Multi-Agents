@@ -59,6 +59,37 @@ void Manager::managerInit(Agent *agent0bleu, Agent *agent0rouge)
         throw bad_alloc();
     }
 }
+/**
+ * @brief Effecture une simulation.
+ * 
+ * @param int nbTour - *Nombre de tours de simulation* 
+ */
+void Manager::simulation(int nbTour)
+{
+    cerr << "Simulation pour " << nbTour << " tours." << endl;
+    for (int i = 0; i < nbTour; ++i)
+    {
+        tour();
+    }
+}
+/**
+ * @brief Effecture une simulation avec l'animation dans la console.
+ * 
+ * @param int nbTour - *Nombre de tours de simulation* 
+ * @param std::chrono::milliseconds frameTpsMs 
+ */
+void Manager::simulationAnimee(int nbTour,
+                               std::chrono::milliseconds frameTpsMs)
+{
+    cerr << "Simulation pour " << nbTour << " tours." << endl;
+    for (int i = 0; i < nbTour; ++i)
+    {
+        tour();
+        afficherCarte();
+        std::this_thread::sleep_for(frameTpsMs);
+        system("clear");
+    }
+}
 
 /**
  * @fn Manager::tour
@@ -232,23 +263,18 @@ void Manager::updateListAgent(Agent *agentCour,
 
     if (agentMort) // Agent mort
     {
-        std::cerr << "Suppression agent mort" << endl;
+        // std::cerr << "Suppression agent mort" << endl;
         // Suppression de l'agent dans la carte
         // ...
         _carte.suppressionAgent(agentCour);
 
-        // std::cerr << "arpès suppression carte et " << _carte.getAgent(agentCour->getY(), agentCour->getX())->getLevel() << endl;
-
-        std::cerr << "lvl agent cour : " << agentCour->getLevel() << endl;
 
         std::vector<Agent *>::iterator it = _listAgents.begin() + iAgent;
 
         _listAgents.erase(it);
 
         --_nbAgents;
-        std::cerr << "arpès suppression dans vecteur" << endl;
 
-        // delete agentCour ???
         delete agentCour;
     }
     else // Agent pas mort : Trop fort ce gars en faite !!!

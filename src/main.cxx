@@ -6,13 +6,10 @@
 
 using namespace std;
 
-
-
 int main(int, char *)
 {
-    
-    initMT();
 
+    initMT();
 
     Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
     Agent *agent0Rouge = new Agent{1, 4, EQUIPE::ROUGE};
@@ -25,7 +22,7 @@ int main(int, char *)
     // agent0Rouge->gagneLevel(1);
     agent0Bleu->gagneLevel();
 
-    Manager* manager = Manager::getInstance();
+    Manager *manager = Manager::getInstance();
 
     manager->managerInit(agent0Bleu, agent0Rouge);
 
@@ -35,14 +32,7 @@ int main(int, char *)
     try
     {
 
-        for (int i = 0; i < 10000; ++i)
-        {
-            cerr << "tour " << i << endl;
-            manager->tour();
-            manager->afficherCarte();
-            std::this_thread::sleep_for(50ms);
-            system("clear");
-        }
+        manager->simulationAnimee(100, 80ms);
     }
     catch (const std::exception &e)
     {

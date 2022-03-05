@@ -21,8 +21,6 @@ private:
     Carte _carte;
     unsigned int _nbAgents;
 
-    // int _nbAgentBleu;
-    // int _nbAgentRouge;
     static Manager *_singleton;
 
 private:
@@ -33,7 +31,12 @@ public:
 
     static Manager *getInstance();
 
-    void managerInit(Agent *agent0bleu, Agent *agent0rouge);
+    void managerInit(Agent *agent0bleu,
+                     Agent *agent0rouge);
+
+    void simulation(int nbTour);
+    void simulationAnimee(int nbTour,
+                          std::chrono::milliseconds frameTpsMs);
     void tour();
     void actionAgent(Agent *agent);
     void communicationAgent(Agent *agent);
