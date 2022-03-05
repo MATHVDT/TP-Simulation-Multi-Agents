@@ -25,6 +25,7 @@ void Manager::deleteAgents()
         delete a;
     }
     _listAgents.clear();
+    _nbAgents = _listAgents.size();
 }
 
 /**
@@ -46,6 +47,11 @@ Manager *Manager::getInstance()
  */
 void Manager::managerInit()
 {
+    // Reset de la carte
+    _carte.resetMap();
+    // Suppression des agents déjà existant
+    deleteAgents();
+
     int xBleu = dice_n(TAILLE) - 1;
     int yBleu = dice_n(TAILLE) - 1;
     int xRouge = dice_n(TAILLE) - 1;
@@ -63,8 +69,6 @@ void Manager::managerInit()
     Agent *agent0Rouge = new Agent{xRouge,
                                    yRouge,
                                    EQUIPE::ROUGE};
-
-    _carte.resetMap();
 
     if (_nbAgents == 0)
     {

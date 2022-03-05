@@ -127,14 +127,14 @@ void Memoire::correctionMemoire()
         valeurDivision += delta / 3.;
         valeurDeplacement += delta / 3.;
         valeurRenforcement += delta / 3.;
-        std::cerr << "Correction de +" << delta / 3.;
+        // std::cerr << "Correction de +" << delta / 3.;
     }
     else if (delta < -Memoire::getEpsilon())
     {
         valeurDivision -= delta / 3.;
         valeurDeplacement -= delta / 3.;
         valeurRenforcement -= delta / 3.;
-        std::cerr << "Correction de -" << delta / 3.;
+        // std::cerr << "Correction de -" << delta / 3.;
     }
     else
     {
