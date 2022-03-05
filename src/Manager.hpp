@@ -23,12 +23,17 @@ private:
 
     // int _nbAgentBleu;
     // int _nbAgentRouge;
+    static Manager *_singleton;
+
+private:
+    Manager();
 
 public:
-    Manager();
     ~Manager();
 
-    void managerInit(Agent *agent0bleu, Agent*agent0rouge);
+    static Manager *getInstance();
+
+    void managerInit(Agent *agent0bleu, Agent *agent0rouge);
     void tour();
     void actionAgent(Agent *agent);
     void communicationAgent(Agent *agent);

@@ -1,6 +1,8 @@
 #include "Manager.hpp"
 #include "exception"
 
+Manager *Manager::_singleton = nullptr;
+
 Manager::Manager()
     : _listAgents{}, _carte{}, _nbAgents(0)
 {
@@ -14,6 +16,20 @@ Manager::~Manager()
         delete a;
     }
     _listAgents.clear();
+    _singleton = nullptr;
+}
+
+/**
+ * @brief Récupère ou crée un instance de manager *(singleton)*.
+ *
+ * @return Manager*
+ */
+Manager *Manager::getInstance()
+{
+    // Pas d'instance créée => alors création
+    if (Manager::_singleton == nullptr)
+        _singleton = new Manager();
+    return _singleton;
 }
 
 void Manager::managerInit(Agent *agent0bleu, Agent *agent0rouge)

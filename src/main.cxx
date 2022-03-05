@@ -25,11 +25,11 @@ int main(int, char *)
     // agent0Rouge->gagneLevel(1);
     agent0Bleu->gagneLevel();
 
-    Manager manager{agent0Bleu, agent0Rouge};
+    Manager* manager = Manager::getInstance();
 
-    manager.managerInit(agent0Bleu, agent0Rouge);
+    manager->managerInit(agent0Bleu, agent0Rouge);
 
-    // manager.afficherCarte();
+    // manager->afficherCarte();
     // std::this_thread::sleep_for(2000ms);
 
     try
@@ -38,8 +38,8 @@ int main(int, char *)
         for (int i = 0; i < 10000; ++i)
         {
             cerr << "tour " << i << endl;
-            manager.tour();
-            manager.afficherCarte();
+            manager->tour();
+            manager->afficherCarte();
             std::this_thread::sleep_for(50ms);
             system("clear");
         }
@@ -49,7 +49,7 @@ int main(int, char *)
         std::cerr << e.what() << '\n';
     }
 
-    // manager.afficherCarte();
+    delete manager;
 
     return 0;
 }
