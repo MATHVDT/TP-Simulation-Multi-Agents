@@ -282,3 +282,20 @@ void Carte::compterStatCases(int &nbCasesBleu,
         }
     }
 }
+/**
+ * @brief Reste la map.
+ * @details
+ * Enlève tous les agents dans la grille,
+ * et remet tout les cases *NEUTRE* dans la grille.
+ */
+void Carte::resetMap()
+{
+    for (int i = 0; i < TAILLE; i++)
+    {
+        for (int j = 0; j < TAILLE; j++)
+        {
+            setCase(i, j, EQUIPE::NEUTRE);
+            setAgent(i, j, nullptr);
+        }
+    }
+}

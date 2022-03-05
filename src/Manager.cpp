@@ -41,8 +41,8 @@ Manager *Manager::getInstance()
 }
 
 /**
- * @brief Initialise deux agents avec des positions aléatoire (et la carte)=>pas encore fait.
- * 
+ * @brief Initialise deux agents avec des positions aléatoire et la carte.
+ *
  */
 void Manager::managerInit()
 {
@@ -56,12 +56,15 @@ void Manager::managerInit()
         xRouge = dice_n(TAILLE) - 1;
     }
 
+    // Crée 2 agents
     Agent *agent0Bleu = new Agent{xBleu,
                                   yBleu,
                                   EQUIPE::BLEU};
     Agent *agent0Rouge = new Agent{xRouge,
                                    yRouge,
                                    EQUIPE::ROUGE};
+
+    _carte.resetMap();
 
     if (_nbAgents == 0)
     {
@@ -96,6 +99,7 @@ void Manager::managerInit()
 void Manager::simulation(int nbTour)
 {
     cerr << "Simulation pour " << nbTour << " tours." << endl;
+    managerInit();
     for (int i = 0; i < nbTour; ++i)
     {
         tour();
@@ -111,6 +115,7 @@ void Manager::simulationAnimee(int nbTour,
                                std::chrono::milliseconds frameTpsMs)
 {
     cerr << "Simulation pour " << nbTour << " tours." << endl;
+    managerInit();
     for (int i = 0; i < nbTour; ++i)
     {
         tour();

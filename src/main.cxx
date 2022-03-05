@@ -13,8 +13,6 @@ int main(int, char *)
 
     Manager *manager = Manager::getInstance();
 
-    manager->managerInit();
-
     try
     {
         manager->simulationAnimee(10, 40ms);

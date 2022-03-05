@@ -38,6 +38,8 @@ public:
     void compterStatCases(int &nbCasesBleu,
                           int &nbCasesRouge);
 
+    void resetMap();
+
 public:
     class ExceptionCaseDejaOccupe : public exception
     {
