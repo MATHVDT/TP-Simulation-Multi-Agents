@@ -97,6 +97,46 @@ void Memoire::apprentissage(float influence, const Memoire &memoire)
     this->correctionMemoire();
 }
 
+void Memoire::apprentissage2(float influence, const ACTION action)
+{
+    float newValeurDivision, newValeurDeplacement, newValeurRenforcement;
+
+    // Calcul des nouvelles valeurs
+    switch (action)
+    {
+        case ACTION::DEPLACEMENT:
+            newValeurDivision = (1 - influence) * this->_division + influence * 1 / 3;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 1 / 3;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 1 / 3;
+            break;
+        case ACTION::DIVISION:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 0;
+            break;
+        case ACTION::RENFORCEMENT:
+            newValeurDivision = (1 - influence) * this->_division + influence * 1 / 4;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 1 / 4;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 1 / 2;
+            break;
+        case ACTION::ESTATTAQUE:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 0;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 1;
+            break;
+        default:
+            break;
+    }
+
+    // Application des nouvelles valeurs
+    this->setDivision(newValeurDivision);
+    this->setDeplacement(newValeurDeplacement);
+    this->setRenforcement(newValeurRenforcement);
+
+    // Appel de la correction
+    this->correctionMemoire();
+}
+
 /**
  * @fn void Memoire::correctionMemoire()
  * @brief Corrige les valeurs de la mémoire pour avoir une somme environ égale à 1.
@@ -209,12 +249,11 @@ bool operator!=(const Memoire &m1, const Memoire &m2)
  */
 void Memoire::augmenterDeplacement()
 {
-    float valReducRenfo = _renforcement / 2;
-    float valReducDiv = _division / 2;
+    float valAdd = (1 - _deplacement) * 0.1;
 
-    _deplacement += valReducRenfo + valReducDiv;
-    _renforcement -= valReducRenfo;
-    _division -= valReducDiv;
+    _deplacement += valAdd;
+    _renforcement -= valAdd / 2;
+    _division -= valAdd / 2;
 }
 
 /**
@@ -231,9 +270,18 @@ void Memoire::diminuerDeplacement()
     float valReduc = _deplacement / 2;
 
     _deplacement -= valReduc;
-    _division += valReduc ;
-    // _renforcement += valReduc / 2;
+    _division += valReduc / 2 ;
+    _renforcement += valReduc / 2;
 }
+
+void Memoire::augmenterDivision(const float ratioLevel)
+{
+    float valAdd = (1 - _division) * ratioLevel;
+    _division += valAdd;
+    _renforcement -= 7 * valAdd / 10;
+    _deplacement -= 3 * valAdd / 10;
+}
+
 /**
  * @fn void Memoire::diminuerDivision()
  * @brief Diminue la valeur de division.
@@ -245,10 +293,11 @@ void Memoire::diminuerDeplacement()
  */
 void Memoire::diminuerDivision()
 {
-    float valReduc = _renforcement / 2;
+    float valReduc = _division / 2;
 
     _division -= valReduc;
-    _renforcement += valReduc;
+    _renforcement += valReduc / 2;
+    _deplacement += valReduc / 2;
 }
 /**
  * @fn void Memoire::augmenterRenforcement()
@@ -262,12 +311,13 @@ void Memoire::diminuerDivision()
  * de division. *(Somme doit faire 1)*
  * *[renfo = renfo + (1 - renfo) *( 1 * ratio)]*
  */
-void Memoire::augmenterRenforcement(const int ratioLevel)
+void Memoire::augmenterRenforcement(const float ratioLevel, const float weight)
 {
     float valAdd = (1 - _renforcement) * (1 - ratioLevel);
 
     _renforcement += valAdd;
-    _division -= valAdd;
+    _division -= valAdd * (1 - weight);
+    _deplacement -= valAdd * weight;
 }
 
 /**
@@ -284,5 +334,6 @@ void Memoire::diminuerRenforcement()
     float valReduc = _renforcement / 2;
 
     _renforcement -= valReduc;
-    _division += valReduc;
+    _division += valReduc / 2;
+    _deplacement += valReduc / 2;
 }

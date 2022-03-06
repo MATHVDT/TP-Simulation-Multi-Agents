@@ -1,0 +1,17 @@
+#ifndef ACTION_HPP
+#define ACTION_HPP
+
+enum class ACTION
+{
+    DIVISION,
+    DEPLACEMENT,
+    RENFORCEMENT,
+    ESTATTAQUE,
+    SURVIVANT,
+    MORT,
+    NAISSANCEDIVISION,
+    BLOQUE,
+    INACTIF
+};
+
+#endif

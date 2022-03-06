@@ -6,7 +6,9 @@
 #define MEMOIRE_HPP
 
 #include <iostream>
+#include "Action.hpp"
 
+enum class ACTION;
 enum class EQUIPE
 {
     BLEU,
@@ -55,13 +57,14 @@ public:
 
     void augmenterDeplacement();
     void diminuerDeplacement();
+    void augmenterDivision(const float ratioLevel);
     void diminuerDivision();
-    void augmenterRenforcement(
-        const int ratioLevel);
+    void augmenterRenforcement(const float ratioLevel, const float weight);
     void diminuerRenforcement();
 
     float getInfluence(int differenceLevel);
     void apprentissage(float influence, const Memoire &memoire);
+    void apprentissage2(float influence, const ACTION action);
 
     // Operator
     Memoire &operator=(const Memoire &memoire);

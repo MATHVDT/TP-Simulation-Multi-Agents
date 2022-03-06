@@ -10,6 +10,7 @@
 
 #include "Direction.hpp"
 #include "Memoire.hpp"
+#include "Action.hpp"
 #include "mt.hpp"
 
 using namespace std;
@@ -86,25 +87,13 @@ public:
     void partagerMemoireAuVoisinage(Agent *voisinage[6]);
     void partagerMemoireACopain(Agent *copainAdjacent);
     void aquerirMemoire(int level, const Memoire &memoire);
+    void aquerirMemoire2(int levelAgentTransmetteur, const ACTION action);
 
     // Classe Exception
 public:
     class ExceptionAucuneDirectionsLibres : public exception
     {
     };
-};
-
-enum class ACTION
-{
-    DIVISION,
-    DEPLACEMENT,
-    RENFORCEMENT,
-    ESTATTAQUE,
-    SURVIVANT,
-    MORT,
-    NAISSANCEDIVISION,
-    BLOQUE,
-    INACTIF
 };
 
 #endif

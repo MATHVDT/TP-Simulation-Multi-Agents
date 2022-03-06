@@ -5,6 +5,7 @@
 
 #include "Agent.hpp"
 #include "Carte.hpp"
+#include <thread>
 
 /**
  * @fn Agent::Agent(int x, int y, EQUIPE)
@@ -86,7 +87,7 @@ void Agent::partagerMemoireACopain(Agent *copainAdjacent)
 {
     if (copainAdjacent != nullptr)
     { // Transmet mémoire qui est acquise par l'agent adjacent
-        copainAdjacent->aquerirMemoire(this->_level, this->_memoire);
+        copainAdjacent->aquerirMemoire2(this->_level, this->_action);
     }
     else
     {
@@ -113,6 +114,15 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
     float influence = this->_memoire.getInfluence(diffLevel);
 
     this->_memoire.apprentissage(influence, memoire);
+}
+
+void Agent::aquerirMemoire2(int levelAgentTransmetteur, const ACTION action)
+{
+    int diffLevel = (levelAgentTransmetteur - this->_level);
+
+    float influence = this->_memoire.getInfluence(diffLevel);
+
+    this->_memoire.apprentissage2(influence, action);
 }
 
 /**
@@ -200,24 +210,24 @@ Agent *Agent::agir(Agent *voisinageAgentVoisins[6], EQUIPE voisinageAgentCases[6
  */
 DIRECTION Agent::choixDirectionDeplacement(bool directionsPossibles[6])
 {
-    int i;
+    int i = rand() % 6;
 
     DIRECTION directionChoisie = DIRECTION::NULLDIRECTION;
 
     // Tant que l'on a pas choisie une direction
     while (directionChoisie == DIRECTION::NULLDIRECTION)
     {
-        i = dice_6() - 1; // nb entre [|0;5|]
         // Si la direction est possible
         if (directionsPossibles[i])
-        {                          // La direction est libre
-            if (dice_6() - 1 == 0) // 1 chance sur 6
-            {                      // Prendre la direction par rapport au tableau de correspondance
+        {                        // La direction est libre
+            if (rand() % 6 == 0) // 1 chance sur 6
+            {                    // Prendre la direction par rapport au tableau de correspondance
                 directionChoisie = intToDirection(i);
             }
         }
         // on a pas choisie cette direction
         // On relance une direction
+        i = rand() % 6;
     }
     return directionChoisie;
 }
@@ -268,7 +278,7 @@ Agent &Agent::operator=(const Agent &agent)
  */
 ACTION Agent::choixAction(int levelEnnemis, int nbDirPossible)
 {
-    double choix = genrand_real2(); // [0-1]
+    double choix = (double)rand() / (double)RAND_MAX; // [0-1]
     ACTION actionChoisie = ACTION::INACTIF;
 
     if (levelEnnemis > 0) // ie, il ya des ennemis adjacents
@@ -438,21 +448,30 @@ void Agent::deplacementApresNaissance(bool direction[6])
 
 void Agent::consequenceAction(const bool caseCapture)
 {
-    if (_action == ACTION::DEPLACEMENT)
+    switch (_action)
     {
-        if (caseCapture)
-            _memoire.augmenterDeplacement();
-        else
-            _memoire.diminuerDeplacement();
-    }
-    else
-    {
-        if (_action == ACTION::DIVISION)
+        case ACTION::DEPLACEMENT:
+            if (caseCapture)
+                _memoire.augmenterRenforcement((float)_level / _levelMax, 0.9);
+            else
+                _memoire.augmenterDeplacement();
+            if (_level == _levelMax)
+                _memoire.augmenterDivision((float)_level / _levelMax);
+            break;
+        case ACTION::RENFORCEMENT:
+            _memoire.augmenterDivision((float)_level / _levelMax);
+            break;
+        case ACTION::DIVISION:
             _memoire.diminuerDivision();
-        if (_action == ACTION::SURVIVANT)
-            _memoire.augmenterRenforcement(_level / _levelMax);
-        if (_level == _levelMax)
-            _memoire.diminuerRenforcement();
+            break;
+        case ACTION::BLOQUE:
+            _memoire.diminuerDivision();
+            _memoire.augmenterRenforcement((float)_level / _levelMax, 0.5);
+            break;
+        case ACTION::NAISSANCEDIVISION:
+            _memoire.augmenterDeplacement();
+        default:
+            break;
     }
     _memoire.correctionMemoire();
 }
