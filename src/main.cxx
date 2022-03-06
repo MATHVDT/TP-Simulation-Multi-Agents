@@ -18,6 +18,10 @@ int main(int, char *)
     int sumCasesBleu = 0;
     int sumCasesRouge = 0;
 
+    //affichage d'une expérience pour voir le comportement
+    manager->simulationAnimee(1000, 50ms);
+
+    //affichage des stats pour 'n' répétitions de l'expérience
     try
     {
         for (int k = 0; k < n; ++k)
