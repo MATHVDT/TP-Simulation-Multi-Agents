@@ -11,7 +11,7 @@ int main(int, char *)
 
     initMT();
 
-    int n = 15;
+    int n = 5;
 
     Manager *manager = Manager::getInstance();
     int nbCasesBleu, nbCasesRouge;
@@ -36,7 +36,7 @@ int main(int, char *)
     {
         std::cerr << e.what() << '\n';
     }
-    // manager->afficherCarte();
+    manager->afficherCarte();
 
     cout << endl;
     cout << "CASES BLEU " << sumCasesBleu / n << "  " << sumCasesBleu << endl;

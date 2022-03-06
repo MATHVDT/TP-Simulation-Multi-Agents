@@ -109,6 +109,7 @@ void Manager::simulation(int nbTour)
         tour();
     }
 }
+
 /**
  * @brief Effecture une simulation avec l'animation dans la console.
  *

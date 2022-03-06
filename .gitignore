@@ -34,8 +34,5 @@
 */test*
 
 # Documentation
-documentation/*
-documentation/html
-*html/*
-*html/
-*.html
+*documentation*
+
