@@ -232,21 +232,21 @@ void Manager::updateListAgent(Agent *agentCour,
 
     if (agentMort) // Agent mort
     {
-        std::cerr << "Suppression agent mort" << endl;
+        //std::cerr << "Suppression agent mort" << endl;
         // Suppression de l'agent dans la carte
         // ...
         _carte.suppressionAgent(agentCour);
 
         // std::cerr << "arpès suppression carte et " << _carte.getAgent(agentCour->getY(), agentCour->getX())->getLevel() << endl;
 
-        std::cerr << "lvl agent cour : " << agentCour->getLevel() << endl;
+        //std::cerr << "lvl agent cour : " << agentCour->getLevel() << endl;
 
         std::vector<Agent *>::iterator it = _listAgents.begin() + iAgent;
 
         _listAgents.erase(it);
 
         --_nbAgents;
-        std::cerr << "arpès suppression dans vecteur" << endl;
+        //std::cerr << "arpès suppression dans vecteur" << endl;
 
         // delete agentCour ???
         delete agentCour;
