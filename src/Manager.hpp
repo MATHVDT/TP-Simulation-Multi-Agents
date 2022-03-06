@@ -21,19 +21,22 @@ private:
     Carte _carte;
     unsigned int _nbAgents;
 
-    // int _nbAgentBleu;
-    // int _nbAgentRouge;
     static Manager *_singleton;
 
 private:
     Manager();
+    void deleteAgents();
 
 public:
     ~Manager();
 
     static Manager *getInstance();
 
-    void managerInit(Agent *agent0bleu, Agent *agent0rouge);
+    void managerInit();
+
+    void simulation(int nbTour);
+    void simulationAnimee(int nbTour,
+                          std::chrono::milliseconds frameTpsMs);
     void tour();
     void actionAgent(Agent *agent);
     void communicationAgent(Agent *agent);
@@ -42,6 +45,8 @@ public:
 
     void updateListAgent(Agent *agentCour,
                          unsigned int &iAgent);
+
+    Carte &getCarte() { return _carte; }
 
 private:
     void melangerOrdreAgent();

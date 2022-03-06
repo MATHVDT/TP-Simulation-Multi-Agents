@@ -6,48 +6,41 @@
 
 using namespace std;
 
-
-
 int main(int, char *)
 {
-    
+
     initMT();
 
+    int n = 15;
 
-    Agent *agent0Bleu = new Agent{0, 0, EQUIPE::BLEU};
-    Agent *agent0Rouge = new Agent{1, 4, EQUIPE::ROUGE};
-
-    agent0Bleu->setX(rand() % TAILLE);
-    agent0Bleu->setY(rand() % TAILLE);
-    agent0Rouge->setX(rand() % TAILLE);
-    agent0Rouge->setY(rand() % TAILLE);
-
-    // agent0Rouge->gagneLevel(1);
-    agent0Bleu->gagneLevel();
-
-    Manager* manager = Manager::getInstance();
-
-    manager->managerInit(agent0Bleu, agent0Rouge);
-
-    // manager->afficherCarte();
-    // std::this_thread::sleep_for(2000ms);
+    Manager *manager = Manager::getInstance();
+    int nbCasesBleu, nbCasesRouge;
+    int sumCasesBleu = 0;
+    int sumCasesRouge = 0;
 
     try
     {
-
-        for (int i = 0; i < 10000; ++i)
+        for (int k = 0; k < n; ++k)
         {
-            cerr << "tour " << i << endl;
-            manager->tour();
-            manager->afficherCarte();
-            std::this_thread::sleep_for(50ms);
-            system("clear");
+            // manager->simulationAnimee(100, 40ms);
+            manager->simulation(1000);
+            manager->getCarte().compterStatCases(nbCasesBleu, nbCasesRouge);
+            cout << "cases bleu : " << nbCasesBleu << endl;
+            cout << "cases rouge : " << nbCasesRouge << endl;
+
+            sumCasesBleu += nbCasesBleu;
+            sumCasesRouge += nbCasesRouge;
         }
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
     }
+    // manager->afficherCarte();
+
+    cout << endl;
+    cout << "CASES BLEU " << sumCasesBleu / n << "  " << sumCasesBleu << endl;
+    cout << "CASES ROUGE " << sumCasesRouge / n << "  " << sumCasesRouge << endl;
 
     delete manager;
 
