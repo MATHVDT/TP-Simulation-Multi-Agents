@@ -105,9 +105,9 @@ void Memoire::apprentissage2(float influence, const ACTION action)
     switch (action)
     {
         case ACTION::DEPLACEMENT:
-            newValeurDivision = (1 - influence) * this->_division + influence * 1 / 3;
-            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 1 / 3;
-            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 1 / 3;
+            newValeurDivision = (1 - influence) * this->_division + influence * 0 / 100;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 50 / 100;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 50 / 100;
             break;
         case ACTION::DIVISION:
             newValeurDivision = (1 - influence) * this->_division + influence * 0;
@@ -115,16 +115,23 @@ void Memoire::apprentissage2(float influence, const ACTION action)
             newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 0;
             break;
         case ACTION::RENFORCEMENT:
-            newValeurDivision = (1 - influence) * this->_division + influence * 1 / 4;
-            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 1 / 4;
-            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 1 / 2;
+            newValeurDivision = (1 - influence) * this->_division + influence * 0 / 10;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 5 / 10;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 5 / 10;
             break;
         case ACTION::ESTATTAQUE:
             newValeurDivision = (1 - influence) * this->_division + influence * 0;
             newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 0;
             newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 1;
             break;
+        case ACTION::BLOQUE:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 1;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 0;
         default:
+            newValeurDivision = this->_division;
+            newValeurDeplacement = this->_deplacement;
+            newValeurRenforcement = this->_renforcement;
             break;
     }
 
@@ -276,7 +283,7 @@ void Memoire::diminuerDeplacement()
 
 void Memoire::augmenterDivision(const float ratioLevel)
 {
-    float valAdd = (1 - _division) * ratioLevel;
+    float valAdd = (1 - _division) * ratioLevel* 1 / 100;
     _division += valAdd;
     _renforcement -= 7 * valAdd / 10;
     _deplacement -= 3 * valAdd / 10;
@@ -293,7 +300,7 @@ void Memoire::augmenterDivision(const float ratioLevel)
  */
 void Memoire::diminuerDivision()
 {
-    float valReduc = _division / 2;
+    float valReduc = 99 * _division / 100;
 
     _division -= valReduc;
     _renforcement += valReduc / 2;

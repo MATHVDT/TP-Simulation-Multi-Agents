@@ -468,8 +468,6 @@ void Agent::consequenceAction(const bool caseCapture)
             _memoire.diminuerDivision();
             _memoire.augmenterRenforcement((float)_level / _levelMax, 0.5);
             break;
-        case ACTION::NAISSANCEDIVISION:
-            _memoire.augmenterDeplacement();
         default:
             break;
     }
