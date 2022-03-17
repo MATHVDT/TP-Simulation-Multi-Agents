@@ -25,12 +25,12 @@ TEST_CASE("Deplacement agent")
 {
   Agent a{0, 0, EQUIPE::BLEU};
 
-  // Position (0,0)
-  REQUIRE(a.getX() == 0);
-  REQUIRE(a.getY() == 0);
-
   SECTION("Deplacement Nord Ouest")
   {
+    // Position (0,0)
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
+
     // Deplacement ↖
     a.deplacer(DIRECTION::NORDOUEST);
 
@@ -40,6 +40,10 @@ TEST_CASE("Deplacement agent")
 
   SECTION("Deplacement Ouest")
   {
+    // Position (0,0)
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
+
     // Deplacement ←
     a.deplacer(DIRECTION::OUEST);
 
@@ -49,6 +53,10 @@ TEST_CASE("Deplacement agent")
 
   SECTION("Deplacement Sud Ouest")
   {
+    // Position (0,0)
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
+
     // Deplacement ↙
     a.deplacer(DIRECTION::SUDOUEST);
 
@@ -58,6 +66,10 @@ TEST_CASE("Deplacement agent")
 
   SECTION("Deplacement Sud Est")
   {
+    // Position (0,0)
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
+
     // Deplacement ↘
     a.deplacer(DIRECTION::SUDEST);
 
@@ -67,6 +79,10 @@ TEST_CASE("Deplacement agent")
 
   SECTION("Deplacement Est")
   {
+    // Position (0,0)
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
+
     // Deplacement →
     a.deplacer(DIRECTION::EST);
 
@@ -76,6 +92,10 @@ TEST_CASE("Deplacement agent")
 
   SECTION("Deplacement Nord Est")
   {
+    // Position (0,0)
+    REQUIRE(a.getX() == 0);
+    REQUIRE(a.getY() == 0);
+
     // Deplacement ↗
     a.deplacer(DIRECTION::NORDEST);
 
@@ -92,9 +112,9 @@ TEST_CASE("Operateur == et != mémoire")
   Memoire m1{EQUIPE::BLEU};
 
   // Vérification état de la mémoire
-  REQUIRE(m1.getDivision() == Approx(1. / 3.).margin(eps));
-  REQUIRE(m1.getDeplacement() == Approx(1. / 3.).margin(eps));
-  REQUIRE(m1.getRenforcement() == Approx(1. / 3.).margin(eps));
+  REQUIRE(m1.getDivision() == Approx(1. / 3.).epsilon(eps));
+  REQUIRE(m1.getDeplacement() == Approx(1. / 3.).epsilon(eps));
+  REQUIRE(m1.getRenforcement() == Approx(1. / 3.).epsilon(eps));
 
   // Test égalité vraie
   REQUIRE(m1 == Memoire{EQUIPE::BLEU});
@@ -111,7 +131,6 @@ TEST_CASE("Operateur == et != mémoire")
   REQUIRE_FALSE(m1 != Memoire{EQUIPE::BLEU});
 }
 
-/* changement du nom de la méthode => ne fonctionne plus comme avant
 TEST_CASE("Apprentissage mémoire")
 {
   float eps = Memoire::getEpsilon();
@@ -158,7 +177,6 @@ TEST_CASE("Apprentissage mémoire")
     REQUIRE(m1 == (Memoire{1. / 3., 1. / 3., 1. / 3., equipeMemoire}));
   }
 }
-*/
 
 TEST_CASE("Partage de la mémoire à un voisinage")
 {
