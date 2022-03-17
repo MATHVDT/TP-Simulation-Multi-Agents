@@ -63,8 +63,7 @@ public:
     void diminuerRenforcement();
 
     float getInfluence(int differenceLevel);
-    void apprentissage(float influence, const Memoire &memoire);
-    void apprentissage2(float influence, const ACTION action);
+    void apprentissage(float influence, const ACTION action);
 
     // Operator
     Memoire &operator=(const Memoire &memoire);

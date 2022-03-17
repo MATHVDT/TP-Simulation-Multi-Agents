@@ -87,7 +87,7 @@ void Agent::partagerMemoireACopain(Agent *copainAdjacent)
 {
     if (copainAdjacent != nullptr)
     { // Transmet mémoire qui est acquise par l'agent adjacent
-        copainAdjacent->aquerirMemoire2(this->_level, this->_action);
+        copainAdjacent->aquerirMemoire(this->_level, this->_action);
     }
     else
     {
@@ -96,33 +96,24 @@ void Agent::partagerMemoireACopain(Agent *copainAdjacent)
 }
 
 /**
- * @fn void Agent::aquerirMemoire(int levelAgentTransmetteur, Memoire &memoire)
+ * @fn void Agent::aquerirMemoire(int levelAgentTransmetteur, const Action action)
  * @brief Apprend en fonction du level de l'agent transmetteur de mémoire.
  *
  * @param int levelAgentTransmetteur - *Level de l'agent qui transmet sa mémoire*
- * @param const Memoire &memoire - *Memoire de l'agent qui transmet sa mémoire*
+ * @param const Action action - *Action de l'agent qui communique son action*
  *
  *  @details
  * Apprend de la mémoire d'un autre agent.
  * L'influence de l'agent transmetteur dépend de sa différence
  * de level par rapport à l'agent qui reçoit la mémoire.
  */
-void Agent::aquerirMemoire(int levelAgentTransmetteur, const Memoire &memoire)
+void Agent::aquerirMemoire(int levelAgentTransmetteur, const ACTION action)
 {
     int diffLevel = (levelAgentTransmetteur - this->_level);
 
     float influence = this->_memoire.getInfluence(diffLevel);
 
-    this->_memoire.apprentissage(influence, memoire);
-}
-
-void Agent::aquerirMemoire2(int levelAgentTransmetteur, const ACTION action)
-{
-    int diffLevel = (levelAgentTransmetteur - this->_level);
-
-    float influence = this->_memoire.getInfluence(diffLevel);
-
-    this->_memoire.apprentissage2(influence, action);
+    this->_memoire.apprentissage(influence, action);
 }
 
 /**

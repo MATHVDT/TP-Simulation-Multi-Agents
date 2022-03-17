@@ -71,33 +71,15 @@ float Memoire::getInfluence(int differenceLevel)
 }
 
 /**
- * @fn void Memoire::apprentissage(float influence, Memoire &memoire)
+ * @fn void Memoire::apprentissage(float influence, const Action action)
  * @brief
  *
  * @param float influence - *Influence de la mémoire passé en paramètre*
- * @param const Memoire &memoire - *Mémoire sur laquelle on apprend*
+ * @param const Action action - *action communiquée par un voisin*
  *
  * @warning correctionMemoire est appelée
  */
-void Memoire::apprentissage(float influence, const Memoire &memoire)
-{
-    float newValeurDivision, newValeurDeplacement, newValeurRenforcement;
-
-    // Calcul des nouvelles valeurs
-    newValeurDivision = (1 - influence) * this->_division + influence * memoire.getDivision();
-    newValeurDeplacement = (1 - influence) * this->_deplacement + influence * memoire.getDeplacement();
-    newValeurRenforcement = (1 - influence) * this->_renforcement + influence * memoire.getRenforcement();
-
-    // Application des nouvelles valeurs
-    this->setDivision(newValeurDivision);
-    this->setDeplacement(newValeurDeplacement);
-    this->setRenforcement(newValeurRenforcement);
-
-    // Appel de la correction
-    this->correctionMemoire();
-}
-
-void Memoire::apprentissage2(float influence, const ACTION action)
+void Memoire::apprentissage(float influence, const ACTION action)
 {
     float newValeurDivision, newValeurDeplacement, newValeurRenforcement;
 
