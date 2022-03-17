@@ -10,8 +10,8 @@
 /**
  * @fn Agent::Agent(int x, int y, EQUIPE)
  * @brief Constructeur de Agent.
- * @param int x - *Position x d'instantiation de l'agent*
- * @param int y - *Position y d'instantiation de l'agent*
+ * @param int x - *Position x d'Instanciation de l'agent*
+ * @param int y - *Position y d'Instanciation de l'agent*
  * @param EQUIPE equipe - *Nom de l'équipe de l'agent*
  */
 Agent::Agent(int x, int y, EQUIPE equipe)
