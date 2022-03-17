@@ -79,7 +79,7 @@ float Memoire::getInfluence(int differenceLevel)
  *
  * @warning correctionMemoire est appelée
  */
-void Memoire::apprentissage(float influence, const ACTION action)
+void Memoire::apprentissageRouge(float influence, const ACTION action)
 {
     float newValeurDivision, newValeurDeplacement, newValeurRenforcement;
 
@@ -110,6 +110,53 @@ void Memoire::apprentissage(float influence, const ACTION action)
             newValeurDivision = (1 - influence) * this->_division + influence * 0;
             newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 1;
             newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 0;
+        default:
+            newValeurDivision = this->_division;
+            newValeurDeplacement = this->_deplacement;
+            newValeurRenforcement = this->_renforcement;
+            break;
+    }
+
+    // Application des nouvelles valeurs
+    this->setDivision(newValeurDivision);
+    this->setDeplacement(newValeurDeplacement);
+    this->setRenforcement(newValeurRenforcement);
+
+    // Appel de la correction
+    this->correctionMemoire();
+}
+
+void Memoire::apprentissageBleu(float influence, const ACTION action)
+{
+    float newValeurDivision, newValeurDeplacement, newValeurRenforcement;
+
+    // Calcul des nouvelles valeurs
+    switch (action)
+    {
+        case ACTION::DEPLACEMENT:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0 / 100;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 75 / 100;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 25 / 100;
+            break;
+        case ACTION::DIVISION:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 0;
+            break;
+        case ACTION::RENFORCEMENT:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0 / 10;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 8 / 10;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 2 / 10;
+            break;
+        case ACTION::ESTATTAQUE:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 7 / 10;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 3 / 10;
+            break;
+        case ACTION::BLOQUE:
+            newValeurDivision = (1 - influence) * this->_division + influence * 0;
+            newValeurDeplacement = (1 - influence) * this->_deplacement + influence * 10 / 10;
+            newValeurRenforcement = (1 - influence) * this->_renforcement + influence * 0 / 10;
         default:
             newValeurDivision = this->_division;
             newValeurDeplacement = this->_deplacement;

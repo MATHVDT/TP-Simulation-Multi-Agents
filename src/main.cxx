@@ -104,7 +104,7 @@ int main(int, char **)
     int sumCasesRouge = 0;
 
     // affichage d'une expérience pour voir le comportement
-    //  manager->simulationAnimee(1000, 50ms);
+    manager->simulationAnimee(1000, 50ms);
 
     // affichage des stats pour 'n' répétitions de l'expérience
     try

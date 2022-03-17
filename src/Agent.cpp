@@ -113,7 +113,10 @@ void Agent::aquerirMemoire(int levelAgentTransmetteur, const ACTION action)
 
     float influence = this->_memoire.getInfluence(diffLevel);
 
-    this->_memoire.apprentissage(influence, action);
+    if (this->getEquipe() == EQUIPE::ROUGE)
+        this->_memoire.apprentissageRouge(influence, action);
+    else
+        this->_memoire.apprentissageBleu(influence, action);
 }
 
 /**
